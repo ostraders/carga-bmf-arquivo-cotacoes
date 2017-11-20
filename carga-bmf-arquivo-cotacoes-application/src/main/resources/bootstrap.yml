@@ -1,0 +1,25 @@
+# Spring properties
+spring:
+  application:
+    name: hiker-concipagcargabow
+
+---
+spring:
+  profiles: develop
+  cloud:
+    config:
+      uri: http://ualbax-dev:30002
+
+---
+spring:
+  profiles: homolog
+  cloud:
+    config:
+      uri: http://ualbax-hom:30002
+
+---
+spring:
+  profiles: prod
+  cloud:
+    config:
+      uri: http://ualbax-prod:30002

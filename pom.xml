@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ricardococati</groupId>
+    <artifactId>carga-bmf-arquivo-cotacoes</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <modules>
+        <module>carga-bmf-arquivo-cotacoes-api</module>
+        <module>carga-bmf-arquivo-cotacoes-application</module>
+        <module>carga-bmf-arquivo-cotacoes-model</module>
+        <module>carga-bmf-arquivo-cotacoes-repository</module>
+        <module>carga-bmf-arquivo-cotacoes-service</module>
+    </modules>
+
+    <properties>
+        <!-- JAVA VERSION -->
+        <java.version>1.8</java.version>
+        <!-- SPRING BOOT VERSION -->
+        <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
+        <!-- SPRING CLOUD VERSION -->
+        <spring-cloud.version>Brixton.RELEASE</spring-cloud.version>
+        <!-- LOMBOK VERSION -->
+        <lombok.version>1.16.10</lombok.version>
+        <!-- MAVEN COMPILER PLUGIN VERSION -->
+        <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
+        <!-- MAVEN RELEASE PLUGIN VERSION -->
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <!-- POSTGRESQL -->
+        <postgresql.version>42.1.1</postgresql.version>
+        <!-- JDBC TEMPLATE VERSION -->
+        <spring-jdbc.version>4.3.10.RELEASE</spring-jdbc.version>
+        <!-- ENCODES -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.profiles.active>develop</spring.profiles.active>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.3.RELEASE</version>
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- INTERNAL -->
+            <dependency>
+                <groupId>com.ricardococati</groupId>
+                <artifactId>carga-bmf-arquivo-cotacoes-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ricardococati</groupId>
+                <artifactId>carga-bmf-arquivo-cotacoes-repository</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ricardococati</groupId>
+                <artifactId>carga-bmf-arquivo-cotacoes-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ricardococati</groupId>
+                <artifactId>carga-bmf-arquivo-cotacoes-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- BOM -->
+            <!-- SPRING -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- EXTERNAL -->
+            <!-- LOMBOK -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- OJDBC6 -->
+            <dependency>
+                <groupId>oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${ojdbc6.version}</version>
+            </dependency>
+            <!-- SPRING BATCH -->
+            <dependency>
+                <groupId>org.springframework.batch</groupId>
+                <artifactId>spring-batch-core</artifactId>
+                <version>${spring-batch.version}</version>
+            </dependency>
+            <!-- POSTGRESQL-->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <!-- Lib p/ integração cm Banco de dados -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring-jdbc.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- EXTERNAL -->
+        <!-- SPRING -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+		<dependency>
+		    <groupId>org.springframework.batch</groupId>
+		    <artifactId>spring-batch-infrastructure</artifactId>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.springframework.batch</groupId>
+		    <artifactId>spring-batch-core</artifactId>
+		</dependency>
+
+        <!-- LOMBOK -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- SPRING BOOT-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                		<mainClass>com.ricardococati.Application</mainClass>
+            		</configuration>
+                </plugin>
+                <!-- MAVEN COMPILER PLUGIN -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- MAVEN COMPILER PLUGIN -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <!-- MAVEN RELEASE PLUGIN -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven-release-plugin.version}</version>
+                <configuration>
+                    <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
