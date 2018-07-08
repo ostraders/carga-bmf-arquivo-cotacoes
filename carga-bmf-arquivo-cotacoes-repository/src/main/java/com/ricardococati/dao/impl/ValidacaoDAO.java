@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ricardococati.dao.GenericDAO;
 import com.ricardococati.dao.IValidacaoDAO;
 import com.ricardococati.dto.ArquivoDTO;
-import com.ricardococati.dto.BoletoDTO;
+import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.enums.DataBaseInfosEnum;
 import com.ricardococati.util.SQLAppender;
 
@@ -21,7 +21,7 @@ public class ValidacaoDAO extends GenericDAO implements IValidacaoDAO, Serializa
 	private static final long serialVersionUID = -8418078387562756910L;
 	
 	@Override
-	public Long verificaExisteBoleto(BoletoDTO boletoDTO, ArquivoDTO arquivoDTO) throws Exception {
+	public Long verificaExisteBoleto(BMFCargaDTO BMFCargaDTO, ArquivoDTO arquivoDTO) throws Exception {
 		Long retorno = 0L;
 		log.info("Executando método: verificaExisteBoleto");
 		final SQLAppender sql = new SQLAppender(100);

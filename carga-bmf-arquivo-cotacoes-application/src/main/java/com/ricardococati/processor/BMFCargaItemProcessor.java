@@ -6,7 +6,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.file.transform.FieldSet;
 
 import com.ricardococati.dto.DetalheSegmentoGDTO;
-import com.ricardococati.dto.BoletoDTO;
+import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.dto.HeaderDTO;
 import com.ricardococati.dto.HeaderLoteDTO;
 import com.ricardococati.enums.TipoRegistroEnum;
@@ -15,17 +15,17 @@ import com.ricardococati.util.Funcoes;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class BoletoItemProcessor implements ItemProcessor<FieldSet, BoletoDTO>, Serializable {
+public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDTO>, Serializable {
 
 	private static final long serialVersionUID = 5894537786947938991L;
 
 	@Override
-	public BoletoDTO process(FieldSet line) throws Exception {
+	public BMFCargaDTO process(FieldSet line) throws Exception {
 		log.info("Iniciando ItemProcess: " + line);
 
 		String identificacao = line.readString("tipoRegistro");
 
-		BoletoDTO boletoDTO = null;
+		BMFCargaDTO BMFCargaDTO = null;
 		if(identificacao.equals(TipoRegistroEnum.DETALHE_SEGMENTO_G.getCod())){
 			identificacao = line.readString("codSegmento");
 		}
@@ -56,7 +56,7 @@ public class BoletoItemProcessor implements ItemProcessor<FieldSet, BoletoDTO>, 
 			headerDTO.setReservadorBco(line.readString("reservadorBco"));
 			headerDTO.setReservadoEmpresa(line.readString("reservadoEmpresa"));
 			headerDTO.setExclusivoCnab3(line.readString("exclusivoCnab3"));
-			return boletoDTO = headerDTO;
+			return BMFCargaDTO = headerDTO;
 		}
 
 		if (identificacao.equals(TipoRegistroEnum.HEADER_LOTE.getCod())) {
@@ -79,7 +79,7 @@ public class BoletoItemProcessor implements ItemProcessor<FieldSet, BoletoDTO>, 
 			headerLoteDTO.setDvAgConta(line.readString("dvAgConta"));
 			headerLoteDTO.setNomeEmpresa(line.readString("nomeEmpresa"));
 			headerLoteDTO.setExclusivoCnab3(line.readString("exclusivoCnab3"));
-			return boletoDTO = headerLoteDTO;
+			return BMFCargaDTO = headerLoteDTO;
 		}
 
 		if (identificacao.equals(TipoRegistroEnum.DETALHE_SEGMENTO_G.getNome())) {
@@ -114,10 +114,10 @@ public class BoletoItemProcessor implements ItemProcessor<FieldSet, BoletoDTO>, 
 			detalheSegmentoGDTO.setPrazoProtesto(line.readLong("prazoProtesto"));
 			detalheSegmentoGDTO.setDtaLimitePagtoTitulo(Funcoes.formatarDateUtilForReaderDate(line.readString("dtaLimitePagtoTitulo")));
 			detalheSegmentoGDTO.setOcorProcessamento(0L);
-			boletoDTO = detalheSegmentoGDTO;
+			BMFCargaDTO = detalheSegmentoGDTO;
 		}
 
-		return boletoDTO;
+		return BMFCargaDTO;
 	}
 
 }

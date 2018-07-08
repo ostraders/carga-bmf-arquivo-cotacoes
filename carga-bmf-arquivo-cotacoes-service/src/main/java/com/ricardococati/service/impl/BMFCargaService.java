@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.ricardococati.dao.GenericDAO;
 import com.ricardococati.dao.IArquivoDAO;
-import com.ricardococati.dao.IBoletoDAO;
+import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dao.ISegmentoDAO;
 import com.ricardococati.dto.ArquivoDTO;
-import com.ricardococati.dto.BoletoDTO;
+import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.dto.DetalheSegmentoGDTO;
 import com.ricardococati.dto.HeaderDTO;
-import com.ricardococati.service.IBoletoService;
+import com.ricardococati.service.IBMFCargaService;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -22,10 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @Service
-public class BoletoService implements IBoletoService {
+public class BMFCargaService implements IBMFCargaService {
 	
 	@Autowired
-	private IBoletoDAO boletoADAO;
+	private IBMFCargaDAO boletoADAO;
 	
 	@Autowired
 	private IHeaderDAO headerDAO;
@@ -48,20 +48,20 @@ public class BoletoService implements IBoletoService {
 	private Long codBoleto;
 
 	@Override
-	public void insereDados(List<? extends BoletoDTO> listBoletoDTO) {
+	public void insereDados(List<? extends BMFCargaDTO> listBoletoDTO) {
 		Long nroSegmento = 0L;
 		try {
 			if(listBoletoDTO != null && listBoletoDTO.size() > 0) {
 				arquivoDAO.buscaDadosIntercambio(arquivoDTO);
 				nroSegmento = segmentoDAO.incluirSegmento();
 				codBoleto = 0L;
-				for (BoletoDTO boletoDTO : listBoletoDTO) {
-					if(HeaderDTO.class.isInstance(boletoDTO)) {
-						HeaderDTO headerDTO = (HeaderDTO) boletoDTO;
+				for (BMFCargaDTO BMFCargaDTO : listBoletoDTO) {
+					if(HeaderDTO.class.isInstance(BMFCargaDTO)) {
+						HeaderDTO headerDTO = (HeaderDTO) BMFCargaDTO;
 						headerDAO.incluirHeaderArquivo(headerDTO, arquivoDTO);
-					} else if(DetalheSegmentoGDTO.class.isInstance(boletoDTO)) {
+					} else if(DetalheSegmentoGDTO.class.isInstance(BMFCargaDTO)) {
 						codBoleto = genericDAO.obterSequenceLong("SEGMENTOG_SEQ");
-						DetalheSegmentoGDTO detalheSegmentoGDTO = (DetalheSegmentoGDTO) boletoDTO;
+						DetalheSegmentoGDTO detalheSegmentoGDTO = (DetalheSegmentoGDTO) BMFCargaDTO;
 						detalheSegmentoGDTO.setCodSegmento(String.valueOf(nroSegmento));
 						detalheSegmentoGDTO.setCodBoleto(codBoleto);
 						boletoADAO.incluirBoleto(detalheSegmentoGDTO, arquivoDTO);

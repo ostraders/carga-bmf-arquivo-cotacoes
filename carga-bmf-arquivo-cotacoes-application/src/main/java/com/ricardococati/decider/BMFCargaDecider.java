@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.ricardococati.service.impl.IntegrationService;
 
 @Component
-public class BoletoCargaDecider implements JobExecutionDecider, Serializable{
+public class BMFCargaDecider implements JobExecutionDecider, Serializable{
 	
 	private static final long serialVersionUID = 488805782785072196L;
 	

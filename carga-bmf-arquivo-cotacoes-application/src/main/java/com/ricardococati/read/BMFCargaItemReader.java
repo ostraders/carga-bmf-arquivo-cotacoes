@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BoletoItemReader implements ItemReader<MultiResourceItemReader<FieldSet>>, ItemStream, Serializable {
+public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<FieldSet>>, ItemStream, Serializable {
 
 	private static final long serialVersionUID = 1927411035137714641L;
 	private final static String HEADER = "???????0*";

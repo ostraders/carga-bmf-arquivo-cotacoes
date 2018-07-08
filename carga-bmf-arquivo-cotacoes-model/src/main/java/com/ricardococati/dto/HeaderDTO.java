@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class HeaderDTO extends BoletoDTO {
+public class HeaderDTO extends BMFCargaDTO {
 
 	private static final long serialVersionUID = 4338858549320272919L;
 	private Long nroArquivo;

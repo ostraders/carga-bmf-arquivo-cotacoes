@@ -8,8 +8,7 @@ import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ricardococati.dto.ArquivoDTO;
-import com.ricardococati.dto.BoletoDTO;
-import com.ricardococati.enums.NomeDoSistemaParaLogFornaxEnum;
+import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.enums.TipoRegistroEnum;
 import com.ricardococati.enums.TiposCamposEnum;
 import com.ricardococati.exception.LinhaInvalidaException;
@@ -24,7 +23,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class BoletoValidaEstruturaArquivoProcessor implements ItemProcessor<FieldSet, BoletoDTO>{
+public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<FieldSet, BMFCargaDTO>{
 	
 	private HeaderLayout header = null;
 	private HeaderLoteLayout headerLote = null;
@@ -40,7 +39,7 @@ public class BoletoValidaEstruturaArquivoProcessor implements ItemProcessor<Fiel
 	private ArquivoDTO arquivoDTO;
 
 	@Override
-	public BoletoDTO process(FieldSet line) throws Exception {
+	public BMFCargaDTO process(FieldSet line) throws Exception {
 		try {
 			BoletoUtil boletoUtil = new BoletoUtil();
 			boletoUtil.setTrackingID(arquivoDTO.getTrackingID());

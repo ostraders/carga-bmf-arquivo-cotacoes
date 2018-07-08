@@ -4,11 +4,11 @@ import lombok.Getter;
 
 public enum CaminhoArquivoEnum {
 
-	CAMINHO_ARQUIVO_PROCESSO("file:/data/concipag/cargaBoleto/execucao/*"),//
-	CAMINHO_ARQUIVO_ENTRADA("/data/concipag/cargaBoleto/entrada/"), //
-	CAMINHO_ARQUIVO_ERRO("/data/concipag/cargaBoleto/erro/"),//
-	CAMINHO_ARQUIVO_EXECUCAO("/data/concipag/cargaBoleto/execucao/"),//
-	CAMINHO_ARQUIVO_SAIDA("/data/concipag/cargaBoleto/saida/");
+	CAMINHO_ARQUIVO_PROCESSO("file:/data/bfmCarga/execucao/*"),//
+	CAMINHO_ARQUIVO_ENTRADA("/data/bfmCarga/entrada/"), //
+	CAMINHO_ARQUIVO_ERRO("/data/bfmCarga/erro/"),//
+	CAMINHO_ARQUIVO_EXECUCAO("/data/bfmCarga/execucao/"),//
+	CAMINHO_ARQUIVO_SAIDA("/data/bfmCarga/saida/");
 
 	@Getter
 	private String caminho;

@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.ricardococati.dao.GenericDAO;
-import com.ricardococati.dao.IBoletoDAO;
+import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dto.ArquivoDTO;
 import com.ricardococati.dto.DetalheSegmentoGDTO;
 import com.ricardococati.enums.DataBaseInfosEnum;
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
-public class BoletoDAO extends GenericDAO implements IBoletoDAO, Serializable{
+public class BMFCargaDAO extends GenericDAO implements IBMFCargaDAO, Serializable{
 
 	private static final long COD_OCORRENCIA_ZERO = 0L;
 	private static final long serialVersionUID = 8963892631378621289L;

@@ -29,8 +29,8 @@ public class IntegrationService implements IIntegrationService, Serializable{
 	private static final long serialVersionUID = 25671121174988145L;
 
 	@Autowired
-	@Qualifier("jobCargaBoleto")
-	private Job jobCargaBoleto;
+	@Qualifier("jobExecutionBatch")
+	private Job jobExecutionBatch;
 
 	@Autowired
 	private JobLauncher jobLauncher;
@@ -116,7 +116,7 @@ public class IntegrationService implements IIntegrationService, Serializable{
     private void executeProcessoBatch() throws Exception {
 	    try {
 			JobParameters param = new JobParametersBuilder().addLong("time",System.currentTimeMillis()).toJobParameters();
-			execution = jobLauncher.run(jobCargaBoleto, param);
+			execution = jobLauncher.run(jobExecutionBatch, param);
 			log.info("Exit Status : " + execution.getStatus());
 	    } catch (Exception e) {
 			log.error(e.getMessage());
