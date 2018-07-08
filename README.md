@@ -22,3 +22,7 @@ Este projeto tem como objetivo a Carga BMF Arquivo de Cotações
 | xxx   | xxx | jdbc:postgresql://xxx:5432/xxx           |                       | xxx    | xxx   |
 
 ---
+
+### Comandos necessários
+
+sudo mkdir -p data/bmfCarga/{entrada,erro,execucao,sucesso}
