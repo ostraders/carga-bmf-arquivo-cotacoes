@@ -1,10 +1,8 @@
 package com.ricardococati.dao;
 
-import com.ricardococati.dto.ArquivoDTO;
-import com.ricardococati.dto.HeaderDTO;
+import com.ricardococati.dto.Header;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface IHeaderDAO {
-
-	public boolean incluirHeaderArquivo(HeaderDTO headerDTO, ArquivoDTO arquivoDTO) throws Exception;
+public interface IHeaderDAO  extends MongoRepository<Header, String> {
 
 }

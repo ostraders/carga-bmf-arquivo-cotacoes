@@ -12,7 +12,7 @@ import com.ricardococati.tokenize.FixedLengthTokenizer;
 import lombok.Data;
 
 @Data
-public class DetalheSegmentoGLayout implements ILayoutArquivo {
+public class CotacoesDosPapeisPorDiaLayout implements ILayoutArquivo {
 
 	private static final long serialVersionUID = -1550389035997848703L;
 	private String[] campos;
@@ -81,7 +81,7 @@ public class DetalheSegmentoGLayout implements ILayoutArquivo {
 	private static final Range RANGE_DTA_LIMITE_PAGTO_TITULO	= new Range(232,239);
 	private static final Range RANGE_OCOR_PROCESSAMENTO			= new Range(240,240);
 
-	public DetalheSegmentoGLayout() {
+	public CotacoesDosPapeisPorDiaLayout() {
 		super();
 		this.campos = new String[]{ COD_COMPENSACAO_BANCO		,
 									LOTE_SERVICO				,

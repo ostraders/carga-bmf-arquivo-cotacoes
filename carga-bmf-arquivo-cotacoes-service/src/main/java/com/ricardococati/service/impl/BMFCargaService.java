@@ -13,7 +13,7 @@ import com.ricardococati.dao.ISegmentoDAO;
 import com.ricardococati.dto.ArquivoDTO;
 import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.dto.DetalheSegmentoGDTO;
-import com.ricardococati.dto.HeaderDTO;
+import com.ricardococati.dto.Header;
 import com.ricardococati.service.IBMFCargaService;
 
 import lombok.Data;
@@ -56,9 +56,9 @@ public class BMFCargaService implements IBMFCargaService {
         nroSegmento = segmentoDAO.incluirSegmento();
         codBoleto = 0L;
         for (BMFCargaDTO bmfCargaDTO : listBoletoDTO) {
-          if (HeaderDTO.class.isInstance(bmfCargaDTO)) {
-            HeaderDTO headerDTO = (HeaderDTO) bmfCargaDTO;
-            headerDAO.incluirHeaderArquivo(headerDTO, arquivoDTO);
+          if (Header.class.isInstance(bmfCargaDTO)) {
+            Header header = (Header) bmfCargaDTO;
+            headerDAO.save(header);
           } else if (DetalheSegmentoGDTO.class.isInstance(bmfCargaDTO)) {
             codBoleto = genericDAO.obterSequenceLong("SEGMENTOG_SEQ");
             DetalheSegmentoGDTO detalheSegmentoGDTO = (DetalheSegmentoGDTO) bmfCargaDTO;

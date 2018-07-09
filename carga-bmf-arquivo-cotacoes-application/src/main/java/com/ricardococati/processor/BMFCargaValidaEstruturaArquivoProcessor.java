@@ -5,7 +5,7 @@ import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.enums.TipoRegistroEnum;
 import com.ricardococati.enums.TiposCamposEnum;
 import com.ricardococati.exception.LinhaInvalidaException;
-import com.ricardococati.layouts.DetalheSegmentoGLayout;
+import com.ricardococati.layouts.CotacoesDosPapeisPorDiaLayout;
 import com.ricardococati.layouts.HeaderBMFLayout;
 import com.ricardococati.layouts.TrailerLayout;
 import com.ricardococati.service.impl.IntegrationService;
@@ -22,7 +22,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
     ItemProcessor<FieldSet, BMFCargaDTO> {
 
   private HeaderBMFLayout header = null;
-  private DetalheSegmentoGLayout segmentoA;
+  private CotacoesDosPapeisPorDiaLayout segmentoA;
   private TrailerLayout trailler;
   private static final String TIPO_REGISTRO_DETALHE = "3";
 
@@ -73,7 +73,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
   private void validarTipagemDosCampos(String nomeCampo, String valorCampo, BoletoUtil boletoUtil)
       throws Exception, LinhaInvalidaException {
     header = new HeaderBMFLayout();
-    segmentoA = new DetalheSegmentoGLayout();
+    segmentoA = new CotacoesDosPapeisPorDiaLayout();
     trailler = new TrailerLayout();
 
     try {

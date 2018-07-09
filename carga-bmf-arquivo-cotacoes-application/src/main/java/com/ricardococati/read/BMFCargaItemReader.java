@@ -1,7 +1,7 @@
 package com.ricardococati.read;
 
 import com.ricardococati.enums.CaminhoArquivoEnum;
-import com.ricardococati.layouts.DetalheSegmentoGLayout;
+import com.ricardococati.layouts.CotacoesDosPapeisPorDiaLayout;
 import com.ricardococati.layouts.HeaderBMFLayout;
 import com.ricardococati.layouts.TrailerLayout;
 import java.io.Serializable;
@@ -85,7 +85,7 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 		HeaderBMFLayout headerLayout = new HeaderBMFLayout();
 		tokenizers.put(HEADER, headerLayout.configurarParser());
 
-		DetalheSegmentoGLayout detalheSegmentoGLayout = new DetalheSegmentoGLayout();
+		CotacoesDosPapeisPorDiaLayout detalheSegmentoGLayout = new CotacoesDosPapeisPorDiaLayout();
 		tokenizers.put(DETALHE_SEGMENTO_G, detalheSegmentoGLayout.configurarParser());
 
 		TrailerLayout trailerLayout = new TrailerLayout();
