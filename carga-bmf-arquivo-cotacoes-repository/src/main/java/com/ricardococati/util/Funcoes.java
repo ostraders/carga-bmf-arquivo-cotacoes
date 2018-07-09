@@ -93,7 +93,7 @@ public class Funcoes {
     }
   }
 
-  public static Date formatarDateUtilForReaderDate(String dataStr) {
+  public static Date formatarDateReaderDate(String dataStr) {
     SimpleDateFormat formatDataContinua = new SimpleDateFormat("ddMMyyyy");
     SimpleDateFormat formatComTraco = new SimpleDateFormat("yyyy-MM-dd");
     Date data = null;

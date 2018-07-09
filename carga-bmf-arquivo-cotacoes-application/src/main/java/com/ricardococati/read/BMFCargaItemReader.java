@@ -1,15 +1,22 @@
 package com.ricardococati.read;
 
 import com.ricardococati.enums.CaminhoArquivoEnum;
-import com.ricardococati.layouts.HeaderLayout;
-import com.ricardococati.layouts.HeaderLoteLayout;
 import com.ricardococati.layouts.DetalheSegmentoGLayout;
-import com.ricardococati.layouts.TrailerLoteLayout;
+import com.ricardococati.layouts.HeaderBMFLayout;
 import com.ricardococati.layouts.TrailerLayout;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.AfterStep;
 import org.springframework.batch.core.annotation.BeforeStep;
-import org.springframework.batch.item.*;
+import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemStream;
+import org.springframework.batch.item.ItemStreamException;
+import org.springframework.batch.item.NonTransientResourceException;
+import org.springframework.batch.item.ParseException;
+import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
@@ -20,17 +27,11 @@ import org.springframework.batch.item.file.transform.PatternMatchingCompositeLin
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourceArrayPropertyEditor;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
 public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<FieldSet>>, ItemStream, Serializable {
 
-	private static final long serialVersionUID = 1927411035137714641L;
-	private final static String HEADER = "???????0*";
-	private final static String HEADER_LOTE = "???????1*";
+	private static final long serialVersionUID = 1602197835137714641L;
+	private final static String HEADER = "00*";
 	private final static String DETALHE_SEGMENTO_G = "???????3?????G*";
-	private final static String TRAILER_LOTE = "???????5*";
 	private final static String TRAILER = "???????9*";
 	private FlatFileItemReader<FieldSet> flatFileItemReader;
 	private MultiResourceItemReader<FieldSet> multiResourceItemReader;
@@ -81,17 +82,11 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 	private Map<String, LineTokenizer> setTokenizers() {
 		final Map<String, LineTokenizer> tokenizers = new HashMap<>();
 
-		HeaderLayout headerLayout = new HeaderLayout();
+		HeaderBMFLayout headerLayout = new HeaderBMFLayout();
 		tokenizers.put(HEADER, headerLayout.configurarParser());
-
-		HeaderLoteLayout headerLoteLayout = new HeaderLoteLayout();
-		tokenizers.put(HEADER_LOTE, headerLoteLayout.configurarParser());
 
 		DetalheSegmentoGLayout detalheSegmentoGLayout = new DetalheSegmentoGLayout();
 		tokenizers.put(DETALHE_SEGMENTO_G, detalheSegmentoGLayout.configurarParser());
-
-		TrailerLoteLayout trailerLoteLayout = new TrailerLoteLayout();
-		tokenizers.put(TRAILER_LOTE, trailerLoteLayout.configurarParser());
 
 		TrailerLayout trailerLayout = new TrailerLayout();
 		tokenizers.put(TRAILER, trailerLayout.configurarParser());

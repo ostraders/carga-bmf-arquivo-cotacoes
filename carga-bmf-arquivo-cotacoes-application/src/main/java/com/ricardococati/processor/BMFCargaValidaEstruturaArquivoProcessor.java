@@ -1,35 +1,28 @@
 package com.ricardococati.processor;
 
-import java.math.BigInteger;
-import java.text.MessageFormat;
-
-import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.file.transform.FieldSet;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.ricardococati.dto.ArquivoDTO;
 import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.enums.TipoRegistroEnum;
 import com.ricardococati.enums.TiposCamposEnum;
 import com.ricardococati.exception.LinhaInvalidaException;
 import com.ricardococati.layouts.DetalheSegmentoGLayout;
-import com.ricardococati.layouts.HeaderLayout;
-import com.ricardococati.layouts.HeaderLoteLayout;
+import com.ricardococati.layouts.HeaderBMFLayout;
 import com.ricardococati.layouts.TrailerLayout;
-import com.ricardococati.layouts.TrailerLoteLayout;
 import com.ricardococati.service.impl.IntegrationService;
-
+import java.math.BigInteger;
+import java.text.MessageFormat;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.file.transform.FieldSet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 public class BMFCargaValidaEstruturaArquivoProcessor implements
     ItemProcessor<FieldSet, BMFCargaDTO> {
 
-  private HeaderLayout header = null;
-  private HeaderLoteLayout headerLote = null;
+  private HeaderBMFLayout header = null;
   private DetalheSegmentoGLayout segmentoA;
-  private TrailerLoteLayout traillerLote;
   private TrailerLayout trailler;
   private static final String TIPO_REGISTRO_DETALHE = "3";
 
@@ -79,10 +72,8 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
 
   private void validarTipagemDosCampos(String nomeCampo, String valorCampo, BoletoUtil boletoUtil)
       throws Exception, LinhaInvalidaException {
-    header = new HeaderLayout();
-    headerLote = new HeaderLoteLayout();
+    header = new HeaderBMFLayout();
     segmentoA = new DetalheSegmentoGLayout();
-    traillerLote = new TrailerLoteLayout();
     trailler = new TrailerLayout();
 
     try {
@@ -91,11 +82,9 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
 
       if (boletoUtil.getTipoRegistro().equals(TipoRegistroEnum.HEADER.getCod())) {
         tipoCampo = (TiposCamposEnum) header.getTipos().get(nomeCampo);
-      } else if (boletoUtil.getTipoRegistro().equals(TipoRegistroEnum.HEADER_LOTE.getCod())) {
-        tipoCampo = (TiposCamposEnum) headerLote.getTipos().get(nomeCampo);
-      } else if (TipoRegistroEnum.DETALHE_SEGMENTO_G.getCod().equals(boletoUtil.getTipoRegistro())
+      } else if (TipoRegistroEnum.DETALHE.getCod().equals(boletoUtil.getTipoRegistro())
           &&
-          TipoRegistroEnum.DETALHE_SEGMENTO_G.getNome().equals(boletoUtil.getSegmento())) {
+          TipoRegistroEnum.DETALHE.getNome().equals(boletoUtil.getSegmento())) {
         if ("codOcorrenciaBase".equals(nomeCampo)) {
           boletoUtil.setCodOcorr(boletoUtil.getLine().readRawString("codOcorrenciaBase"));
           boletoUtil.validaInclusaoExclusaoBoleto(boletoUtil);
@@ -105,8 +94,6 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
           boletoUtil.validaTipoPagtoBoleto(boletoUtil);
         }
         tipoCampo = (TiposCamposEnum) segmentoA.getTipos().get(nomeCampo);
-      } else if (boletoUtil.getTipoRegistro().equals(TipoRegistroEnum.TRAILER_LOTE.getCod())) {
-        tipoCampo = (TiposCamposEnum) traillerLote.getTipos().get(nomeCampo);
       } else if (boletoUtil.getTipoRegistro().equals(TipoRegistroEnum.TRAILER.getCod())) {
         tipoCampo = (TiposCamposEnum) trailler.getTipos().get(nomeCampo);
       }

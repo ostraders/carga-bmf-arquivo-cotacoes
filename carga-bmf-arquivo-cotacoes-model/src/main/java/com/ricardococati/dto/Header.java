@@ -1,5 +1,6 @@
 package com.ricardococati.dto;
 
+import java.util.Date;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,7 +12,7 @@ public class Header extends BMFCargaDTO {
 	private Long tipoRegistro;
 	private String nomeDoArquivo;
 	private String codigoDaOrigem;
-	private String dataDaGeracaoDoArquivo;
+	private Date dataDaGeracaoDoArquivo;
 	private String reserva;
 
 }
