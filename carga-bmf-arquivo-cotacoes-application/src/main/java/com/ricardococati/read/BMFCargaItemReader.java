@@ -3,7 +3,7 @@ package com.ricardococati.read;
 import com.ricardococati.enums.CaminhoArquivoEnum;
 import com.ricardococati.layouts.CotacoesDosPapeisPorDiaLayout;
 import com.ricardococati.layouts.HeaderBMFLayout;
-import com.ricardococati.layouts.TrailerLayout;
+import com.ricardococati.layouts.TraillerBMFLayout;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -88,7 +88,7 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 		CotacoesDosPapeisPorDiaLayout detalheSegmentoGLayout = new CotacoesDosPapeisPorDiaLayout();
 		tokenizers.put(DETALHE_SEGMENTO_G, detalheSegmentoGLayout.configurarParser());
 
-		TrailerLayout trailerLayout = new TrailerLayout();
+		TraillerBMFLayout trailerLayout = new TraillerBMFLayout();
 		tokenizers.put(TRAILER, trailerLayout.configurarParser());
 
 		return tokenizers;

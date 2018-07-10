@@ -7,7 +7,7 @@ import com.ricardococati.enums.TiposCamposEnum;
 import com.ricardococati.exception.LinhaInvalidaException;
 import com.ricardococati.layouts.CotacoesDosPapeisPorDiaLayout;
 import com.ricardococati.layouts.HeaderBMFLayout;
-import com.ricardococati.layouts.TrailerLayout;
+import com.ricardococati.layouts.TraillerBMFLayout;
 import com.ricardococati.service.impl.IntegrationService;
 import java.math.BigInteger;
 import java.text.MessageFormat;
@@ -23,7 +23,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
 
   private HeaderBMFLayout header = null;
   private CotacoesDosPapeisPorDiaLayout segmentoA;
-  private TrailerLayout trailler;
+  private TraillerBMFLayout trailler;
   private static final String TIPO_REGISTRO_DETALHE = "3";
 
   @Autowired
@@ -74,7 +74,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
       throws Exception, LinhaInvalidaException {
     header = new HeaderBMFLayout();
     segmentoA = new CotacoesDosPapeisPorDiaLayout();
-    trailler = new TrailerLayout();
+    trailler = new TraillerBMFLayout();
 
     try {
 
