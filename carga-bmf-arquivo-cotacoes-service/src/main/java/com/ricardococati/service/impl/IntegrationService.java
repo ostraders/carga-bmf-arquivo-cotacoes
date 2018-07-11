@@ -1,9 +1,12 @@
 package com.ricardococati.service.impl;
 
+import com.ricardococati.enums.CaminhoArquivoEnum;
+import com.ricardococati.service.IGerenciadorArquivosService;
+import com.ricardococati.service.IIntegrationService;
 import java.io.File;
 import java.io.Serializable;
-import java.util.StringTokenizer;
-
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -12,14 +15,6 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import com.ricardococati.service.IGerenciadorArquivosService;
-import com.ricardococati.dto.ArquivoDTO;
-import com.ricardococati.enums.CaminhoArquivoEnum;
-import com.ricardococati.service.IIntegrationService;
-
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data
@@ -39,9 +34,6 @@ public class IntegrationService implements IIntegrationService, Serializable {
 
   @Autowired
   private IGerenciadorArquivosService gerenciadorArquivos;
-
-  @Autowired
-  private ArquivoDTO arquivoDTO;
 
   File diretorioExecucao = null;
   File arquivo = null;
@@ -75,7 +67,6 @@ public class IntegrationService implements IIntegrationService, Serializable {
             }
             arquivo = gerenciadorArquivos.renomearArquivo(arquivo);
             gerenciadorArquivos.moveArquivoParaDiretorio(diretorioExecucao, arquivo);
-            capturaTrackingID(arquivo);
             gerenciadorArquivos.moveArquivoParaDiretorio(diretorioExecucao, arquivo);
             executeProcessoBatch();
             gerenciadorArquivos.moverArquivosEntreDiretorios(
@@ -89,29 +80,6 @@ public class IntegrationService implements IIntegrationService, Serializable {
     } catch (Exception e) {
       String mensagemErro = "Ocorreu um erro no processamento do arquivo ";
       log.error(mensagemErro + "  -  " + e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-  /***
-   * Metodo responsável por capturar informações de:
-   *  - sender
-   *  - receiver
-   *  - doctype
-   *  - trackingId
-   * do nome do arquivo.
-   */
-  private void capturaTrackingID(File arquivo) throws Exception {
-    try {
-      StringTokenizer strToken = new StringTokenizer(arquivo.getName());
-      arquivoDTO.setTamanhoArquivo(arquivo.length());
-      arquivoDTO.setNomeArquivo(arquivo.getName());
-      arquivoDTO.setSender(strToken.nextToken("@").toUpperCase());
-      arquivoDTO.setReceiver(strToken.nextToken("@").toUpperCase());
-      arquivoDTO.setDoctype(strToken.nextToken("@").toUpperCase());
-      arquivoDTO.setTrackingID(strToken.nextToken().toUpperCase().substring(0, 15));
-    } catch (Exception e) {
-      log.error("Ocorreu um erro ao parsear o nome do arquivo " + "  -  " + e.getMessage());
       e.printStackTrace();
     }
   }

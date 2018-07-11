@@ -2,7 +2,6 @@ package com.ricardococati.processor;
 
 import static java.util.Objects.isNull;
 
-import com.ricardococati.dto.ArquivoDTO;
 import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.enums.TipoRegistroEnum;
 import com.ricardococati.enums.TiposCamposEnum;
@@ -13,7 +12,6 @@ import com.ricardococati.layouts.TraillerBMFLayout;
 import com.ricardococati.service.impl.IntegrationService;
 import com.ricardococati.util.Funcoes;
 import java.math.BigInteger;
-import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.UUID;
 import lombok.Data;
@@ -32,9 +30,6 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
 
   @Autowired
   private IntegrationService integrationService;
-
-  @Autowired
-  private ArquivoDTO arquivoDTO;
 
   @Override
   public BMFCargaDTO process(FieldSet line) throws Exception {

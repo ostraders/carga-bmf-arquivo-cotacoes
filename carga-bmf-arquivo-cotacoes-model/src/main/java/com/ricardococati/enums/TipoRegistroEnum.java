@@ -4,18 +4,15 @@ import lombok.Getter;
 
 public enum TipoRegistroEnum {
 
-	HEADER("00", "HEADER"),
-	DETALHE("01", "G"),
-	TRAILER("99", "TRAILER");
+	HEADER("00"),
+	DETALHE("01"),
+	TRAILER("99");
 
-	private TipoRegistroEnum(String cod, String nome){
+	private TipoRegistroEnum(String cod){
 		this.cod = cod;
-		this.nome = nome;
 	}
 
 	@Getter
 	private String cod;
-	@Getter
-	private String nome;
 
 }
