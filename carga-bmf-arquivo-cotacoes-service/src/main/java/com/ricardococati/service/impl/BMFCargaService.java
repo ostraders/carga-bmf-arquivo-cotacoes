@@ -1,5 +1,7 @@
 package com.ricardococati.service.impl;
 
+import static java.util.Objects.isNull;
+
 import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dto.BMFCargaDTO;
@@ -27,10 +29,10 @@ public class BMFCargaService implements IBMFCargaService {
   private IntegrationService integrationService;
 
   @Override
-  public void insereDados(List<? extends BMFCargaDTO> listBoletoDTO) {
+  public void insereDados(List<? extends BMFCargaDTO> listCargaDTO) {
     try {
-      if (listBoletoDTO != null && listBoletoDTO.size() > 0) {
-        for (BMFCargaDTO bmfCargaDTO : listBoletoDTO) {
+      if (!isNull(listCargaDTO) && !listCargaDTO.isEmpty()) {
+        for (BMFCargaDTO bmfCargaDTO : listCargaDTO) {
           if (Header.class.isInstance(bmfCargaDTO)) {
             Header header = (Header) bmfCargaDTO;
             headerDAO.save(header);

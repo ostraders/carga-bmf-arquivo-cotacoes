@@ -83,9 +83,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements
 
       if (bmfUtil.getTipoRegistro().equals(TipoRegistroEnum.HEADER.getCod())) {
         tipoCampo = (TiposCamposEnum) header.getTipos().get(nomeCampo);
-      } else if (TipoRegistroEnum.DETALHE.getCod().equals(bmfUtil.getTipoRegistro())
-          &&
-          TipoRegistroEnum.DETALHE.getNome().equals(bmfUtil.getSegmento())) {
+      } else if (TipoRegistroEnum.DETALHE.getCod().equals(bmfUtil.getTipoRegistro())) {
         tipoCampo = (TiposCamposEnum) cotacoes.getTipos().get(nomeCampo);
       } else if (bmfUtil.getTipoRegistro().equals(TipoRegistroEnum.TRAILER.getCod())) {
         tipoCampo = (TiposCamposEnum) trailler.getTipos().get(nomeCampo);

@@ -1,6 +1,7 @@
 package com.ricardococati.processor;
 
 import com.ricardococati.dto.BMFCargaDTO;
+import com.ricardococati.dto.Cotacao;
 import com.ricardococati.dto.DetalheSegmentoGDTO;
 import com.ricardococati.dto.Header;
 import com.ricardococati.enums.TipoRegistroEnum;
@@ -22,10 +23,7 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 		String identificacao = line.readString("tipoRegistro");
 
 		BMFCargaDTO bmfCargaDTO = null;
-		if(identificacao.equals(TipoRegistroEnum.DETALHE.getCod())){
-			identificacao = line.readString("codSegmento");
-		}
-		
+
 		if(identificacao.equals(TipoRegistroEnum.HEADER.getCod())) {
 			Header header = new Header();
 			header.setTipoRegistro(line.readLong("tipoRegistro"));
@@ -33,42 +31,38 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 			header.setCodigoDaOrigem(line.readString("codigoDaOrigem"));
 			header.setDataDaGeracaoDoArquivo(Funcoes.formatarDateReaderDate(line.readString("dataDaGeracaoDoArquivo")));
 			header.setReserva(line.readString("reserva"));
-			return bmfCargaDTO = header;
+			bmfCargaDTO = header;
 		}
 
-		if (identificacao.equals(TipoRegistroEnum.DETALHE.getNome())) {
-			DetalheSegmentoGDTO detalheSegmentoGDTO = new DetalheSegmentoGDTO();
-			detalheSegmentoGDTO.setCodCompensacaoBco(line.readLong("codCompensacaoBco"));
-			detalheSegmentoGDTO.setLoteServico(line.readLong("loteServico"));
-			detalheSegmentoGDTO.setTipoRegistro(line.readLong("tipoRegistro"));
-			detalheSegmentoGDTO.setNroSequencial(line.readLong("nroSequencial"));
-			detalheSegmentoGDTO.setCodSegmento(line.readString("codSegmento"));
-			detalheSegmentoGDTO.setFormaPgto(line.readString("formaPgto"));
-			detalheSegmentoGDTO.setCodOcorrenciaBase(line.readLong("codOcorrenciaBase"));
-			detalheSegmentoGDTO.setCodBarra(line.readString("codBarra"));
-			detalheSegmentoGDTO.setTpoInscCedente(line.readLong("tpoInscCedente"));
-			detalheSegmentoGDTO.setInscCedente(line.readLong("inscCedente"));
-			detalheSegmentoGDTO.setNomeCedente(line.readString("nomeCedente"));
-			detalheSegmentoGDTO.setDtaVencimento(Funcoes.formatarDateReaderDate(line.readString("dtaVencimento")));
-			detalheSegmentoGDTO.setVlrTitulo(Funcoes.dividePorCem(line.readBigDecimal("vlrTitulo")));
-			detalheSegmentoGDTO.setQtdMoeda(line.readLong("qtdMoeda"));
-			detalheSegmentoGDTO.setCodMoeda(line.readLong("codMoeda"));
-			detalheSegmentoGDTO.setNroDocCobranca(line.readString("nroDocCobranca"));
-			detalheSegmentoGDTO.setCodAgCobranca(line.readLong("codAgCobranca"));
-			detalheSegmentoGDTO.setDvAgencia(line.readString("dvAgencia"));
-			detalheSegmentoGDTO.setPracaCobranca(line.readString("pracaCobranca"));
-			detalheSegmentoGDTO.setCodCarteira(line.readString("codCarteira"));
-			detalheSegmentoGDTO.setEspecieTitulo(line.readString("especieTitulo"));
-			detalheSegmentoGDTO.setDtaEmissaoTitulo(Funcoes.formatarDateReaderDate(line.readString("dtaEmissaoTitulo")));
-			detalheSegmentoGDTO.setJurosMoraPorDia(Funcoes.dividePorCem(line.readBigDecimal("jurosMoraPorDia")));
-			detalheSegmentoGDTO.setCodDesconto(line.readLong("codDesconto"));
-			detalheSegmentoGDTO.setDtaDesconto(Funcoes.formatarDateReaderDate(line.readString("dtaDesconto")));
-			detalheSegmentoGDTO.setVlrDesconto(Funcoes.dividePorCem(line.readBigDecimal("vlrDesconto")));
-			detalheSegmentoGDTO.setCodProtesto(line.readLong("codProtesto"));
-			detalheSegmentoGDTO.setPrazoProtesto(line.readLong("prazoProtesto"));
-			detalheSegmentoGDTO.setDtaLimitePagtoTitulo(Funcoes.formatarDateReaderDate(line.readString("dtaLimitePagtoTitulo")));
-			detalheSegmentoGDTO.setOcorProcessamento(0L);
-			bmfCargaDTO = detalheSegmentoGDTO;
+		if (identificacao.equals(TipoRegistroEnum.DETALHE.getCod())) {
+			Cotacao cotacao = new Cotacao();
+			cotacao.setTipoRegistro(line.readLong("tipoRegistro"));
+			cotacao.setDtpreg(Funcoes.formatarDateReaderDate(line.readString("dtpreg")));
+			cotacao.setCodbdi(line.readString("codbdi"));
+			cotacao.setCodneg(line.readString("codneg"));
+			cotacao.setTpmerc(line.readLong("tpmerc"));
+			cotacao.setNomres(line.readString("nomres"));
+			cotacao.setEspeci(line.readString("especi"));
+			cotacao.setPrazot(line.readString("prazot"));
+			cotacao.setModref(line.readString("modref"));
+			cotacao.setPreabe(Funcoes.dividePorCem(line.readBigDecimal("preabe")));
+			cotacao.setPremax(Funcoes.dividePorCem(line.readBigDecimal("premax")));
+			cotacao.setPremin(Funcoes.dividePorCem(line.readBigDecimal("premin")));
+			cotacao.setPremed(Funcoes.dividePorCem(line.readBigDecimal("premed")));
+			cotacao.setPreult(Funcoes.dividePorCem(line.readBigDecimal("preult")));
+			cotacao.setPreofc(Funcoes.dividePorCem(line.readBigDecimal("preofc")));
+			cotacao.setPreofv(Funcoes.dividePorCem(line.readBigDecimal("preofv")));
+			cotacao.setTotneg(line.readLong("totneg"));
+			cotacao.setQuatot(line.readLong("quatot"));
+			cotacao.setVoltot(Funcoes.dividePorCem(line.readBigDecimal("voltot")));
+			cotacao.setPreexe(Funcoes.dividePorCem(line.readBigDecimal("preexe")));
+			cotacao.setIndopc(line.readLong("indopc"));
+			cotacao.setDatven(Funcoes.formatarDateReaderDate(line.readString("datven")));
+			cotacao.setFatcot(line.readLong("fatcot"));
+			cotacao.setPtoexe(Funcoes.dividePorCem(line.readBigDecimal("ptoexe")));
+			cotacao.setCodisi(line.readString("codisi"));
+			cotacao.setDismes(line.readLong("dismes"));
+			bmfCargaDTO = cotacao;
 		}
 
 		return bmfCargaDTO;

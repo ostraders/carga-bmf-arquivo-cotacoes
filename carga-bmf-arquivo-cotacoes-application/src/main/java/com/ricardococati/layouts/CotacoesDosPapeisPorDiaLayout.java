@@ -20,7 +20,7 @@ public class CotacoesDosPapeisPorDiaLayout implements ILayoutArquivo {
   private Range[] tamanhos;
   private Map<String, TiposCamposEnum> tipos = new HashMap<String, TiposCamposEnum>();
 
-  private static final String TIPREG = "tipreg";
+  private static final String TIPREG = "tipoRegistro";
   private static final String DTPREG = "dtpreg";
   private static final String CODBDI = "codbdi";
   private static final String CODNEG = "codneg";
@@ -155,7 +155,7 @@ public class CotacoesDosPapeisPorDiaLayout implements ILayoutArquivo {
     tipos.put(VOLTOT, TiposCamposEnum.NUMERICO);
     tipos.put(PREEXE, TiposCamposEnum.NUMERICO);
     tipos.put(INDOPC, TiposCamposEnum.NUMERICO);
-    tipos.put(DATVEN, TiposCamposEnum.NUMERICO);
+    tipos.put(DATVEN, TiposCamposEnum.DATA);
     tipos.put(FATCOT, TiposCamposEnum.NUMERICO);
     tipos.put(PTOEXE, TiposCamposEnum.NUMERICO);
     tipos.put(CODISI, TiposCamposEnum.ALFA);
