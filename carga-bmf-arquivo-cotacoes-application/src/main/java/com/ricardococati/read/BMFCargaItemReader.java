@@ -31,8 +31,8 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 
 	private static final long serialVersionUID = 1602197835137714641L;
 	private final static String HEADER = "00*";
-	private final static String DETALHE_SEGMENTO_G = "???????3?????G*";
-	private final static String TRAILER = "???????9*";
+	private final static String COTACAO = "01*";
+	private final static String TRAILER = "99*";
 	private FlatFileItemReader<FieldSet> flatFileItemReader;
 	private MultiResourceItemReader<FieldSet> multiResourceItemReader;
 
@@ -85,8 +85,8 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 		HeaderBMFLayout headerLayout = new HeaderBMFLayout();
 		tokenizers.put(HEADER, headerLayout.configurarParser());
 
-		CotacoesDosPapeisPorDiaLayout detalheSegmentoGLayout = new CotacoesDosPapeisPorDiaLayout();
-		tokenizers.put(DETALHE_SEGMENTO_G, detalheSegmentoGLayout.configurarParser());
+		CotacoesDosPapeisPorDiaLayout cotacao = new CotacoesDosPapeisPorDiaLayout();
+		tokenizers.put(COTACAO, cotacao.configurarParser());
 
 		TraillerBMFLayout trailerLayout = new TraillerBMFLayout();
 		tokenizers.put(TRAILER, trailerLayout.configurarParser());

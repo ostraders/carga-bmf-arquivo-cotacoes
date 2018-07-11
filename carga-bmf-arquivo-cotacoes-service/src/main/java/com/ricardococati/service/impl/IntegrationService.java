@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.ricardococati.diretorios.IGerenciadorArquivos;
+import com.ricardococati.service.IGerenciadorArquivosService;
 import com.ricardococati.dto.ArquivoDTO;
 import com.ricardococati.enums.CaminhoArquivoEnum;
 import com.ricardococati.service.IIntegrationService;
@@ -38,7 +38,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
   private JobExecution execution;
 
   @Autowired
-  private IGerenciadorArquivos gerenciadorArquivos;
+  private IGerenciadorArquivosService gerenciadorArquivos;
 
   @Autowired
   private ArquivoDTO arquivoDTO;

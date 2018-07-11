@@ -1,11 +1,16 @@
 package com.ricardococati.util;
 
+import static java.util.Objects.isNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import lombok.extern.slf4j.Slf4j;
@@ -65,11 +70,6 @@ public class Funcoes {
     return builder;
   }
 
-  /**
-   * Recebe a data e retorna um long da data no formato yyyyMMdd
-   *
-   * @return data em milissegundos
-   */
   public static Long formataDataRelatorio(Date data) {
     SimpleDateFormat formatDataRel = new SimpleDateFormat("yyyyMMdd");
     String dtFormatada = formatDataRel.format(data);
@@ -91,6 +91,22 @@ public class Funcoes {
     } finally {
       return data;
     }
+  }
+
+  public static LocalDate convertStringToLocalDate(String source) {
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+    LocalDate retorno = null;
+    if(!isNull(source) && !source.isEmpty()){
+      retorno = LocalDate.parse(validFormat(source), dtf);
+    }
+    return retorno;
+  }
+
+  public static String validFormat(String strDate) {
+    if (strDate.length() > 8) {
+      return strDate.substring(0, 8);
+    }
+    return strDate;
   }
 
   public static Date formatarDateReaderDate(String dataStr) {

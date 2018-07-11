@@ -1,23 +1,16 @@
 package com.ricardococati.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.ricardococati.dao.GenericDAO;
-import com.ricardococati.dao.IArquivoDAO;
 import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.IHeaderDAO;
-import com.ricardococati.dao.ISegmentoDAO;
-import com.ricardococati.dto.ArquivoDTO;
 import com.ricardococati.dto.BMFCargaDTO;
-import com.ricardococati.dto.DetalheSegmentoGDTO;
+import com.ricardococati.dto.Cotacao;
 import com.ricardococati.dto.Header;
 import com.ricardococati.service.IBMFCargaService;
-
+import java.util.List;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Data
@@ -25,46 +18,25 @@ import lombok.extern.slf4j.Slf4j;
 public class BMFCargaService implements IBMFCargaService {
 
   @Autowired
-  private IBMFCargaDAO boletoADAO;
+  private IBMFCargaDAO cargaDAO;
 
   @Autowired
   private IHeaderDAO headerDAO;
 
   @Autowired
-  private ISegmentoDAO segmentoDAO;
-
-  @Autowired
-  private IArquivoDAO arquivoDAO;
-
-  @Autowired
-  private GenericDAO genericDAO;
-
-  @Autowired
-  private ArquivoDTO arquivoDTO;
-
-  @Autowired
   private IntegrationService integrationService;
-
-  private Long codBoleto;
 
   @Override
   public void insereDados(List<? extends BMFCargaDTO> listBoletoDTO) {
-    Long nroSegmento = 0L;
     try {
       if (listBoletoDTO != null && listBoletoDTO.size() > 0) {
-        arquivoDAO.buscaDadosIntercambio(arquivoDTO);
-        nroSegmento = segmentoDAO.incluirSegmento();
-        codBoleto = 0L;
         for (BMFCargaDTO bmfCargaDTO : listBoletoDTO) {
           if (Header.class.isInstance(bmfCargaDTO)) {
             Header header = (Header) bmfCargaDTO;
             headerDAO.save(header);
-          } else if (DetalheSegmentoGDTO.class.isInstance(bmfCargaDTO)) {
-            codBoleto = genericDAO.obterSequenceLong("SEGMENTOG_SEQ");
-            DetalheSegmentoGDTO detalheSegmentoGDTO = (DetalheSegmentoGDTO) bmfCargaDTO;
-            detalheSegmentoGDTO.setCodSegmento(String.valueOf(nroSegmento));
-            detalheSegmentoGDTO.setCodBoleto(codBoleto);
-            boletoADAO.incluirBoleto(detalheSegmentoGDTO, arquivoDTO);
+          } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
+            Cotacao cotacao = (Cotacao) bmfCargaDTO;
+            cargaDAO.save(cotacao);
           }
         }
       }

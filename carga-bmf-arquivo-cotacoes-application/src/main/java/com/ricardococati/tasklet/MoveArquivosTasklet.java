@@ -8,8 +8,8 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ricardococati.diretorios.GerenciadorArquivos;
-import com.ricardococati.diretorios.IGerenciadorArquivos;
+import com.ricardococati.service.impl.GerenciadorArquivosService;
+import com.ricardococati.service.IGerenciadorArquivosService;
 import com.ricardococati.enums.CaminhoArquivoEnum;
 
 import lombok.Data;
@@ -21,7 +21,7 @@ public class MoveArquivosTasklet implements Tasklet {
 	private CaminhoArquivoEnum caminhoErro;
 	
 	@Autowired
-	private IGerenciadorArquivos gerenciadorArquivos;
+	private IGerenciadorArquivosService gerenciadorArquivos;
 
 	public MoveArquivosTasklet(CaminhoArquivoEnum caminhoEntrada, CaminhoArquivoEnum caminhoSaida) {
 		super();
@@ -30,7 +30,7 @@ public class MoveArquivosTasklet implements Tasklet {
 	}
 
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws IOException, Exception {
-		IGerenciadorArquivos gerenciadorArquivos = new GerenciadorArquivos();
+		IGerenciadorArquivosService gerenciadorArquivos = new GerenciadorArquivosService();
 		gerenciadorArquivos.moverArquivosEntreDiretoriosVerificaDiretorio(getCaminhoEntrada().getCaminho(), getCaminhoErro().getCaminho());
     	return RepeatStatus.FINISHED;
 	}

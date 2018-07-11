@@ -1,10 +1,10 @@
-package com.ricardococati.diretorios;
+package com.ricardococati.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public interface IGerenciadorArquivos {
+public interface IGerenciadorArquivosService {
 
 	public void moverArquivosEntreDiretorios(String origem, String destino) throws Exception, IOException, FileNotFoundException;
 	

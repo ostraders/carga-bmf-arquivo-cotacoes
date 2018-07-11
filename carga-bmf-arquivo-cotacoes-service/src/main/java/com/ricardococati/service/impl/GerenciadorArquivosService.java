@@ -1,7 +1,8 @@
-package com.ricardococati.diretorios;
+package com.ricardococati.service.impl;
 
 import static java.util.Objects.nonNull;
 
+import com.ricardococati.service.IGerenciadorArquivosService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class GerenciadorArquivos implements IGerenciadorArquivos, Serializable {
+public class GerenciadorArquivosService implements IGerenciadorArquivosService, Serializable {
 
   private static final long serialVersionUID = -1283658257967124514L;
   private static final String LOCK = "@.lock";
