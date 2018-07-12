@@ -16,7 +16,7 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 	private static final long serialVersionUID = 1602197886947938991L;
 
 	@Override
-	public BMFCargaDTO process(FieldSet line) throws Exception {
+	public BMFCargaDTO process(FieldSet line) {
 		log.info("Iniciando ItemProcess: " + line);
 
 		String identificacao = line.readString("tipoRegistro");
@@ -28,7 +28,7 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 			header.setTipoRegistro(line.readLong("tipoRegistro"));
 			header.setNomeDoArquivo(line.readString("nomeDoArquivo"));
 			header.setCodigoDaOrigem(line.readString("codigoDaOrigem"));
-			header.setDataDaGeracaoDoArquivo(Funcoes.formatarDateReaderDate(line.readString("dataDaGeracaoDoArquivo")));
+			header.setDataDaGeracaoDoArquivo(Funcoes.convertStringToLocalDate(line.readString("dataDaGeracaoDoArquivo")));
 			header.setReserva(line.readString("reserva"));
 			bmfCargaDTO = header;
 		}
@@ -36,7 +36,7 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 		if (identificacao.equals(TipoRegistroEnum.DETALHE.getCod())) {
 			Cotacao cotacao = new Cotacao();
 			cotacao.setTipoRegistro(line.readLong("tipoRegistro"));
-			cotacao.setDtpreg(Funcoes.formatarDateReaderDate(line.readString("dtpreg")));
+			cotacao.setDtpreg(Funcoes.convertStringToLocalDate(line.readString("dtpreg")));
 			cotacao.setCodbdi(line.readString("codbdi"));
 			cotacao.setCodneg(line.readString("codneg"));
 			cotacao.setTpmerc(line.readLong("tpmerc"));
@@ -56,7 +56,7 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 			cotacao.setVoltot(Funcoes.dividePorCem(line.readBigDecimal("voltot")));
 			cotacao.setPreexe(Funcoes.dividePorCem(line.readBigDecimal("preexe")));
 			cotacao.setIndopc(line.readLong("indopc"));
-			cotacao.setDatven(Funcoes.formatarDateReaderDate(line.readString("datven")));
+			cotacao.setDatven(Funcoes.convertStringToLocalDate(line.readString("datven")));
 			cotacao.setFatcot(line.readLong("fatcot"));
 			cotacao.setPtoexe(Funcoes.dividePorCem(line.readBigDecimal("ptoexe")));
 			cotacao.setCodisi(line.readString("codisi"));
