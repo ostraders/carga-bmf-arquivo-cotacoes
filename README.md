@@ -25,4 +25,4 @@ Este projeto tem como objetivo a Carga BMF Arquivo de Cotações
 
 ### Comandos necessários
 
-sudo mkdir -p data/bmfCarga/{entrada,erro,execucao,sucesso}
+sudo mkdir -p data/bmfCarga/{entrada,erro,execucao,saida}
