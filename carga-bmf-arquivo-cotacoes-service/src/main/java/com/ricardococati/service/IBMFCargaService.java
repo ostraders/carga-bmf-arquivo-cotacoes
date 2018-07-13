@@ -6,6 +6,6 @@ import com.ricardococati.dto.BMFCargaDTO;
 
 public interface IBMFCargaService {
 	
-    public void insereDados(List<? extends BMFCargaDTO> listBoletoDTO);
+    public void insereDados(List<? extends BMFCargaDTO> bmfCargaDTOS);
 
 }

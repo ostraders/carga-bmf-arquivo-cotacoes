@@ -17,11 +17,11 @@ public class BMFCargaItemWriter implements ItemWriter<BMFCargaDTO>, Serializable
 	private static final long serialVersionUID = 771329275101100444L;
 
 	@Autowired
-	private IBMFCargaService boletoService;
+	private IBMFCargaService cargaService;
 	
 	@Override
-	public void write(List<? extends BMFCargaDTO> listBoletoDTO) throws Exception {
-		boletoService.insereDados(listBoletoDTO);
+	public void write(List<? extends BMFCargaDTO> bmfCargaDTOS) throws Exception {
+		cargaService.insereDados(bmfCargaDTOS);
 	}
 
 }
