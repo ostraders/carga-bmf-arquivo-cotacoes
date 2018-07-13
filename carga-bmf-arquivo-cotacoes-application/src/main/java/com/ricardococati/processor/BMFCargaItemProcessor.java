@@ -6,6 +6,7 @@ import com.ricardococati.dto.Header;
 import com.ricardococati.enums.TipoRegistroEnum;
 import com.ricardococati.util.Funcoes;
 import java.io.Serializable;
+import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.file.transform.FieldSet;
@@ -35,6 +36,7 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 
 		if (identificacao.equals(TipoRegistroEnum.DETALHE.getCod())) {
 			Cotacao cotacao = new Cotacao();
+			cotacao.setId(UUID.randomUUID().toString());
 			cotacao.setTipoRegistro(line.readLong("tipoRegistro"));
 			cotacao.setDtpreg(Funcoes.convertStringToLocalDate(line.readString("dtpreg")));
 			cotacao.setCodbdi(line.readString("codbdi"));
