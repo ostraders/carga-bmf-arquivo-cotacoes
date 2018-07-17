@@ -3,11 +3,13 @@ package com.ricardococati.service.impl;
 import static java.util.Objects.isNull;
 
 import com.ricardococati.dao.IBMFCargaDAO;
+import com.ricardococati.dao.ICandlestickDiarioDAO;
 import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.dto.Cotacao;
 import com.ricardococati.dto.Header;
 import com.ricardococati.service.IBMFCargaService;
+import com.ricardococati.service.converter.ConverteCotacao;
 import java.util.List;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +28,13 @@ public class BMFCargaService implements IBMFCargaService {
   private IHeaderDAO headerDAO;
 
   @Autowired
+  private ICandlestickDiarioDAO candlestickDiarioDAO;
+
+  @Autowired
   private IntegrationService integrationService;
+
+  @Autowired
+  private ConverteCotacao converteCotacao;
 
   @Override
   public void insereDados(List<? extends BMFCargaDTO> listCargaDTO) {
@@ -39,6 +47,7 @@ public class BMFCargaService implements IBMFCargaService {
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
             cargaDAO.save(cotacao);
+            candlestickDiarioDAO.save(converteCotacao.converterCotacaoParaCandlestick(cotacao));
           }
         }
       }
