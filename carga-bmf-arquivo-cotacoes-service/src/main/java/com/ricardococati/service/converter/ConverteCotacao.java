@@ -2,9 +2,12 @@ package com.ricardococati.service.converter;
 
 import com.ricardococati.dto.CandlestickDiario;
 import com.ricardococati.dto.Cotacao;
+import com.ricardococati.util.Funcoes;
 import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class ConverteCotacao {
 
@@ -18,6 +21,7 @@ public class ConverteCotacao {
     diario.setPremin(cotacao.getPremin());
     diario.setPremax(cotacao.getPremax());
     diario.setVoltot(cotacao.getVoltot());
+    diario.setIdSemana(Funcoes.stringToIdWeekOfYear(cotacao.getDtpreg()));
     return diario;
   }
 

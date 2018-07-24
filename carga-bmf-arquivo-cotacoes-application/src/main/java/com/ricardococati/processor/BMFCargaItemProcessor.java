@@ -1,6 +1,7 @@
 package com.ricardococati.processor;
 
 import com.ricardococati.dto.BMFCargaDTO;
+import com.ricardococati.dto.CandlestickDiario;
 import com.ricardococati.dto.Cotacao;
 import com.ricardococati.dto.Header;
 import com.ricardococati.enums.TipoRegistroEnum;

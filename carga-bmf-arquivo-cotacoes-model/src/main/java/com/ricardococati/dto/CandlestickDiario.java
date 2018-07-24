@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "candlestick_diario")
+@Document(collection = "candlestickDiario")
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class CandlestickDiario extends BMFCargaDTO {
@@ -25,5 +25,6 @@ public class CandlestickDiario extends BMFCargaDTO {
   private BigDecimal premin;
   private BigDecimal preult;
   private BigDecimal voltot;
+  private Integer idSemana;
 
 }

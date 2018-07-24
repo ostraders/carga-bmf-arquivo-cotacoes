@@ -9,14 +9,12 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
-
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import lombok.Data;
 
 @Data
 @Slf4j
@@ -96,7 +94,7 @@ public class Funcoes {
   public static LocalDate convertStringToLocalDate(String source) {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
     LocalDate retorno = null;
-    if(!isNull(source) && !source.isEmpty()){
+    if (!isNull(source) && !source.isEmpty()) {
       retorno = LocalDate.parse(validFormat(source), dtf);
     }
     return retorno;
@@ -258,8 +256,8 @@ public class Funcoes {
    *
    * @return data em milissegundos
    */
-  public static String formataDataPesquisaDataProcessamento(Date data) {
-    SimpleDateFormat formatDataRel = new SimpleDateFormat("dd/MM/yyyy");
+  public static String formataDataPesquisaDataProcessamento(LocalDate data) {
+    SimpleDateFormat formatDataRel = new SimpleDateFormat("yyyy-MM-dd");
     String dtFormatada = formatDataRel.format(data);
     return dtFormatada;
   }
@@ -270,6 +268,17 @@ public class Funcoes {
       retorno = Long.parseLong(nro);
     }
     return retorno;
+  }
+
+  public static Integer stringToIdWeekOfYear(LocalDate dateStr) {
+    SimpleDateFormat formatDataContinua = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar calendar = Calendar.getInstance();
+    try {
+      Date dateObj = formatDataContinua.parse(dateStr.toString());
+      calendar.setTime(dateObj);
+    } catch (ParseException e) {
+    }
+    return calendar.get(Calendar.WEEK_OF_YEAR);
   }
 
 }
