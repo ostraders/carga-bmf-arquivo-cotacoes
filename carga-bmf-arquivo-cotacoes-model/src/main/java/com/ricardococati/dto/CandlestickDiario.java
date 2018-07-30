@@ -25,6 +25,6 @@ public class CandlestickDiario extends BMFCargaDTO {
   private BigDecimal premin;
   private BigDecimal preult;
   private BigDecimal voltot;
-  private Integer idSemana;
+  private Integer semana;
 
 }

@@ -4,9 +4,12 @@ import static java.util.Objects.isNull;
 
 import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAO;
+import com.ricardococati.dao.ICandlestickDiarioDAOCustom;
 import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dto.BMFCargaDTO;
+import com.ricardococati.dto.CandlestickDiario;
 import com.ricardococati.dto.Cotacao;
+import com.ricardococati.dto.Empresa;
 import com.ricardococati.dto.Header;
 import com.ricardococati.service.IBMFCargaService;
 import com.ricardococati.service.converter.ConverteCotacao;
@@ -29,6 +32,9 @@ public class BMFCargaService implements IBMFCargaService {
 
   @Autowired
   private ICandlestickDiarioDAO candlestickDiarioDAO;
+
+  @Autowired
+  private ICandlestickDiarioDAOCustom diarioDAOCustom;
 
   @Autowired
   private IntegrationService integrationService;
@@ -55,6 +61,16 @@ public class BMFCargaService implements IBMFCargaService {
       integrationService.setArquivoValido(false);
       log.info("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: " + e.getMessage());
     }
+  }
+
+  @Override
+  public List<CandlestickDiario> listaCandlestickDiarioPorEmpresa(String nomres) {
+    return candlestickDiarioDAO.findByNomres(nomres);
+  }
+
+  @Override
+  public List<Empresa> listEmpresas() {
+    return diarioDAOCustom.findAllNomres();
   }
 
 }

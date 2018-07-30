@@ -1,10 +1,21 @@
 package com.ricardococati.service.impl;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
+import com.ricardococati.dto.CandlestickDiario;
+import com.ricardococati.dto.CandlestickSemanal;
 import com.ricardococati.enums.CaminhoArquivoEnum;
+import com.ricardococati.service.IBMFCargaService;
 import com.ricardococati.service.IGerenciadorArquivosService;
 import com.ricardococati.service.IIntegrationService;
 import java.io.File;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -31,6 +42,9 @@ public class IntegrationService implements IIntegrationService, Serializable {
   private JobLauncher jobLauncher;
 
   private JobExecution execution;
+
+  @Autowired
+  private IBMFCargaService cargaService;
 
   @Autowired
   private IGerenciadorArquivosService gerenciadorArquivos;
@@ -73,6 +87,8 @@ public class IntegrationService implements IIntegrationService, Serializable {
                 CaminhoArquivoEnum.CAMINHO_ARQUIVO_EXECUCAO.getCaminho(),
                 CaminhoArquivoEnum.CAMINHO_ARQUIVO_SAIDA.getCaminho());
           }
+        } else {
+          geraCandleStickSemanal();
         }
       } else {
         log.info("Diretórios não existem, por favor crie os diretórios!");
@@ -82,6 +98,102 @@ public class IntegrationService implements IIntegrationService, Serializable {
       log.error(mensagemErro + "  -  " + e.getMessage());
       e.printStackTrace();
     }
+  }
+
+  private void geraCandleStickSemanal() {
+    cargaService
+        .listEmpresas()
+        .forEach(empresa -> {
+          List<CandlestickDiario> candlestickList =
+              cargaService
+                  .listaCandlestickDiarioPorEmpresa(empresa.getId());
+          Map<Integer, List<CandlestickDiario>> mapDiario =
+              getListCandlestickToMap(candlestickList);
+          mapDiario
+              .entrySet()
+              .forEach(integerEntry -> {
+                CandlestickSemanal candlestickSemanal = calculaCandleStickPorSemana(
+                    mapDiario.get(integerEntry.getKey()));
+                candlestickSemanal.setSemana(integerEntry.getKey());
+                candlestickSemanal.setNomres(empresa.getId());
+                log.info(candlestickSemanal.toString());
+              });
+          log.info("Nome empresa: " + empresa.getId());
+        });
+  }
+
+  private CandlestickSemanal calculaCandleStickPorSemana(
+      List<CandlestickDiario> candlestickDiarios) {
+    CandlestickSemanal candlestickSemanal = new CandlestickSemanal();
+    candlestickDiarios
+        .forEach(candlestickDiario -> {
+          candlestickSemanal.setDtpregini(calculaDtpregini(candlestickSemanal, candlestickDiario));
+          candlestickSemanal.setDtpregfim(calculaDtpregfim(candlestickSemanal, candlestickDiario));
+          candlestickSemanal.setPreabe(calculaPreabe(candlestickSemanal, candlestickDiario));
+          candlestickSemanal.setPremin(calculaPremin(candlestickSemanal, candlestickDiario));
+          candlestickSemanal.setPremax(calculaPremax(candlestickSemanal, candlestickDiario));
+          candlestickSemanal.setPreult(calculaPreult(candlestickSemanal, candlestickDiario));
+        });
+    return candlestickSemanal;
+  }
+
+  private LocalDate calculaDtpregini(CandlestickSemanal candlestickSemanal,
+      CandlestickDiario candlestickDiario) {
+    if (isNull(candlestickSemanal.getDtpregini()) ||
+        candlestickDiario.getDtpreg().isBefore(candlestickSemanal.getDtpregini())) {
+      candlestickSemanal.setDtpregini(candlestickDiario.getDtpreg());
+    }
+    return candlestickSemanal.getDtpregini();
+  }
+
+  private LocalDate calculaDtpregfim(CandlestickSemanal candlestickSemanal,
+      CandlestickDiario candlestickDiario) {
+    if (isNull(candlestickSemanal.getDtpregfim()) ||
+        candlestickDiario.getDtpreg().isAfter(candlestickSemanal.getDtpregfim())) {
+      candlestickSemanal.setDtpregfim(candlestickDiario.getDtpreg());
+    }
+    return candlestickSemanal.getDtpregfim();
+  }
+
+  private BigDecimal calculaPreabe(CandlestickSemanal candlestickSemanal,
+      CandlestickDiario candlestickDiario) {
+    if (isNull(candlestickSemanal.getPreabe()) ||
+        candlestickSemanal.getDtpregini().isEqual(candlestickDiario.getDtpreg())) {
+      candlestickSemanal.setPreabe(candlestickDiario.getPreabe());
+    }
+    return candlestickSemanal.getPreabe();
+  }
+
+  private BigDecimal calculaPremax(CandlestickSemanal candlestickSemanal,
+      CandlestickDiario candlestickDiario) {
+    BigDecimal vlrPremax = candlestickDiario.getPremax();
+    return vlrPremax;
+  }
+
+  private BigDecimal calculaPremin(CandlestickSemanal candlestickSemanal,
+      CandlestickDiario candlestickDiario) {
+    BigDecimal vlrPremin = candlestickDiario.getPremin();
+    return vlrPremin;
+  }
+
+  private BigDecimal calculaPreult(CandlestickSemanal candlestickSemanal,
+      CandlestickDiario candlestickDiario) {
+    BigDecimal vlrPreult = candlestickDiario.getPreult();
+    return vlrPreult;
+  }
+
+  private BigDecimal calculaVoltot(CandlestickSemanal candlestickSemanal,
+      CandlestickDiario candlestickDiario) {
+    BigDecimal vlrVoltot = candlestickDiario.getVoltot();
+    return vlrVoltot;
+  }
+
+  private Map<Integer, List<CandlestickDiario>> getListCandlestickToMap(
+      List<CandlestickDiario> listcandlestickDiarios) {
+    return listcandlestickDiarios
+        .stream()
+        .filter(candlestickDiario -> nonNull(candlestickDiario.getSemana()))
+        .collect(Collectors.groupingBy(candlestickDiario -> candlestickDiario.getSemana()));
   }
 
   private void executeProcessoBatch() throws Exception {
