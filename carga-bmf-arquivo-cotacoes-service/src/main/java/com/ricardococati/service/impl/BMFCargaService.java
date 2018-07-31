@@ -5,9 +5,11 @@ import static java.util.Objects.isNull;
 import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAOCustom;
+import com.ricardococati.dao.ICandlestickSemanalDAO;
 import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.dto.CandlestickDiario;
+import com.ricardococati.dto.CandlestickSemanal;
 import com.ricardococati.dto.Cotacao;
 import com.ricardococati.dto.Empresa;
 import com.ricardococati.dto.Header;
@@ -34,6 +36,9 @@ public class BMFCargaService implements IBMFCargaService {
   private ICandlestickDiarioDAO candlestickDiarioDAO;
 
   @Autowired
+  private ICandlestickSemanalDAO candlestickSemanalDAO;
+
+  @Autowired
   private ICandlestickDiarioDAOCustom diarioDAOCustom;
 
   @Autowired
@@ -53,7 +58,7 @@ public class BMFCargaService implements IBMFCargaService {
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
             cargaDAO.save(cotacao);
-            candlestickDiarioDAO.save(converteCotacao.converterCotacaoParaCandlestick(cotacao));
+            salvaCandlestickDiario(converteCotacao.converterCotacaoParaCandlestick(cotacao));
           }
         }
       }
@@ -71,6 +76,16 @@ public class BMFCargaService implements IBMFCargaService {
   @Override
   public List<Empresa> listEmpresas() {
     return diarioDAOCustom.findAllNomres();
+  }
+
+  @Override
+  public void salvaCandlestickSemanal(CandlestickSemanal candlestickSemanal) {
+    candlestickSemanalDAO.save(candlestickSemanal);
+  }
+
+  @Override
+  public void salvaCandlestickDiario(CandlestickDiario candlestickDiario) {
+    candlestickDiarioDAO.save(candlestickDiario);
   }
 
 }
