@@ -69,8 +69,14 @@ public class BMFCargaService implements IBMFCargaService {
   }
 
   @Override
-  public List<CandlestickDiario> listaCandlestickDiarioPorEmpresa(String nomres) {
-    return candlestickDiarioDAO.findByNomres(nomres);
+  public List<CandlestickDiario> listaCandlestickDiarioPorEmpresaSemanaGerada(String nomres,
+      Boolean semanaGerada) {
+    return candlestickDiarioDAO.findByNomresAndSemanaGerada(nomres, semanaGerada);
+  }
+
+  @Override
+  public List<CandlestickDiario> listaCandlestickDiarioPorSemanaGerada(Boolean semanaGerada) {
+    return candlestickDiarioDAO.findBySemanaGerada(semanaGerada);
   }
 
   @Override

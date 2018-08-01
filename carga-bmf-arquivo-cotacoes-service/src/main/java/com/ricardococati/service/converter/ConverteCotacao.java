@@ -22,6 +22,7 @@ public class ConverteCotacao {
     diario.setPremax(cotacao.getPremax());
     diario.setVoltot(cotacao.getVoltot());
     diario.setSemana(Funcoes.stringToIdWeekOfYear(cotacao.getDtpreg()));
+    diario.setSemanaGerada(false);
     return diario;
   }
 

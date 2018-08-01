@@ -11,7 +11,9 @@ public interface IBMFCargaService {
 	
     public void insereDados(List<? extends BMFCargaDTO> bmfCargaDTOS);
 
-    public List<CandlestickDiario> listaCandlestickDiarioPorEmpresa(String nomres);
+    public List<CandlestickDiario> listaCandlestickDiarioPorEmpresaSemanaGerada(String nomres, Boolean semanaGerada);
+
+    public List<CandlestickDiario> listaCandlestickDiarioPorSemanaGerada(Boolean semanaGerada);
 
     public List<Empresa> listEmpresas();
 

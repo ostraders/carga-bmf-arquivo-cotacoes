@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 public class IntegrationService implements IIntegrationService, Serializable {
 
   private static final long serialVersionUID = 25671121174988145L;
+  public static final boolean SEMANA_GERADA = false;
 
   @Autowired
   @Qualifier("jobExecutionBatch")
@@ -88,7 +89,9 @@ public class IntegrationService implements IIntegrationService, Serializable {
                 CaminhoArquivoEnum.CAMINHO_ARQUIVO_SAIDA.getCaminho());
           }
         } else {
-          geraCandleStickSemanal();
+          if(cargaService.listaCandlestickDiarioPorSemanaGerada(SEMANA_GERADA).size() > 0) {
+            geraCandleStickSemanal();
+          }
         }
       } else {
         log.info("Diretórios não existem, por favor crie os diretórios!");
@@ -107,7 +110,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
           log.info("Nome empresa: " + empresa.getId());
           List<CandlestickDiario> candlestickList =
               cargaService
-                  .listaCandlestickDiarioPorEmpresa(empresa.getId());
+                  .listaCandlestickDiarioPorEmpresaSemanaGerada(empresa.getId(), SEMANA_GERADA);
           Map<Integer, List<CandlestickDiario>> mapDiario =
               getListCandlestickToMap(candlestickList);
           mapDiario
@@ -176,7 +179,8 @@ public class IntegrationService implements IIntegrationService, Serializable {
 
   private BigDecimal calculaPremax(CandlestickSemanal candlestickSemanal,
       CandlestickDiario candlestickDiario) {
-    if(isNull(candlestickSemanal.getPremax()) || candlestickDiario.getPremax().compareTo(candlestickSemanal.getPremax()) > 0){
+    if (isNull(candlestickSemanal.getPremax())
+        || candlestickDiario.getPremax().compareTo(candlestickSemanal.getPremax()) > 0) {
       candlestickSemanal.setPremax(candlestickDiario.getPremax());
     }
     return candlestickSemanal.getPremax();
@@ -184,7 +188,8 @@ public class IntegrationService implements IIntegrationService, Serializable {
 
   private BigDecimal calculaPremin(CandlestickSemanal candlestickSemanal,
       CandlestickDiario candlestickDiario) {
-    if(isNull(candlestickSemanal.getPremin()) || candlestickDiario.getPremin().compareTo(candlestickSemanal.getPremin()) > 0){
+    if (isNull(candlestickSemanal.getPremin())
+        || candlestickDiario.getPremin().compareTo(candlestickSemanal.getPremin()) > 0) {
       candlestickSemanal.setPremin(candlestickDiario.getPremin());
     }
     return candlestickSemanal.getPremin();
@@ -201,7 +206,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
 
   private BigDecimal calculaVoltot(CandlestickSemanal candlestickSemanal,
       CandlestickDiario candlestickDiario) {
-    if(isNull(candlestickSemanal.getVoltot())) {
+    if (isNull(candlestickSemanal.getVoltot())) {
       candlestickSemanal.setVoltot(candlestickDiario.getVoltot());
     } else {
       candlestickSemanal.getVoltot().add(candlestickDiario.getVoltot());

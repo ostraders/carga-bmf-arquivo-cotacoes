@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ICandlestickDiarioDAO extends MongoRepository<CandlestickDiario, String> {
 
-  List<CandlestickDiario> findByNomres(String nomres);
+  List<CandlestickDiario> findByNomresAndSemanaGerada(String nomres, Boolean semanaGerada);
+
+  List<CandlestickDiario> findBySemanaGerada(Boolean semanaGerada);
 
 }
