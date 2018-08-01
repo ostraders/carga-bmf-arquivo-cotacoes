@@ -11,6 +11,7 @@ Este projeto tem como objetivo a Carga BMF Arquivo de Cotações
 * [Spring Boot](https://projects.spring.io/spring-boot/)
 * [Spring Batch](https://projects.spring.io/spring-batch/)
 * [PostgreSQL](https://www.postgresql.org/)
+* [Docker](https://hub.docker.com/)
 * [Java 1.8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
 
 ---
@@ -19,7 +20,8 @@ Este projeto tem como objetivo a Carga BMF Arquivo de Cotações
 
 | Name         | JNDI       | Connection URL                                            | Service Name 			| User 			 | Pass 		    |
 | -------      |:----:      |:-------------:                                            |:-------------:		|:-------------: |:-------------:   |
-| xxx   | xxx | jdbc:postgresql://xxx:5432/xxx           |                       | xxx    | xxx   |
+| xxx   | xxx | jdbc:postgresql://0.0.0.0:5432/dbbmf           |                       | dbuser    | dbpass   |
+| xxx   | xxx | jdbc:postgresql://0.0.0.0:5432/dbbmf           |                       |     |     |
 
 ---
 
