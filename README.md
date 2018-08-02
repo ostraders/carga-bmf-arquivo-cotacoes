@@ -1,30 +1,47 @@
-## Carga BMF Arquivo de Cotações
+## Carga BMF: Arquivo de Cotações
 
-### Resumo
+#### Resumo
+Projeto tem como objetivo a Carga BMF do arquivo posicional de cotações 245 posições.
+Efetuando a leitura e a escrita dos dados na base de dados(MongoDB)
 
-Este projeto tem como objetivo a Carga BMF Arquivo de Cotações
----
+#### Algumas regras de negócio pertinentes:
+* Validação sintática e semântica dos dados carregados.
+* Criação do Candlestick Diário no momento da carga de dados do arquivo posicional.
+* Criação do Candlestick Semanal após a execução de carga, para que o sistema contenha todas as informações necessárias.
 
-### Tecnologias
 
-* [Maven](https://maven.apache.org/)
-* [Spring Boot](https://projects.spring.io/spring-boot/)
-* [Spring Batch](https://projects.spring.io/spring-batch/)
-* [PostgreSQL](https://www.postgresql.org/)
-* [Docker](https://hub.docker.com/)
+#### Tecnologias
+
 * [Java 1.8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Spring Boot](https://projects.spring.io/spring-boot/) * Tomcat embedded
+* [Spring Batch](https://projects.spring.io/spring-batch/)
+* [MongoDB](http://mongodb.com/) * Onde os dados da carga são armazenados
+* [PostgreSQL](https://www.postgresql.org/) * Utilizado para as tabelas de controle do Spring Batch
+* [Docker](https://hub.docker.com/)
+* [Docker Compose](https://hub.docker.com/) * Para criação da VM do PostgreSQL
+* [Maven](https://maven.apache.org/)
 
----
+#### Passos para a execução do projeto
 
-### Datasources
+Criar as bases de dados conforme descrito abaixo nas linhas de datasource.
+
+#### Porta de execução
+Porta de execução padrão 8080 
+
+#### Datasources
 
 | Name         | JNDI       | Connection URL                                            | Service Name 			| User 			 | Pass 		    |
 | -------      |:----:      |:-------------:                                            |:-------------:		|:-------------: |:-------------:   |
 | xxx   | xxx | jdbc:postgresql://0.0.0.0:5432/dbbmf           |                       | dbuser    | dbpass   |
-| xxx   | xxx | jdbc:postgresql://0.0.0.0:5432/dbbmf           |                       |     |     |
+| xxx   | xxx | mongodb://localhost:27017/db_bmf           |                       |     |     |
 
 ---
 
-### Comandos necessários
+#### Diretórios
 
 sudo mkdir -p data/bmfCarga/{entrada,erro,execucao,saida}
+
+#### Docker
+```
+sudo docker-compose up
+```
