@@ -20,7 +20,7 @@ public class CandlestickSemanal extends BMFCargaDTO {
   private LocalDate dtpregini;
   private LocalDate dtpregfim;
   private Integer semana;
-  private String nomres;
+  private String codneg;
   private BigDecimal preabe;
   private BigDecimal premax;
   private BigDecimal premin;

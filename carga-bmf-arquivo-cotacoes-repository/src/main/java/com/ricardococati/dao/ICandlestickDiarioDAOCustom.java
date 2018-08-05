@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ICandlestickDiarioDAOCustom {
 
-  public List<Empresa> findAllNomres();
+  public List<Empresa> findAllCodneg();
 
 }

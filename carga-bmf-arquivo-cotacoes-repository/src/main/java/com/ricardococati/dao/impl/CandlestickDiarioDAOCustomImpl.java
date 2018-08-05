@@ -22,9 +22,9 @@ public class CandlestickDiarioDAOCustomImpl implements ICandlestickDiarioDAOCust
   private final MongoTemplate mongoTemplate;
 
   @Override
-  public List<Empresa> findAllNomres(){
+  public List<Empresa> findAllCodneg(){
     Aggregation agg = newAggregation(
-        group("nomres"),
+        group("codneg"),
         sort(Direction.ASC, "_id")
     );
 

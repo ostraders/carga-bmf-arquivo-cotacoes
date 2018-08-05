@@ -119,7 +119,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
                 CandlestickSemanal candlestickSemanal = calculaCandleStickPorSemana(
                     mapDiario.get(integerEntry.getKey()));
                 candlestickSemanal.setSemana(integerEntry.getKey());
-                candlestickSemanal.setNomres(empresa.getId());
+                candlestickSemanal.setCodneg(empresa.getId());
                 cargaService.salvaCandlestickSemanal(candlestickSemanal);
               });
           atualizaListaCandlestickDiarioSemanaGerada(candlestickList);
@@ -189,7 +189,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
   private BigDecimal calculaPremin(CandlestickSemanal candlestickSemanal,
       CandlestickDiario candlestickDiario) {
     if (isNull(candlestickSemanal.getPremin())
-        || candlestickDiario.getPremin().compareTo(candlestickSemanal.getPremin()) > 0) {
+        || candlestickDiario.getPremin().compareTo(candlestickSemanal.getPremin()) < 0) {
       candlestickSemanal.setPremin(candlestickDiario.getPremin());
     }
     return candlestickSemanal.getPremin();

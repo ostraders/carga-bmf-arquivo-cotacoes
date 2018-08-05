@@ -69,9 +69,9 @@ public class BMFCargaService implements IBMFCargaService {
   }
 
   @Override
-  public List<CandlestickDiario> listaCandlestickDiarioPorEmpresaSemanaGerada(String nomres,
+  public List<CandlestickDiario> listaCandlestickDiarioPorEmpresaSemanaGerada(String codneg,
       Boolean semanaGerada) {
-    return candlestickDiarioDAO.findByNomresAndSemanaGerada(nomres, semanaGerada);
+    return candlestickDiarioDAO.findByCodnegAndSemanaGerada(codneg, semanaGerada);
   }
 
   @Override
@@ -81,7 +81,7 @@ public class BMFCargaService implements IBMFCargaService {
 
   @Override
   public List<Empresa> listEmpresas() {
-    return diarioDAOCustom.findAllNomres();
+    return diarioDAOCustom.findAllCodneg();
   }
 
   @Override

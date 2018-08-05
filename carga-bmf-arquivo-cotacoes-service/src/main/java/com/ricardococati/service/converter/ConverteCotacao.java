@@ -15,7 +15,7 @@ public class ConverteCotacao {
     CandlestickDiario diario = new CandlestickDiario();
     diario.setId(UUID.randomUUID().toString());
     diario.setDtpreg(cotacao.getDtpreg());
-    diario.setNomres(cotacao.getNomres());
+    diario.setCodneg(cotacao.getCodneg());
     diario.setPreabe(cotacao.getPreabe());
     diario.setPreult(cotacao.getPreult());
     diario.setPremin(cotacao.getPremin());

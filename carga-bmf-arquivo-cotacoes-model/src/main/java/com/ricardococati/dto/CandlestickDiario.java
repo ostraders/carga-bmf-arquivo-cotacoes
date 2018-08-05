@@ -19,7 +19,7 @@ public class CandlestickDiario extends BMFCargaDTO {
   @Id
   private String id;
   private LocalDate dtpreg;
-  private String nomres;
+  private String codneg;
   private BigDecimal preabe;
   private BigDecimal premax;
   private BigDecimal premin;
