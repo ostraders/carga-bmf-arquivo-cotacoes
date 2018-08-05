@@ -5,7 +5,7 @@ Projeto tem como objetivo a Carga BMF do arquivo posicional de cotações 245 po
 Efetuando a leitura e a escrita dos dados na base de dados(MongoDB)
 
 #### Algumas regras de negócio pertinentes:
-* Validação sintática e semântica dos dados carregados.
+* Validação dos dados carregados.
 * Criação do Candlestick Diário no momento da carga de dados do arquivo posicional.
 * Criação do Candlestick Semanal após a execução de carga, para que o sistema contenha todas as informações necessárias.
 
