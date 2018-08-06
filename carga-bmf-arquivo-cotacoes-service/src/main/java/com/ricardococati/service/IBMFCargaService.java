@@ -15,7 +15,7 @@ public interface IBMFCargaService {
 
     public List<CandlestickDiario> listaCandlestickDiarioPorSemanaGerada(Boolean semanaGerada);
 
-    public List<Empresa> listEmpresas();
+    public List<Empresa> listCodNegocio();
 
     public void salvaCandlestickSemanal(CandlestickSemanal candlestickSemanal);
 

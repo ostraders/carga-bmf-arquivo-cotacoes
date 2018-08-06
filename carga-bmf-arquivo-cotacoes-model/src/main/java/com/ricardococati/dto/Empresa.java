@@ -9,6 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Empresa {
 
   @Id
-  private String id;
+  private String codneg;
 
 }

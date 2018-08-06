@@ -80,7 +80,7 @@ public class BMFCargaService implements IBMFCargaService {
   }
 
   @Override
-  public List<Empresa> listEmpresas() {
+  public List<Empresa> listCodNegocio() {
     return diarioDAOCustom.findAllCodneg();
   }
 

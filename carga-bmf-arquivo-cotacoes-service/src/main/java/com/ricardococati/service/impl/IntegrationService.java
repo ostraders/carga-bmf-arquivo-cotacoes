@@ -105,12 +105,12 @@ public class IntegrationService implements IIntegrationService, Serializable {
 
   private void geraCandleStickSemanal() {
     cargaService
-        .listEmpresas()
+        .listCodNegocio()
         .forEach(empresa -> {
-          log.info("Nome empresa: " + empresa.getId());
+          log.info("Código de negociação: " + empresa.getCodneg());
           List<CandlestickDiario> candlestickList =
               cargaService
-                  .listaCandlestickDiarioPorEmpresaSemanaGerada(empresa.getId(), SEMANA_GERADA);
+                  .listaCandlestickDiarioPorEmpresaSemanaGerada(empresa.getCodneg(), SEMANA_GERADA);
           Map<Integer, List<CandlestickDiario>> mapDiario =
               getListCandlestickToMap(candlestickList);
           mapDiario
@@ -119,7 +119,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
                 CandlestickSemanal candlestickSemanal = calculaCandleStickPorSemana(
                     mapDiario.get(integerEntry.getKey()));
                 candlestickSemanal.setSemana(integerEntry.getKey());
-                candlestickSemanal.setCodneg(empresa.getId());
+                candlestickSemanal.setCodneg(empresa.getCodneg());
                 cargaService.salvaCandlestickSemanal(candlestickSemanal);
               });
           atualizaListaCandlestickDiarioSemanaGerada(candlestickList);
