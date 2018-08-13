@@ -1,3 +1,5 @@
+server:
+  port: 8666
 # Spring properties
 spring:
   datasource:
