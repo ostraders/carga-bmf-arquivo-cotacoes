@@ -1,6 +1,7 @@
 package com.ricardococati.service.impl;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAO;
@@ -58,7 +59,11 @@ public class BMFCargaService implements IBMFCargaService {
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
             cargaDAO.save(cotacao);
-            salvaCandlestickDiario(converteCotacao.converterCotacaoParaCandlestick(cotacao));
+            CandlestickDiario candlestickDiario = converteCotacao
+                .converterCotacaoParaCandlestick(cotacao);
+            if (nonNull(candlestickDiario)) {
+              salvaCandlestickDiario(candlestickDiario);
+            }
           }
         }
       }
