@@ -27,5 +27,6 @@ public class CandlestickDiario extends BMFCargaDTO {
   private BigDecimal voltot;
   private Integer semana;
   private Boolean semanaGerada;
+  private Boolean mediaMovelGerada;
 
 }

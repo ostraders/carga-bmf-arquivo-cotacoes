@@ -27,6 +27,7 @@ public class ConverteCotacao {
       diario.setVoltot(cotacao.getVoltot());
       diario.setSemana(Funcoes.stringToIdWeekOfYear(cotacao.getDtpreg()));
       diario.setSemanaGerada(false);
+      diario.setMediaMovelGerada(false);
     }
     return diario;
   }
