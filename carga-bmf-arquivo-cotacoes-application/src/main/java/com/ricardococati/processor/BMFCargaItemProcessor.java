@@ -19,12 +19,8 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 
 	@Override
 	public BMFCargaDTO process(FieldSet line) {
-		log.info("Iniciando ItemProcess: " + line);
-
 		String identificacao = line.readString("tipoRegistro");
-
 		BMFCargaDTO bmfCargaDTO = null;
-
 		if(identificacao.equals(TipoRegistroEnum.HEADER.getCod())) {
 			Header header = new Header();
 			header.setTipoRegistro(line.readLong("tipoRegistro"));
