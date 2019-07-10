@@ -19,10 +19,3 @@ PostgreSQL:
     - REPLICATION_SSLMODE=
   volumes:
     - /srv/docker/postgresql:/var/lib/postgresql
-
-springboot-carga-bmf-arquivo-cotacoes:
-  image: alpine-jdk8/springboot-carga-bmf-arquivo-cotacoes
-  links:
-  - PostgreSQL:postgres
-  ports:
-  - 80:8080
