@@ -11,9 +11,11 @@ spring:
     url: ${spring.datasource.url}
     enabled: true
     checkLocation: false
+    locations: db/migrations
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     baselineOnMigrate: true
+    versions: 1
   profiles:
     active: local
   application:
