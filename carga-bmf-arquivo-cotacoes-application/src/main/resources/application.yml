@@ -3,10 +3,17 @@ server:
 # Spring properties
 spring:
   datasource:
-    url: jdbc:postgresql://0.0.0.0:5432/dbbmf
-    username: dbuser
-    password: dbpass
+    url: jdbc:postgresql://localhost:5432/dbbmf
+    username: dbbmf
+    password: dbbmf
     driver-class-name: org.postgresql.Driver
+  flyway:
+    url: ${spring.datasource.url}
+    enabled: true
+    checkLocation: false
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    baselineOnMigrate: true
   profiles:
     active: local
   application:
