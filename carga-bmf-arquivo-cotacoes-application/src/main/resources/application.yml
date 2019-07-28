@@ -7,15 +7,6 @@ spring:
     username: dbbmf
     password: dbbmf
     driver-class-name: org.postgresql.Driver
-  flyway:
-    url: ${spring.datasource.url}
-    enabled: true
-    checkLocation: false
-    locations: db/migrations
-    user: ${spring.datasource.username}
-    password: ${spring.datasource.password}
-    baselineOnMigrate: true
-    versions: 1
   profiles:
     active: local
   application:
