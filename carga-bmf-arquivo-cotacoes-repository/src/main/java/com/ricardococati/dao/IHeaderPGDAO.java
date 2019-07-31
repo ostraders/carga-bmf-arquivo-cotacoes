@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface IHeaderPGDAO {
 
-  boolean incluirHeaderArquivo(HeaderDTO headerDTO, ArquivoDTO arquivoDTO) throws Exception;
+  boolean incluirHeaderArquivo(HeaderDTO headerDTO) throws Exception;
 
 }

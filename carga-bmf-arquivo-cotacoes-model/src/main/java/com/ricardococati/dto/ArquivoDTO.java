@@ -17,6 +17,5 @@ public class ArquivoDTO implements Serializable {
   private String sender;
   private String receiver;
   private String doctype;
-  private Long codEmpFornax;
 
 }
