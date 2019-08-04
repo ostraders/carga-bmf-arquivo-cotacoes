@@ -32,7 +32,7 @@ public class ScheduledBatchExecution {
     this.candlestickService = candlestickService;
   }
 
-  @Scheduled(cron = "* */2 * * * *")
+  @Scheduled(cron = "0 0/1 * * * *")
   public void executaAgendador() {
     log.info("Inicia execução PROCESSO BATCH em " + sdf.format(new Date()));
     try {
