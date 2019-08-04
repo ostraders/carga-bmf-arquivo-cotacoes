@@ -34,6 +34,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BMFCargaService implements IBMFCargaService {
 
+  private static final String LOTE_PADRAO = "02";
+
   @Autowired
   private IBMFCargaDAO cargaDAO;
 
@@ -87,13 +89,14 @@ public class BMFCargaService implements IBMFCargaService {
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
             CotacaoDTO cotacaoDTO = converterCot.convert(cotacao);
-            cargaDAO.save(cotacao);
-            cotacaoDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
-            cotacaoDAO.incluirCotacao(cotacaoDTO);
-            CandlestickDiario candlestickDiario = candlestickConverter
-                .convert(cotacao);
-            if (nonNull(candlestickDiario)) {
-              salvaCandlestickDiario(candlestickDiario);
+            if(LOTE_PADRAO.equals(cotacaoDTO.getCodbdi())) {
+              cargaDAO.save(cotacao);
+              cotacaoDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
+              cotacaoDAO.incluirCotacao(cotacaoDTO);
+              CandlestickDiario candlestickDiario = candlestickConverter.convert(cotacao);
+              if (nonNull(candlestickDiario)) {
+                salvaCandlestickDiario(candlestickDiario);
+              }
             }
           }
         }
