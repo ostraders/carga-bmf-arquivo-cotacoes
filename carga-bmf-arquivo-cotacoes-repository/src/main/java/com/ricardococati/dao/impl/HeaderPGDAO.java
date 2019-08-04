@@ -3,7 +3,6 @@ package com.ricardococati.dao.impl;
 import com.ricardococati.dao.GenericDAO;
 import com.ricardococati.dao.IHeaderPGDAO;
 import com.ricardococati.dto.HeaderDTO;
-import com.ricardococati.enums.DataBaseInfosEnum;
 import com.ricardococati.util.SQLAppender;
 import java.io.Serializable;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Slf4j
 @Repository
-public class HeaderPGDAO extends GenericDAO implements IHeaderPGDAO, Serializable{
-
-  private static final long serialVersionUID = 3210731296043904591L;
+public class HeaderPGDAO extends GenericDAO implements IHeaderPGDAO {
 
   @Override
   public boolean incluirHeaderArquivo(HeaderDTO headerDTO) throws Exception {
@@ -24,7 +21,7 @@ public class HeaderPGDAO extends GenericDAO implements IHeaderPGDAO, Serializabl
     try {
       jdbcTemplate = new JdbcTemplate(dataSource);
 
-      headerDTO.setIdentificacaoArquivo(getSequence("ARQUIVO_SEQ", jdbcTemplate).longValue());
+      //headerDTO.setIdentificacaoArquivo(getSequence("ARQUIVO_SEQ", jdbcTemplate).longValue());
 
       sql.appendSQL("  INSERT INTO HEADER_ARQ ");
       sql.appendSQL("       ( CODIGO_ORIGEM ");

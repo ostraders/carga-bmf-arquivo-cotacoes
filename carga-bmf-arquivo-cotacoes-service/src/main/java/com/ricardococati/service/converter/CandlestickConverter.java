@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class ConverteCotacao {
+public class CandlestickConverter {
 
-  public CandlestickDiario converterCotacaoParaCandlestick(Cotacao cotacao){
+  public CandlestickDiario convert(Cotacao cotacao){
     CandlestickDiario diario = null;
     if(verificaTipoCotacao(cotacao)) {
       diario = new CandlestickDiario();

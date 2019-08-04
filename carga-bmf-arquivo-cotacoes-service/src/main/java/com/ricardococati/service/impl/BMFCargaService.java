@@ -3,10 +3,12 @@ package com.ricardococati.service.impl;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
+import com.ricardococati.dao.GenericDAO;
 import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAOCustom;
 import com.ricardococati.dao.ICandlestickSemanalDAO;
+import com.ricardococati.dao.ICotacaoDAO;
 import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dao.IHeaderPGDAO;
 import com.ricardococati.dto.BMFCargaDTO;
@@ -18,7 +20,8 @@ import com.ricardococati.dto.Empresa;
 import com.ricardococati.dto.Header;
 import com.ricardococati.dto.HeaderDTO;
 import com.ricardococati.service.IBMFCargaService;
-import com.ricardococati.service.converter.ConverteCotacao;
+import com.ricardococati.service.converter.CandlestickConverter;
+import com.ricardococati.service.converter.CotacaoConverter;
 import com.ricardococati.service.converter.HeaderConverter;
 import java.util.List;
 import lombok.Data;
@@ -50,30 +53,45 @@ public class BMFCargaService implements IBMFCargaService {
   private IntegrationService integrationService;
 
   @Autowired
-  private ConverteCotacao converteCotacao;
+  private CandlestickConverter candlestickConverter;
 
   @Autowired
   private IHeaderPGDAO headerPGDAO;
 
   @Autowired
-  private HeaderConverter converter;
+  private ICotacaoDAO cotacaoDAO;
+
+  @Autowired
+  private HeaderConverter converterHed;
+
+  @Autowired
+  private CotacaoConverter converterCot;
+
+  @Autowired
+  private GenericDAO genericDAO;
+
+  private Long identificadorArquivo;
 
   @Override
   public void insereDados(List<? extends BMFCargaDTO> listCargaDTO) {
     try {
       if (!isNull(listCargaDTO) && !listCargaDTO.isEmpty()) {
+        setIdentificadorArquivo(genericDAO.obterSequenceLong("ARQUIVO_SEQ"));
         for (BMFCargaDTO bmfCargaDTO : listCargaDTO) {
           if (Header.class.isInstance(bmfCargaDTO)) {
             Header header = (Header) bmfCargaDTO;
-            HeaderDTO headerDTO = converter.convert(header);
+            HeaderDTO headerDTO = converterHed.convert(header);
+            headerDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
             headerDAO.save(header);
             headerPGDAO.incluirHeaderArquivo(headerDTO);
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
-            CotacaoDTO cotacaoDTO = null;
+            CotacaoDTO cotacaoDTO = converterCot.convert(cotacao);
             cargaDAO.save(cotacao);
-            CandlestickDiario candlestickDiario = converteCotacao
-                .converterCotacaoParaCandlestick(cotacao);
+            cotacaoDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
+            cotacaoDAO.incluirCotacao(cotacaoDTO);
+            CandlestickDiario candlestickDiario = candlestickConverter
+                .convert(cotacao);
             if (nonNull(candlestickDiario)) {
               salvaCandlestickDiario(candlestickDiario);
             }
