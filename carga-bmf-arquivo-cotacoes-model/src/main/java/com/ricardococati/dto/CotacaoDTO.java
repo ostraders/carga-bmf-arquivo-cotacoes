@@ -12,9 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CotacaoDTO implements Serializable {
+public class CotacaoDTO extends BMFCargaDTO {
 
-  private static final long serialVersionUID = 635171180528520023L;
   private Long tipoRegistro;
   private LocalDate dtpreg;
   private String codbdi;

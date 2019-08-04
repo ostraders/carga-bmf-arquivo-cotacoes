@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Slf4j
 @Repository
-public class HeaderDAO extends GenericDAO implements IHeaderPGDAO, Serializable{
+public class HeaderPGDAO extends GenericDAO implements IHeaderPGDAO, Serializable{
 
   private static final long serialVersionUID = 3210731296043904591L;
 
@@ -26,13 +26,13 @@ public class HeaderDAO extends GenericDAO implements IHeaderPGDAO, Serializable{
 
       headerDTO.setIdentificacaoArquivo(getSequence("ARQUIVO_SEQ", jdbcTemplate).longValue());
 
-      sql.appendSQL("  INSERT INTO " + DataBaseInfosEnum.SCHEMA.getTexto() + ".HEADER ");
+      sql.appendSQL("  INSERT INTO HEADER_ARQ ");
       sql.appendSQL("       ( CODIGO_ORIGEM ");
       sql.appendSQL("       , NOME_ARQUIVO ");
       sql.appendSQL("       , DATA_GERACAO_ARQUIVO ");
       sql.appendSQL("       , TIPO_REGISTRO ");
-      sql.appendSQL("       , IDENTIFICACAO_REG");
-      sql.appendSQL("  VALUES (?,?,?,?,?,?,?) ");
+      sql.appendSQL("       , IDENTIFICACAO_REG) ");
+      sql.appendSQL("  VALUES (?,?,?,?,?) ");
 
       retorno = jdbcTemplate.update(sql.getAppendSQLSemQuebra().toString(),
           new Object[] {

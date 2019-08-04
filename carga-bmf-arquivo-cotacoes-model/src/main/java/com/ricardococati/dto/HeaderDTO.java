@@ -1,15 +1,20 @@
 package com.ricardococati.dto;
 
+import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class HeaderDTO extends BMFCargaDTO {
 
-  private Integer tipoRegistro;
+  private Long tipoRegistro;
   private String nomeDoArquivo;
   private String codigoDaOrigem;
-  private Integer dataDaGeracaoDoArquivo;
+  private LocalDate dataDaGeracaoDoArquivo;
 
 }

@@ -26,7 +26,7 @@ public class GenericDAO  {
     if (sequenceName == null) {
       throw new IllegalArgumentException("The passed sequence name was null", new Throwable());
     }
-    return template.query("SELECT NEXTVAL('" + DataBaseInfosEnum.SCHEMA.getTexto() + ".\"" + sequenceName + "\"')" , new ResultSetExtractor<Number>() {
+    return template.query("SELECT NEXTVAL('" + sequenceName + "')" , new ResultSetExtractor<Number>() {
       public Number extractData(ResultSet rs) throws SQLException, DataAccessException {
         rs.next();
         Number number = (Number) rs.getObject(1);
