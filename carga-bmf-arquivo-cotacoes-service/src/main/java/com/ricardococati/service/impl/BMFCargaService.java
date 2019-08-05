@@ -1,6 +1,5 @@
 package com.ricardococati.service.impl;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 import com.ricardococati.dao.GenericDAO;
@@ -77,7 +76,7 @@ public class BMFCargaService implements IBMFCargaService {
   @Override
   public void insereDados(List<? extends BMFCargaDTO> listCargaDTO) {
     try {
-      if (!isNull(listCargaDTO) && !listCargaDTO.isEmpty()) {
+      if (nonNull(listCargaDTO) && !listCargaDTO.isEmpty()) {
         setIdentificadorArquivo(genericDAO.obterSequenceLong("ARQUIVO_SEQ"));
         for (BMFCargaDTO bmfCargaDTO : listCargaDTO) {
           if (Header.class.isInstance(bmfCargaDTO)) {
