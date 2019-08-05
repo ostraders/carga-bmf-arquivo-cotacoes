@@ -1,15 +1,14 @@
--- Drop Table candlestick_diario;
-create table candlestick_diario (
-	"codneg" VARCHAR(255) null,
-	"dtpreg" timestamp null,
-	"media_movel_gerada" BOOLEAN null,
-	"preco_abertura" VARCHAR(255) null,
-	"preco_max" VARCHAR(255) null,
-	"preco_min" VARCHAR(255) null,
-	"preco_fechamento" VARCHAR(255) null,
-	"semana" INTEGER null,
-	"semana_gerada" BOOLEAN null,
-	"volume_total" VARCHAR(255) null
+-- DROP TABLE CANDLESTICK_DIARIO;
+CREATE TABLE CANDLESTICK_DIARIO (
+	ID_CANDLE_DIARIO BIGINT NOT NULL PRIMARY KEY,
+	CODNEG VARCHAR(255) NULL,
+	DTPREG DATE NULL,
+	MEDIA_MOVEL_GERADA BOOLEAN NULL,
+	PREABE DECIMAL(14,2) NULL,
+	PREMAX DECIMAL(14,2) NULL,
+	PREMIN DECIMAL(14,2) NULL,
+	PREULT DECIMAL(14,2) NULL,
+	SEMANA BIGINT NULL,
+	SEMANA_GERADA BOOLEAN NULL,
+	VOLTOT DECIMAL(20,2) NULL
 );
-
-ALTER TABLE candlestick_diario ADD PRIMARY KEY (codneg, dtpreg);
