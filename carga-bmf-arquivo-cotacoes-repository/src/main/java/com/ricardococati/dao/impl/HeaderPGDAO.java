@@ -21,8 +21,6 @@ public class HeaderPGDAO extends GenericDAO implements IHeaderPGDAO {
     try {
       jdbcTemplate = new JdbcTemplate(dataSource);
 
-      //headerDTO.setIdentificacaoArquivo(getSequence("ARQUIVO_SEQ", jdbcTemplate).longValue());
-
       sql.appendSQL("  INSERT INTO HEADER_ARQ ");
       sql.appendSQL("       ( CODIGO_ORIGEM ");
       sql.appendSQL("       , NOME_ARQUIVO ");

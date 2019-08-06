@@ -6,12 +6,14 @@ import com.ricardococati.dao.GenericDAO;
 import com.ricardococati.dao.IBMFCargaDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAO;
 import com.ricardococati.dao.ICandlestickDiarioDAOCustom;
+import com.ricardococati.dao.ICandlestickDiarioPGDAO;
 import com.ricardococati.dao.ICandlestickSemanalDAO;
 import com.ricardococati.dao.ICotacaoDAO;
 import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dao.IHeaderPGDAO;
 import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.dto.CandlestickDiario;
+import com.ricardococati.dto.CandlestickDiarioDTO;
 import com.ricardococati.dto.CandlestickSemanal;
 import com.ricardococati.dto.Cotacao;
 import com.ricardococati.dto.CotacaoDTO;
@@ -20,6 +22,7 @@ import com.ricardococati.dto.Header;
 import com.ricardococati.dto.HeaderDTO;
 import com.ricardococati.service.IBMFCargaService;
 import com.ricardococati.service.converter.CandlestickConverter;
+import com.ricardococati.service.converter.CandlestickDiarioConverter;
 import com.ricardococati.service.converter.CotacaoConverter;
 import com.ricardococati.service.converter.HeaderConverter;
 import java.util.List;
@@ -45,6 +48,9 @@ public class BMFCargaService implements IBMFCargaService {
   private ICandlestickDiarioDAO candlestickDiarioDAO;
 
   @Autowired
+  private ICandlestickDiarioPGDAO candlestickDiarioPGDAO;
+
+  @Autowired
   private ICandlestickSemanalDAO candlestickSemanalDAO;
 
   @Autowired
@@ -54,7 +60,10 @@ public class BMFCargaService implements IBMFCargaService {
   private IntegrationService integrationService;
 
   @Autowired
-  private CandlestickConverter candlestickConverter;
+  private CandlestickConverter convertCandle;
+
+  @Autowired
+  private CandlestickDiarioConverter convertCandleDiario;
 
   @Autowired
   private IHeaderPGDAO headerPGDAO;
@@ -63,10 +72,10 @@ public class BMFCargaService implements IBMFCargaService {
   private ICotacaoDAO cotacaoDAO;
 
   @Autowired
-  private HeaderConverter converterHed;
+  private HeaderConverter convertHed;
 
   @Autowired
-  private CotacaoConverter converterCot;
+  private CotacaoConverter convertCot;
 
   @Autowired
   private GenericDAO genericDAO;
@@ -81,19 +90,21 @@ public class BMFCargaService implements IBMFCargaService {
         for (BMFCargaDTO bmfCargaDTO : listCargaDTO) {
           if (Header.class.isInstance(bmfCargaDTO)) {
             Header header = (Header) bmfCargaDTO;
-            HeaderDTO headerDTO = converterHed.convert(header);
+            HeaderDTO headerDTO = convertHed.convert(header);
             headerDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
             headerDAO.save(header);
             headerPGDAO.incluirHeaderArquivo(headerDTO);
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
-            CotacaoDTO cotacaoDTO = converterCot.convert(cotacao);
+            CotacaoDTO cotacaoDTO = convertCot.convert(cotacao);
             if(LOTE_PADRAO.equals(cotacaoDTO.getCodbdi())) {
               cargaDAO.save(cotacao);
               cotacaoDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
               cotacaoDAO.incluirCotacao(cotacaoDTO);
-              CandlestickDiario candlestickDiario = candlestickConverter.convert(cotacao);
+              CandlestickDiario candlestickDiario = convertCandle.convert(cotacao);
+              CandlestickDiarioDTO candlestickDiarioDTO = convertCandleDiario.convert(cotacao);
               if (nonNull(candlestickDiario)) {
+                candlestickDiarioPGDAO.incluirCandlestickDiario(candlestickDiarioDTO);
                 salvaCandlestickDiario(candlestickDiario);
               }
             }
