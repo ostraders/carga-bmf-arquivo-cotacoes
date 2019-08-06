@@ -41,13 +41,13 @@ public class ScheduledBatchExecution {
       File arrayArquivos[] = arquivosDiretorioOrigem.listFiles();
       if (arquivosDiretorioOrigem.exists() && arrayArquivos.length > 0) {
         service.execute();
-      } else {
+      } /*else {
         final int size = cargaService.listaCandlestickDiarioPorSemanaGerada(SEMANA_GERADA).size();
         if(size > 0) {
           System.out.println("Passou aqui: size == " + size);
           candlestickService.execute();
         }
-      }
+      }*/
     } catch (Exception e) {
       log.error(" Causa: " + e.getCause() + " Mensagem de Erro: " + e.getMessage());
     }

@@ -1,19 +1,16 @@
 package com.ricardococati.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
-@Document(collection = "cotacao")
 @EqualsAndHashCode(callSuper = false)
 public class Cotacao extends BMFCargaDTO {
 
   private static final long serialVersionUID = 505011356059052924L;
-  @Id
   private String id;
   private Long tipoRegistro;
   private LocalDate dtpreg;

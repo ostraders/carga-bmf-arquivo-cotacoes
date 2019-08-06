@@ -11,6 +11,3 @@ spring:
     active: local
   application:
     name: carga-bmf-arquivo-cotacoes
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/db_bmf

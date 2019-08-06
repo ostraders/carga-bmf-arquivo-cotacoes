@@ -12,11 +12,4 @@
 
   <artifactId>carga-bmf-arquivo-cotacoes-model</artifactId>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-mongodb</artifactId>
-    </dependency>
-  </dependencies>
-
 </project>

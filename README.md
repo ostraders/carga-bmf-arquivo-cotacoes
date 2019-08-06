@@ -2,7 +2,7 @@
 
 #### Resumo
 Projeto tem como objetivo a Carga BMF do arquivo posicional de cotações 245 posições.
-Efetuando a leitura e a escrita dos dados na base de dados(MongoDB)
+Efetuando a leitura e a escrita dos dados na base de dados(PostgreSQL)
 
 #### Algumas regras de negócio pertinentes:
 * Validação dos dados carregados.
@@ -15,8 +15,8 @@ Efetuando a leitura e a escrita dos dados na base de dados(MongoDB)
 * [Java 1.8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Spring Boot](https://projects.spring.io/spring-boot/) * Tomcat embedded
 * [Spring Batch](https://projects.spring.io/spring-batch/)
-* [MongoDB](http://mongodb.com/) * Onde os dados da carga são armazenados
-* [PostgreSQL](https://www.postgresql.org/) * Utilizado para as tabelas de controle do Spring Batch
+* [PostgreSQL](https://www.postgresql.org/) * Onde os dados da carga são armazenados e 
+utilizado para as tabelas de controle do Spring Batch
 * [Docker](https://hub.docker.com/)
 * [Docker Compose](https://hub.docker.com/) * Para criação da VM do PostgreSQL
 * [Maven](https://maven.apache.org/)
@@ -32,8 +32,7 @@ Porta de execução padrão 8080
 
 | Name         | JNDI       | Connection URL                                            | Service Name 			| User 			 | Pass 		    |
 | -------      |:----:      |:-------------:                                            |:-------------:		|:-------------: |:-------------:   |
-| xxx   | xxx | jdbc:postgresql://0.0.0.0:5432/dbbmf           |                       | dbuser    | dbpass   |
-| xxx   | xxx | mongodb://localhost:27017/db_bmf           |                       |     |     |
+| xxx   | xxx | jdbc:postgresql://0.0.0.0:5432/dbbmf           |                       | dbbmf    | dbbmf   |
 
 ---
 
@@ -41,7 +40,3 @@ Porta de execução padrão 8080
 
 sudo mkdir -p data/bmfCarga/{entrada,erro,execucao,saida}
 
-#### Docker
-```
-sudo docker-compose up
-```

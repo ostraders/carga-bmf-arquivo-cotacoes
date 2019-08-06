@@ -39,7 +39,7 @@ public class CandlestickService implements ICandlestickService, Serializable {
   }
 
   private void geraCandleStickSemanal() {
-    cargaService
+    /*cargaService
         .listCodNegocio()
         .forEach(empresa -> {
           log.info("Código de negociação: " + empresa.getCodneg());
@@ -58,15 +58,15 @@ public class CandlestickService implements ICandlestickService, Serializable {
                 cargaService.salvaCandlestickSemanal(candlestickSemanal);
               });
           atualizaListaCandlestickDiarioSemanaGerada(candlestickList);
-        });
+        });*/
   }
 
   private void atualizaListaCandlestickDiarioSemanaGerada(List<CandlestickDiario> candlestickList) {
-    candlestickList
+    /*candlestickList
         .forEach(candlestickDiario -> {
           candlestickDiario.setSemanaGerada(true);
           cargaService.salvaCandlestickDiario(candlestickDiario);
-        });
+        });*/
   }
 
   private CandlestickSemanal calculaCandleStickPorSemana(
