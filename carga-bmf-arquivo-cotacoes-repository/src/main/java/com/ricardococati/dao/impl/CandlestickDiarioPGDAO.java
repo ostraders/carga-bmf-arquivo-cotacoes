@@ -16,7 +16,6 @@ public class CandlestickDiarioPGDAO extends GenericDAO implements ICandlestickDi
 
   @Override
   public boolean incluirCandlestickDiario(final CandlestickDiarioDTO candlestickDiarioDTO) throws Exception {
-    log.info("Executando método: CANDLESTICK_DIARIO");
     int retorno = 0;
     final SQLAppender sql = new SQLAppender(100);
 

@@ -15,7 +15,6 @@ public class HeaderPGDAO extends GenericDAO implements IHeaderPGDAO {
 
   @Override
   public boolean incluirHeaderArquivo(HeaderDTO headerDTO) throws Exception {
-    log.info("Executando método: insereHeaderArquivo");
     int retorno = 0;
     final SQLAppender sql = new SQLAppender(100);
     try {

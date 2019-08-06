@@ -16,7 +16,6 @@ public class CotacaoDAO extends GenericDAO implements ICotacaoDAO {
 
   @Override
   public boolean incluirCotacao(CotacaoDTO cotacaoDTO) throws Exception {
-    log.info("Executando método: incluirCotacao");
     int retorno = 0;
     final SQLAppender sql = new SQLAppender(100);
     try {
