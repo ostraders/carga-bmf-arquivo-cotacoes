@@ -92,20 +92,17 @@ public class BMFCargaService implements IBMFCargaService {
             Header header = (Header) bmfCargaDTO;
             HeaderDTO headerDTO = convertHed.convert(header);
             headerDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
-            headerDAO.save(header);
             headerPGDAO.incluirHeaderArquivo(headerDTO);
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
             CotacaoDTO cotacaoDTO = convertCot.convert(cotacao);
             if(LOTE_PADRAO.equals(cotacaoDTO.getCodbdi())) {
-              cargaDAO.save(cotacao);
               cotacaoDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
               cotacaoDAO.incluirCotacao(cotacaoDTO);
               CandlestickDiario candlestickDiario = convertCandle.convert(cotacao);
               CandlestickDiarioDTO candlestickDiarioDTO = convertCandleDiario.convert(cotacao);
               if (nonNull(candlestickDiario)) {
                 candlestickDiarioPGDAO.incluirCandlestickDiario(candlestickDiarioDTO);
-                salvaCandlestickDiario(candlestickDiario);
               }
             }
           }
