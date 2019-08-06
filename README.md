@@ -17,8 +17,6 @@ Efetuando a leitura e a escrita dos dados na base de dados(PostgreSQL)
 * [Spring Batch](https://projects.spring.io/spring-batch/)
 * [PostgreSQL](https://www.postgresql.org/) * Onde os dados da carga são armazenados e 
 utilizado para as tabelas de controle do Spring Batch
-* [Docker](https://hub.docker.com/)
-* [Docker Compose](https://hub.docker.com/) * Para criação da VM do PostgreSQL
 * [Maven](https://maven.apache.org/)
 
 #### Passos para a execução do projeto
