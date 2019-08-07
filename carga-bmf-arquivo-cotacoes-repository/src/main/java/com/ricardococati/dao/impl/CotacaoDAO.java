@@ -2,9 +2,7 @@ package com.ricardococati.dao.impl;
 
 import com.ricardococati.dao.GenericDAO;
 import com.ricardococati.dao.ICotacaoDAO;
-import com.ricardococati.dao.IHeaderPGDAO;
 import com.ricardococati.dto.CotacaoDTO;
-import com.ricardococati.dto.HeaderDTO;
 import com.ricardococati.util.SQLAppender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;

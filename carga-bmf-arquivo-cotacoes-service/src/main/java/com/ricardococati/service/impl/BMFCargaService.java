@@ -1,75 +1,59 @@
 package com.ricardococati.service.impl;
 
-import com.ricardococati.dao.GenericDAO;
+import static java.util.Objects.nonNull;
+
 import com.ricardococati.dao.ICandlestickDiarioPGDAO;
-import com.ricardococati.dao.IHeaderPGDAO;
-import com.ricardococati.dto.*;
 import com.ricardococati.dao.ICotacaoDAO;
+import com.ricardococati.dao.IHeaderPGDAO;
+import com.ricardococati.dto.BMFCargaDTO;
+import com.ricardococati.dto.CandlestickDiarioDTO;
+import com.ricardococati.dto.Cotacao;
+import com.ricardococati.dto.CotacaoDTO;
+import com.ricardococati.dto.Header;
+import com.ricardococati.dto.HeaderDTO;
 import com.ricardococati.service.IBMFCargaService;
 import com.ricardococati.service.converter.CandlestickConverter;
 import com.ricardococati.service.converter.CandlestickDiarioConverter;
 import com.ricardococati.service.converter.CotacaoConverter;
 import com.ricardococati.service.converter.HeaderConverter;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.util.List;
-
-import static java.util.Objects.nonNull;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Data
 @Service
+@RequiredArgsConstructor
 public class BMFCargaService implements IBMFCargaService {
 
   private static final String LOTE_PADRAO = "02";
-
-  @Autowired
-  private ICandlestickDiarioPGDAO candlestickDiarioPGDAO;
-
-  @Autowired
-  private IntegrationService integrationService;
-
-  @Autowired
-  private CandlestickConverter convertCandle;
-
-  @Autowired
-  private CandlestickDiarioConverter convertCandleDiario;
-
-  @Autowired
-  private IHeaderPGDAO headerPGDAO;
-
-  @Autowired
-  private ICotacaoDAO cotacaoDAO;
-
-  @Autowired
-  private HeaderConverter convertHed;
-
-  @Autowired
-  private CotacaoConverter convertCot;
-
-  @Autowired
-  private GenericDAO genericDAO;
-
-  private Long identificadorArquivo;
+  private final ICandlestickDiarioPGDAO candlestickDiarioPGDAO;
+  private final IntegrationService integrationService;
+  private final CandlestickConverter convertCandle;
+  private final CandlestickDiarioConverter convertCandleDiario;
+  private final IHeaderPGDAO headerPGDAO;
+  private final ICotacaoDAO cotacaoDAO;
+  private final HeaderConverter convertHed;
+  private final CotacaoConverter convertCot;
+  private final ControlaIdArquivoUtil idArquivoUtil;
 
   @Override
   public void insereDados(List<? extends BMFCargaDTO> listCargaDTO) {
     try {
       if (nonNull(listCargaDTO) && !listCargaDTO.isEmpty()) {
-        setIdentificadorArquivo(genericDAO.obterSequenceLong("ARQUIVO_SEQ"));
         for (BMFCargaDTO bmfCargaDTO : listCargaDTO) {
           if (Header.class.isInstance(bmfCargaDTO)) {
             HeaderDTO headerDTO = convertHed.convert((Header) bmfCargaDTO);
-            headerDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
+            headerDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
             headerPGDAO.incluirHeaderArquivo(headerDTO);
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
             CotacaoDTO cotacaoDTO = convertCot.convert(cotacao);
             if(LOTE_PADRAO.equals(cotacaoDTO.getCodbdi())) {
-              cotacaoDTO.setIdentificacaoArquivo(getIdentificadorArquivo());
+              cotacaoDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
               cotacaoDAO.incluirCotacao(cotacaoDTO);
               CandlestickDiarioDTO candlestickDiarioDTO = convertCandleDiario.convert(cotacao);
               if (nonNull(candlestickDiarioDTO)) {

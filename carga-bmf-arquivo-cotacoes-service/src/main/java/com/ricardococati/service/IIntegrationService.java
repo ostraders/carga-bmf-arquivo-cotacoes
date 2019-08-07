@@ -2,6 +2,8 @@ package com.ricardococati.service;
 
 public interface IIntegrationService {
 
-	public void execute() throws Exception;
+	void execute() throws Exception;
+
+	Long getIdArquivoSequence(final String nomeSequence);
 
 }
