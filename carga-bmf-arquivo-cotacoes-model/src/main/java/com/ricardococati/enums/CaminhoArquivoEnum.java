@@ -8,7 +8,7 @@ public enum CaminhoArquivoEnum {
 	CAMINHO_ARQUIVO_ENTRADA("/data/bmfCarga/entrada/"), //
 	CAMINHO_ARQUIVO_ERRO("/data/bmfCarga/erro/"),//
 	CAMINHO_ARQUIVO_EXECUCAO("/data/bmfCarga/execucao/"),//
-	CAMINHO_ARQUIVO_SAIDA("/data/bmfCarga/saida/");
+	CAMINHO_ARQUIVO_SUCESSO("/data/bmfCarga/sucesso/");
 
 	@Getter
 	private String caminho;

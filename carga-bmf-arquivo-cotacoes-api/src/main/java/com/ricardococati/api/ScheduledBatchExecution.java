@@ -1,19 +1,14 @@
 package com.ricardococati.api;
 
 import com.ricardococati.enums.CaminhoArquivoEnum;
-import com.ricardococati.service.IBMFCargaService;
-import com.ricardococati.service.ICandlestickService;
+import com.ricardococati.service.ICandlestickSemanalService;
 import com.ricardococati.service.IIntegrationService;
-import com.ricardococati.service.impl.BMFCargaService;
-import com.ricardococati.service.impl.CandlestickService;
-import com.ricardococati.service.impl.IntegrationService;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class ScheduledBatchExecution {
 
   private final IIntegrationService service;
+  private final ICandlestickSemanalService candlestickSemanalService;
   private final ControlaIdArquivoUtil idArquivoUtil;
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
   public static final boolean SEMANA_GERADA = false;
@@ -37,13 +33,13 @@ public class ScheduledBatchExecution {
       if (arquivosDiretorioOrigem.exists() && arrayArquivos.length > 0) {
         idArquivoUtil.setIdentificadorArquivo(service.getIdArquivoSequence("ARQUIVO_SEQ"));
         service.execute();
-      } /*else {
-        final int size = cargaService.listaCandlestickDiarioPorSemanaGerada(SEMANA_GERADA).size();
+      } else {
+        final int size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse(SEMANA_GERADA);
         if(size > 0) {
-          System.out.println("Passou aqui: size == " + size);
-          candlestickService.execute();
+          log.info("Passou aqui: size == " + size);
+          candlestickSemanalService.execute();
         }
-      }*/
+      }
     } catch (Exception e) {
       log.error(" Causa: " + e.getCause() + " Mensagem de Erro: " + e.getMessage());
     }

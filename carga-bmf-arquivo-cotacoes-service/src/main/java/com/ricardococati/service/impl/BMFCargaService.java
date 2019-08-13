@@ -2,9 +2,9 @@ package com.ricardococati.service.impl;
 
 import static java.util.Objects.nonNull;
 
-import com.ricardococati.dao.ICandlestickDiarioPGDAO;
+import com.ricardococati.dao.ICandlestickDiarioDAO;
 import com.ricardococati.dao.ICotacaoDAO;
-import com.ricardococati.dao.IHeaderPGDAO;
+import com.ricardococati.dao.IHeaderDAO;
 import com.ricardococati.dto.BMFCargaDTO;
 import com.ricardococati.dto.CandlestickDiarioDTO;
 import com.ricardococati.dto.Cotacao;
@@ -12,6 +12,7 @@ import com.ricardococati.dto.CotacaoDTO;
 import com.ricardococati.dto.Header;
 import com.ricardococati.dto.HeaderDTO;
 import com.ricardococati.service.IBMFCargaService;
+import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.CandlestickConverter;
 import com.ricardococati.service.converter.CandlestickDiarioConverter;
 import com.ricardococati.service.converter.CotacaoConverter;
@@ -30,11 +31,11 @@ import org.springframework.stereotype.Service;
 public class BMFCargaService implements IBMFCargaService {
 
   private static final String LOTE_PADRAO = "02";
-  private final ICandlestickDiarioPGDAO candlestickDiarioPGDAO;
-  private final IntegrationService integrationService;
+  private final ICandlestickDiarioDAO candlestickDiarioDAO;
+  private final ControleArquivoConfig arquivoConfig;
   private final CandlestickConverter convertCandle;
   private final CandlestickDiarioConverter convertCandleDiario;
-  private final IHeaderPGDAO headerPGDAO;
+  private final IHeaderDAO headerDAO;
   private final ICotacaoDAO cotacaoDAO;
   private final HeaderConverter convertHed;
   private final CotacaoConverter convertCot;
@@ -48,7 +49,7 @@ public class BMFCargaService implements IBMFCargaService {
           if (Header.class.isInstance(bmfCargaDTO)) {
             HeaderDTO headerDTO = convertHed.convert((Header) bmfCargaDTO);
             headerDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
-            headerPGDAO.incluirHeaderArquivo(headerDTO);
+            headerDAO.incluirHeaderArquivo(headerDTO);
           } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
             Cotacao cotacao = (Cotacao) bmfCargaDTO;
             CotacaoDTO cotacaoDTO = convertCot.convert(cotacao);
@@ -57,14 +58,14 @@ public class BMFCargaService implements IBMFCargaService {
               cotacaoDAO.incluirCotacao(cotacaoDTO);
               CandlestickDiarioDTO candlestickDiarioDTO = convertCandleDiario.convert(cotacao);
               if (nonNull(candlestickDiarioDTO)) {
-                candlestickDiarioPGDAO.incluirCandlestickDiario(candlestickDiarioDTO);
+                candlestickDiarioDAO.incluirCandlestickDiario(candlestickDiarioDTO);
               }
             }
           }
         }
       }
     } catch (Exception e) {
-      integrationService.setArquivoValido(false);
+      arquivoConfig.setArquivoValido(false);
       log.info("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: " + e.getMessage());
     }
   }

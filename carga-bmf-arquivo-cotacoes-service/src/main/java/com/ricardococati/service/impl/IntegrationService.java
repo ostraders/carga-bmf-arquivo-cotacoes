@@ -8,6 +8,7 @@ import com.ricardococati.service.IIntegrationService;
 import java.io.File;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -21,32 +22,27 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Data
 @Service
+@RequiredArgsConstructor
 public class IntegrationService implements IIntegrationService, Serializable {
 
   private static final long serialVersionUID = 25671121174988145L;
 
-  @Autowired
   @Qualifier("jobExecutionBatch")
-  private Job jobExecutionBatch;
+  private final Job jobExecutionBatch;
 
-  @Autowired
-  private JobLauncher jobLauncher;
+  private final JobLauncher jobLauncher;
 
   private JobExecution execution;
 
-  @Autowired
-  private IBMFCargaService cargaService;
+  private final IBMFCargaService cargaService;
 
-  @Autowired
-  private IGerenciadorArquivosService gerenciadorArquivos;
+  private final IGerenciadorArquivosService gerenciadorArquivos;
 
-  @Autowired
-  private GenericDAO genericDAO;
+  private final GenericDAO genericDAO;
 
   File diretorioExecucao = null;
   File arquivo = null;
   File diretorioSaida = null;
-  private boolean arquivoValido = true;
 
   @Override
   public void execute() throws Exception {
@@ -62,7 +58,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
       File arquivosDiretorioOrigem = new File(
           CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA.getCaminho());
       diretorioExecucao = new File(CaminhoArquivoEnum.CAMINHO_ARQUIVO_EXECUCAO.getCaminho());
-      diretorioSaida = new File(CaminhoArquivoEnum.CAMINHO_ARQUIVO_SAIDA.getCaminho());
+      diretorioSaida = new File(CaminhoArquivoEnum.CAMINHO_ARQUIVO_SUCESSO.getCaminho());
       File arrayArquivos[] = arquivosDiretorioOrigem.listFiles();
       int i = 0;
       /** Move os arquivos para o diretório de execução 1 por vez **/
@@ -78,7 +74,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
           executeProcessoBatch();
           gerenciadorArquivos.moverArquivosEntreDiretorios(
               CaminhoArquivoEnum.CAMINHO_ARQUIVO_EXECUCAO.getCaminho(),
-              CaminhoArquivoEnum.CAMINHO_ARQUIVO_SAIDA.getCaminho());
+              CaminhoArquivoEnum.CAMINHO_ARQUIVO_SUCESSO.getCaminho());
         }
       }
     } catch (Exception e) {
