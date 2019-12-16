@@ -29,20 +29,18 @@ public class BaixarArquivoService implements IBaixarArquivoService {
   private SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
 
   @Override
-  public Boolean baixaArquivoCotacao() {
+  public void baixaArquivoCotacao() {
+    // TODO Alterar para receber data dinamicamente do bd conforme caledário da bolsa
     final String dataStr = LocalDate.of(2019, 12, 13).toString();
     Date dataPregao = formatarDateReaderDate(dataStr);
     try {
-
-      //connectionTimeout, readTimeout = 10 seconds
+      final String dataFormatada = sdf.format(dataPregao);
       FileUtils.copyURLToFile(
-          new URL(arquivoConfig.getUrlArquivoCotacoes().replace("*", sdf.format(dataPregao))),
+          new URL(arquivoConfig.getUrlArquivoCotacoes().replace("*", dataFormatada)),
           new File(CaminhoArquivoEnum.CAMINHO_ARQUIVO_ZIP.getCaminho() + "Teste.zip"), 10000, 10000);
-
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return null;
   }
 
   public Date formatarDateReaderDate(final String dataStr) {
