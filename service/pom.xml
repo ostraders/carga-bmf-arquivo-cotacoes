@@ -12,6 +12,10 @@
 
     <artifactId>service</artifactId>
 
+    <properties>
+        <commons-io.version>2.6</commons-io.version>
+    </properties>
+
     <dependencies>
         <!-- INTERNAL -->
         <dependency>
@@ -21,6 +25,11 @@
         <dependency>
             <groupId>com.ricardococati</groupId>
             <artifactId>repository</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
     </dependencies>
 
