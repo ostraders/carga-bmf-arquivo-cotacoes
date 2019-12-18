@@ -1,7 +1,6 @@
 package com.ricardococati.controller;
 
 import com.ricardococati.controller.converter.SplitInplitConverter;
-import com.ricardococati.model.dto.SplitInplit;
 import com.ricardococati.service.IBaixarArquivoService;
 import com.ricardococati.service.ISplitInplitService;
 import com.ricardococati.service.config.ControleArquivoConfig;
@@ -9,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.io.IOException;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -81,7 +80,7 @@ public class SplitInplitController {
   }
 
   @GetMapping(value = "/properties")
-  public ResponseEntity<?> getProperties() {
+  public ResponseEntity<?> getProperties() throws IOException {
     log.info("Excutando Properties ");
     arquivoService.baixaArquivoCotacao();
     return ResponseEntity.ok().body(config.getUrlArquivoCotacoes());

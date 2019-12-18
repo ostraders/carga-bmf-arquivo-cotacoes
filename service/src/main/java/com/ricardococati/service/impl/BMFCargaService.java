@@ -58,6 +58,7 @@ public class BMFCargaService implements IBMFCargaService {
             if(LOTE_PADRAO.equals(cotacaoDTO.getCodbdi())) {
               cotacaoDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
               cotacaoDAO.incluirCotacao(cotacaoDTO);
+              log.info("Incluido cotacao: {}", cotacao);
               CandlestickDiarioDTO candlestickDiarioDTO = candlestickConverter.convert(cotacao);
               if (nonNull(candlestickDiarioDTO)) {
                 candlestickDiarioDAO.incluirCandlestickDiario(candlestickDiarioDTO);
@@ -70,7 +71,7 @@ public class BMFCargaService implements IBMFCargaService {
       }
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
-      log.info("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: " + e.getMessage());
+      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}" + e.getMessage());
     }
   }
 

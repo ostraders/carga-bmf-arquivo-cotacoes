@@ -1,7 +1,9 @@
 package com.ricardococati.service;
 
+import java.io.IOException;
+
 public interface IBaixarArquivoService {
 
-	void baixaArquivoCotacao();
+	Boolean baixaArquivoCotacao() throws IOException;
 
 }
