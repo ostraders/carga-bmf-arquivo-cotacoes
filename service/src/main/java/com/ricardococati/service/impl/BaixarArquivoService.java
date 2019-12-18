@@ -3,11 +3,9 @@ package com.ricardococati.service.impl;
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
 import com.ricardococati.repository.dao.ICalendarioFeriadoDAO;
 import com.ricardococati.service.IBaixarArquivoService;
+import com.ricardococati.service.IDescompactarArquivoService;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -17,8 +15,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -33,65 +29,22 @@ public class BaixarArquivoService implements IBaixarArquivoService {
   private final ControleArquivoConfig arquivoConfig;
   private SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
   private final ICalendarioFeriadoDAO feriadoDAO;
+  private final IDescompactarArquivoService descompactarService;
 
   @Override
   public Boolean baixaArquivoCotacao() throws IOException {
-    boolean hojeEhSabado = hojeEh(DayOfWeek.SATURDAY);
-    boolean hojeEhDomingo = hojeEh(DayOfWeek.SUNDAY);
-    boolean hojeEhFeriado = feriadoDAO.buscaCalendarioFeriado(LocalDate.now());
-    if(hojeEhSabado || hojeEhDomingo || hojeEhFeriado){
-      return Boolean.FALSE;
-    }
-    Date dataPregao = formatarDateReaderDate();
-    final String dataFormatada = sdf.format(dataPregao);
+    final String dataFormatada = obterDataDiaUtilStr();
     final String caminho = CaminhoArquivoEnum.CAMINHO_ARQUIVO_ZIP.getCaminho();
-    Boolean arquivoPronto = efetuaDownloadArquivo(dataFormatada, caminho);
-    if (arquivoPronto) {
-      arquivoPronto = descompactarArquivoBaixado(dataFormatada);
+    final String nomeArquivo = caminho + NOME_ARQUIVO_DEFAULT + dataFormatada + ".zip";
+    Boolean arquivoPronto = Boolean.FALSE;
+    if(!"".equals(dataFormatada)){
+      arquivoPronto = efetuaDownloadArquivo(dataFormatada, caminho);
+      if (arquivoPronto) {
+        log.info("Arquivo baixado com sucesso: {} ", nomeArquivo);
+        arquivoPronto = descompactarService.descompactaArquivoCotacao(nomeArquivo);
+      }
     }
     return arquivoPronto;
-  }
-
-  private Boolean descompactarArquivoBaixado(final String dataFormatada) throws IOException {
-    File destDir = new File(
-        CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA.getCaminho()
-    );
-    byte[] buffer = new byte[1024];
-    ZipInputStream zis = new ZipInputStream(
-            new FileInputStream(
-                CaminhoArquivoEnum.CAMINHO_ARQUIVO_ZIP.getCaminho() +
-                    NOME_ARQUIVO_DEFAULT +
-                    dataFormatada +
-                    ".zip"
-            )
-        );
-    ZipEntry zipEntry = zis.getNextEntry();
-    while (zipEntry != null) {
-      File newFile = newFile(destDir, zipEntry);
-      FileOutputStream fos = new FileOutputStream(newFile);
-      int len;
-      while ((len = zis.read(buffer)) > 0) {
-        fos.write(buffer, 0, len);
-      }
-      fos.close();
-      zipEntry = zis.getNextEntry();
-    }
-    zis.closeEntry();
-    zis.close();
-    return Boolean.TRUE;
-  }
-
-  public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
-    File destFile = new File(destinationDir, zipEntry.getName());
-
-    String destDirPath = destinationDir.getCanonicalPath();
-    String destFilePath = destFile.getCanonicalPath();
-
-    if (!destFilePath.startsWith(destDirPath + File.separator)) {
-      throw new IOException("A entrada está fora do diretório de destino: " + zipEntry.getName());
-    }
-
-    return destFile;
   }
 
   private Boolean efetuaDownloadArquivo(String dataFormatada, String caminho) throws IOException {
@@ -109,15 +62,25 @@ public class BaixarArquivoService implements IBaixarArquivoService {
     return Boolean.TRUE;
   }
 
-  private boolean hojeEh(final DayOfWeek dayOfWeek) {
-    return LocalDate
-        .now(ZoneId.of("America/Sao_Paulo"))
-        .getDayOfWeek()
-        .equals(dayOfWeek);
+  private String obterDataDiaUtilStr(){
+    LocalDate dataAtual = LocalDate.now(ZoneId.of("America/Sao_Paulo"));
+    boolean hojeEhSabado = hojeEh(dataAtual.getDayOfWeek(), DayOfWeek.SATURDAY);
+    boolean hojeEhDomingo = hojeEh(dataAtual.getDayOfWeek(),DayOfWeek.SUNDAY);
+    boolean hojeEhFeriado = feriadoDAO.buscaCalendarioFeriado(dataAtual);
+    if(hojeEhSabado || hojeEhDomingo || hojeEhFeriado){
+      return "";
+    }
+    Date dataPregao = converterDataAtualToDate(dataAtual);
+    final String dataFormatada = sdf.format(dataPregao);
+    return dataFormatada;
   }
 
-  public Date formatarDateReaderDate() {
-    LocalDateTime dataStr = LocalDateTime.now();
+  private boolean hojeEh(final DayOfWeek dataAtual, final DayOfWeek dayOfWeek) {
+    return dataAtual.equals(dayOfWeek);
+  }
+
+  private Date converterDataAtualToDate(final LocalDate dataAtual) {
+    LocalDateTime dataStr = dataAtual.atStartOfDay();
     if(dataStr.getHour() < 19){
       dataStr = dataStr.minusDays(1);
     }

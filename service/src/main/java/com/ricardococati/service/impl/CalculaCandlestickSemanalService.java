@@ -5,14 +5,13 @@ import static java.util.Objects.nonNull;
 
 import com.ricardococati.kafka.topic.TopicEnum;
 import com.ricardococati.model.dto.CandlestickDiarioDTO;
-import com.ricardococati.model.dto.CandlestickDiarioMessage;
 import com.ricardococati.model.dto.CandlestickSemanalDTO;
 import com.ricardococati.model.dto.CandlestickSemanalMessage;
 import com.ricardococati.repository.dao.ICandlestickDiarioDAO;
 import com.ricardococati.repository.dao.ICandlestickSemanalDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
 import com.ricardococati.service.IBMFCargaService;
-import com.ricardococati.service.ICandlestickSemanalService;
+import com.ricardococati.service.ICalculaCandlestickSemanalService;
 import com.ricardococati.service.converter.CandlestickConverter;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -31,11 +30,9 @@ import org.springframework.stereotype.Service;
 @Data
 @Service
 @RequiredArgsConstructor
-public class CandlestickSemanalSemanalService implements ICandlestickSemanalService, Serializable {
+public class CalculaCandlestickSemanalService implements ICalculaCandlestickSemanalService {
 
-  private static final long serialVersionUID = 37671121174988135L;
-  public static final boolean SEMANA_GERADA = false;
-
+  private static final boolean SEMANA_GERADA = false;
   private final IBMFCargaService cargaService;
   private final ICandlestickSemanalDAO semanalDAO;
   private final ICandlestickDiarioDAO diarioDAO;

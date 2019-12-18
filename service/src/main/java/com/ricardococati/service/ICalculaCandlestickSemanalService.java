@@ -1,6 +1,6 @@
 package com.ricardococati.service;
 
-public interface ICandlestickSemanalService {
+public interface ICalculaCandlestickSemanalService {
 
 	void execute() throws Exception;
 

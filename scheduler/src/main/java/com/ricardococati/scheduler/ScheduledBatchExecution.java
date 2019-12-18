@@ -1,7 +1,7 @@
 package com.ricardococati.scheduler;
 
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
-import com.ricardococati.service.ICandlestickSemanalService;
+import com.ricardococati.service.ICalculaCandlestickSemanalService;
 import com.ricardococati.service.IIntegrationService;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.io.File;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class ScheduledBatchExecution {
 
   private final IIntegrationService service;
-  private final ICandlestickSemanalService candlestickSemanalService;
+  private final ICalculaCandlestickSemanalService candlestickSemanalService;
   private final ControlaIdArquivoUtil idArquivoUtil;
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
   public static final boolean SEMANA_GERADA = false;
@@ -37,7 +37,7 @@ public class ScheduledBatchExecution {
         final Integer size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse();
         if(size > 0) {
           log.info("Inicia cálculo semanal");
-          candlestickSemanalService.execute();
+          //candlestickSemanalService.execute();
         }
       }
     } catch (Exception e) {
