@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BaixarArquivoService implements IBaixarArquivoService {
 
-  public static final String NOME_ARQUIVO_DEFAULT = "COTAHIST_D";
+  private static final String NOME_ARQUIVO_DEFAULT = "COTAHIST_D";
   private final ControleArquivoConfig arquivoConfig;
   private SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
   private final ICalendarioFeriadoDAO feriadoDAO;
