@@ -4,4 +4,4 @@
 Projeto tem como objetivo a Carga BMF do arquivo posicional de cotações 245 posições.
 Efetuando a leitura e a escrita dos dados na base de dados(PostgreSQL)
 
-Mais detalhes de configurações do projeto acesse: [openbraziltraders](https://github.com/ostraders/ostraders/blob/master/README.md)
+Mais detalhes de configurações do projeto acesse: [ostraders](https://github.com/ostraders/ostraders)
