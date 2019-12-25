@@ -37,7 +37,7 @@ public class ScheduledBatchExecution {
         final Integer size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse();
         if(size > 0) {
           log.info("Inicia cálculo semanal");
-          //candlestickSemanalService.execute();
+          candlestickSemanalService.execute();
         }
       }
     } catch (Exception e) {
