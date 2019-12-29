@@ -2,7 +2,7 @@ package com.ricardococati.service.impl;
 
 import com.ricardococati.repository.dao.GenericDAO;
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
-import com.ricardococati.service.IBMFCargaService;
+import com.ricardococati.service.IBMFCargaCotacaoService;
 import com.ricardococati.service.IGerenciadorArquivosService;
 import com.ricardococati.service.IIntegrationService;
 import java.io.File;
@@ -33,7 +33,7 @@ public class IntegrationService implements IIntegrationService, Serializable {
 
   private JobExecution execution;
 
-  private final IBMFCargaService cargaService;
+  private final IBMFCargaCotacaoService cargaService;
 
   private final IGerenciadorArquivosService gerenciadorArquivos;
 

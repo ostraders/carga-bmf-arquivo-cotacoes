@@ -22,7 +22,7 @@ public class CandlestickDiarioDTO {
   private BigDecimal premin;
   private BigDecimal preult;
   private BigDecimal voltot;
-  private Integer semana;
+  private Integer idSemanaAno;
   private Boolean semanaGerada;
 
 }

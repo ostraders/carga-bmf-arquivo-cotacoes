@@ -55,7 +55,7 @@ public class CandlestickDiarioSQLUtil {
         .addValue("premax", candlestickDiarioDTO.getPremax())
         .addValue("premin", candlestickDiarioDTO.getPremin())
         .addValue("preult", candlestickDiarioDTO.getPreult())
-        .addValue("semana", candlestickDiarioDTO.getSemana())
+        .addValue("semana", candlestickDiarioDTO.getIdSemanaAno())
         .addValue("semanaGerada", candlestickDiarioDTO.getSemanaGerada())
         .addValue("voltot", candlestickDiarioDTO.getVoltot());
   }

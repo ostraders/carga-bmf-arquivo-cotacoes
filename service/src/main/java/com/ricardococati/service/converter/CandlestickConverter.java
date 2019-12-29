@@ -25,7 +25,7 @@ public class CandlestickConverter {
           .premin(cotacao.getPremin())
           .premax(cotacao.getPremax())
           .voltot(cotacao.getVoltot())
-          .semana(Funcoes.stringToIdWeekOfYear(cotacao.getDtpreg()))
+          .idSemanaAno(Funcoes.stringToIdWeekOfYear(cotacao.getDtpreg()))
           .semanaGerada(false)
           .build();
     }

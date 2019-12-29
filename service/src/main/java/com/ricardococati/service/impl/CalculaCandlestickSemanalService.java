@@ -1,7 +1,6 @@
 package com.ricardococati.service.impl;
 
 import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 import com.ricardococati.kafka.topic.TopicEnum;
 import com.ricardococati.model.dto.CandlestickDiarioDTO;
@@ -10,17 +9,15 @@ import com.ricardococati.model.dto.CandlestickSemanalMessage;
 import com.ricardococati.repository.dao.ICandlestickDiarioDAO;
 import com.ricardococati.repository.dao.ICandlestickSemanalDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
-import com.ricardococati.service.IBMFCargaService;
 import com.ricardococati.service.ICalculaCandlestickSemanalService;
 import com.ricardococati.service.converter.CandlestickConverter;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +30,6 @@ import org.springframework.stereotype.Service;
 public class CalculaCandlestickSemanalService implements ICalculaCandlestickSemanalService {
 
   private static final boolean SEMANA_GERADA = false;
-  private final IBMFCargaService cargaService;
   private final ICandlestickSemanalDAO semanalDAO;
   private final ICandlestickDiarioDAO diarioDAO;
   private final PostgresEventListener listener;
@@ -68,17 +64,17 @@ public class CalculaCandlestickSemanalService implements ICalculaCandlestickSema
   private String geraCandleStickSemanal(final String codneg) {
     log.info("Código de negociação: " + codneg);
     List<CandlestickDiarioDTO> diarioDTOList = diarioDAO.buscaCandleDiarioPorCodNeg(codneg);
-    Map<Integer, List<CandlestickDiarioDTO>> mapDiario =
-        getListCandlestickToMap(diarioDTOList);
+    Map<String, List<CandlestickDiarioDTO>> mapDiario = getListCandlestickToStringMap(diarioDTOList);
     mapDiario
         .entrySet()
         .forEach(integerEntry -> {
-          CandlestickSemanalDTO candlestickSemanal = calculaCandleStickPorSemana(
-              mapDiario.get(integerEntry.getKey()));
-          candlestickSemanal.setSemana(integerEntry.getKey());
+          CandlestickSemanalDTO candlestickSemanal =
+              calculaCandleStickPorSemana(mapDiario.get(integerEntry.getKey()));
+          candlestickSemanal.setSemana(integerEntry.getValue().get(0).getIdSemanaAno());
           candlestickSemanal.setCodneg(codneg);
           semanalDAO.salvaCandlestickSemanal(candlestickSemanal);
-          CandlestickSemanalMessage message = candlestickConverter.convertMessageSemanal(candlestickSemanal);
+          CandlestickSemanalMessage message = candlestickConverter
+              .convertMessageSemanal(candlestickSemanal);
           listener.onAfterSave(message, TopicEnum.CANDLESTICK_SEMANAL.getTopicName());
         });
     log.info("Finalizando Código de negociação: " + codneg);
@@ -86,7 +82,8 @@ public class CalculaCandlestickSemanalService implements ICalculaCandlestickSema
     return codneg;
   }
 
-  private void atualizaListaCandlestickDiarioSemanaGerada(List<CandlestickDiarioDTO> candlestickList) {
+  private void atualizaListaCandlestickDiarioSemanaGerada(
+      List<CandlestickDiarioDTO> candlestickList) {
     candlestickList
         .forEach(candlestickDiarioDTO -> {
           candlestickDiarioDTO.setSemanaGerada(true);
@@ -174,14 +171,34 @@ public class CalculaCandlestickSemanalService implements ICalculaCandlestickSema
     return candlestickSemanal.getVoltot();
   }
 
-  private Map<Integer, List<CandlestickDiarioDTO>> getListCandlestickToMap(
+  private Map<String, List<CandlestickDiarioDTO>> getListCandlestickToStringMap(
+      final List<CandlestickDiarioDTO> dtoList
+  ) {
+    Map<String, List<CandlestickDiarioDTO>> mapCandlestick =
+        generateMapListNull(dtoList);
+    mapCandlestick
+        .entrySet()
+        .forEach(entry -> {
+          List<CandlestickDiarioDTO> candlestickList = new ArrayList<>();
+          dtoList
+              .stream()
+              .filter(dto -> entry.getKey().equals(dto.getIdSemanaAno() + "#" + dto.getDtpreg().getYear()))
+              .forEach(dto -> {
+                candlestickList.add(dto);
+                mapCandlestick.replace(entry.getKey(), candlestickList);
+              });
+        });
+    return mapCandlestick;
+  }
+
+  private Map<String, List<CandlestickDiarioDTO>> generateMapListNull(
       List<CandlestickDiarioDTO> listcandlestickDiarios) {
-    return Optional
-        .ofNullable(listcandlestickDiarios)
-        .orElse(null)
-        .stream()
-        .filter(candlestickDiario -> nonNull(candlestickDiario.getSemana()))
-        .collect(Collectors.groupingBy(candlestickDiario -> candlestickDiario.getSemana()));
+    Map<String, List<CandlestickDiarioDTO>> mapCandlestick = new HashMap<>();
+    for (CandlestickDiarioDTO dto : listcandlestickDiarios) {
+      final String strKey = dto.getIdSemanaAno() + "#" + dto.getDtpreg().getYear();
+      mapCandlestick.put(strKey, null);
+    }
+    return mapCandlestick;
   }
 
 }

@@ -9,9 +9,9 @@ public class SQLAppender {
   @Getter
   private StringBuilder appendSQLSemQuebra;
 
-  public SQLAppender(int capacidade) {
-    this.appendSQL = new StringBuilder(capacidade);
-    this.appendSQLSemQuebra = new StringBuilder(capacidade);
+  public SQLAppender(int capacidadeInicial) {
+    this.appendSQL = new StringBuilder(capacidadeInicial);
+    this.appendSQLSemQuebra = new StringBuilder(capacidadeInicial);
   }
 
   public void appendSQL(String texto) {

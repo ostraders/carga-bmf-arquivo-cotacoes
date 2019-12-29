@@ -30,7 +30,7 @@ public class CandlestickDiarioMapper {
           .premax(rs.getBigDecimal("premax"))
           .premin(rs.getBigDecimal("premin"))
           .preult(rs.getBigDecimal("preult"))
-          .semana(rs.getInt("semana"))
+          .idSemanaAno(rs.getInt("semana"))
           .semanaGerada(rs.getBoolean("semana_gerada"))
           .voltot(rs.getBigDecimal("voltot"))
           .build();
