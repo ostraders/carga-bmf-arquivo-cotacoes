@@ -48,11 +48,13 @@ public class IntegrationService implements IIntegrationService, Serializable {
     try {
       movimentaArquivoEExecutaBatch();
     } catch (Exception e) {
-      e.printStackTrace();
+      String mensagemErro = "Ocorreu um erro na execução do processo: {} ";
+      log.error(mensagemErro, e.getMessage());
+      throw e;
     }
   }
 
-  private void movimentaArquivoEExecutaBatch() {
+  private void movimentaArquivoEExecutaBatch() throws Exception {
     try {
       File arquivosDiretorioOrigem = new File(
           CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA.getCaminho());
@@ -80,9 +82,9 @@ public class IntegrationService implements IIntegrationService, Serializable {
         }
       }
     } catch (Exception e) {
-      String mensagemErro = "Ocorreu um erro no processamento do arquivo ";
-      log.error(mensagemErro + "  -  " + e.getMessage());
-      e.printStackTrace();
+      String mensagemErro = "Ocorreu um erro no processamento do arquivo {} ";
+      log.error(mensagemErro, e.getMessage());
+      throw e;
     }
   }
 
@@ -93,7 +95,9 @@ public class IntegrationService implements IIntegrationService, Serializable {
       execution = jobLauncher.run(jobExecutionBatch, param);
       log.info("Exit Status : " + execution.getStatus());
     } catch (Exception e) {
-      log.error(e.getMessage());
+      String mensagemErro = "Ocorreu um erro na execução do job do processo batch: {} ";
+      log.error(mensagemErro, e.getMessage());
+      throw e;
     }
   }
 

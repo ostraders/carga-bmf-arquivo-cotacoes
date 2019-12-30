@@ -21,7 +21,6 @@ public class ScheduledBatchExecution {
   private final ICalculaCandlestickSemanalService candlestickSemanalService;
   private final ControlaIdArquivoUtil idArquivoUtil;
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-  public static final boolean SEMANA_GERADA = false;
 
   @Scheduled(cron = "0 0/1 * * * *")
   public void executaAgendador() {

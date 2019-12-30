@@ -59,7 +59,7 @@ public class BMFCargaCotacaoService implements IBMFCargaCotacaoService {
       }
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
-      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}" + e.getMessage());
+      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {} ", e.getMessage());
     }
   }
 

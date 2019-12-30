@@ -46,7 +46,7 @@ public class CalculaCandlestickSemanalService implements ICalculaCandlestickSema
             log.info("Código de negócio calculado para semana: " + codnegProcessado);
           });
     } catch (Exception e) {
-      log.error("Erro ao calcular Candlestick" + e.getMessage(), e.getCause());
+      log.error("Erro ao calcular Candlestick {} {} " , e.getMessage(), e.getCause());
     }
   }
 
@@ -56,7 +56,9 @@ public class CalculaCandlestickSemanalService implements ICalculaCandlestickSema
     try {
       retorno = semanalDAO.contaCandleDiarioSemCandleSemanalGerado();
     } catch (Exception e) {
-      e.printStackTrace();
+      String mensagemErro = "Ocorreu um erro na contagem dos candles diarios {} ";
+      log.error(mensagemErro, e.getMessage());
+      throw e;
     }
     return retorno;
   }
