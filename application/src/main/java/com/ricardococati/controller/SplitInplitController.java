@@ -1,7 +1,7 @@
 package com.ricardococati.controller;
 
 import com.ricardococati.controller.converter.SplitInplitConverter;
-import com.ricardococati.service.ISplitInplitService;
+import com.ricardococati.service.SplitInplitService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SplitInplitController {
 
   private final SplitInplitConverter converter;
-  private final ISplitInplitService service;
+  private final SplitInplitService service;
 
   @ApiOperation(value = "Split na acao por: codigo de negocio, data do pregão e quantidade de divisões")
   @ApiResponses(

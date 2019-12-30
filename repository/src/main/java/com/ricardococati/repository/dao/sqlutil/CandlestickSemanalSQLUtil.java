@@ -1,8 +1,6 @@
 package com.ricardococati.repository.dao.sqlutil;
 
-import com.ricardococati.model.dto.CandlestickDiarioDTO;
 import com.ricardococati.model.dto.CandlestickSemanal;
-import com.ricardococati.model.dto.CandlestickSemanalDTO;
 import com.ricardococati.model.dto.SplitInplit;
 import com.ricardococati.repository.util.SQLAppender;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -49,7 +47,7 @@ public class CandlestickSemanalSQLUtil {
     return sql.getAppendSQLSemQuebra().toString();
   }
 
-  public MapSqlParameterSource toParameters(final CandlestickSemanalDTO candlestickDiarioDTO) {
+  public MapSqlParameterSource toParameters(final CandlestickSemanal candlestickDiarioDTO) {
     return new MapSqlParameterSource()
         .addValue("idCandleSemanal", candlestickDiarioDTO.getIdCandleSemanal())
         .addValue("codneg", candlestickDiarioDTO.getCodneg())

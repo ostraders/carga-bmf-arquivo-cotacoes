@@ -2,7 +2,7 @@ package com.ricardococati.repository.dao.mapper;
 
 import static java.util.Objects.nonNull;
 
-import com.ricardococati.model.dto.CandlestickDiarioDTO;
+import com.ricardococati.model.dto.CandlestickDiario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,9 +19,9 @@ public class CandlestickDiarioMapper {
     }
   }
 
-  public CandlestickDiarioDTO mapper(ResultSet rs) {
+  public CandlestickDiario mapper(ResultSet rs) {
     try {
-      return CandlestickDiarioDTO
+      return CandlestickDiario
           .builder()
           .idCandleDiario(rs.getLong("id_candle_diario"))
           .codneg(rs.getString("codneg"))

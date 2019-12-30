@@ -1,9 +1,9 @@
 package com.ricardococati.service.batchprocess.read;
 
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
-import com.ricardococati.service.batchprocess.layouts.CotacoesDosPapeisPorDiaLayout;
-import com.ricardococati.service.batchprocess.layouts.HeaderBMFLayout;
-import com.ricardococati.service.batchprocess.layouts.TraillerBMFLayout;
+import com.ricardococati.service.batchprocess.layouts.CotacoesDosPapeisPorDiaLayoutImpl;
+import com.ricardococati.service.batchprocess.layouts.HeaderBMFLayoutImpl;
+import com.ricardococati.service.batchprocess.layouts.TraillerBMFLayoutImpl;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,13 +86,13 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 	private Map<String, LineTokenizer> setTokenizers() {
 		final Map<String, LineTokenizer> tokenizers = new HashMap<>();
 
-		HeaderBMFLayout headerLayout = new HeaderBMFLayout();
+		HeaderBMFLayoutImpl headerLayout = new HeaderBMFLayoutImpl();
 		tokenizers.put(HEADER, headerLayout.configurarParser());
 
-		CotacoesDosPapeisPorDiaLayout cotacao = new CotacoesDosPapeisPorDiaLayout();
+		CotacoesDosPapeisPorDiaLayoutImpl cotacao = new CotacoesDosPapeisPorDiaLayoutImpl();
 		tokenizers.put(COTACAO, cotacao.configurarParser());
 
-		TraillerBMFLayout trailerLayout = new TraillerBMFLayout();
+		TraillerBMFLayoutImpl trailerLayout = new TraillerBMFLayoutImpl();
 		tokenizers.put(TRAILER, trailerLayout.configurarParser());
 
 		return tokenizers;

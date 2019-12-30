@@ -1,8 +1,8 @@
 package com.ricardococati.service.batchprocess.tasklet;
 
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
-import com.ricardococati.service.IGerenciadorArquivosService;
-import com.ricardococati.service.impl.GerenciadorArquivosService;
+import com.ricardococati.service.GerenciadorArquivosService;
+import com.ricardococati.service.impl.GerenciadorArquivosServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.batch.core.StepContribution;
@@ -20,7 +20,7 @@ public class MoveArquivosTasklet implements Tasklet {
   @Override
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
       throws Exception {
-    IGerenciadorArquivosService gerenciadorArquivos = new GerenciadorArquivosService();
+    GerenciadorArquivosService gerenciadorArquivos = new GerenciadorArquivosServiceImpl();
     gerenciadorArquivos
         .moverArquivosEntreDiretoriosVerificaDiretorio(getCaminhoEntrada().getCaminho(),
             getCaminhoErro().getCaminho());

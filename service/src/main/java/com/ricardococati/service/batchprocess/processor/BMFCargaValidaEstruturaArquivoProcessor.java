@@ -5,9 +5,9 @@ import static java.util.Objects.isNull;
 import com.ricardococati.model.dto.BMFCargaDTO;
 import com.ricardococati.model.enums.TipoRegistroEnum;
 import com.ricardococati.model.enums.TiposCamposEnum;
-import com.ricardococati.service.batchprocess.layouts.CotacoesDosPapeisPorDiaLayout;
-import com.ricardococati.service.batchprocess.layouts.HeaderBMFLayout;
-import com.ricardococati.service.batchprocess.layouts.TraillerBMFLayout;
+import com.ricardococati.service.batchprocess.layouts.CotacoesDosPapeisPorDiaLayoutImpl;
+import com.ricardococati.service.batchprocess.layouts.HeaderBMFLayoutImpl;
+import com.ricardococati.service.batchprocess.layouts.TraillerBMFLayoutImpl;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.repository.util.Funcoes;
 import java.math.BigInteger;
@@ -25,9 +25,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<FieldSet, BMFCargaDTO> {
 
-  private HeaderBMFLayout header = null;
-  private CotacoesDosPapeisPorDiaLayout cotacoes;
-  private TraillerBMFLayout trailler;
+  private HeaderBMFLayoutImpl header = null;
+  private CotacoesDosPapeisPorDiaLayoutImpl cotacoes;
+  private TraillerBMFLayoutImpl trailler;
 
   private final ControleArquivoConfig arquivoConfig;
 
@@ -68,9 +68,9 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
 
   private void validarTipagemDosCampos(String nomeCampo, String valorCampo, BMFUtil bmfUtil)
       throws Exception {
-    header = new HeaderBMFLayout();
-    cotacoes = new CotacoesDosPapeisPorDiaLayout();
-    trailler = new TraillerBMFLayout();
+    header = new HeaderBMFLayoutImpl();
+    cotacoes = new CotacoesDosPapeisPorDiaLayoutImpl();
+    trailler = new TraillerBMFLayoutImpl();
 
     try {
 

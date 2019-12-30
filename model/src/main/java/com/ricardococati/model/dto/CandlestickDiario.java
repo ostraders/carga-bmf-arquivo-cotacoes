@@ -12,17 +12,17 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CandlestickSemanal {
+public class CandlestickDiario {
 
-  private Long idCandleSemanal;
-  private LocalDate dtpregini;
-  private LocalDate dtpregfim;
-  private Integer semana;
+  private Long idCandleDiario;
+  private LocalDate dtpreg;
   private String codneg;
   private BigDecimal preabe;
   private BigDecimal premax;
   private BigDecimal premin;
   private BigDecimal preult;
   private BigDecimal voltot;
+  private Integer idSemanaAno;
+  private Boolean semanaGerada;
 
 }

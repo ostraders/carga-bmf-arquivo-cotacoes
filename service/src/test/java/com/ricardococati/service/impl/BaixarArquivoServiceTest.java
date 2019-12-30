@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-import com.ricardococati.repository.dao.ICalendarioFeriadoDAO;
-import com.ricardococati.service.IDescompactarArquivoService;
-import com.ricardococati.service.IDownloadArquivoService;
+import com.ricardococati.repository.dao.CalendarioFeriadoDAO;
+import com.ricardococati.service.DescompactarArquivoService;
+import com.ricardococati.service.DownloadArquivoService;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -19,13 +19,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class BaixarArquivoServiceTest {
 
   @InjectMocks
-  private BaixarEDescompactaArquivoService target;
+  private BaixarEDescompactaArquivoServiceImpl target;
   @Mock
-  private ICalendarioFeriadoDAO feriadoDAO;
+  private CalendarioFeriadoDAO feriadoDAO;
   @Mock
-  private IDescompactarArquivoService descompactarService;
+  private DescompactarArquivoService descompactarService;
   @Mock
-  private IDownloadArquivoService downloadService;
+  private DownloadArquivoService downloadService;
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
