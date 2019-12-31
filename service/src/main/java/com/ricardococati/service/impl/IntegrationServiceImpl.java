@@ -102,7 +102,7 @@ public class IntegrationServiceImpl implements IntegrationService, Serializable 
   }
 
   @Override
-  public Long getIdArquivoSequence(final String nomeSequence){
+  public Long getIdArquivoSequence(final String nomeSequence) {
     return genericDAO.obterSequenceLong(nomeSequence);
   }
 

@@ -26,23 +26,42 @@ public class ScheduledBatchExecution {
   public void executaAgendador() {
     log.info("Inicia execução PROCESSO BATCH em " + sdf.format(new Date()));
     try {
-      File arquivosDiretorioOrigem = new File(
-          CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA.getCaminho());
-      File arrayArquivos[] = arquivosDiretorioOrigem.listFiles();
-      if (arquivosDiretorioOrigem.exists() && arrayArquivos.length > 0) {
-        idArquivoUtil.setIdentificadorArquivo(service.getIdArquivoSequence("ARQUIVO_SEQ"));
-        service.execute();
+      if (existemArquivosNoDiretorio()) {
+        executaGeracaoCandleDiario();
       } else {
-        final Integer size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse();
-        if(size > 0) {
-          log.info("Inicia cálculo semanal");
-          candlestickSemanalService.execute();
-        }
+        executaGeracaoCandleSemanal();
       }
     } catch (Exception e) {
       log.error(" Causa: " + e.getCause() + " Mensagem de Erro: " + e.getMessage());
     }
     log.info("Termina execução PROCESSO BATCH em " + sdf.format(new Date()));
+  }
+
+  private Boolean existemArquivosNoDiretorio() {
+    final String caminho = CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA.getCaminho();
+    File arquivosDiretorioOrigem = new File(caminho);
+    File arrayArquivos[] = arquivosDiretorioOrigem.listFiles();
+    if(arquivosDiretorioOrigem.exists() && arrayArquivos.length > 0){
+      return Boolean.TRUE;
+    }
+    return Boolean.FALSE;
+  }
+
+  private void executaGeracaoCandleDiario() throws Exception {
+    idArquivoUtil.setIdentificadorArquivo(getIdArquivo());
+    service.execute();
+  }
+
+  private Long getIdArquivo() throws Exception {
+    return service.getIdArquivoSequence("ARQUIVO_SEQ");
+  }
+
+  private void executaGeracaoCandleSemanal() throws Exception {
+    final Integer size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse();
+    if(size > 0) {
+      log.info("Inicia cálculo semanal");
+      candlestickSemanalService.execute();
+    }
   }
 
 }
