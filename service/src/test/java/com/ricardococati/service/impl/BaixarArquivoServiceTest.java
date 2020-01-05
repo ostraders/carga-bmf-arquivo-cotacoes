@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import com.ricardococati.repository.dao.CalendarioFeriadoDAO;
 import com.ricardococati.service.DescompactarArquivoService;
 import com.ricardococati.service.DownloadArquivoService;
+import java.time.LocalDate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -19,7 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class BaixarArquivoServiceTest {
 
   @InjectMocks
-  private BaixarEDescompactaArquivoServiceImpl target;
+  private BaixarArquivoServiceImpl target;
   @Mock
   private CalendarioFeriadoDAO feriadoDAO;
   @Mock
@@ -35,8 +36,9 @@ public class BaixarArquivoServiceTest {
     when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
     when(downloadService.doanloadArquivo(any(), any())).thenReturn(Boolean.TRUE);
     when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(Boolean.FALSE);
+    LocalDate data = LocalDate.of(2020, 01, 02);
     //when
-    Boolean returned = target.baixaEDescompactaArquivoCotacao();
+    Boolean returned = target.baixarArquivoCotacao(data);
     //then
     assertThat(returned).isNotNull().isTrue();
   }
@@ -47,8 +49,9 @@ public class BaixarArquivoServiceTest {
     when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
     when(downloadService.doanloadArquivo(any(), any())).thenReturn(Boolean.TRUE);
     when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(Boolean.TRUE);
+    LocalDate data = LocalDate.of(2020, 01, 01);
     //when
-    Boolean returned = target.baixaEDescompactaArquivoCotacao();
+    Boolean returned = target.baixarArquivoCotacao(data);
     //then
     assertThat(returned).isNotNull().isFalse();
   }
@@ -63,7 +66,8 @@ public class BaixarArquivoServiceTest {
     this.thrown.expect(Exception.class);
     this.thrown.expectMessage("Erro ao obter data dia util");
 
+    LocalDate data = LocalDate.of(2020, 01, 01);
     //when
-    Boolean returned = target.baixaEDescompactaArquivoCotacao();
+    target.baixarArquivoCotacao(data);
   }
 }

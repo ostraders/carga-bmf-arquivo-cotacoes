@@ -4,7 +4,7 @@ import static java.util.Objects.isNull;
 
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
 import com.ricardococati.repository.dao.CalendarioFeriadoDAO;
-import com.ricardococati.service.BaixarEDescompactaArquivoService;
+import com.ricardococati.service.BaixarArquivoService;
 import com.ricardococati.service.DescompactarArquivoService;
 import com.ricardococati.service.DownloadArquivoService;
 import java.text.ParseException;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class BaixarEDescompactaArquivoServiceImpl implements BaixarEDescompactaArquivoService {
+public class BaixarArquivoServiceImpl implements BaixarArquivoService {
 
   private static final String NOME_ARQUIVO_DEFAULT = "COTAHIST_D";
   private SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
@@ -30,19 +30,24 @@ public class BaixarEDescompactaArquivoServiceImpl implements BaixarEDescompactaA
   private final DownloadArquivoService downloadService;
 
   @Override
-  public Boolean baixaEDescompactaArquivoCotacao() throws Exception {
-    final String dataFormatada = obterDataDiaUtilStr();
+  public Boolean baixarArquivoCotacao(final LocalDate dtpreg) throws Exception {
+    LocalDateTime dtLocal = dtpreg.atTime(20, 00);
+    final String dataFormatada = validarDataSeEhDiaUtilStr(dtLocal);
+    return obterArquivo(dataFormatada);
+  }
+
+  private Boolean obterArquivo(String dataFormatada) throws Exception {
     final String caminho = CaminhoArquivoEnum.CAMINHO_ARQUIVO_ZIP.getCaminho();
     final String nomeArquivo = caminho + NOME_ARQUIVO_DEFAULT + dataFormatada + ".zip";
     Boolean arquivoPronto = Boolean.FALSE;
-    try{
-    if(!"".equals(dataFormatada)){
-      arquivoPronto = downloadService.doanloadArquivo(dataFormatada, caminho);
-      if (arquivoPronto) {
-        log.info("Arquivo baixado com sucesso: {} ", nomeArquivo);
-        arquivoPronto = descompactarService.descompactaArquivoCotacao(nomeArquivo);
+    try {
+      if (!"".equals(dataFormatada)) {
+        arquivoPronto = downloadService.doanloadArquivo(dataFormatada, caminho);
+        if (arquivoPronto) {
+          log.info("Arquivo baixado com sucesso: {} ", nomeArquivo);
+          arquivoPronto = descompactarService.descompactaArquivoCotacao(nomeArquivo);
+        }
       }
-    }
     } catch (Exception e) {
       log.error("Erro ao baixar e descompactar arquivo: {}", e.getMessage());
       throw new Exception("Erro ao baixar e descompactar arquivo");
@@ -50,18 +55,17 @@ public class BaixarEDescompactaArquivoServiceImpl implements BaixarEDescompactaA
     return arquivoPronto;
   }
 
-  private String obterDataDiaUtilStr() throws Exception {
-    LocalDate dataAtual = LocalDate.now(ZoneId.of("America/Sao_Paulo"));
-    Boolean hojeEhSabado = hojeEh(dataAtual.getDayOfWeek(), DayOfWeek.SATURDAY);
-    Boolean hojeEhDomingo = hojeEh(dataAtual.getDayOfWeek(),DayOfWeek.SUNDAY);
-    Boolean hojeEhFeriado = feriadoDAO.buscaCalendarioFeriado(dataAtual);
-    if(isNull(hojeEhFeriado)){
+  private String validarDataSeEhDiaUtilStr(final LocalDateTime dtpreg) throws Exception {
+    Boolean hojeEhSabado = hojeEh(dtpreg.getDayOfWeek(), DayOfWeek.SATURDAY);
+    Boolean hojeEhDomingo = hojeEh(dtpreg.getDayOfWeek(), DayOfWeek.SUNDAY);
+    Boolean hojeEhFeriado = feriadoDAO.buscaCalendarioFeriado(dtpreg.toLocalDate());
+    if (isNull(hojeEhFeriado)) {
       throw new Exception("Erro ao obter data dia util");
     }
-    if(hojeEhSabado || hojeEhDomingo || hojeEhFeriado){
+    if (hojeEhSabado || hojeEhDomingo || hojeEhFeriado) {
       return "";
     }
-    Date dataPregao = converterDataAtualToDate(dataAtual);
+    Date dataPregao = converterDataAtualToDate(dtpreg);
     final String dataFormatada = sdf.format(dataPregao);
     return dataFormatada;
   }
@@ -70,9 +74,9 @@ public class BaixarEDescompactaArquivoServiceImpl implements BaixarEDescompactaA
     return dataAtual.equals(dayOfWeek);
   }
 
-  private Date converterDataAtualToDate(final LocalDate dataAtual) {
-    LocalDateTime dataStr = dataAtual.atStartOfDay();
-    if(dataStr.getHour() < 19){
+  private Date converterDataAtualToDate(final LocalDateTime dataAtual) {
+    LocalDateTime dataStr = dataAtual;
+    if (dataStr.getHour() < 19) {
       dataStr = dataStr.minusDays(1);
     }
     SimpleDateFormat formatComTraco = new SimpleDateFormat("yyyy-MM-dd");
