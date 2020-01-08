@@ -79,7 +79,7 @@ public class CandlestickDiarioSQLUtil {
         .addValue("qtddivmult", splitInplit.getQtdSplitInplit());
   }
 
-  public String getSelectCodNeg() {
+  public String getSelectCodNegPorSemanaGeradaFalse() {
     final SQLAppender sql = new SQLAppender(100);
     sql.appendSQL(" select ");
     sql.appendSQL("   codneg  ");
@@ -124,6 +124,25 @@ public class CandlestickDiarioSQLUtil {
   public MapSqlParameterSource toParametersUpdateSemanaGerada(final CandlestickDiario diarioDTO) {
     return new MapSqlParameterSource()
         .addValue("idCandleDiario", diarioDTO.getIdCandleDiario());
+  }
+
+  public String getSelectByCodNegESemanaGeradaFalse() {
+    SQLAppender sql = new SQLAppender(100);
+    sql.appendSQL(" select ");
+    sql.appendSQL("		id_candle_diario, ");
+    sql.appendSQL("		codneg, ");
+    sql.appendSQL("		dtpreg, ");
+    sql.appendSQL("		preabe, ");
+    sql.appendSQL("		premax, ");
+    sql.appendSQL("		premin, ");
+    sql.appendSQL("		preult, ");
+    sql.appendSQL("		semana, ");
+    sql.appendSQL("		semana_gerada, ");
+    sql.appendSQL("		voltot ");
+    sql.appendSQL(" from candlestick_diario ");
+    sql.appendSQL("	where codneg = :codneg ");
+    sql.appendSQL("	and semana_gerada = false ");
+    return sql.getAppendSQLSemQuebra().toString();
   }
 
 }

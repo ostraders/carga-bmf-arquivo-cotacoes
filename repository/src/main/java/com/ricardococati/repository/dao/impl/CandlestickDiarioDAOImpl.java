@@ -74,7 +74,7 @@ public class CandlestickDiarioDAOImpl implements CandlestickDiarioDAO {
   @Override
   public List<String> buscaCodNegSemanaGeradaFalse() {
     return template.query(
-        sqlUtil.getSelectCodNeg(),
+        sqlUtil.getSelectCodNegPorSemanaGeradaFalse(),
         new MapSqlParameterSource(),
         (rs, rowNum) -> mapper.mapperCodNeg(rs)
     );
@@ -101,6 +101,15 @@ public class CandlestickDiarioDAOImpl implements CandlestickDiarioDAO {
       throw ex;
     }
     return retorno > 0;
+  }
+
+  @Override
+  public List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg) {
+    return template.query(
+        sqlUtil.getSelectByCodNegESemanaGeradaFalse(),
+        sqlUtil.toParametersSelectByCodNeg(codneg),
+        (rs, rowNum) -> mapper.mapper(rs)
+    );
   }
 
 }

@@ -17,4 +17,6 @@ public interface CandlestickDiarioDAO {
   List<CandlestickDiario> buscaCandleDiarioPorCodNeg(String codneg);
 
   Boolean salvaCandlestickDiario(CandlestickDiario candlestickDiarioDTO);
+
+  List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg);
 }

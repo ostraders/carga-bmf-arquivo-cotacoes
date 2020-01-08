@@ -65,7 +65,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
 
   private String geraCandleStickSemanal(final String codneg) {
     log.info("Código de negociação: " + codneg);
-    List<CandlestickDiario> diarioDTOList = diarioDAO.buscaCandleDiarioPorCodNeg(codneg);
+    List<CandlestickDiario> diarioDTOList = diarioDAO.buscaCandleDiarioPorCodNegSemanaGerada(codneg);
     Map<String, List<CandlestickDiario>> mapDiario = getListCandlestickToStringMap(diarioDTOList);
     mapDiario
         .entrySet()
