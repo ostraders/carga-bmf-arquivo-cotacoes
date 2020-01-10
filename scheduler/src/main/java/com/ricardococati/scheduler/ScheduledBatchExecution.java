@@ -1,5 +1,6 @@
 package com.ricardococati.scheduler;
 
+import com.ricardococati.model.dto.CandlestickSemanal;
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
 import com.ricardococati.service.BuscarCandlestickSemanalService;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
@@ -8,6 +9,7 @@ import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,11 +30,11 @@ public class ScheduledBatchExecution {
   public void executaAgendador() {
     log.info("Inicia execução PROCESSO BATCH em " + sdf.format(new Date()));
     try {
-      /*if (existemArquivosNoDiretorio()) {
+      if (existemArquivosNoDiretorio()) {
         executaGeracaoCandleDiario();
-      } else {*/
+      } else {
         executaGeracaoCandleSemanal();
-      /*}*/
+      }
     } catch (Exception e) {
       log.error(" Causa: " + e.getCause() + " Mensagem de Erro: " + e.getMessage());
     }
@@ -60,7 +62,7 @@ public class ScheduledBatchExecution {
 
   private void executaGeracaoCandleSemanal() throws Exception {
     final Integer size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse();
-    buscarService.buscarCandleSemanalPorPrimeiroDiaSemana();
+    List<CandlestickSemanal> semanalList = buscarService.buscarCandleSemanalPorPrimeiroDiaSemana();
     if(size > 0) {
       log.info("Inicia cálculo semanal");
       candlestickSemanalService.execute();
