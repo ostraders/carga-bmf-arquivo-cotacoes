@@ -3,6 +3,7 @@ package com.ricardococati.service.impl;
 import com.ricardococati.service.DownloadArquivoService;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,9 @@ public class DownloadArquivoServiceImpl implements DownloadArquivoService {
           10000,
           10000
       );
+    } catch (FileNotFoundException e) {
+      log.error("Erro ao tentar baixar arquivo de cotação! {} ", e.getMessage());
+      throw e;
     } catch (IOException e) {
       log.error("Erro ao tentar baixar arquivo de cotação! {} ", e.getMessage());
       throw e;

@@ -4,7 +4,6 @@ import com.ricardococati.model.enums.CaminhoArquivoEnum;
 import com.ricardococati.service.batchprocess.layouts.CotacoesDosPapeisPorDiaLayoutImpl;
 import com.ricardococati.service.batchprocess.layouts.HeaderBMFLayoutImpl;
 import com.ricardococati.service.batchprocess.layouts.TraillerBMFLayoutImpl;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +14,6 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemStream;
 import org.springframework.batch.item.ItemStreamException;
-import org.springframework.batch.item.NonTransientResourceException;
-import org.springframework.batch.item.ParseException;
-import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
@@ -31,9 +27,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<FieldSet>>, ItemStream, Serializable {
+public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<FieldSet>>, ItemStream {
 
-	private static final long serialVersionUID = 1602197835137714641L;
 	private final static String HEADER = "00*";
 	private final static String COTACAO = "01*";
 	private final static String TRAILER = "99*";
@@ -61,9 +56,7 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 	}
 
 	@Override
-	public MultiResourceItemReader<FieldSet> read()
-			throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
-
+	public MultiResourceItemReader<FieldSet> read() throws Exception {
 		flatFileItemReader = new FlatFileItemReader<>();
 		multiResourceItemReader = new MultiResourceItemReader<>();
 		multiResourceItemReader.setResources(getArquivos());

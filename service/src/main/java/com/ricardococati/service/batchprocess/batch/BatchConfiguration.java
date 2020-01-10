@@ -10,7 +10,6 @@ import com.ricardococati.service.batchprocess.tasklet.MoveArquivosTasklet;
 import com.ricardococati.service.batchprocess.validator.VerificadorArquivoSkipper;
 import com.ricardococati.service.batchprocess.writer.BMFCargaItemWriter;
 import com.ricardococati.service.config.ControleArquivoConfig;
-import java.io.Serializable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -34,9 +33,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableBatchProcessing
 @RequiredArgsConstructor
-public class BatchConfiguration implements Serializable {
-
-  private static final long serialVersionUID = -8528625581896050611L;
+public class BatchConfiguration {
 
   private final JobBuilderFactory jobBuilderFactory;
   private final StepBuilderFactory stepBuilderFactory;
@@ -44,17 +41,6 @@ public class BatchConfiguration implements Serializable {
   private final BMFCargaItemWriter itemWriter;
   private final BMFCargaItemReader itemReader;
   private final BMFCargaItemProcessor itemProcessor;
-
-  @Bean
-  @StepScope
-  public MultiResourceItemReader<FieldSet> bmfItemReader() throws Exception {
-    return itemReader.read();
-  }
-
-  @Bean
-  public BMFCargaItemProcessor bmfItemProcessor() {
-    return itemProcessor;
-  }
 
   @Bean
   public Job jobExecutionBatch(
@@ -88,11 +74,6 @@ public class BatchConfiguration implements Serializable {
   }
 
   @Bean
-  public SkipPolicy verificadorArquivoSkipper() {
-    return new VerificadorArquivoSkipper();
-  }
-
-  @Bean
   public Step step1_ValidaEstruturaArquivo() throws Exception {
     return stepBuilderFactory.get("step1_ValidaEstruturaArquivo")
         .<FieldSet, BMFCargaDTO>chunk(50)
@@ -116,6 +97,22 @@ public class BatchConfiguration implements Serializable {
         .processor(bmfItemProcessor())
         .writer(bmfItemWriter())
         .build();
+  }
+
+  @Bean
+  @StepScope
+  public MultiResourceItemReader<FieldSet> bmfItemReader() throws Exception {
+    return itemReader.read();
+  }
+
+  @Bean
+  public BMFCargaItemProcessor bmfItemProcessor() {
+    return itemProcessor;
+  }
+
+  @Bean
+  public SkipPolicy verificadorArquivoSkipper() {
+    return new VerificadorArquivoSkipper();
   }
 
   @Bean

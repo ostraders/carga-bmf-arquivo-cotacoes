@@ -2,6 +2,8 @@ package com.ricardococati.repository.dao;
 
 import com.ricardococati.model.dto.CandlestickSemanal;
 import com.ricardococati.model.dto.SplitInplit;
+import java.time.LocalDate;
+import java.util.List;
 
 public interface CandlestickSemanalDAO {
 
@@ -11,6 +13,7 @@ public interface CandlestickSemanalDAO {
 
   Boolean inplit(SplitInplit splitInplit);
 
-  Boolean salvaCandlestickSemanal(final CandlestickSemanal semanal);
-
+  List<CandlestickSemanal> buscarCandleSemanalPorPrimeiroDiaSemana(
+      final LocalDate obterPrimeiroDiaUtilSemanaCorrente
+  );
 }

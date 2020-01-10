@@ -1,6 +1,7 @@
 package com.ricardococati.scheduler;
 
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
+import com.ricardococati.service.BuscarCandlestickSemanalService;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
 import com.ricardococati.service.IntegrationService;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
@@ -19,6 +20,7 @@ public class ScheduledBatchExecution {
 
   private final IntegrationService service;
   private final CalculaCandlestickSemanalService candlestickSemanalService;
+  private final BuscarCandlestickSemanalService buscarService;
   private final ControlaIdArquivoUtil idArquivoUtil;
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
@@ -26,11 +28,11 @@ public class ScheduledBatchExecution {
   public void executaAgendador() {
     log.info("Inicia execução PROCESSO BATCH em " + sdf.format(new Date()));
     try {
-      if (existemArquivosNoDiretorio()) {
+      /*if (existemArquivosNoDiretorio()) {
         executaGeracaoCandleDiario();
-      } else {
+      } else {*/
         executaGeracaoCandleSemanal();
-      }
+      /*}*/
     } catch (Exception e) {
       log.error(" Causa: " + e.getCause() + " Mensagem de Erro: " + e.getMessage());
     }
@@ -58,6 +60,7 @@ public class ScheduledBatchExecution {
 
   private void executaGeracaoCandleSemanal() throws Exception {
     final Integer size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse();
+    buscarService.buscarCandleSemanalPorPrimeiroDiaSemana();
     if(size > 0) {
       log.info("Inicia cálculo semanal");
       candlestickSemanalService.execute();

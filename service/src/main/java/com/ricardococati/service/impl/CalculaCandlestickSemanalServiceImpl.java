@@ -8,6 +8,7 @@ import com.ricardococati.model.dto.CandlestickSemanal;
 import com.ricardococati.model.dto.CandlestickSemanalMessage;
 import com.ricardococati.repository.dao.CandlestickDiarioDAO;
 import com.ricardococati.repository.dao.CandlestickSemanalDAO;
+import com.ricardococati.repository.dao.InserirCandlestickSemanalDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
 import com.ricardococati.service.converter.CandlestickConverter;
@@ -31,12 +32,28 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
 
   private static final boolean SEMANA_GERADA = false;
   private final CandlestickSemanalDAO semanalDAO;
+  private final InserirCandlestickSemanalDAO inserirSemanalDAO;
   private final CandlestickDiarioDAO diarioDAO;
   private final PostgresEventListener listener;
   private final CandlestickConverter candlestickConverter;
 
   @Override
   public void execute() {
+    try {
+      diarioDAO.buscaCodNegSemanaGeradaFalse()
+          .stream()
+          .filter(Objects::nonNull)
+          .forEach(codneg -> {
+            String codnegProcessado = geraCandleStickSemanal(codneg);
+            log.info("Código de negócio calculado para semana: " + codnegProcessado);
+          });
+    } catch (Exception e) {
+      log.error("Erro ao calcular Candlestick {} {} " , e.getMessage(), e.getCause());
+    }
+  }
+
+  @Override
+  public void execute(final List<CandlestickSemanal> semanalList) {
     try {
       diarioDAO.buscaCodNegSemanaGeradaFalse()
           .stream()
@@ -74,7 +91,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
               calculaCandleStickPorSemana(mapDiario.get(integerEntry.getKey()));
           candlestickSemanal.setSemana(integerEntry.getValue().get(0).getIdSemanaAno());
           candlestickSemanal.setCodneg(codneg);
-          semanalDAO.salvaCandlestickSemanal(candlestickSemanal);
+          inserirSemanalDAO.incluirCandlestickSemanal(candlestickSemanal);
           CandlestickSemanalMessage message = candlestickConverter
               .convertMessageSemanal(candlestickSemanal);
           listener.onAfterSave(message, TopicEnum.CANDLESTICK_SEMANAL.getTopicName());
