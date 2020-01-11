@@ -2,6 +2,7 @@ package com.ricardococati.repository.dao;
 
 import com.ricardococati.model.dto.CandlestickDiario;
 import com.ricardococati.model.dto.SplitInplit;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CandlestickDiarioDAO {
@@ -12,11 +13,16 @@ public interface CandlestickDiarioDAO {
 
   Boolean inplit(SplitInplit splitInplit);
 
-  List<String> buscaCodNegSemanaGeradaFalse();
+  List<String> buscaCodNeg();
 
   List<CandlestickDiario> buscaCandleDiarioPorCodNeg(String codneg);
 
   Boolean salvaCandlestickDiario(CandlestickDiario candlestickDiarioDTO);
 
   List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg);
+
+  List<CandlestickDiario> buscarCandleDiarioPorPrimeiroDiaSemanaCodneg(
+      LocalDate primeiroDiaUtilSemanaCorrente,
+      String codneg
+  );
 }

@@ -3,6 +3,7 @@ package com.ricardococati.service.impl;
 import com.ricardococati.model.dto.CandlestickSemanal;
 import com.ricardococati.repository.dao.CandlestickSemanalDAO;
 import com.ricardococati.service.BuscarCandlestickSemanalService;
+import com.ricardococati.service.util.DateServiceUtils;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.Data;
@@ -21,35 +22,8 @@ public class BuscarCandlestickSemanalServiceImpl implements BuscarCandlestickSem
   @Override
   public List<CandlestickSemanal> buscarCandleSemanalPorPrimeiroDiaSemana() {
     return semanalDAO.buscarCandleSemanalPorPrimeiroDiaSemana(
-        obterPrimeiroDiaUtilSemanaCorrente()
+        DateServiceUtils.obterPrimeiroDiaUtilDaSemana(LocalDate.now())
     );
-  }
-
-  private LocalDate obterPrimeiroDiaUtilSemanaCorrente(){
-    LocalDate dataRetorno = LocalDate.now();
-    switch (dataRetorno.getDayOfWeek()) {
-      case SUNDAY:
-        dataRetorno = dataRetorno.minusDays(6);
-        break;
-      case SATURDAY:
-        dataRetorno = dataRetorno.minusDays(5);
-        break;
-      case FRIDAY:
-        dataRetorno = dataRetorno.minusDays(4);
-        break;
-      case THURSDAY:
-        dataRetorno = dataRetorno.minusDays(3);
-        break;
-      case WEDNESDAY:
-        dataRetorno = dataRetorno.minusDays(2);
-        break;
-      case TUESDAY:
-        dataRetorno = dataRetorno.minusDays(1);
-        break;
-      default:
-        break;
-    }
-    return dataRetorno;
   }
 
 }

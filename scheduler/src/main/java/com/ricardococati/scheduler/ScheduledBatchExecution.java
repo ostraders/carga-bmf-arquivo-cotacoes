@@ -1,15 +1,13 @@
 package com.ricardococati.scheduler;
 
-import com.ricardococati.model.dto.CandlestickSemanal;
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
-import com.ricardococati.service.BuscarCandlestickSemanalService;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
 import com.ricardococati.service.IntegrationService;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,7 +20,6 @@ public class ScheduledBatchExecution {
 
   private final IntegrationService service;
   private final CalculaCandlestickSemanalService candlestickSemanalService;
-  private final BuscarCandlestickSemanalService buscarService;
   private final ControlaIdArquivoUtil idArquivoUtil;
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
@@ -45,7 +42,7 @@ public class ScheduledBatchExecution {
     final String caminho = CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA.getCaminho();
     File arquivosDiretorioOrigem = new File(caminho);
     File arrayArquivos[] = arquivosDiretorioOrigem.listFiles();
-    if(arquivosDiretorioOrigem.exists() && arrayArquivos.length > 0){
+    if (arquivosDiretorioOrigem.exists() && arrayArquivos.length > 0) {
       return Boolean.TRUE;
     }
     return Boolean.FALSE;
@@ -61,12 +58,8 @@ public class ScheduledBatchExecution {
   }
 
   private void executaGeracaoCandleSemanal() throws Exception {
-    final Integer size = candlestickSemanalService.contaCandlestickDiarioSemanaGeradaFalse();
-    List<CandlestickSemanal> semanalList = buscarService.buscarCandleSemanalPorPrimeiroDiaSemana();
-    if(size > 0) {
-      log.info("Inicia cálculo semanal");
-      candlestickSemanalService.execute();
-    }
+    log.info("Inicia cálculo semanal");
+    //candlestickSemanalService.execute(LocalDate.now());
   }
 
 }

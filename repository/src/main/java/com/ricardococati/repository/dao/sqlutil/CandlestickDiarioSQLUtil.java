@@ -3,6 +3,7 @@ package com.ricardococati.repository.dao.sqlutil;
 import com.ricardococati.model.dto.CandlestickDiario;
 import com.ricardococati.model.dto.SplitInplit;
 import com.ricardococati.repository.util.SQLAppender;
+import java.time.LocalDate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
@@ -79,12 +80,11 @@ public class CandlestickDiarioSQLUtil {
         .addValue("qtddivmult", splitInplit.getQtdSplitInplit());
   }
 
-  public String getSelectCodNegPorSemanaGeradaFalse() {
+  public String getSelectCodNeg() {
     final SQLAppender sql = new SQLAppender(100);
     sql.appendSQL(" select ");
     sql.appendSQL("   codneg  ");
     sql.appendSQL(" from candlestick_diario ");
-    sql.appendSQL(" where semana_gerada = false ");
     sql.appendSQL(" group by codneg ");
     sql.appendSQL(" order by codneg asc ");
     return sql.getAppendSQLSemQuebra().toString();
@@ -126,7 +126,7 @@ public class CandlestickDiarioSQLUtil {
         .addValue("idCandleDiario", diarioDTO.getIdCandleDiario());
   }
 
-  public String getSelectByCodNegESemanaGeradaFalse() {
+  public String getSelectByCodNegESemana() {
     SQLAppender sql = new SQLAppender(100);
     sql.appendSQL(" select ");
     sql.appendSQL("		id_candle_diario, ");
@@ -141,8 +141,35 @@ public class CandlestickDiarioSQLUtil {
     sql.appendSQL("		voltot ");
     sql.appendSQL(" from candlestick_diario ");
     sql.appendSQL("	where codneg = :codneg ");
-    sql.appendSQL("	and semana_gerada = false ");
     return sql.getAppendSQLSemQuebra().toString();
+  }
+
+  public String getSelectCandleDiarioByDtPregCodneg() {
+    SQLAppender sql = new SQLAppender(100);
+    sql.appendSQL(" select ");
+    sql.appendSQL("		id_candle_diario, ");
+    sql.appendSQL("		codneg, ");
+    sql.appendSQL("		dtpreg, ");
+    sql.appendSQL("		preabe, ");
+    sql.appendSQL("		premax, ");
+    sql.appendSQL("		premin, ");
+    sql.appendSQL("		preult, ");
+    sql.appendSQL("		semana, ");
+    sql.appendSQL("		semana_gerada, ");
+    sql.appendSQL("		voltot ");
+    sql.appendSQL(" from candlestick_diario ");
+    sql.appendSQL("	where codneg = :codneg ");
+    sql.appendSQL("	and dtpreg >= :dtpreg ");
+    return sql.getAppendSQLSemQuebra().toString();
+  }
+
+  public MapSqlParameterSource toParametersCandleDiarioByDtPregCodneg(
+      final LocalDate dtpreg,
+      final String codneg
+  ) {
+    return new MapSqlParameterSource()
+        .addValue("dtpreg", dtpreg)
+        .addValue("codneg", codneg);
   }
 
 }

@@ -35,7 +35,7 @@ public class InserirCandlestickSemanalSQLUtil {
     sql.appendSQL("		:semana, ");
     sql.appendSQL("		:voltot ");
     sql.appendSQL("   ) ");
-    sql.appendSQL(" on conflict (codneg, dtpregini, dtpregfim) do update set ");
+    sql.appendSQL(" on conflict (codneg, dtpregini) do update set ");
     sql.appendSQL("		codneg = excluded.codneg, ");
     sql.appendSQL("		dtpregini = excluded.dtpregini, ");
     sql.appendSQL("		dtpregfim = excluded.dtpregfim, ");

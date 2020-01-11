@@ -7,6 +7,7 @@ import com.ricardococati.repository.dao.CandlestickDiarioDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickDiarioMapper;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioSQLUtil;
 import com.ricardococati.repository.util.SQLAppender;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,9 +73,9 @@ public class CandlestickDiarioDAOImpl implements CandlestickDiarioDAO {
   }
 
   @Override
-  public List<String> buscaCodNegSemanaGeradaFalse() {
+  public List<String> buscaCodNeg() {
     return template.query(
-        sqlUtil.getSelectCodNegPorSemanaGeradaFalse(),
+        sqlUtil.getSelectCodNeg(),
         new MapSqlParameterSource(),
         (rs, rowNum) -> mapper.mapperCodNeg(rs)
     );
@@ -106,8 +107,23 @@ public class CandlestickDiarioDAOImpl implements CandlestickDiarioDAO {
   @Override
   public List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg) {
     return template.query(
-        sqlUtil.getSelectByCodNegESemanaGeradaFalse(),
+        sqlUtil.getSelectByCodNegESemana(),
         sqlUtil.toParametersSelectByCodNeg(codneg),
+        (rs, rowNum) -> mapper.mapper(rs)
+    );
+  }
+
+  @Override
+  public List<CandlestickDiario> buscarCandleDiarioPorPrimeiroDiaSemanaCodneg(
+      final LocalDate primeiroDiaUtilSemanaCorrente,
+      final String codneg
+  ) {
+    return template.query(
+        sqlUtil.getSelectCandleDiarioByDtPregCodneg(),
+        sqlUtil.toParametersCandleDiarioByDtPregCodneg(
+            primeiroDiaUtilSemanaCorrente,
+            codneg
+        ),
         (rs, rowNum) -> mapper.mapper(rs)
     );
   }
