@@ -10,6 +10,7 @@ import com.ricardococati.repository.dao.CandlestickDiarioDAO;
 import com.ricardococati.repository.dao.CandlestickSemanalDAO;
 import com.ricardococati.repository.dao.InserirCandlestickSemanalDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
+import com.ricardococati.service.BuildCandlestickSemanalService;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
 import com.ricardococati.service.converter.CandlestickConverter;
 import java.math.BigDecimal;
@@ -36,6 +37,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
   private final CandlestickDiarioDAO diarioDAO;
   private final PostgresEventListener listener;
   private final CandlestickConverter candlestickConverter;
+  private final BuildCandlestickSemanalService buildSemanal;
 
   @Override
   public void execute() {
@@ -60,7 +62,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
         .entrySet()
         .forEach(integerEntry -> {
           CandlestickSemanal candlestickSemanal =
-              calculaCandleStickPorSemana(mapDiario.get(integerEntry.getKey()));
+              buildSemanal.build(mapDiario.get(integerEntry.getKey()));
           candlestickSemanal.setSemana(integerEntry.getValue().get(0).getIdSemanaAno());
           candlestickSemanal.setCodneg(codneg);
           inserirSemanalDAO.incluirCandlestickSemanal(candlestickSemanal);
@@ -70,86 +72,6 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
         });
     log.info("Finalizando Código de negociação: " + codneg);
     return codneg;
-  }
-
-  private CandlestickSemanal calculaCandleStickPorSemana(
-      List<CandlestickDiario> candlestickDiarios) {
-    CandlestickSemanal candlestickSemanal = new CandlestickSemanal();
-    candlestickDiarios
-        .forEach(candlestickDiario -> {
-          candlestickSemanal.setDtpregini(calculaDtpregini(candlestickSemanal, candlestickDiario));
-          candlestickSemanal.setDtpregfim(calculaDtpregfim(candlestickSemanal, candlestickDiario));
-          candlestickSemanal.setPreabe(calculaPreabe(candlestickSemanal, candlestickDiario));
-          candlestickSemanal.setPremin(calculaPremin(candlestickSemanal, candlestickDiario));
-          candlestickSemanal.setPremax(calculaPremax(candlestickSemanal, candlestickDiario));
-          candlestickSemanal.setPreult(calculaPreult(candlestickSemanal, candlestickDiario));
-          candlestickSemanal.setVoltot(calculaVoltot(candlestickSemanal, candlestickDiario));
-        });
-    return candlestickSemanal;
-  }
-
-  private LocalDate calculaDtpregini(CandlestickSemanal candlestickSemanal,
-      CandlestickDiario candlestickDiario) {
-    if (isNull(candlestickSemanal.getDtpregini()) ||
-        candlestickDiario.getDtpreg().isBefore(candlestickSemanal.getDtpregini())) {
-      candlestickSemanal.setDtpregini(candlestickDiario.getDtpreg());
-    }
-    return candlestickSemanal.getDtpregini();
-  }
-
-  private LocalDate calculaDtpregfim(CandlestickSemanal candlestickSemanal,
-      CandlestickDiario candlestickDiario) {
-    if (isNull(candlestickSemanal.getDtpregfim()) ||
-        candlestickDiario.getDtpreg().isAfter(candlestickSemanal.getDtpregfim())) {
-      candlestickSemanal.setDtpregfim(candlestickDiario.getDtpreg());
-    }
-    return candlestickSemanal.getDtpregfim();
-  }
-
-  private BigDecimal calculaPreabe(CandlestickSemanal candlestickSemanal,
-      CandlestickDiario candlestickDiario) {
-    if (isNull(candlestickSemanal.getPreabe()) ||
-        candlestickSemanal.getDtpregini().isEqual(candlestickDiario.getDtpreg())) {
-      candlestickSemanal.setPreabe(candlestickDiario.getPreabe());
-    }
-    return candlestickSemanal.getPreabe();
-  }
-
-  private BigDecimal calculaPremax(CandlestickSemanal candlestickSemanal,
-      CandlestickDiario candlestickDiario) {
-    if (isNull(candlestickSemanal.getPremax())
-        || candlestickDiario.getPremax().compareTo(candlestickSemanal.getPremax()) > 0) {
-      candlestickSemanal.setPremax(candlestickDiario.getPremax());
-    }
-    return candlestickSemanal.getPremax();
-  }
-
-  private BigDecimal calculaPremin(CandlestickSemanal candlestickSemanal,
-      CandlestickDiario candlestickDiario) {
-    if (isNull(candlestickSemanal.getPremin())
-        || candlestickDiario.getPremin().compareTo(candlestickSemanal.getPremin()) < 0) {
-      candlestickSemanal.setPremin(candlestickDiario.getPremin());
-    }
-    return candlestickSemanal.getPremin();
-  }
-
-  private BigDecimal calculaPreult(CandlestickSemanal candlestickSemanal,
-      CandlestickDiario candlestickDiario) {
-    if (isNull(candlestickSemanal.getPreult()) ||
-        candlestickSemanal.getDtpregfim().isEqual(candlestickDiario.getDtpreg())) {
-      candlestickSemanal.setPreult(candlestickDiario.getPreult());
-    }
-    return candlestickSemanal.getPreult();
-  }
-
-  private BigDecimal calculaVoltot(CandlestickSemanal candlestickSemanal,
-      CandlestickDiario candlestickDiario) {
-    if (isNull(candlestickSemanal.getVoltot())) {
-      candlestickSemanal.setVoltot(candlestickDiario.getVoltot());
-    } else {
-      candlestickSemanal.getVoltot().add(candlestickDiario.getVoltot());
-    }
-    return candlestickSemanal.getVoltot();
   }
 
   private Map<String, List<CandlestickDiario>> getListCandlestickToStringMap(
