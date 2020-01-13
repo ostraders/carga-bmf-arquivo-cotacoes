@@ -1,5 +1,6 @@
 package com.ricardococati.model.dto;
 
+import com.ricardococati.model.enums.OperacaoSplitInplit;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,5 +16,6 @@ public class SplitInplit {
   private String codneg;
   private LocalDate dtpreg;
   private Integer qtdSplitInplit;
+  private OperacaoSplitInplit operacao;
 
 }

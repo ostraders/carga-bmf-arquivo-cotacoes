@@ -1,7 +1,8 @@
 package com.ricardococati.controller;
 
 import com.ricardococati.controller.converter.SplitInplitConverter;
-import com.ricardococati.service.SplitInplitService;
+import com.ricardococati.model.dto.SplitInplit;
+import com.ricardococati.service.AtualizarCandlesticksService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,9 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class SplitInplitController {
 
   private final SplitInplitConverter converter;
-  private final SplitInplitService service;
+  private final AtualizarCandlesticksService service;
 
-  @ApiOperation(value = "Split na acao por: codigo de negocio, data do pregão e quantidade de divisões")
+  @ApiOperation(
+      value = "Split | Inplit na acao por: "
+          + "codigo de negocio(String), "
+          + "data do pregão(DD/MM/YYYY), "
+          + "quantidade de divisões e(Integer) "
+          + "operação(SPLIT ou INPLIT)")
   @ApiResponses(
       value = {
           @ApiResponse(code = 200, message = "Split OK"),
@@ -39,38 +45,20 @@ public class SplitInplitController {
       }
   )
   @ResponseStatus(HttpStatus.OK)
-  @PutMapping(value = "/split")
-  public ResponseEntity<?> split(
+  @PutMapping
+  public ResponseEntity<?> splitInplit(
       @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dtPregrao,
       @RequestParam String codneg,
-      @RequestParam Integer qtdSplitInplit
+      @RequestParam Integer qtdSplitInplit,
+      @RequestParam String operacao
   ) {
     log.info("Excutando Split ");
-    service.split(converter.convert(dtPregrao, codneg, qtdSplitInplit));
+    final SplitInplit splitInplit =
+        converter.convert(dtPregrao, codneg, qtdSplitInplit, operacao);
+    log.info("Objeto convertido: {}", splitInplit);
+    service.executeSplitInplit(splitInplit);
     log.info("Split executado com sucesso!! ");
-    return ResponseEntity.noContent().build();
-  }
-
-  @ApiOperation(value = "Inplit na acao por: codigo de negocio, data do pregão e quantidade de multiplicações")
-  @ApiResponses(
-      value = {
-          @ApiResponse(code = 200, message = "Inplit OK"),
-          @ApiResponse(code = 400, message = "Bad Request"),
-          @ApiResponse(code = 409, message = "Conflict Request"),
-          @ApiResponse(code = 500, message = "Internal Server Error")
-      }
-  )
-  @ResponseStatus(HttpStatus.OK)
-  @PutMapping(value = "/inplit")
-  public ResponseEntity<?> inplit(
-      @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dtPregrao,
-      @RequestParam String codneg,
-      @RequestParam Integer qtdSplitInplit
-  ) {
-    log.info("Excutando Split ");
-    service.inplit(converter.convert(dtPregrao, codneg, qtdSplitInplit));
-    log.info("Inplit executado com sucesso!! ");
-    return ResponseEntity.noContent().build();
+    return ResponseEntity.ok().build();
   }
 
 }
