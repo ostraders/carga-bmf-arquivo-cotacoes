@@ -1,4 +1,4 @@
-package com.ricardococati.scheduler;
+package com.ricardococati.service.scheduler;
 
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
@@ -6,7 +6,6 @@ import com.ricardococati.service.IntegrationService;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ScheduledBatchExecution {
+public class ScheduledBatchExecutionService {
 
   private final IntegrationService service;
   private final CalculaCandlestickSemanalService candlestickSemanalService;

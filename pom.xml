@@ -13,7 +13,6 @@
     <module>application</module>
     <module>model</module>
     <module>repository</module>
-    <module>scheduler</module>
     <module>service</module>
     <module>message</module>
   </modules>
@@ -65,11 +64,6 @@
       <dependency>
         <groupId>com.ricardococati</groupId>
         <artifactId>service</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.ricardococati</groupId>
-        <artifactId>scheduler</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

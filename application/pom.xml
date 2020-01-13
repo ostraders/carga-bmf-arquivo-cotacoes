@@ -22,10 +22,6 @@
     <!-- INTERNAL -->
     <dependency>
       <groupId>com.ricardococati</groupId>
-      <artifactId>scheduler</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.ricardococati</groupId>
       <artifactId>service</artifactId>
     </dependency>
     <dependency>

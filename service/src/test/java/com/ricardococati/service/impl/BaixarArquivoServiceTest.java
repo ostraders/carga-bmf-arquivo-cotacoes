@@ -70,4 +70,5 @@ public class BaixarArquivoServiceTest {
     //when
     target.baixarArquivoCotacao(data);
   }
+
 }
