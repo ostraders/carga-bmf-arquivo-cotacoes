@@ -19,7 +19,7 @@ public class CalculaCandlestickSemanalAsyncServiceImpl implements
   private final CalculaCandlestickSemanalService semanalService;
   private final TaskExecutor taskExecutor;
 
-  public void executeAsynchronously(final LocalDate dataOrigem) {
+  public void executeAsynchronously() {
     taskExecutor.execute(() -> {
       log.info("Inicia task calculaSemanal");
       try {
@@ -32,8 +32,8 @@ public class CalculaCandlestickSemanalAsyncServiceImpl implements
   }
 
   @Override
-  public void execute(LocalDate dataOrigem) throws Exception {
-    executeAsynchronously(dataOrigem);
+  public void execute() throws Exception {
+    executeAsynchronously();
   }
 
 }

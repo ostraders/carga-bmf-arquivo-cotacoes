@@ -6,6 +6,7 @@ import com.ricardococati.service.IntegrationService;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +59,7 @@ public class ScheduledBatchExecutionService {
 
   private void executaGeracaoCandleSemanal() throws Exception {
     log.info("Inicia cálculo semanal");
-    //candlestickSemanalService.execute(LocalDate.now());
+    //candlestickSemanalService.execute();
   }
 
 }

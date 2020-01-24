@@ -27,11 +27,9 @@ public class CalculaSemanaController {
   private final CalculaCandlestickSemanalByDataService byDataService;
 
   @PutMapping
-  public ResponseEntity<?> calcular(
-      @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dtPregrao
-  ) throws Exception {
+  public ResponseEntity<?> calcular() throws Exception {
     log.info("Executando calculo semana ");
-    service.execute(dtPregrao);
+    service.execute();
     log.info("Executando calculo semana executado ");
     return ResponseEntity.noContent().build();
   }
