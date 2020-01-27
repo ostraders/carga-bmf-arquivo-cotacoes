@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +26,7 @@ public class CalculaSemanaController {
   private final CalculaCandlestickSemanalAsyncService service;
   private final CalculaCandlestickSemanalByDataService byDataService;
 
-  @PutMapping
+  @PostMapping
   public ResponseEntity<?> calcular() throws Exception {
     log.info("Executando calculo semana ");
     service.execute();
@@ -34,7 +34,7 @@ public class CalculaSemanaController {
     return ResponseEntity.noContent().build();
   }
 
-  @PutMapping("/by-data")
+  @PostMapping("/by-data")
   public ResponseEntity<?> calcularByData(
       @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dtPregrao
   ) throws Exception {
