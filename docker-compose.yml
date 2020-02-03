@@ -17,6 +17,17 @@ kafka:
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
 
+pg-dbbmf:
+  image: postgres:10.6-alpine
+  environment:
+    POSTGRES_DB: dbbmf
+    POSTGRES_USER: dbbmf
+    POSTGRES_PASSWORD: dbbmf
+  volumes:
+    - /data/sql/:/docker-entrypoint-initdb.d/
+  ports:
+    - "5432:5432"
+
 # Para CRIAR e INICIALIZAR os containers definidos acima:
 # docker-compose up  (esse comando cria e inicia os containers. Caso não queira apendar o processo no console utilizar a opção -d)
 
