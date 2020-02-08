@@ -1,6 +1,6 @@
 package com.ricardococati.service;
 
-import com.ricardococati.model.dto.SplitInplit;
+import com.ricardococati.model.entities.SplitInplit;
 
 public interface AtualizarCandlesticksService {
 

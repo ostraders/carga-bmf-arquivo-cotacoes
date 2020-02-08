@@ -1,6 +1,6 @@
 package com.ricardococati.repository.dao.impl;
 
-import com.ricardococati.model.dto.CandlestickSemanal;
+import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.repository.dao.CandlestickSemanalDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickSemanalMapper;
 import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalSQLUtil;

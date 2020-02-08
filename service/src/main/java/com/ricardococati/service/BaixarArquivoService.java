@@ -1,9 +1,10 @@
 package com.ricardococati.service;
 
+import com.ricardococati.model.response.BaixarArquivo;
 import java.time.LocalDate;
 
 public interface BaixarArquivoService {
 
-	Boolean baixarArquivoCotacao(final LocalDate dtpreg) throws Exception;
+	BaixarArquivo baixarArquivoCotacao(final LocalDate dtpreg) throws Exception;
 
 }

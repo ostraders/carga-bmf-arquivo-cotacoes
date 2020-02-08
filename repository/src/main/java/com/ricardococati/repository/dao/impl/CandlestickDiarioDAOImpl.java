@@ -1,7 +1,7 @@
 package com.ricardococati.repository.dao.impl;
 
-import com.ricardococati.model.dto.CandlestickDiario;
-import com.ricardococati.model.dto.SplitInplit;
+import com.ricardococati.model.entities.CandlestickDiario;
+import com.ricardococati.model.entities.SplitInplit;
 import com.ricardococati.repository.dao.GenericDAO;
 import com.ricardococati.repository.dao.CandlestickDiarioDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickDiarioMapper;

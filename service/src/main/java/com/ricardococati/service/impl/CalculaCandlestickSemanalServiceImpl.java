@@ -1,11 +1,9 @@
 package com.ricardococati.service.impl;
 
-import static java.util.Objects.isNull;
-
 import com.ricardococati.kafka.topic.TopicEnum;
-import com.ricardococati.model.dto.CandlestickDiario;
-import com.ricardococati.model.dto.CandlestickSemanal;
-import com.ricardococati.model.dto.CandlestickSemanalMessage;
+import com.ricardococati.model.entities.CandlestickDiario;
+import com.ricardococati.model.entities.CandlestickSemanal;
+import com.ricardococati.model.entities.CandlestickSemanalMessage;
 import com.ricardococati.repository.dao.CandlestickDiarioDAO;
 import com.ricardococati.repository.dao.CandlestickSemanalDAO;
 import com.ricardococati.repository.dao.InserirCandlestickSemanalDAO;
@@ -13,8 +11,6 @@ import com.ricardococati.repository.event.PostgresEventListener;
 import com.ricardococati.service.BuildCandlestickSemanalService;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
 import com.ricardococati.service.converter.CandlestickConverter;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

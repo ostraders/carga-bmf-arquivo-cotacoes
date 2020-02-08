@@ -1,7 +1,7 @@
 package com.ricardococati.controller;
 
+import com.ricardococati.model.response.BaixarArquivo;
 import com.ricardococati.service.BaixarArquivoService;
-import com.ricardococati.service.config.ControleArquivoConfig;
 import io.swagger.annotations.Api;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("api/v1/baixar")
-@Api(value = "api/v1/split-inplit", consumes = MediaType.APPLICATION_JSON_VALUE)
+@Api(value = "api/v1/baixar", consumes = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class BaixarArquivoController {
 
-  private final ControleArquivoConfig config;
   private final BaixarArquivoService arquivoService;
 
   @GetMapping
-  public ResponseEntity<?> baixarArquivo(
+  public ResponseEntity<BaixarArquivo> baixarArquivo(
       @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dtPregrao
   ) throws Exception {
     log.info("Excutando baixando Arquivo ");
-    arquivoService.baixarArquivoCotacao(dtPregrao);
-    return ResponseEntity.ok().body(config.getUrlArquivoCotacoes());
+    BaixarArquivo retorno = arquivoService.baixarArquivoCotacao(dtPregrao);
+    log.info("Arquivo baixado: {} ", retorno);
+    return ResponseEntity.ok().body(retorno);
   }
 
 }

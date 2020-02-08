@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
+import com.ricardococati.model.response.BaixarArquivo;
 import com.ricardococati.repository.dao.CalendarioFeriadoDAO;
 import com.ricardococati.service.DescompactarArquivoService;
 import com.ricardococati.service.DownloadArquivoService;
@@ -34,33 +35,33 @@ public class BaixarArquivoServiceTest {
   public void baixaArquivoCotacaoTrue() throws Exception {
     //given
     when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
-    when(downloadService.doanloadArquivo(any(), any())).thenReturn(Boolean.TRUE);
+    when(downloadService.doanloadArquivo(any(), any())).thenReturn("URL");
     when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(Boolean.FALSE);
     LocalDate data = LocalDate.of(2020, 01, 02);
     //when
-    Boolean returned = target.baixarArquivoCotacao(data);
+    BaixarArquivo returned = target.baixarArquivoCotacao(data);
     //then
-    assertThat(returned).isNotNull().isTrue();
+    assertThat(returned.getUrl()).isNotNull().isEqualTo("URL");
   }
 
   @Test
   public void baixaArquivoCotacaoFalse() throws Exception {
     //given
     when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
-    when(downloadService.doanloadArquivo(any(), any())).thenReturn(Boolean.TRUE);
+    when(downloadService.doanloadArquivo(any(), any())).thenReturn("URL");
     when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(Boolean.TRUE);
     LocalDate data = LocalDate.of(2020, 01, 01);
     //when
-    Boolean returned = target.baixarArquivoCotacao(data);
+    BaixarArquivo returned = target.baixarArquivoCotacao(data);
     //then
-    assertThat(returned).isNotNull().isFalse();
+    assertThat(returned.getUrl()).isNull();
   }
 
   @Test
   public void baixaArquivoCotacaoError() throws Exception {
     //given
     when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
-    when(downloadService.doanloadArquivo(any(), any())).thenReturn(Boolean.TRUE);
+    when(downloadService.doanloadArquivo(any(), any())).thenReturn("URL");
     when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(null);
 
     this.thrown.expect(Exception.class);

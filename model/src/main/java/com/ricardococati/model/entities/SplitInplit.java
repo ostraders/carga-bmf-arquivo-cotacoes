@@ -1,4 +1,4 @@
-package com.ricardococati.model.dto;
+package com.ricardococati.model.entities;
 
 import com.ricardococati.model.enums.OperacaoSplitInplit;
 import java.time.LocalDate;

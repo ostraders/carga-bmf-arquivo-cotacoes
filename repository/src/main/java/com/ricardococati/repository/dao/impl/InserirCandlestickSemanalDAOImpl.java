@@ -1,9 +1,8 @@
 package com.ricardococati.repository.dao.impl;
 
-import com.ricardococati.model.dto.CandlestickSemanal;
+import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.repository.dao.GenericDAO;
 import com.ricardococati.repository.dao.InserirCandlestickSemanalDAO;
-import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.InserirCandlestickSemanalSQLUtil;
 import com.ricardococati.repository.util.SQLAppender;
 import lombok.RequiredArgsConstructor;

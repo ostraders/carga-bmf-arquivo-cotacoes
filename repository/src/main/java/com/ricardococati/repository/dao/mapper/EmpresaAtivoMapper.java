@@ -1,6 +1,6 @@
 package com.ricardococati.repository.dao.mapper;
 
-import com.ricardococati.model.dto.EmpresaAtivo;
+import com.ricardococati.model.entities.EmpresaAtivo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.stereotype.Service;

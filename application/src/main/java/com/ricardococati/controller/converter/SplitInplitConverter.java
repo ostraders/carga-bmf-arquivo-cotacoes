@@ -1,6 +1,6 @@
 package com.ricardococati.controller.converter;
 
-import com.ricardococati.model.dto.SplitInplit;
+import com.ricardococati.model.entities.SplitInplit;
 import com.ricardococati.model.enums.OperacaoSplitInplit;
 import java.time.LocalDate;
 import org.springframework.stereotype.Component;

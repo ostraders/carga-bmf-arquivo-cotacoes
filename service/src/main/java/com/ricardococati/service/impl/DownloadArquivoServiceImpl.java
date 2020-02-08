@@ -20,14 +20,18 @@ public class DownloadArquivoServiceImpl implements DownloadArquivoService {
   private final ControleArquivoConfig arquivoConfig;
 
   @Override
-  public Boolean doanloadArquivo(final String dataFormatada, final String caminho) throws IOException {
+  public String doanloadArquivo(final String dataFormatada, final String caminho) throws IOException {
+    String retorno = "";
     try {
+      final String url = arquivoConfig.getUrlArquivoCotacoes().replace("*", dataFormatada);
+      final String nomeArquivo = NOME_ARQUIVO_DEFAULT + dataFormatada + ".zip";
       FileUtils.copyURLToFile(
-          new URL(arquivoConfig.getUrlArquivoCotacoes().replace("*", dataFormatada)),
-          new File(caminho + NOME_ARQUIVO_DEFAULT +dataFormatada+".zip"),
+          new URL(url),
+          new File(caminho + nomeArquivo),
           10000,
           10000
       );
+      retorno = url + nomeArquivo;
     } catch (FileNotFoundException e) {
       log.error("Erro ao tentar baixar arquivo de cotação! {} ", e.getMessage());
       throw e;
@@ -35,7 +39,7 @@ public class DownloadArquivoServiceImpl implements DownloadArquivoService {
       log.error("Erro ao tentar baixar arquivo de cotação! {} ", e.getMessage());
       throw e;
     }
-    return Boolean.TRUE;
+    return retorno;
   }
 
 }

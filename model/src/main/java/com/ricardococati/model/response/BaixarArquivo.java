@@ -1,4 +1,4 @@
-package com.ricardococati.model.dto;
+package com.ricardococati.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmpresaAtivo {
+public class BaixarArquivo {
 
-  private Long idEmpresa;
-  private String ativo;
+  private String url;
+  private String caminhoArquivoLocal;
 
 }

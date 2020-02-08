@@ -1,9 +1,9 @@
 package com.ricardococati.service.converter;
 
-import com.ricardococati.model.dto.CandlestickDiario;
-import com.ricardococati.model.dto.CandlestickDiarioMessage;
-import com.ricardococati.model.dto.CandlestickSemanal;
-import com.ricardococati.model.dto.CandlestickSemanalMessage;
+import com.ricardococati.model.entities.CandlestickDiario;
+import com.ricardococati.model.entities.CandlestickDiarioMessage;
+import com.ricardococati.model.entities.CandlestickSemanal;
+import com.ricardococati.model.entities.CandlestickSemanalMessage;
 import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.enums.CodbdiEnum;
 import com.ricardococati.model.enums.TipoMercadoEnum;

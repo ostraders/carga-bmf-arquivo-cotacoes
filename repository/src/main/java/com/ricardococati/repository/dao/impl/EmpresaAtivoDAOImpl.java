@@ -1,6 +1,6 @@
 package com.ricardococati.repository.dao.impl;
 
-import com.ricardococati.model.dto.EmpresaAtivo;
+import com.ricardococati.model.entities.EmpresaAtivo;
 import com.ricardococati.repository.dao.EmpresaAtivoDAO;
 import com.ricardococati.repository.dao.mapper.EmpresaAtivoMapper;
 import com.ricardococati.repository.dao.sqlutil.EmpresaAtivoSQLUtil;

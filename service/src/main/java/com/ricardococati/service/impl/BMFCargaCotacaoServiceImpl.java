@@ -3,11 +3,11 @@ package com.ricardococati.service.impl;
 import static java.util.Objects.nonNull;
 
 import com.ricardococati.kafka.topic.TopicEnum;
-import com.ricardococati.model.dto.CandlestickDiario;
-import com.ricardococati.model.dto.CandlestickDiarioMessage;
+import com.ricardococati.model.entities.CandlestickDiario;
+import com.ricardococati.model.entities.CandlestickDiarioMessage;
 import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.dto.CotacaoDTO;
-import com.ricardococati.model.dto.EmpresaAtivo;
+import com.ricardococati.model.entities.EmpresaAtivo;
 import com.ricardococati.repository.dao.CandlestickDiarioDAO;
 import com.ricardococati.repository.dao.CotacaoDAO;
 import com.ricardococati.repository.dao.EmpresaAtivoDAO;

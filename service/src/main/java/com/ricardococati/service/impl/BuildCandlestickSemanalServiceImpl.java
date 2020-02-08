@@ -2,8 +2,8 @@ package com.ricardococati.service.impl;
 
 import static java.util.Objects.isNull;
 
-import com.ricardococati.model.dto.CandlestickDiario;
-import com.ricardococati.model.dto.CandlestickSemanal;
+import com.ricardococati.model.entities.CandlestickDiario;
+import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.service.BuildCandlestickSemanalService;
 import java.math.BigDecimal;
 import java.time.LocalDate;

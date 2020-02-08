@@ -1,7 +1,7 @@
 package com.ricardococati.repository.dao.impl;
 
 import com.ricardococati.model.dto.CotacaoDTO;
-import com.ricardococati.model.dto.SplitInplit;
+import com.ricardococati.model.entities.SplitInplit;
 import com.ricardococati.repository.dao.CotacaoDAO;
 import com.ricardococati.repository.dao.sqlutil.CotacaoSQLUtil;
 import lombok.RequiredArgsConstructor;

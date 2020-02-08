@@ -3,6 +3,7 @@ package com.ricardococati.service.impl;
 import static java.util.Objects.isNull;
 
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
+import com.ricardococati.model.response.BaixarArquivo;
 import com.ricardococati.repository.dao.CalendarioFeriadoDAO;
 import com.ricardococati.service.BaixarArquivoService;
 import com.ricardococati.service.DescompactarArquivoService;
@@ -30,29 +31,31 @@ public class BaixarArquivoServiceImpl implements BaixarArquivoService {
   private final DownloadArquivoService downloadService;
 
   @Override
-  public Boolean baixarArquivoCotacao(final LocalDate dtpreg) throws Exception {
+  public BaixarArquivo baixarArquivoCotacao(final LocalDate dtpreg) throws Exception {
     LocalDateTime dtLocal = dtpreg.atTime(20, 00);
     final String dataFormatada = validarDataSeEhDiaUtilStr(dtLocal);
     return obterArquivo(dataFormatada);
   }
 
-  private Boolean obterArquivo(String dataFormatada) throws Exception {
+  private BaixarArquivo obterArquivo(final String dataFormatada) throws Exception {
     final String caminho = CaminhoArquivoEnum.CAMINHO_ARQUIVO_ZIP.getCaminho();
-    final String nomeArquivo = caminho + NOME_ARQUIVO_DEFAULT + dataFormatada + ".zip";
-    Boolean arquivoPronto = Boolean.FALSE;
+    BaixarArquivo baixarArquivo = BaixarArquivo
+        .builder()
+        .caminhoArquivoLocal((caminho + NOME_ARQUIVO_DEFAULT + dataFormatada + ".zip"))
+        .build();
     try {
       if (!"".equals(dataFormatada)) {
-        arquivoPronto = downloadService.doanloadArquivo(dataFormatada, caminho);
-        if (arquivoPronto) {
-          log.info("Arquivo baixado com sucesso: {} ", nomeArquivo);
-          arquivoPronto = descompactarService.descompactaArquivoCotacao(nomeArquivo);
+        baixarArquivo.setUrl(downloadService.doanloadArquivo(dataFormatada, caminho));
+        if (!"".equals(baixarArquivo)) {
+          log.info("Arquivo baixado com sucesso: {} ", baixarArquivo.getCaminhoArquivoLocal());
+          descompactarService.descompactaArquivoCotacao(baixarArquivo.getCaminhoArquivoLocal());
         }
       }
     } catch (Exception e) {
       log.error("Erro ao baixar e descompactar arquivo: {}", e.getMessage());
       throw new Exception("Erro ao baixar e descompactar arquivo");
     }
-    return arquivoPronto;
+    return baixarArquivo;
   }
 
   private String validarDataSeEhDiaUtilStr(final LocalDateTime dtpreg) throws Exception {

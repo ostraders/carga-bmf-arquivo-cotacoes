@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-import com.ricardococati.model.dto.CandlestickSemanal;
+import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.repository.dao.BaseJdbcTest;
 import com.ricardococati.repository.dao.GenericDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickSemanalMapper;

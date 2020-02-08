@@ -1,4 +1,4 @@
-package com.ricardococati.model.dto;
+package com.ricardococati.model.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,17 +12,17 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CandlestickDiario {
+public class CandlestickSemanal {
 
-  private Long idCandleDiario;
-  private LocalDate dtpreg;
+  private Long idCandleSemanal;
+  private LocalDate dtpregini;
+  private LocalDate dtpregfim;
+  private Integer semana;
   private String codneg;
   private BigDecimal preabe;
   private BigDecimal premax;
   private BigDecimal premin;
   private BigDecimal preult;
   private BigDecimal voltot;
-  private Integer idSemanaAno;
-  private Boolean semanaGerada;
 
 }

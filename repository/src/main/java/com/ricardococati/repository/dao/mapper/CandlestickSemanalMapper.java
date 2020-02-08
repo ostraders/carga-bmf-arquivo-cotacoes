@@ -2,7 +2,7 @@ package com.ricardococati.repository.dao.mapper;
 
 import static java.util.Objects.nonNull;
 
-import com.ricardococati.model.dto.CandlestickSemanal;
+import com.ricardococati.model.entities.CandlestickSemanal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
