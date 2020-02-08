@@ -45,7 +45,7 @@ public class CalculaSemanaControllerTest {
     //when
     final ResultActions result = this.mockMvc
         .perform(
-            get(String.format("/api/v1/calcular-semana"))
+            get(String.format("/api/v1/calcular-semana/by-data"))
                 .param("dtPregrao", dtPregao)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
