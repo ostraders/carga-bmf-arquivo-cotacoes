@@ -9,7 +9,7 @@ import com.ricardococati.service.batchprocess.layouts.CotacoesDosPapeisPorDiaLay
 import com.ricardococati.service.batchprocess.layouts.HeaderBMFLayoutImpl;
 import com.ricardococati.service.batchprocess.layouts.TraillerBMFLayoutImpl;
 import com.ricardococati.service.config.ControleArquivoConfig;
-import com.ricardococati.repository.util.Funcoes;
+import com.ricardococati.repository.util.ConverteStringParaLocalDate;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -88,7 +88,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
         new BigInteger(valorCampo.trim());
       }
       if(tipoCampo.equals(TiposCamposEnum.DATA)){
-        LocalDate localDate = Funcoes.convertStringToLocalDate(valorCampo);
+        LocalDate localDate = ConverteStringParaLocalDate.converte(valorCampo);
         if(isNull(localDate)){
           new Exception("Erro na conversão da data");
         }

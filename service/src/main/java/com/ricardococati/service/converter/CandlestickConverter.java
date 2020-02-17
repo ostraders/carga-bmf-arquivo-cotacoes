@@ -1,13 +1,13 @@
 package com.ricardococati.service.converter;
 
+import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickDiarioMessage;
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.model.entities.CandlestickSemanalMessage;
-import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.enums.CodbdiEnum;
 import com.ricardococati.model.enums.TipoMercadoEnum;
-import com.ricardococati.repository.util.Funcoes;
+import com.ricardococati.repository.util.ConverteDataParaNumeroSemanaAno;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class CandlestickConverter {
           .premin(cotacao.getPremin())
           .premax(cotacao.getPremax())
           .voltot(cotacao.getVoltot())
-          .idSemanaAno(Funcoes.stringToIdWeekOfYear(cotacao.getDtpreg()))
+          .idSemanaAno(ConverteDataParaNumeroSemanaAno.converte(cotacao.getDtpreg()))
           .semanaGerada(false)
           .build();
     }
@@ -50,7 +50,7 @@ public class CandlestickConverter {
         .premin(diarioDTO.getPremin())
         .premax(diarioDTO.getPremax())
         .voltot(diarioDTO.getVoltot())
-        .semana(Funcoes.stringToIdWeekOfYear(diarioDTO.getDtpreg()))
+        .semana(ConverteDataParaNumeroSemanaAno.converte(diarioDTO.getDtpreg()))
         .semanaGerada(false)
         .build();
   }

@@ -1,7 +1,6 @@
 package com.ricardococati.repository.dao.sqlutil;
 
 import com.ricardococati.model.dto.CotacaoDTO;
-import com.ricardococati.model.entities.SplitInplit;
 import com.ricardococati.repository.util.SQLAppender;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
@@ -98,7 +97,7 @@ public class CotacaoSQLUtil {
     return sql.getAppendSQLSemQuebra().toString();
   }
 
-  public MapSqlParameterSource toParametersInsert(final CotacaoDTO cotacaoDTO) {
+  public MapSqlParameterSource toParameters(final CotacaoDTO cotacaoDTO) {
     return new MapSqlParameterSource()
         .addValue("identificacaoArquivo", cotacaoDTO.getIdentificacaoArquivo())
         .addValue("tipoRegistro", cotacaoDTO.getTipoRegistro())
@@ -127,28 +126,6 @@ public class CotacaoSQLUtil {
         .addValue("ptoexe", cotacaoDTO.getPtoexe())
         .addValue("codisi", cotacaoDTO.getCodisi())
         .addValue("dismes", cotacaoDTO.getDismes());
-  }
-
-  public String getUpdate(final String operacao) {
-    final SQLAppender sql = new SQLAppender(100);
-    sql.appendSQL(" update cotacao set  ");
-    sql.appendSQL("   preabe = preabe "+operacao+" :qtddivmult,  ");
-    sql.appendSQL("   premax = premax "+operacao+" :qtddivmult,  ");
-    sql.appendSQL("   premin = premin "+operacao+" :qtddivmult, ");
-    sql.appendSQL("   premed = premed "+operacao+" :qtddivmult, ");
-    sql.appendSQL("   preult = preult "+operacao+" :qtddivmult, ");
-    sql.appendSQL("   preofc = preofc "+operacao+" :qtddivmult, ");
-    sql.appendSQL("   preofv = preofv "+operacao+" :qtddivmult ");
-    sql.appendSQL(" where dtpreg < :dtpreg ");
-    sql.appendSQL(" and   codneg = :codneg ");
-    return sql.getAppendSQLSemQuebra().toString();
-  }
-
-  public MapSqlParameterSource toParametersUpdate(final SplitInplit splitInplit) {
-    return new MapSqlParameterSource()
-        .addValue("dtpreg", splitInplit.getDtpreg())
-        .addValue("codneg", splitInplit.getCodneg())
-        .addValue("qtddivmult", splitInplit.getQtdSplitInplit());
   }
 
 }

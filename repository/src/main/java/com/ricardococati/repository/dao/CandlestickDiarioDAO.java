@@ -9,15 +9,7 @@ public interface CandlestickDiarioDAO {
 
   Boolean incluirCandlestickDiario(final CandlestickDiario candlestickDiarioDTO) throws Exception;
 
-  Boolean split(SplitInplit splitInplit);
-
-  Boolean inplit(SplitInplit splitInplit);
-
   List<String> buscaCodNeg();
-
-  List<CandlestickDiario> buscaCandleDiarioPorCodNeg(String codneg);
-
-  Boolean salvaCandlestickDiario(CandlestickDiario candlestickDiarioDTO);
 
   List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg);
 

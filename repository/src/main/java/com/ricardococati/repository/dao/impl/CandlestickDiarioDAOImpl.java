@@ -1,9 +1,8 @@
 package com.ricardococati.repository.dao.impl;
 
 import com.ricardococati.model.entities.CandlestickDiario;
-import com.ricardococati.model.entities.SplitInplit;
-import com.ricardococati.repository.dao.GenericDAO;
 import com.ricardococati.repository.dao.CandlestickDiarioDAO;
+import com.ricardococati.repository.dao.GeraSequenciaDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickDiarioMapper;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioSQLUtil;
 import com.ricardococati.repository.util.SQLAppender;
@@ -24,7 +23,7 @@ public class CandlestickDiarioDAOImpl implements CandlestickDiarioDAO {
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;
 
-  private final GenericDAO genericDAO;
+  private final GeraSequenciaDAO genericDAO;
   private final CandlestickDiarioSQLUtil sqlUtil;
   private final CandlestickDiarioMapper mapper;
 
@@ -34,39 +33,11 @@ public class CandlestickDiarioDAOImpl implements CandlestickDiarioDAO {
     final SQLAppender sql = new SQLAppender(100);
     try {
       candlestickDiarioDTO.setIdCandleDiario(
-          genericDAO.getSequence("CANDLESTICK_SEQ", template).longValue()
+          genericDAO.getSequence("CANDLESTICK_SEQ").longValue()
       );
       retorno = template.update(sqlUtil.getInsert(), sqlUtil.toParameters(candlestickDiarioDTO));
     } catch (Exception ex) {
       log.error("Erro na execução do método CANDLESTICK_DIARIO: " + ex.getMessage());
-      throw ex;
-    }
-    return retorno > 0;
-  }
-
-  @Override
-  public Boolean split(final SplitInplit splitInplit) {
-    int retorno = 0;
-    final String operacao = "/";
-    try {
-      retorno = template.update(sqlUtil.getUpdate(operacao),
-          sqlUtil.toParametersUpdate(splitInplit));
-    } catch (Exception ex) {
-      log.error("Erro na execução do método split: " + ex.getMessage());
-      throw ex;
-    }
-    return retorno > 0;
-  }
-
-  @Override
-  public Boolean inplit(final SplitInplit splitInplit) {
-    int retorno = 0;
-    final String operacao = "*";
-    try {
-      retorno = template.update(sqlUtil.getUpdate(operacao),
-          sqlUtil.toParametersUpdate(splitInplit));
-    } catch (Exception ex) {
-      log.error("Erro na execução do método inplit: " + ex.getMessage());
       throw ex;
     }
     return retorno > 0;
@@ -79,29 +50,6 @@ public class CandlestickDiarioDAOImpl implements CandlestickDiarioDAO {
         new MapSqlParameterSource(),
         (rs, rowNum) -> mapper.mapperCodNeg(rs)
     );
-  }
-
-  @Override
-  public List<CandlestickDiario> buscaCandleDiarioPorCodNeg(String codneg) {
-    return template.query(
-        sqlUtil.getSelectByCodNeg(),
-        sqlUtil.toParametersSelectByCodNeg(codneg),
-        (rs, rowNum) -> mapper.mapper(rs)
-    );
-  }
-
-  @Override
-  public Boolean salvaCandlestickDiario(CandlestickDiario candlestickDiarioDTO) {
-    int retorno = 0;
-    final String operacao = "*";
-    try {
-      retorno = template.update(sqlUtil.getUpdateSemanaGerada(),
-          sqlUtil.toParametersUpdateSemanaGerada(candlestickDiarioDTO));
-    } catch (Exception ex) {
-      log.error("Erro na execução do método inplit: " + ex.getMessage());
-      throw ex;
-    }
-    return retorno > 0;
   }
 
   @Override

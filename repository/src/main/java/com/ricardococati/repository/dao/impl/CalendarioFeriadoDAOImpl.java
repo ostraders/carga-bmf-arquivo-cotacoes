@@ -1,6 +1,5 @@
 package com.ricardococati.repository.dao.impl;
 
-import com.ricardococati.repository.dao.GenericDAO;
 import com.ricardococati.repository.dao.CalendarioFeriadoDAO;
 import com.ricardococati.repository.dao.sqlutil.CalendarioFeriadoSQLUtil;
 import java.time.LocalDate;
@@ -18,7 +17,6 @@ public class CalendarioFeriadoDAOImpl implements CalendarioFeriadoDAO {
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;
 
-  private final GenericDAO genericDAO;
   private final CalendarioFeriadoSQLUtil sqlUtil;
 
   @Override

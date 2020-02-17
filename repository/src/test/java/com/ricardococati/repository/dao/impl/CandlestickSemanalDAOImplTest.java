@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.repository.dao.BaseJdbcTest;
-import com.ricardococati.repository.dao.GenericDAO;
+import com.ricardococati.repository.dao.GeraSequenciaDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickSemanalMapper;
 import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.InserirCandlestickSemanalSQLUtil;
@@ -36,7 +36,7 @@ public class CandlestickSemanalDAOImplTest extends BaseJdbcTest {
   @Mock
   private InserirCandlestickSemanalSQLUtil incluirSQLUtil;
   @Mock
-  private GenericDAO genericDAO;
+  private GeraSequenciaDAO genericDAO;
 
   @Before
   public void setUp() {
@@ -64,7 +64,7 @@ public class CandlestickSemanalDAOImplTest extends BaseJdbcTest {
     incluirDAO = new InserirCandlestickSemanalDAOImpl(getNamedParameterJdbcTemplate(), genericDAO, incluirSQLUtil);
     when(incluirSQLUtil.getInsert()).thenCallRealMethod();
     when(incluirSQLUtil.toParameters(any())).thenCallRealMethod();
-    when(genericDAO.getSequence(any(), any())).thenReturn(1);
+    when(genericDAO.getSequence(any())).thenReturn(1);
     incluirDAO.incluirCandlestickSemanal(
         buildCandlestickSemanalDTO("MGLU3", 10.1, LocalDate.now(), LocalDate.now().plusDays(1))
     );

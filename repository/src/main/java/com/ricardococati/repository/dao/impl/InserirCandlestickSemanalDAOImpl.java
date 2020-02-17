@@ -1,7 +1,7 @@
 package com.ricardococati.repository.dao.impl;
 
 import com.ricardococati.model.entities.CandlestickSemanal;
-import com.ricardococati.repository.dao.GenericDAO;
+import com.ricardococati.repository.dao.GeraSequenciaDAO;
 import com.ricardococati.repository.dao.InserirCandlestickSemanalDAO;
 import com.ricardococati.repository.dao.sqlutil.InserirCandlestickSemanalSQLUtil;
 import com.ricardococati.repository.util.SQLAppender;
@@ -19,7 +19,7 @@ public class InserirCandlestickSemanalDAOImpl implements InserirCandlestickSeman
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;
 
-  private final GenericDAO genericDAO;
+  private final GeraSequenciaDAO genericDAO;
   private final InserirCandlestickSemanalSQLUtil sqlUtil;
 
   @Override
@@ -28,7 +28,7 @@ public class InserirCandlestickSemanalDAOImpl implements InserirCandlestickSeman
     final SQLAppender sql = new SQLAppender(100);
     try {
       semanal.setIdCandleSemanal(
-          genericDAO.getSequence("CANDLESTICK_SEMANAL_SEQ", template).longValue()
+          genericDAO.getSequence("CANDLESTICK_SEMANAL_SEQ").longValue()
       );
       retorno = template.update(sqlUtil.getInsert(), sqlUtil.toParameters(semanal));
     } catch (Exception ex) {

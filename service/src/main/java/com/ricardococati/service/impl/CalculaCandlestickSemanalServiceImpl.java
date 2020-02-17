@@ -39,12 +39,9 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
   public void execute() {
     try {
       diarioDAO.buscaCodNeg()
-          .stream()
+          .parallelStream()
           .filter(Objects::nonNull)
-          .forEach(codneg -> {
-            String codnegProcessado = geraCandleStickSemanal(codneg);
-            log.info("Código de negócio calculado para semana: " + codnegProcessado);
-          });
+          .forEach(this::geraCandleStickSemanal);
     } catch (Exception e) {
       log.error("Erro ao calcular Candlestick {} {} " , e.getMessage(), e.getCause());
     }

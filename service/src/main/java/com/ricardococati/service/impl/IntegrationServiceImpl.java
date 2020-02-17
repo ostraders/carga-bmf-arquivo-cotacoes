@@ -1,7 +1,7 @@
 package com.ricardococati.service.impl;
 
-import com.ricardococati.repository.dao.GenericDAO;
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
+import com.ricardococati.repository.dao.GeraSequenciaDAO;
 import com.ricardococati.service.BMFCargaCotacaoService;
 import com.ricardococati.service.GerenciadorArquivosService;
 import com.ricardococati.service.IntegrationService;
@@ -37,7 +37,7 @@ public class IntegrationServiceImpl implements IntegrationService, Serializable 
 
   private final GerenciadorArquivosService gerenciadorArquivos;
 
-  private final GenericDAO genericDAO;
+  private final GeraSequenciaDAO genericDAO;
 
   File diretorioExecucao = null;
   File arquivo = null;
@@ -103,7 +103,7 @@ public class IntegrationServiceImpl implements IntegrationService, Serializable 
 
   @Override
   public Long getIdArquivoSequence(final String nomeSequence) {
-    return genericDAO.obterSequenceLong(nomeSequence);
+    return genericDAO.getSequence(nomeSequence).longValue();
   }
 
 }
