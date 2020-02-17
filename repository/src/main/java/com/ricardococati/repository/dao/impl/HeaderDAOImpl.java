@@ -23,7 +23,7 @@ public class HeaderDAOImpl implements HeaderDAO {
   private final HeaderSQLUtil sqlUtil;
 
   @Override
-  public boolean incluirHeaderArquivo(HeaderDTO headerDTO) throws Exception {
+  public Boolean incluirHeaderArquivo(final HeaderDTO headerDTO) throws Exception {
     int retorno = 0;
     if (isNull(headerDTO)
         || isNull(headerDTO.getIdentificacaoArquivo())
