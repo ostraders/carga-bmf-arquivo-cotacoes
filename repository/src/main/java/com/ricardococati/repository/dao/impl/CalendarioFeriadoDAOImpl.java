@@ -1,5 +1,7 @@
 package com.ricardococati.repository.dao.impl;
 
+import static java.util.Objects.isNull;
+
 import com.ricardococati.repository.dao.CalendarioFeriadoDAO;
 import com.ricardococati.repository.dao.sqlutil.CalendarioFeriadoSQLUtil;
 import java.time.LocalDate;
@@ -20,11 +22,23 @@ public class CalendarioFeriadoDAOImpl implements CalendarioFeriadoDAO {
   private final CalendarioFeriadoSQLUtil sqlUtil;
 
   @Override
-  public Boolean buscaCalendarioFeriado(final LocalDate dataAtual) {
-    return template.queryForObject(
-        sqlUtil.getSelectCountByDataAtual(),
-        sqlUtil.toParametersSelectByDataAtual(dataAtual),
-        Integer.class
-    ) > 0;
+  public Boolean buscaCalendarioFeriado(final LocalDate dataAtual) throws Exception {
+    Integer result = 0;
+    if (isNull(dataAtual)) {
+      throw new NullPointerException(
+          "Data atual está nula para pesquisar CALENDARIO_FERIADO");
+    }
+    try {
+      result = template.queryForObject(
+          sqlUtil.getSelectCountByDataAtual(),
+          sqlUtil.toParametersSelectByDataAtual(dataAtual),
+          Integer.class
+      );
+    } catch (Exception ex) {
+      log.error("Erro na execução do método CALENDARIO_FERIADO: {} ", ex.getMessage());
+      throw new Exception("Erro na execução do método CALENDARIO_FERIADO");
+    }
+    return result > 0;
   }
+
 }

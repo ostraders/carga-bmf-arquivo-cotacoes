@@ -4,6 +4,6 @@ import java.time.LocalDate;
 
 public interface CalendarioFeriadoDAO {
 
-  Boolean buscaCalendarioFeriado(final LocalDate dataAtual);
+  Boolean buscaCalendarioFeriado(final LocalDate dataAtual) throws Exception;
 
 }
