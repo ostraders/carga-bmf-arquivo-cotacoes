@@ -1,7 +1,7 @@
 package com.ricardococati.service.impl;
 
 import com.ricardococati.model.entities.CandlestickSemanal;
-import com.ricardococati.repository.dao.CandlestickSemanalDAO;
+import com.ricardococati.repository.dao.CandlestickSemanalBuscarDAO;
 import com.ricardococati.service.BuscarCandlestickSemanalService;
 import com.ricardococati.service.util.DateServiceUtils;
 import java.time.LocalDate;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BuscarCandlestickSemanalServiceImpl implements BuscarCandlestickSemanalService {
 
-  private final CandlestickSemanalDAO semanalDAO;
+  private final CandlestickSemanalBuscarDAO semanalDAO;
 
   @Override
   public List<CandlestickSemanal> buscarCandleSemanalPorPrimeiroDiaSemana() {

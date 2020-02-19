@@ -1,13 +1,10 @@
 package com.ricardococati.repository.dao;
 
 import com.ricardococati.model.entities.CandlestickDiario;
-import com.ricardococati.model.entities.SplitInplit;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface CandlestickDiarioDAO {
-
-  Boolean incluirCandlestickDiario(final CandlestickDiario candlestickDiarioDTO) throws Exception;
+public interface CandlestickDiarioBuscarDAO {
 
   List<String> buscaCodNeg();
 

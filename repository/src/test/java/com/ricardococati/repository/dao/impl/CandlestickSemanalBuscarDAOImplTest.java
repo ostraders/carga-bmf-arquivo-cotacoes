@@ -9,8 +9,8 @@ import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.repository.dao.BaseJdbcTest;
 import com.ricardococati.repository.dao.GeraSequenciaDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickSemanalMapper;
-import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalSQLUtil;
-import com.ricardococati.repository.dao.sqlutil.InserirCandlestickSemanalSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalBuscarSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalInserirSQLUtil;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,24 +23,24 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-public class CandlestickSemanalDAOImplTest extends BaseJdbcTest {
+public class CandlestickSemanalBuscarDAOImplTest extends BaseJdbcTest {
 
   @InjectMocks
-  private CandlestickSemanalDAOImpl target;
+  private CandlestickSemanalBuscarDAOImpl target;
   @Mock
   private CandlestickSemanalMapper mapper;
   @Mock
-  private CandlestickSemanalSQLUtil sqlUtil;
+  private CandlestickSemanalBuscarSQLUtil sqlUtil;
   @MockBean
-  private InserirCandlestickSemanalDAOImpl incluirDAO;
+  private CandlestickSemanalInserirDAOImpl incluirDAO;
   @Mock
-  private InserirCandlestickSemanalSQLUtil incluirSQLUtil;
+  private CandlestickSemanalInserirSQLUtil incluirSQLUtil;
   @Mock
   private GeraSequenciaDAO genericDAO;
 
   @Before
   public void setUp() {
-    target = new CandlestickSemanalDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil, mapper);
+    target = new CandlestickSemanalBuscarDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil, mapper);
     incluiCandleAntesDeExecutarTestes();
   }
 
@@ -61,7 +61,7 @@ public class CandlestickSemanalDAOImplTest extends BaseJdbcTest {
   }
 
   private void incluiCandleAntesDeExecutarTestes() {
-    incluirDAO = new InserirCandlestickSemanalDAOImpl(getNamedParameterJdbcTemplate(), genericDAO, incluirSQLUtil);
+    incluirDAO = new CandlestickSemanalInserirDAOImpl(getNamedParameterJdbcTemplate(), genericDAO, incluirSQLUtil);
     when(incluirSQLUtil.getInsert()).thenCallRealMethod();
     when(incluirSQLUtil.toParameters(any())).thenCallRealMethod();
     when(genericDAO.getSequence(any())).thenReturn(1);

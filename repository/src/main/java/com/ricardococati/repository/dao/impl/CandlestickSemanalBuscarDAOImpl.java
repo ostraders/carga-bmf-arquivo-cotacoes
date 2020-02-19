@@ -1,9 +1,9 @@
 package com.ricardococati.repository.dao.impl;
 
 import com.ricardococati.model.entities.CandlestickSemanal;
-import com.ricardococati.repository.dao.CandlestickSemanalDAO;
+import com.ricardococati.repository.dao.CandlestickSemanalBuscarDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickSemanalMapper;
-import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalBuscarSQLUtil;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class CandlestickSemanalDAOImpl implements CandlestickSemanalDAO {
+public class CandlestickSemanalBuscarDAOImpl implements CandlestickSemanalBuscarDAO {
 
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;
 
-  private final CandlestickSemanalSQLUtil sqlUtil;
+  private final CandlestickSemanalBuscarSQLUtil sqlUtil;
   private final CandlestickSemanalMapper mapper;
 
   @Override

@@ -1,8 +1,8 @@
 package com.ricardococati.repository.dao.impl;
 
 import com.ricardococati.model.entities.SplitInplit;
-import com.ricardococati.repository.dao.AtualizarCandlestickDiarioDAO;
-import com.ricardococati.repository.dao.sqlutil.AtualizarCandlestickDiarioSQLUtil;
+import com.ricardococati.repository.dao.CandlestickSemanalAtualizarDAO;
+import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalAtualizarSQLUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class AtualizarCandlestickDiarioDAOImpl implements AtualizarCandlestickDiarioDAO {
+public class CandlestickSemanalAtualizarDAOImpl implements CandlestickSemanalAtualizarDAO {
 
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;
 
-  private final AtualizarCandlestickDiarioSQLUtil sqlUtil;
+  private final CandlestickSemanalAtualizarSQLUtil sqlUtil;
 
   @Override
   public Boolean atualizaSplitInplit(final SplitInplit splitInplit) {
@@ -33,5 +33,4 @@ public class AtualizarCandlestickDiarioDAOImpl implements AtualizarCandlestickDi
     }
     return retorno > 0;
   }
-
 }

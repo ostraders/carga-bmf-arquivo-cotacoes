@@ -4,9 +4,9 @@ import com.ricardococati.kafka.topic.TopicEnum;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.model.entities.CandlestickSemanalMessage;
-import com.ricardococati.repository.dao.CandlestickDiarioDAO;
-import com.ricardococati.repository.dao.CandlestickSemanalDAO;
-import com.ricardococati.repository.dao.InserirCandlestickSemanalDAO;
+import com.ricardococati.repository.dao.CandlestickDiarioBuscarDAO;
+import com.ricardococati.repository.dao.CandlestickSemanalBuscarDAO;
+import com.ricardococati.repository.dao.CandlestickSemanalInserirDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
 import com.ricardococati.service.BuildCandlestickSemanalService;
 import com.ricardococati.service.CalculaCandlestickSemanalByDataService;
@@ -28,9 +28,9 @@ public class CalculaCandlestickSemanalByDataServiceImpl implements
     CalculaCandlestickSemanalByDataService {
 
   private static final boolean SEMANA_GERADA = false;
-  private final CandlestickSemanalDAO semanalDAO;
-  private final InserirCandlestickSemanalDAO inserirSemanalDAO;
-  private final CandlestickDiarioDAO diarioDAO;
+  private final CandlestickSemanalBuscarDAO semanalDAO;
+  private final CandlestickSemanalInserirDAO inserirSemanalDAO;
+  private final CandlestickDiarioBuscarDAO diarioDAO;
   private final PostgresEventListener listener;
   private final CandlestickConverter candlestickConverter;
   private final BuildCandlestickSemanalService buildSemanal;

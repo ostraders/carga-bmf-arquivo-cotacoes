@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class InserirCandlestickSemanalSQLUtil {
+public class CandlestickSemanalInserirSQLUtil {
 
   public String getInsert() {
     SQLAppender sql = new SQLAppender(100);

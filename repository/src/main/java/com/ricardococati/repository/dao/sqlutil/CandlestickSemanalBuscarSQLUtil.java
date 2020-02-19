@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CandlestickSemanalSQLUtil {
+public class CandlestickSemanalBuscarSQLUtil {
 
   public String getSelectCandleSemanalByDtPregIni() {
     SQLAppender sql = new SQLAppender(100);

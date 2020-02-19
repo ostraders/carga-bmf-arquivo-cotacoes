@@ -2,8 +2,8 @@ package com.ricardococati.repository.dao.impl;
 
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.repository.dao.GeraSequenciaDAO;
-import com.ricardococati.repository.dao.InserirCandlestickSemanalDAO;
-import com.ricardococati.repository.dao.sqlutil.InserirCandlestickSemanalSQLUtil;
+import com.ricardococati.repository.dao.CandlestickSemanalInserirDAO;
+import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalInserirSQLUtil;
 import com.ricardococati.repository.util.SQLAppender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class InserirCandlestickSemanalDAOImpl implements InserirCandlestickSemanalDAO {
+public class CandlestickSemanalInserirDAOImpl implements CandlestickSemanalInserirDAO {
 
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;
 
   private final GeraSequenciaDAO genericDAO;
-  private final InserirCandlestickSemanalSQLUtil sqlUtil;
+  private final CandlestickSemanalInserirSQLUtil sqlUtil;
 
   @Override
   public Boolean incluirCandlestickSemanal(CandlestickSemanal semanal) {
@@ -32,7 +32,7 @@ public class InserirCandlestickSemanalDAOImpl implements InserirCandlestickSeman
       );
       retorno = template.update(sqlUtil.getInsert(), sqlUtil.toParameters(semanal));
     } catch (Exception ex) {
-      log.error("Erro na execução do método CANDLESTICK_DIARIO: " + ex.getMessage());
+      log.error("Erro na execução do método CANDLESTICK_SEMANAL: {}", ex.getMessage());
       throw ex;
     }
     return retorno > 0;

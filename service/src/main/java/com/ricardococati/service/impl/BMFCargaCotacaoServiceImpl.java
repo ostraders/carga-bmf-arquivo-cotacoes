@@ -8,7 +8,7 @@ import com.ricardococati.model.entities.CandlestickDiarioMessage;
 import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.dto.CotacaoDTO;
 import com.ricardococati.model.entities.EmpresaAtivo;
-import com.ricardococati.repository.dao.CandlestickDiarioDAO;
+import com.ricardococati.repository.dao.CandlestickDiarioInserirDAO;
 import com.ricardococati.repository.dao.CotacaoDAO;
 import com.ricardococati.repository.dao.EmpresaAtivoDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
 
   private static final String LOTE_PADRAO = "02";
-  private final CandlestickDiarioDAO candlestickDiarioDAO;
+  private final CandlestickDiarioInserirDAO candlestickDiarioDAO;
   private final ControleArquivoConfig arquivoConfig;
   private final CandlestickConverter candlestickConverter;
   private final CotacaoDAO cotacaoDAO;
