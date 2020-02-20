@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface CandlestickDiarioBuscarDAO {
 
-  List<String> buscaCodNeg();
+  List<String> buscaCodNeg() throws Exception;
 
-  List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg);
+  List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg) throws Exception;
 
   List<CandlestickDiario> buscarCandleDiarioPorPrimeiroDiaSemanaCodneg(
       LocalDate primeiroDiaUtilSemanaCorrente,
       String codneg
-  );
+  ) throws Exception;
 }

@@ -5,7 +5,6 @@ import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.model.entities.CandlestickSemanalMessage;
 import com.ricardococati.repository.dao.CandlestickDiarioBuscarDAO;
-import com.ricardococati.repository.dao.CandlestickSemanalBuscarDAO;
 import com.ricardococati.repository.dao.CandlestickSemanalInserirDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
 import com.ricardococati.service.BuildCandlestickSemanalService;
@@ -28,7 +27,6 @@ public class CalculaCandlestickSemanalByDataServiceImpl implements
     CalculaCandlestickSemanalByDataService {
 
   private static final boolean SEMANA_GERADA = false;
-  private final CandlestickSemanalBuscarDAO semanalDAO;
   private final CandlestickSemanalInserirDAO inserirSemanalDAO;
   private final CandlestickDiarioBuscarDAO diarioDAO;
   private final PostgresEventListener listener;

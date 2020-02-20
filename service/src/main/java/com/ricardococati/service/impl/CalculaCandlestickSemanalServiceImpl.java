@@ -5,7 +5,6 @@ import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.model.entities.CandlestickSemanalMessage;
 import com.ricardococati.repository.dao.CandlestickDiarioBuscarDAO;
-import com.ricardococati.repository.dao.CandlestickSemanalBuscarDAO;
 import com.ricardococati.repository.dao.CandlestickSemanalInserirDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
 import com.ricardococati.service.BuildCandlestickSemanalService;
@@ -28,7 +27,6 @@ import org.springframework.stereotype.Service;
 public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickSemanalService {
 
   private static final boolean SEMANA_GERADA = false;
-  private final CandlestickSemanalBuscarDAO semanalDAO;
   private final CandlestickSemanalInserirDAO inserirSemanalDAO;
   private final CandlestickDiarioBuscarDAO diarioDAO;
   private final PostgresEventListener listener;
@@ -41,13 +39,25 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
       diarioDAO.buscaCodNeg()
           .parallelStream()
           .filter(Objects::nonNull)
-          .forEach(this::geraCandleStickSemanal);
+          .forEach(codneg -> {
+            try {
+              geraCandleStickSemanal(codneg);
+            } catch (Exception e) {
+              log.error("Erro ao calcular Candlestick {} {} ",
+                  e.getMessage(),
+                  e.getCause()
+              );
+            }
+          });
     } catch (Exception e) {
-      log.error("Erro ao calcular Candlestick {} {} ", e.getMessage(), e.getCause());
+      log.error("Erro ao calcular Candlestick {} {} ",
+          e.getMessage(),
+          e.getCause()
+      );
     }
   }
 
-  private String geraCandleStickSemanal(final String codneg) {
+  private String geraCandleStickSemanal(final String codneg) throws Exception {
     log.info("Código de negociação: " + codneg);
     List<CandlestickDiario> diarioDTOList = diarioDAO
         .buscaCandleDiarioPorCodNegSemanaGerada(codneg);
