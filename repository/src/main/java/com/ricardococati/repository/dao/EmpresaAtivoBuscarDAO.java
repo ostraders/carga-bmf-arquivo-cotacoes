@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface EmpresaAtivoBuscarDAO {
 
-  List<EmpresaAtivo> buscaEmpresaAtivo();
+  List<EmpresaAtivo> buscaEmpresaAtivo() throws Exception;
 
 }

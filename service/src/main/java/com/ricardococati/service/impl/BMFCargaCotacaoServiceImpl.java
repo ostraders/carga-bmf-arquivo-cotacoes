@@ -63,7 +63,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
     }
   }
 
-  private Boolean isAtivoValido(final CotacaoDTO cotacao){
+  private Boolean isAtivoValido(final CotacaoDTO cotacao) throws Exception {
     return buscaAtivos()
         .stream()
         .filter(Objects::nonNull)
@@ -79,7 +79,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
   }
 
   @Cacheable
-  private List<EmpresaAtivo> buscaAtivos() {
+  private List<EmpresaAtivo> buscaAtivos() throws Exception {
     return empresaAtivoBuscarDAO.buscaEmpresaAtivo();
   }
 

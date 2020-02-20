@@ -41,13 +41,20 @@ public class CalculaCandlestickSemanalByDataServiceImpl implements
       diarioDAO.buscaCodNeg()
           .parallelStream()
           .filter(Objects::nonNull)
-          .forEach(codneg -> geraCandleStickSemanal(codneg, dataOrigem));
+          .forEach(codneg -> {
+            try {
+              geraCandleStickSemanal(codneg, dataOrigem);
+            } catch (Exception e) {
+              log.error("Erro ao tentar gerar candle semanal");
+            }
+          });
     } catch (Exception e) {
-      log.error("Erro ao calcular Candlestick {} {} ", e.getMessage(), e.getCause());
+      log.error("Erro ao tentar gerar candle semanal {} {} ", e.getMessage(), e.getCause());
     }
   }
 
-  private String geraCandleStickSemanal(final String codneg, final LocalDate dataOrigem) {
+  private String geraCandleStickSemanal(final String codneg, final LocalDate dataOrigem)
+      throws Exception {
     log.info("Código de negociação: " + codneg);
     LocalDate primeiroDiaSemana = DateServiceUtils.obterPrimeiroDiaUtilDaSemana(dataOrigem);
     List<CandlestickDiario> diarioDTOList =

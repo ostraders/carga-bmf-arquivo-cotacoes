@@ -23,10 +23,15 @@ public class EmpresaAtivoBuscarDAOImpl implements EmpresaAtivoBuscarDAO {
   private final EmpresaAtivoMapper mapper;
 
   @Override
-  public List<EmpresaAtivo> buscaEmpresaAtivo() {
-    return template.query(
-        sqlUtil.getSelectAtivos(),
-        (rs, rowNum) -> mapper.mapper(rs)
-    );
+  public List<EmpresaAtivo> buscaEmpresaAtivo() throws Exception {
+    try {
+      return template.query(
+          sqlUtil.getSelectAtivos(),
+          (rs, rowNum) -> mapper.mapper(rs)
+      );
+    } catch (Exception ex) {
+      log.error("Erro na execução do método EMPRESA_ATIVO: {} ", ex.getMessage());
+      throw new Exception("Erro na execução do método EMPRESA_ATIVO");
+    }
   }
 }

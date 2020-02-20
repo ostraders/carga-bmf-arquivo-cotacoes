@@ -34,13 +34,13 @@ public class CandlestickSemanalAtualizarDAOImplTest extends BaseJdbcTest {
   private GeraSequenciaDAOImpl genericDAO;
 
   @Before
-  public void setUp() {
+  public void setUp() throws Exception {
     FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
     target = new CandlestickSemanalAtualizarDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
     incluiCandleAntesDeExecutarTestes();
   }
 
-  private void incluiCandleAntesDeExecutarTestes() {
+  private void incluiCandleAntesDeExecutarTestes() throws Exception {
     CandlestickSemanalInserirDAOImpl incluirDAO = new CandlestickSemanalInserirDAOImpl(
         getNamedParameterJdbcTemplate(), genericDAO, incluirSQLUtil);
     when(incluirSQLUtil.getInsert()).thenCallRealMethod();

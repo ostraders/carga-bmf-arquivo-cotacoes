@@ -42,7 +42,7 @@ public class CandlestickSemanalBuscarDAOImplTest extends BaseJdbcTest {
   private GeraSequenciaDAO genericDAO;
 
   @Before
-  public void setUp() {
+  public void setUp() throws Exception {
     FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
     target = new CandlestickSemanalBuscarDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil, mapper);
     incluiCandleAntesDeExecutarTestes();
@@ -64,7 +64,7 @@ public class CandlestickSemanalBuscarDAOImplTest extends BaseJdbcTest {
     assertThat(result.get(0).getPreult()).isNotNull().isEqualTo(new BigDecimal("11.10"));
   }
 
-  private void incluiCandleAntesDeExecutarTestes() {
+  private void incluiCandleAntesDeExecutarTestes() throws Exception {
     incluirDAO = new CandlestickSemanalInserirDAOImpl(
         getNamedParameterJdbcTemplate(),
         genericDAO,

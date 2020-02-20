@@ -43,27 +43,36 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
           .filter(Objects::nonNull)
           .forEach(this::geraCandleStickSemanal);
     } catch (Exception e) {
-      log.error("Erro ao calcular Candlestick {} {} " , e.getMessage(), e.getCause());
+      log.error("Erro ao calcular Candlestick {} {} ", e.getMessage(), e.getCause());
     }
   }
 
   private String geraCandleStickSemanal(final String codneg) {
     log.info("Código de negociação: " + codneg);
-    List<CandlestickDiario> diarioDTOList = diarioDAO.buscaCandleDiarioPorCodNegSemanaGerada(codneg);
+    List<CandlestickDiario> diarioDTOList = diarioDAO
+        .buscaCandleDiarioPorCodNegSemanaGerada(codneg);
     Map<String, List<CandlestickDiario>> mapDiario = getListCandlestickToStringMap(diarioDTOList);
-    mapDiario
-        .entrySet()
-        .forEach(integerEntry -> {
-          CandlestickSemanal candlestickSemanal =
-              buildSemanal.build(mapDiario.get(integerEntry.getKey()));
-          candlestickSemanal.setSemana(integerEntry.getValue().get(0).getIdSemanaAno());
-          candlestickSemanal.setCodneg(codneg);
-          inserirSemanalDAO.incluirCandlestickSemanal(candlestickSemanal);
-          CandlestickSemanalMessage message = candlestickConverter
-              .convertMessageSemanal(candlestickSemanal);
-          listener.onAfterSave(message, TopicEnum.CANDLESTICK_SEMANAL.getTopicName());
-        });
-    log.info("Finalizando Código de negociação: " + codneg);
+    try {
+      mapDiario
+          .entrySet()
+          .forEach(integerEntry -> {
+            CandlestickSemanal candlestickSemanal =
+                buildSemanal.build(mapDiario.get(integerEntry.getKey()));
+            candlestickSemanal.setSemana(integerEntry.getValue().get(0).getIdSemanaAno());
+            candlestickSemanal.setCodneg(codneg);
+            try {
+              inserirSemanalDAO.incluirCandlestickSemanal(candlestickSemanal);
+            } catch (Exception ex) {
+              log.error("Erro ao tentar gerar candle semanal {} ", ex.getMessage());
+            }
+            CandlestickSemanalMessage message = candlestickConverter
+                .convertMessageSemanal(candlestickSemanal);
+            listener.onAfterSave(message, TopicEnum.CANDLESTICK_SEMANAL.getTopicName());
+          });
+      log.info("Finalizando Código de negociação: " + codneg);
+    } catch (Exception ex) {
+      log.error("Erro ao tentar gerar candle semanal {} ", ex.getMessage());
+    }
     return codneg;
   }
 
@@ -78,7 +87,8 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
           List<CandlestickDiario> candlestickList = new ArrayList<>();
           dtoList
               .stream()
-              .filter(dto -> entry.getKey().equals(dto.getIdSemanaAno() + "#" + dto.getDtpreg().getYear()))
+              .filter(dto -> entry.getKey()
+                  .equals(dto.getIdSemanaAno() + "#" + dto.getDtpreg().getYear()))
               .forEach(dto -> {
                 candlestickList.add(dto);
                 mapCandlestick.replace(entry.getKey(), candlestickList);
