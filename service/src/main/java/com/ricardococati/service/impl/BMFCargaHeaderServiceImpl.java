@@ -2,7 +2,7 @@ package com.ricardococati.service.impl;
 
 import com.ricardococati.model.dto.Header;
 import com.ricardococati.model.dto.HeaderDTO;
-import com.ricardococati.repository.dao.HeaderDAO;
+import com.ricardococati.repository.dao.HeaderInserirDAO;
 import com.ricardococati.service.BMFCargaHeaderService;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.HeaderConverter;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class BMFCargaHeaderServiceImpl implements BMFCargaHeaderService {
 
   private final ControleArquivoConfig arquivoConfig;
-  private final HeaderDAO headerDAO;
+  private final HeaderInserirDAO headerInserirDAO;
   private final HeaderConverter convertHed;
   private final ControlaIdArquivoUtil idArquivoUtil;
 
@@ -28,7 +28,7 @@ public class BMFCargaHeaderServiceImpl implements BMFCargaHeaderService {
     try {
       HeaderDTO headerDTO = convertHed.convert(header);
       headerDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
-      headerDAO.incluirHeaderArquivo(headerDTO);
+      headerInserirDAO.incluirHeaderArquivo(headerDTO);
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
       log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}" + e.getMessage());

@@ -25,12 +25,13 @@ public class CandlestickDiarioInserirDAOImpl implements CandlestickDiarioInserir
   private final CandlestickDiarioInserirSQLUtil sqlUtil;
 
   @Override
-  public Boolean incluirCandlestickDiario(final CandlestickDiario diarioDTO) {
+  public Boolean incluirCandlestickDiario(final CandlestickDiario diarioDTO) throws Exception {
     int retorno = 0;
     if (isNull(diarioDTO)
         || isNull(diarioDTO.getDtpreg())
         || isNull(diarioDTO.getCodneg())) {
-      throw new DataIntegrityViolationException("Violação de chave na inserção de CANDLESTICK_DIARIO");
+      throw new DataIntegrityViolationException(
+          "Violação de chave na inserção de CANDLESTICK_DIARIO");
     }
     try {
       diarioDTO.setIdCandleDiario(
@@ -38,8 +39,8 @@ public class CandlestickDiarioInserirDAOImpl implements CandlestickDiarioInserir
       );
       retorno = template.update(sqlUtil.getInsert(), sqlUtil.toParameters(diarioDTO));
     } catch (Exception ex) {
-      log.error("Erro na execução do método CANDLESTICK_DIARIO: " + ex.getMessage());
-      throw ex;
+      log.error("Erro na execução do método CANDLESTICK_DIARIO: {} ", ex.getMessage());
+      throw new Exception("Erro na execução do método CANDLESTICK_DIARIO");
     }
     return retorno > 0;
   }

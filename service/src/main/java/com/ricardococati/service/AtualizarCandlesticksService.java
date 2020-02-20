@@ -4,6 +4,6 @@ import com.ricardococati.model.entities.SplitInplit;
 
 public interface AtualizarCandlesticksService {
 
-  Boolean executeSplitInplit(final SplitInplit splitInplit);
+  Boolean executeSplitInplit(final SplitInplit splitInplit) throws Exception;
 
 }

@@ -9,8 +9,8 @@ import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.dto.CotacaoDTO;
 import com.ricardococati.model.entities.EmpresaAtivo;
 import com.ricardococati.repository.dao.CandlestickDiarioInserirDAO;
-import com.ricardococati.repository.dao.CotacaoDAO;
-import com.ricardococati.repository.dao.EmpresaAtivoDAO;
+import com.ricardococati.repository.dao.CotacaoInserirDAO;
+import com.ricardococati.repository.dao.EmpresaAtivoBuscarDAO;
 import com.ricardococati.repository.event.PostgresEventListener;
 import com.ricardococati.service.BMFCargaCotacaoService;
 import com.ricardococati.service.config.ControleArquivoConfig;
@@ -35,8 +35,8 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
   private final CandlestickDiarioInserirDAO candlestickDiarioDAO;
   private final ControleArquivoConfig arquivoConfig;
   private final CandlestickConverter candlestickConverter;
-  private final CotacaoDAO cotacaoDAO;
-  private final EmpresaAtivoDAO empresaAtivoDAO;
+  private final CotacaoInserirDAO cotacaoInserirDAO;
+  private final EmpresaAtivoBuscarDAO empresaAtivoBuscarDAO;
   private final CotacaoConverter convertCot;
   private final ControlaIdArquivoUtil idArquivoUtil;
   private final PostgresEventListener listener;
@@ -47,7 +47,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
       CotacaoDTO cotacaoDTO = convertCot.convert(cotacao);
       if (isLotePadrao(cotacaoDTO) && isAtivoValido(cotacaoDTO)) {
         cotacaoDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
-        cotacaoDAO.incluirCotacao(cotacaoDTO);
+        cotacaoInserirDAO.incluirCotacao(cotacaoDTO);
         log.info("Incluido cotacao: {}", cotacao);
         CandlestickDiario candlestickDiarioDTO = candlestickConverter.convert(cotacao);
         if (nonNull(candlestickDiarioDTO)) {
@@ -80,7 +80,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
 
   @Cacheable
   private List<EmpresaAtivo> buscaAtivos() {
-    return empresaAtivoDAO.buscaEmpresaAtivo();
+    return empresaAtivoBuscarDAO.buscaEmpresaAtivo();
   }
 
 }

@@ -1,10 +1,13 @@
 package com.ricardococati.repository.dao.impl;
 
+import static br.com.six2six.fixturefactory.Fixture.from;
+import static com.ricardococati.repository.dao.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.repository.dao.BaseJdbcTest;
 import com.ricardococati.repository.dao.GeraSequenciaDAO;
@@ -39,7 +42,8 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
   private GeraSequenciaDAO genericDAO;
 
   @Before
-  public void setUp() {
+  public void setUp() throws Exception {
+    FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
     target = new CandlestickDiarioBuscarDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil, mapper);
     incluiCandleAntesDeExecutarTestes();
   }
@@ -47,7 +51,7 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
   @Test
   public void buscarCandleDiarioPorPrimeiroDiaSemana() {
     //given
-    LocalDate dtpregLocal = LocalDate.now();
+    LocalDate dtpregLocal = LocalDate.of(1978, 2, 17);
     when(sqlUtil.getSelectCandleDiarioByDtPregCodneg()).thenCallRealMethod();
     when(sqlUtil.toParametersCandleDiarioByDtPregCodneg(any(), any())).thenCallRealMethod();
     when(mapper.mapper(any())).thenCallRealMethod();
@@ -58,30 +62,23 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
     assertTrue(!result.isEmpty());
     assertThat(result).isNotNull().size().isEqualTo(1);
     assertThat(result.get(0).getCodneg()).isNotNull().isEqualTo("MGLU3");
-    assertThat(result.get(0).getPreult()).isNotNull().isEqualTo(new BigDecimal("10.10"));
+    assertThat(result.get(0).getPreult()).isNotNull().isEqualTo(new BigDecimal("11.10"));
   }
 
-  private void incluiCandleAntesDeExecutarTestes() {
-    incluirDAO = new CandlestickDiarioInserirDAOImpl(getNamedParameterJdbcTemplate(), genericDAO, incluirSQLUtil);
+  private void incluiCandleAntesDeExecutarTestes() throws Exception {
+    incluirDAO = new CandlestickDiarioInserirDAOImpl(
+        getNamedParameterJdbcTemplate(),
+        genericDAO,
+        incluirSQLUtil
+    );
     when(incluirSQLUtil.getInsert()).thenCallRealMethod();
     when(incluirSQLUtil.toParameters(any())).thenCallRealMethod();
     when(genericDAO.getSequence(any())).thenReturn(1);
-    incluirDAO.incluirCandlestickDiario(
-        buildCandlestickDiarioDTO("MGLU3", 10.1, LocalDate.now())
-    );
+    incluirDAO.incluirCandlestickDiario(buildCandlestickDiarioDTO());
   }
 
-  private CandlestickDiario buildCandlestickDiarioDTO(
-      final String codneg,
-      final Double preult,
-      final LocalDate dtpreg
-  ) {
-    return CandlestickDiario
-        .builder()
-        .dtpreg(dtpreg)
-        .codneg(codneg)
-        .preult(new BigDecimal(preult).setScale(4, BigDecimal.ROUND_HALF_UP))
-        .build();
+  private CandlestickDiario buildCandlestickDiarioDTO() {
+    return from(CandlestickDiario.class).gimme(CANDLESTICK_DIARIO_VALID_001);
   }
 
 }

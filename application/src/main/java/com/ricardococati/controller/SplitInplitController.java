@@ -51,7 +51,7 @@ public class SplitInplitController {
       @RequestParam String codneg,
       @RequestParam Integer qtdSplitInplit,
       @RequestParam String operacao
-  ) {
+  ) throws Exception {
     log.info("Excutando Split ");
     final SplitInplit splitInplit =
         converter.convert(dtPregrao, codneg, qtdSplitInplit, operacao);

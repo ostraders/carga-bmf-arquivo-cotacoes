@@ -1,16 +1,18 @@
 package com.ricardococati.repository.dao.impl;
 
+import static br.com.six2six.fixturefactory.Fixture.from;
+import static com.ricardococati.repository.dao.templates.CandlestickSemanalTemplateLoader.CANDLESTICK_SEMANAL_VALID_001;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.model.entities.SplitInplit;
 import com.ricardococati.model.enums.OperacaoSplitInplit;
 import com.ricardococati.repository.dao.BaseJdbcTest;
 import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalAtualizarSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalInserirSQLUtil;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +32,10 @@ public class CandlestickSemanalAtualizarDAOImplTest extends BaseJdbcTest {
   private CandlestickSemanalInserirSQLUtil incluirSQLUtil;
   @Mock
   private GeraSequenciaDAOImpl genericDAO;
-  private LocalDate dtpregini;
-  private LocalDate dtpregfim;
 
   @Before
   public void setUp() {
-    this.dtpregini = LocalDate.of(1978, 2, 16);
-    this.dtpregfim = dtpregini.plusDays(6);
+    FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
     target = new CandlestickSemanalAtualizarDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
     incluiCandleAntesDeExecutarTestes();
   }
@@ -47,9 +46,7 @@ public class CandlestickSemanalAtualizarDAOImplTest extends BaseJdbcTest {
     when(incluirSQLUtil.getInsert()).thenCallRealMethod();
     when(incluirSQLUtil.toParameters(any())).thenCallRealMethod();
     when(genericDAO.getSequence(any())).thenReturn(1);
-    incluirDAO.incluirCandlestickSemanal(
-        buildCandlestick(dtpregini, dtpregfim)
-    );
+    incluirDAO.incluirCandlestickSemanal(buildCandlestick());
   }
 
   @Test
@@ -87,17 +84,8 @@ public class CandlestickSemanalAtualizarDAOImplTest extends BaseJdbcTest {
         .build();
   }
 
-  private CandlestickSemanal buildCandlestick(
-      final LocalDate dtpregini,
-      final LocalDate dtpregfim
-  ) {
-    return CandlestickSemanal
-        .builder()
-        .dtpregini(dtpregini)
-        .dtpregfim(dtpregfim)
-        .preult(new BigDecimal(10.1).setScale(4, BigDecimal.ROUND_HALF_UP))
-        .codneg("MGLU3")
-        .build();
+  private CandlestickSemanal buildCandlestick() {
+    return from(CandlestickSemanal.class).gimme(CANDLESTICK_SEMANAL_VALID_001);
   }
 
 }

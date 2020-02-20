@@ -1,7 +1,7 @@
 package com.ricardococati.repository.dao.impl;
 
 import com.ricardococati.model.entities.EmpresaAtivo;
-import com.ricardococati.repository.dao.EmpresaAtivoDAO;
+import com.ricardococati.repository.dao.EmpresaAtivoBuscarDAO;
 import com.ricardococati.repository.dao.mapper.EmpresaAtivoMapper;
 import com.ricardococati.repository.dao.sqlutil.EmpresaAtivoSQLUtil;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class EmpresaAtivoDAOImpl implements EmpresaAtivoDAO {
+public class EmpresaAtivoBuscarDAOImpl implements EmpresaAtivoBuscarDAO {
 
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;

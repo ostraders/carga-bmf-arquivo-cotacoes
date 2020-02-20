@@ -15,7 +15,7 @@ public class AtualizarCandlesticksServiceImpl implements AtualizarCandlesticksSe
   private final CandlestickSemanalAtualizarDAO atualizarSemanalDAO;
 
   @Override
-  public Boolean executeSplitInplit(final SplitInplit splitInplit) {
+  public Boolean executeSplitInplit(final SplitInplit splitInplit) throws Exception {
     Boolean retorno = atualizarDiarioDAO.atualizaSplitInplit(splitInplit);
     if (retorno) {
       retorno = atualizarSemanalDAO.atualizaSplitInplit(splitInplit);

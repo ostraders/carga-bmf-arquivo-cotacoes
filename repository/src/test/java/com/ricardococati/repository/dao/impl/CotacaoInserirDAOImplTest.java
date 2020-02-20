@@ -21,10 +21,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-public class CotacaoDAOImplTest extends BaseJdbcTest {
+public class CotacaoInserirDAOImplTest extends BaseJdbcTest {
 
   @InjectMocks
-  private CotacaoDAOImpl target;
+  private CotacaoInserirDAOImpl target;
   @Mock
   private CotacaoSQLUtil sqlUtil;
   @Rule
@@ -33,7 +33,7 @@ public class CotacaoDAOImplTest extends BaseJdbcTest {
   @Before
   public void setUp() throws Exception {
     FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
-    target = new CotacaoDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
+    target = new CotacaoInserirDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
   }
 
   @Test

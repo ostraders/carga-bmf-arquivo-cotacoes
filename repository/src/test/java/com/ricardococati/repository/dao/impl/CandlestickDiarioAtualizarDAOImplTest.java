@@ -1,23 +1,27 @@
 package com.ricardococati.repository.dao.impl;
 
+import static br.com.six2six.fixturefactory.Fixture.from;
+import static com.ricardococati.repository.dao.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.SplitInplit;
 import com.ricardococati.model.enums.OperacaoSplitInplit;
 import com.ricardococati.repository.dao.BaseJdbcTest;
-import com.ricardococati.repository.dao.mapper.CandlestickDiarioMapper;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioAtualizarSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioInserirSQLUtil;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -31,15 +35,12 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
   private CandlestickDiarioInserirSQLUtil incluirSQLUtil;
   @Mock
   private GeraSequenciaDAOImpl genericDAO;
-  @Mock
-  private CandlestickDiarioMapper mapper;
-  private Integer countInteger;
-  private LocalDate dtpreg;
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
 
   @Before
   public void setUp() throws Exception {
-    this.countInteger = 0;
-    this.dtpreg = LocalDate.of(1978, 2, 16);
+    FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
     target = new CandlestickDiarioAtualizarDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
     incluiCandleAntesDeExecutarTestes();
   }
@@ -50,13 +51,11 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
     when(incluirSQLUtil.getInsert()).thenCallRealMethod();
     when(incluirSQLUtil.toParameters(any())).thenCallRealMethod();
     when(genericDAO.getSequence(any())).thenReturn(1);
-    incluirDAO.incluirCandlestickDiario(
-        buildCandlestickDiarioDTO(dtpreg.plusDays(countInteger += 1))
-    );
+    incluirDAO.incluirCandlestickDiario(buildCandlestickDiarioDTO());
   }
 
   @Test
-  public void updateSplit() {
+  public void updateSplit() throws Exception {
     //given
     SplitInplit splitInplit = build(LocalDate.now(), "SPLIT");
     when(sqlUtil.getUpdateSplitInplit(any())).thenCallRealMethod();
@@ -68,7 +67,7 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
   }
 
   @Test
-  public void updateInplit() {
+  public void updateInplit() throws Exception {
     //given
     SplitInplit splitInplit = build(LocalDate.now(), "INPLIT");
     when(sqlUtil.getUpdateSplitInplit(any())).thenCallRealMethod();
@@ -77,6 +76,81 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
     Boolean retorno = target.atualizaSplitInplit(splitInplit);
     //then
     assertTrue(retorno);
+  }
+
+  @Test
+  public void updateSplitNull() throws Exception {
+    //given
+    when(sqlUtil.getUpdateSplitInplit(any())).thenCallRealMethod();
+    when(sqlUtil.toParametersUpdateSplitInplit(any())).thenCallRealMethod();
+    this.thrown.expectMessage("Violação de chave na atualização de CANDLESTICK_DIARIO");
+    this.thrown.expect(DataIntegrityViolationException.class);
+    //when
+    Boolean retorno = target.atualizaSplitInplit(null);
+  }
+
+  @Test
+  public void updateSplitCodnegNull() throws Exception {
+    //given
+    SplitInplit splitInplit = build(LocalDate.now(), "INPLIT");
+    splitInplit.setCodneg(null);
+    when(sqlUtil.getUpdateSplitInplit(any())).thenCallRealMethod();
+    when(sqlUtil.toParametersUpdateSplitInplit(any())).thenCallRealMethod();
+    this.thrown.expectMessage("Violação de chave na atualização de CANDLESTICK_DIARIO");
+    this.thrown.expect(DataIntegrityViolationException.class);
+    //when
+    Boolean retorno = target.atualizaSplitInplit(splitInplit);
+  }
+
+  @Test
+  public void updateSplitDtpregNull() throws Exception {
+    //given
+    SplitInplit splitInplit = build(LocalDate.now(), "INPLIT");
+    splitInplit.setDtpreg(null);
+    when(sqlUtil.getUpdateSplitInplit(any())).thenCallRealMethod();
+    when(sqlUtil.toParametersUpdateSplitInplit(any())).thenCallRealMethod();
+    this.thrown.expectMessage("Violação de chave na atualização de CANDLESTICK_DIARIO");
+    this.thrown.expect(DataIntegrityViolationException.class);
+    //when
+    Boolean retorno = target.atualizaSplitInplit(splitInplit);
+  }
+
+  @Test
+  public void updateSplitOperacaoNull() throws Exception {
+    //given
+    SplitInplit splitInplit = build(LocalDate.now(), "INPLIT");
+    splitInplit.setOperacao(null);
+    when(sqlUtil.getUpdateSplitInplit(any())).thenCallRealMethod();
+    when(sqlUtil.toParametersUpdateSplitInplit(any())).thenCallRealMethod();
+    this.thrown.expectMessage("Violação de chave na atualização de CANDLESTICK_DIARIO");
+    this.thrown.expect(DataIntegrityViolationException.class);
+    //when
+    Boolean retorno = target.atualizaSplitInplit(splitInplit);
+  }
+
+  @Test
+  public void updateSplitQtdSplitInplitNull() throws Exception {
+    //given
+    SplitInplit splitInplit = build(LocalDate.now(), "INPLIT");
+    splitInplit.setQtdSplitInplit(null);
+    when(sqlUtil.getUpdateSplitInplit(any())).thenCallRealMethod();
+    when(sqlUtil.toParametersUpdateSplitInplit(any())).thenCallRealMethod();
+    this.thrown.expectMessage("Violação de chave na atualização de CANDLESTICK_DIARIO");
+    this.thrown.expect(DataIntegrityViolationException.class);
+    //when
+    Boolean retorno = target.atualizaSplitInplit(splitInplit);
+  }
+
+  @Test
+  public void updateSplitError() throws Exception {
+    //given
+    SplitInplit splitInplit = build(LocalDate.now(), "INPLIT");
+    when(sqlUtil.getUpdateSplitInplit(any())).thenReturn(",");
+    when(sqlUtil.toParametersUpdateSplitInplit(any())).thenCallRealMethod();
+    this.thrown.expectMessage("Erro na execução do método splitInplit");
+    this.thrown.expect(Exception.class);
+    //when
+    Boolean retorno = target.atualizaSplitInplit(splitInplit);
   }
 
   private SplitInplit build(
@@ -92,15 +166,8 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
         .build();
   }
 
-  private CandlestickDiario buildCandlestickDiarioDTO(
-      final LocalDate dtpreg
-  ) {
-    return CandlestickDiario
-        .builder()
-        .dtpreg(dtpreg)
-        .preult(new BigDecimal(10.1).setScale(4, BigDecimal.ROUND_HALF_UP))
-        .codneg("MGLU3")
-        .build();
+  private CandlestickDiario buildCandlestickDiarioDTO() {
+    return from(CandlestickDiario.class).gimme(CANDLESTICK_DIARIO_VALID_001);
   }
 
 }

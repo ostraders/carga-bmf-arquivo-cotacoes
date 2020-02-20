@@ -3,7 +3,7 @@ package com.ricardococati.repository.dao.impl;
 import static java.util.Objects.isNull;
 
 import com.ricardococati.model.dto.HeaderDTO;
-import com.ricardococati.repository.dao.HeaderDAO;
+import com.ricardococati.repository.dao.HeaderInserirDAO;
 import com.ricardococati.repository.dao.sqlutil.HeaderSQLUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class HeaderDAOImpl implements HeaderDAO {
+public class HeaderInserirDAOImpl implements HeaderInserirDAO {
 
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;

@@ -4,6 +4,6 @@ import com.ricardococati.model.entities.SplitInplit;
 
 public interface CandlestickDiarioAtualizarDAO {
 
-  Boolean atualizaSplitInplit(final SplitInplit splitInplit);
+  Boolean atualizaSplitInplit(final SplitInplit splitInplit) throws Exception;
 
 }

@@ -7,7 +7,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.model.dto.CotacaoDTO;
 import com.ricardococati.model.dto.HeaderDTO;
 import com.ricardococati.repository.dao.BaseJdbcTest;
 import com.ricardococati.repository.dao.sqlutil.HeaderSQLUtil;
@@ -22,10 +21,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-public class HeaderDAOImplTest extends BaseJdbcTest {
+public class HeaderInserirDAOImplTest extends BaseJdbcTest {
 
   @InjectMocks
-  private HeaderDAOImpl target;
+  private HeaderInserirDAOImpl target;
   @Mock
   private HeaderSQLUtil sqlUtil;
   @Rule
@@ -34,7 +33,7 @@ public class HeaderDAOImplTest extends BaseJdbcTest {
   @Before
   public void setUp() throws Exception {
     FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
-    target = new HeaderDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
+    target = new HeaderInserirDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
   }
 
   @Test

@@ -3,7 +3,7 @@ package com.ricardococati.repository.dao.impl;
 import static java.util.Objects.isNull;
 
 import com.ricardococati.model.dto.CotacaoDTO;
-import com.ricardococati.repository.dao.CotacaoDAO;
+import com.ricardococati.repository.dao.CotacaoInserirDAO;
 import com.ricardococati.repository.dao.sqlutil.CotacaoSQLUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class CotacaoDAOImpl implements CotacaoDAO {
+public class CotacaoInserirDAOImpl implements CotacaoInserirDAO {
 
   @Qualifier("namedParameterJdbcTemplate")
   private final NamedParameterJdbcTemplate template;
