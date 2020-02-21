@@ -4,6 +4,6 @@ import com.ricardococati.model.dto.Cotacao;
 
 public interface BMFCargaCotacaoService {
 	
-    void insereDados(Cotacao cotacao);
+    Boolean insereDados(Cotacao cotacao) throws Exception;
 
 }

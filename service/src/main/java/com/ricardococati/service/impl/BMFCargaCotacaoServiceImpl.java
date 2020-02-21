@@ -3,10 +3,10 @@ package com.ricardococati.service.impl;
 import static java.util.Objects.nonNull;
 
 import com.ricardococati.kafka.topic.TopicEnum;
-import com.ricardococati.model.entities.CandlestickDiario;
-import com.ricardococati.model.entities.CandlestickDiarioMessage;
 import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.dto.CotacaoDTO;
+import com.ricardococati.model.entities.CandlestickDiario;
+import com.ricardococati.model.entities.CandlestickDiarioMessage;
 import com.ricardococati.model.entities.EmpresaAtivo;
 import com.ricardococati.repository.dao.CandlestickDiarioInserirDAO;
 import com.ricardococati.repository.dao.CotacaoInserirDAO;
@@ -19,14 +19,12 @@ import com.ricardococati.service.converter.CotacaoConverter;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
 import java.util.List;
 import java.util.Objects;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Data
 @Service
 @RequiredArgsConstructor
 public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
@@ -42,7 +40,8 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
   private final PostgresEventListener listener;
 
   @Override
-  public void insereDados(Cotacao cotacao) {
+  public Boolean insereDados(final Cotacao cotacao) throws Exception {
+    Boolean retorno = Boolean.FALSE;
     try {
       CotacaoDTO cotacaoDTO = convertCot.convert(cotacao);
       if (isLotePadrao(cotacaoDTO) && isAtivoValido(cotacaoDTO)) {
@@ -56,11 +55,14 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
               .convertMessage(candlestickDiarioDTO);
           listener.onAfterSave(message, TopicEnum.CANDLESTICK_DIARIO.getTopicName());
         }
+        retorno = Boolean.TRUE;
       }
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
       log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {} ", e.getMessage());
+      throw new Exception("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE");
     }
+    return retorno;
   }
 
   private Boolean isAtivoValido(final CotacaoDTO cotacao) throws Exception {

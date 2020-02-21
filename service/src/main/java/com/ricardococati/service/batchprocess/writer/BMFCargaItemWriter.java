@@ -20,28 +20,34 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BMFCargaItemWriter implements ItemWriter<BMFCargaDTO> {
 
-	private final BMFCargaCotacaoService cargaCotacaoService;
-	private final BMFCargaHeaderService cargaHeaderService;
-	private final ControleArquivoConfig arquivoConfig;
-	
-	@Override
-	public void write(List<? extends BMFCargaDTO> listDTOs) {
-		try{
-			listDTOs
-					.stream()
-					.filter(Objects::nonNull)
-					.forEach(bmfCargaDTO -> {
-						if (Header.class.isInstance(bmfCargaDTO)) {
-							cargaHeaderService.insereDados((Header) bmfCargaDTO);
-						} else if (Cotacao.class.isInstance(bmfCargaDTO)){
-							final Cotacao cotacao = (Cotacao) bmfCargaDTO;
-							cargaCotacaoService.insereDados(cotacao);
-						}
-					});
-		} catch (Exception e) {
-			arquivoConfig.setArquivoValido(false);
-			log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}" + e.getMessage());
-		}
-	}
+  private final BMFCargaCotacaoService cargaCotacaoService;
+  private final BMFCargaHeaderService cargaHeaderService;
+  private final ControleArquivoConfig arquivoConfig;
+
+  @Override
+  public void write(List<? extends BMFCargaDTO> listDTOs) {
+    try {
+      listDTOs
+          .stream()
+          .filter(Objects::nonNull)
+          .forEach(bmfCargaDTO -> {
+            if (Header.class.isInstance(bmfCargaDTO)) {
+              cargaHeaderService.insereDados((Header) bmfCargaDTO);
+            } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
+              final Cotacao cotacao = (Cotacao) bmfCargaDTO;
+              try {
+                cargaCotacaoService.insereDados(cotacao);
+              } catch (Exception e) {
+                log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
+										+ e.getMessage());
+              }
+            }
+          });
+    } catch (Exception e) {
+      arquivoConfig.setArquivoValido(false);
+      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
+					+ e.getMessage());
+    }
+  }
 
 }
