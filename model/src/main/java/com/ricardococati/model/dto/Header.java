@@ -1,11 +1,13 @@
 package com.ricardococati.model.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
 
 @Data
+@Builder
 @EqualsAndHashCode(callSuper=false)
 public class Header extends BMFCargaDTO {
 

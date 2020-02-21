@@ -32,21 +32,34 @@ public class BMFCargaItemWriter implements ItemWriter<BMFCargaDTO> {
           .filter(Objects::nonNull)
           .forEach(bmfCargaDTO -> {
             if (Header.class.isInstance(bmfCargaDTO)) {
-              cargaHeaderService.insereDados((Header) bmfCargaDTO);
+              insereHeader((Header) bmfCargaDTO);
             } else if (Cotacao.class.isInstance(bmfCargaDTO)) {
-              final Cotacao cotacao = (Cotacao) bmfCargaDTO;
-              try {
-                cargaCotacaoService.insereDados(cotacao);
-              } catch (Exception e) {
-                log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
-										+ e.getMessage());
-              }
+              insereCotacao((Cotacao) bmfCargaDTO);
             }
           });
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
       log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
 					+ e.getMessage());
+    }
+  }
+
+  private void insereCotacao(final Cotacao bmfCargaDTO) {
+    final Cotacao cotacao = bmfCargaDTO;
+    try {
+      cargaCotacaoService.insereDados(cotacao);
+    } catch (Exception e) {
+      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
+          + e.getMessage());
+    }
+  }
+
+  private void insereHeader(final Header bmfCargaDTO) {
+    try {
+      cargaHeaderService.insereDados(bmfCargaDTO);
+    } catch (Exception e) {
+      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
+          + e.getMessage());
     }
   }
 

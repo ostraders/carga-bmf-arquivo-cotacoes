@@ -72,4 +72,17 @@ public class BaixarArquivoServiceTest {
     target.baixarArquivoCotacao(data);
   }
 
+  @Test
+  public void baixaArquivoCotacaoDownloadError() throws Exception {
+    //given
+    when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
+    when(downloadService.doanloadArquivo(any(), any())).thenThrow(Exception.class);
+    when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(Boolean.FALSE);
+    LocalDate data = LocalDate.of(2020, 01, 02);
+    this.thrown.expect(Exception.class);
+    this.thrown.expectMessage("Erro ao baixar e descompactar arquivo");
+    //when
+    target.baixarArquivoCotacao(data);
+  }
+
 }

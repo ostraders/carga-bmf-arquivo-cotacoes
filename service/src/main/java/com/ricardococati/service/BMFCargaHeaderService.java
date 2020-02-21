@@ -4,6 +4,6 @@ import com.ricardococati.model.dto.Header;
 
 public interface BMFCargaHeaderService {
 	
-    void insereDados(Header header);
+    Boolean insereDados(Header header) throws Exception;
 
 }

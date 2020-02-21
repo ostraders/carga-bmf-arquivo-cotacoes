@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Data
 @Service
 @RequiredArgsConstructor
 public class BMFCargaHeaderServiceImpl implements BMFCargaHeaderService {
@@ -24,15 +23,18 @@ public class BMFCargaHeaderServiceImpl implements BMFCargaHeaderService {
   private final ControlaIdArquivoUtil idArquivoUtil;
 
   @Override
-  public void insereDados(Header header) {
+  public Boolean insereDados(final Header header) throws Exception {
+    Boolean retorno = Boolean.FALSE;
     try {
       HeaderDTO headerDTO = convertHed.convert(header);
       headerDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
-      headerInserirDAO.incluirHeaderArquivo(headerDTO);
+      retorno = headerInserirDAO.incluirHeaderArquivo(headerDTO);
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
       log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}" + e.getMessage());
+      throw new Exception("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE");
     }
+    return retorno;
   }
 
 }

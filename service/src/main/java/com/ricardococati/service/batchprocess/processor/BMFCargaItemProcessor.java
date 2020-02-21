@@ -24,13 +24,14 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 		String identificacao = line.readString("tipoRegistro");
 		BMFCargaDTO bmfCargaDTO = null;
 		if(identificacao.equals(TipoRegistroEnum.HEADER.getCod())) {
-			Header header = new Header();
-			header.setTipoRegistro(line.readLong("tipoRegistro"));
-			header.setNomeDoArquivo(line.readString("nomeDoArquivo"));
-			header.setCodigoDaOrigem(line.readString("codigoDaOrigem"));
-			header.setDataDaGeracaoDoArquivo(ConverteStringParaLocalDate.converte(line.readString("dataDaGeracaoDoArquivo")));
-			header.setReserva(line.readString("reserva"));
-			bmfCargaDTO = header;
+			bmfCargaDTO = Header
+					.builder()
+					.tipoRegistro(line.readLong("tipoRegistro"))
+					.nomeDoArquivo(line.readString("nomeDoArquivo"))
+					.codigoDaOrigem(line.readString("codigoDaOrigem"))
+					.dataDaGeracaoDoArquivo(ConverteStringParaLocalDate.converte(line.readString("dataDaGeracaoDoArquivo")))
+					.reserva(line.readString("reserva"))
+					.build();
 		}
 
 		if (identificacao.equals(TipoRegistroEnum.DETALHE.getCod())) {
