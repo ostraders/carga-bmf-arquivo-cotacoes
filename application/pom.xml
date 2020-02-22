@@ -21,7 +21,6 @@
   </properties>
 
   <dependencies>
-    <!-- INTERNAL -->
     <dependency>
       <groupId>com.ricardococati</groupId>
       <artifactId>service</artifactId>
@@ -34,17 +33,11 @@
       <groupId>com.ricardococati</groupId>
       <artifactId>model</artifactId>
     </dependency>
-    <!-- EXTERNAL -->
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
       <version>${flyway-core.version}</version>
     </dependency>
-    <!-- SWAGGER -->
     <dependency>
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger2</artifactId>
