@@ -19,13 +19,13 @@
 
   <properties>
     <!-- JAVA VERSION -->
-    <java.version>1.8</java.version>
+    <java.version>11</java.version>
     <!-- SPRING BOOT VERSION -->
     <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
     <!-- SPRING CLOUD VERSION -->
     <spring-cloud.version>Brixton.RELEASE</spring-cloud.version>
     <!-- LOMBOK VERSION -->
-    <lombok.version>1.16.10</lombok.version>
+    <lombok.version>1.18.12</lombok.version>
     <!-- MAVEN COMPILER PLUGIN VERSION -->
     <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
     <!-- MAVEN RELEASE PLUGIN VERSION -->

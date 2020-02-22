@@ -14,7 +14,7 @@
   <properties>
     <otj-pg-embedded.version>0.11.3</otj-pg-embedded.version>
     <flyway-core.version>3.2</flyway-core.version>
-    <jacoco-plugin.version>0.8.0</jacoco-plugin.version>
+    <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
     <fixture-factory.version>3.1.0</fixture-factory.version>
   </properties>
 

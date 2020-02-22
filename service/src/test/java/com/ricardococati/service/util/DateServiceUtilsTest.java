@@ -89,16 +89,4 @@ public class DateServiceUtilsTest {
     assertTrue(hojeEh(result.getDayOfWeek(), DayOfWeek.MONDAY));
   }
 
-  @Test
-  public void obterPrimeiroDiaUtil() {
-    //given
-    try {
-      LocalDate dataParam = LocalDate.of(2019, 12, 0);
-      this.thrown.expect(DateTimeException.class);
-      //when
-      obterPrimeiroDiaUtilDaSemana(dataParam);
-    } catch (DateTimeException dte){
-      dte.printStackTrace();
-    }
-  }
 }

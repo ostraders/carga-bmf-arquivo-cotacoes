@@ -17,7 +17,7 @@
     <flyway-core.version>3.2</flyway-core.version>
     <springfox-swagger2.version>2.6.1</springfox-swagger2.version>
     <fixture-factory.version>3.1.0</fixture-factory.version>
-    <jacoco-plugin.version>0.8.0</jacoco-plugin.version>
+    <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
   </properties>
 
   <dependencies>
