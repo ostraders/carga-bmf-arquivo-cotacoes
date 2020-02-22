@@ -1,7 +1,7 @@
 package com.ricardococati.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.ricardococati.model.response.BaixarArquivo;
@@ -15,7 +15,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BaixarArquivoServiceTest {
@@ -47,8 +47,6 @@ public class BaixarArquivoServiceTest {
   @Test
   public void baixaArquivoCotacaoFalse() throws Exception {
     //given
-    when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
-    when(downloadService.doanloadArquivo(any(), any())).thenReturn("URL");
     when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(Boolean.TRUE);
     LocalDate data = LocalDate.of(2020, 01, 01);
     //when
@@ -60,27 +58,12 @@ public class BaixarArquivoServiceTest {
   @Test
   public void baixaArquivoCotacaoError() throws Exception {
     //given
-    when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
-    when(downloadService.doanloadArquivo(any(), any())).thenReturn("URL");
     when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(null);
 
     this.thrown.expect(Exception.class);
     this.thrown.expectMessage("Erro ao obter data dia util");
 
     LocalDate data = LocalDate.of(2020, 01, 01);
-    //when
-    target.baixarArquivoCotacao(data);
-  }
-
-  @Test
-  public void baixaArquivoCotacaoDownloadError() throws Exception {
-    //given
-    when(descompactarService.descompactaArquivoCotacao(any())).thenReturn(Boolean.TRUE);
-    when(downloadService.doanloadArquivo(any(), any())).thenThrow(Exception.class);
-    when(feriadoDAO.buscaCalendarioFeriado(any())).thenReturn(Boolean.FALSE);
-    LocalDate data = LocalDate.of(2020, 01, 02);
-    this.thrown.expect(Exception.class);
-    this.thrown.expectMessage("Erro ao baixar e descompactar arquivo");
     //when
     target.baixarArquivoCotacao(data);
   }

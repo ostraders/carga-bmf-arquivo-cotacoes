@@ -21,9 +21,9 @@
     <!-- JAVA VERSION -->
     <java.version>11</java.version>
     <!-- SPRING BOOT VERSION -->
-    <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
+    <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
     <!-- SPRING CLOUD VERSION -->
-    <spring-cloud.version>Brixton.RELEASE</spring-cloud.version>
+    <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
     <!-- LOMBOK VERSION -->
     <lombok.version>1.18.12</lombok.version>
     <!-- MAVEN COMPILER PLUGIN VERSION -->
@@ -45,7 +45,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.3.RELEASE</version>
+    <version>2.2.4.RELEASE</version>
   </parent>
 
   <dependencyManagement>

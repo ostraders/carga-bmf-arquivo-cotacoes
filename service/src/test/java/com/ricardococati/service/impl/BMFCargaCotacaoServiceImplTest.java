@@ -4,7 +4,7 @@ import static br.com.six2six.fixturefactory.Fixture.from;
 import static com.ricardococati.service.templates.CotacaoTemplateLoader.COTACAO_VALID_001;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
@@ -26,7 +26,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BMFCargaCotacaoServiceImplTest {
@@ -74,12 +74,10 @@ public class BMFCargaCotacaoServiceImplTest {
   @Test
   public void insereDadosFalse() throws Exception {
     //given
-    when(candlestickConverter.convert(any())).thenCallRealMethod();
     EmpresaAtivo empresaAtivo = getBuildEmpresaAtivo();
     empresaAtivo.setAtivo("MGLU");
     when(empresaAtivoBuscarDAO.buscaEmpresaAtivo()).thenReturn(Arrays.asList(empresaAtivo));
     when(convertCot.convert(any())).thenCallRealMethod();
-    when(idArquivoUtil.getIdentificadorArquivo()).thenReturn(1L);
     //when
     Boolean result = target.insereDados(buildCotacao());
     //then

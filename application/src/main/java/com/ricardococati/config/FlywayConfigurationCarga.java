@@ -6,6 +6,7 @@ import org.flywaydb.core.Flyway;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 @RequiredArgsConstructor
@@ -15,13 +16,13 @@ public class FlywayConfigurationCarga extends FlywayAutoConfiguration {
 
   @Bean(initMethod = "migrate")
   public Flyway flywayInitializer() {
-    Flyway flyway = new Flyway();
-    flyway.setDataSource(dataSource);
-    flyway.setLocations("/db/migration");
-    flyway.setSchemas("public");
-    flyway.setBaselineOnMigrate(true);
-    flyway.setSqlMigrationPrefix("V");
-    flyway.migrate();
-    return flyway;
+    return Flyway
+        .configure()
+        .dataSource(dataSource)
+        .locations("/db/migration")
+        .schemas("public")
+        .baselineOnMigrate(true)
+        .sqlMigrationPrefix("V")
+        .load();
   }
 }

@@ -2,8 +2,7 @@ package com.ricardococati.service.impl;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,8 +18,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AtualizarCandlesticksServiceImplTest {
@@ -68,7 +66,6 @@ public class AtualizarCandlesticksServiceImplTest {
   public void executeInplitDiarioFalse() throws Exception {
     //given
     when(atualizarDiarioDAO.atualizaSplitInplit(any())).thenReturn(Boolean.FALSE);
-    when(atualizarSemanalDAO.atualizaSplitInplit(any())).thenReturn(Boolean.TRUE);
     //when
     Boolean result = target.executeSplitInplit(buildSplitInplit(LocalDate.now(), "SPLIT"));
     //then
@@ -98,7 +95,6 @@ public class AtualizarCandlesticksServiceImplTest {
   public void executeInplitDiarioError() throws Exception {
     //given
     when(atualizarDiarioDAO.atualizaSplitInplit(any())).thenThrow(Exception.class);
-    when(atualizarSemanalDAO.atualizaSplitInplit(any())).thenReturn(Boolean.FALSE);
     this.thrown.expect(Exception.class);
     //when
     target.executeSplitInplit(buildSplitInplit(LocalDate.now(), "SPLIT"));

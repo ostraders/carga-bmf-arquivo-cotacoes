@@ -19,6 +19,8 @@ spring:
     active: local
   application:
     name: carga-bmf-arquivo-cotacoes
+  main:
+    allow-bean-definition-overriding: true
   flyway:
     url: ${spring.datasource.url}
     enabled: true

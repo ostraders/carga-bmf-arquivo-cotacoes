@@ -7,7 +7,6 @@ import com.ricardococati.service.BMFCargaHeaderService;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.HeaderConverter;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class BMFCargaHeaderServiceImpl implements BMFCargaHeaderService {
 
   @Override
   public Boolean insereDados(final Header header) throws Exception {
-    Boolean retorno = Boolean.FALSE;
+    Boolean retorno;
     try {
       HeaderDTO headerDTO = convertHed.convert(header);
       headerDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());

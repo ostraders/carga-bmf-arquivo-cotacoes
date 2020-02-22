@@ -2,13 +2,12 @@ package com.ricardococati.service.impl;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.ricardococati.model.dto.Header;
-import com.ricardococati.model.entities.EmpresaAtivo;
 import com.ricardococati.repository.dao.HeaderInserirDAO;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.HeaderConverter;
@@ -20,7 +19,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BMFCargaHeaderServiceImplTest {
@@ -76,18 +75,6 @@ public class BMFCargaHeaderServiceImplTest {
         .getIdentificadorArquivo();
     verify(this.arquivoConfig, times(0))
         .setArquivoValido(any());
-  }
-
-  @Test
-  public void insereDadosErrorConvert() throws Exception {
-    //given
-    when(convertHed.convert(any())).thenThrow(Exception.class);
-    when(idArquivoUtil.getIdentificadorArquivo()).thenReturn(1L);
-    when(headerInserirDAO.incluirHeaderArquivo(any())).thenReturn(Boolean.FALSE);
-    this.thrown.expect(Exception.class);
-    this.thrown.expectMessage("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE");
-    //when
-    target.insereDados(getBuildHeader());
   }
 
   @Test
