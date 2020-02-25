@@ -4,8 +4,8 @@ import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 import com.ricardococati.model.dto.CotacaoDTO;
+import com.ricardococati.service.util.BigDecimalCustomizado;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 
 public class CotacaoDTOTemplateLoader implements TemplateLoader {
@@ -46,13 +46,13 @@ public class CotacaoDTOTemplateLoader implements TemplateLoader {
           add("especi", "ON NM");
           add("prazot", "");
           add("modref", "R$");
-          add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-          add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-          add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-          add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-          add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-          add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-          add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+          add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+          add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+          add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+          add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+          add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+          add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+          add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
           add("totneg", 1L);
           add("quatot", 10L);
           add("voltot", new BigDecimal(precoVar++));
@@ -65,175 +65,175 @@ public class CotacaoDTOTemplateLoader implements TemplateLoader {
           add("dismes", 114L);
         }})
         .addTemplate(COTACAO_DTO_VALID_002).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_003).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_004).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_005).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_006).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_007).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_008).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_009).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_010).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_011).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_012).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_013).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_014).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_015).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_016).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_017).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_018).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_019).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
         .addTemplate(COTACAO_DTO_VALID_020).inherits(COTACAO_DTO_VALID_001, new Rule() {{
-      add("preabe", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premax", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premin", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("premed", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preult", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofc", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
-      add("preofv", new BigDecimal(precoVar++).setScale(4, RoundingMode.HALF_UP));
+      add("preabe", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premax", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premin", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("premed", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+      add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
     }})
     ;
   }
