@@ -1,5 +1,7 @@
 package com.ricardococati.service.impl;
 
+import static java.util.Objects.nonNull;
+
 import com.ricardococati.kafka.topic.TopicEnum;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickSemanal;
@@ -36,19 +38,22 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
   @Override
   public Boolean execute() throws Exception {
     try {
-      diarioDAO.buscaCodNeg()
-          .parallelStream()
-          .filter(Objects::nonNull)
-          .forEach(codneg -> {
-            try {
-              geraCandleStickSemanal(codneg);
-            } catch (Exception e) {
-              log.error("Erro ao calcular Candlestick {} {} ",
-                  e.getMessage(),
-                  e.getCause()
-              );
-            }
-          });
+      final List<String> listCodNeg = diarioDAO.buscaCodNeg();
+      if (nonNull(listCodNeg)) {
+        listCodNeg
+            .parallelStream()
+            .filter(Objects::nonNull)
+            .forEach(codneg -> {
+              try {
+                geraCandleStickSemanal(codneg);
+              } catch (Exception e) {
+                log.error("Erro ao calcular Candlestick {} {} ",
+                    e.getMessage(),
+                    e.getCause()
+                );
+              }
+            });
+      }
     } catch (Exception e) {
       log.error("Erro ao calcular Candlestick {} {} ",
           e.getMessage(),
