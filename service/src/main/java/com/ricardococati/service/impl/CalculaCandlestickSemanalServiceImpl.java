@@ -6,7 +6,7 @@ import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.model.entities.CandlestickSemanalMessage;
 import com.ricardococati.repository.dao.CandlestickDiarioBuscarDAO;
 import com.ricardococati.repository.dao.CandlestickSemanalInserirDAO;
-import com.ricardococati.repository.event.PostgresEventListener;
+import com.ricardococati.repository.event.CandlestickEventListener;
 import com.ricardococati.service.BuildCandlestickSemanalService;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
 import com.ricardococati.service.converter.CandlestickConverter;
@@ -29,12 +29,12 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
   private static final boolean SEMANA_GERADA = false;
   private final CandlestickSemanalInserirDAO inserirSemanalDAO;
   private final CandlestickDiarioBuscarDAO diarioDAO;
-  private final PostgresEventListener listener;
+  private final CandlestickEventListener listener;
   private final CandlestickConverter candlestickConverter;
   private final BuildCandlestickSemanalService buildSemanal;
 
   @Override
-  public void execute() {
+  public Boolean execute() throws Exception {
     try {
       diarioDAO.buscaCodNeg()
           .parallelStream()
@@ -54,7 +54,9 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
           e.getMessage(),
           e.getCause()
       );
+      throw new Exception("Erro ao calcular Candlestick");
     }
+    return Boolean.TRUE;
   }
 
   private String geraCandleStickSemanal(final String codneg) throws Exception {

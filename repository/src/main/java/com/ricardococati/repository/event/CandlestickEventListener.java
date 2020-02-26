@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PostgresEventListener {
+public class CandlestickEventListener {
 
   private final KafkaSender kafkaSender;
 

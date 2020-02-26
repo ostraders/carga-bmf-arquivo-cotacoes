@@ -11,7 +11,7 @@ import com.ricardococati.model.entities.EmpresaAtivo;
 import com.ricardococati.repository.dao.CandlestickDiarioInserirDAO;
 import com.ricardococati.repository.dao.CotacaoInserirDAO;
 import com.ricardococati.repository.dao.EmpresaAtivoBuscarDAO;
-import com.ricardococati.repository.event.PostgresEventListener;
+import com.ricardococati.repository.event.CandlestickEventListener;
 import com.ricardococati.service.BMFCargaCotacaoService;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.CandlestickConverter;
@@ -37,7 +37,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
   private final EmpresaAtivoBuscarDAO empresaAtivoBuscarDAO;
   private final CotacaoConverter convertCot;
   private final ControlaIdArquivoUtil idArquivoUtil;
-  private final PostgresEventListener listener;
+  private final CandlestickEventListener listener;
 
   @Override
   public Boolean insereDados(final Cotacao cotacao) throws Exception {

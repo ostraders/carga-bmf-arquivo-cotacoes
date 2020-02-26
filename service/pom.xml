@@ -68,11 +68,11 @@
                 <rule>
                   <element>CLASS</element>
                   <excludes>
-                    <exclude>com.ricardococati.repository.config.*</exclude>
-                    <exclude>com.ricardococati.repository.event.*</exclude>
-                    <exclude>com.ricardococati.repository.util.*</exclude>
-                    <exclude>com.ricardococati.repository.dao.mapper.*</exclude>
-                    <exclude>com.ricardococati.repository.dao.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.service.batchprocess.*</exclude>
+                    <exclude>com.ricardococati.service.config.*</exclude>
+                    <exclude>com.ricardococati.service.converter.*</exclude>
+                    <exclude>com.ricardococati.service.scheduler.*</exclude>
+                    <exclude>com.ricardococati.service.util.*</exclude>
                   </excludes>
                   <limits>
                     <limit>

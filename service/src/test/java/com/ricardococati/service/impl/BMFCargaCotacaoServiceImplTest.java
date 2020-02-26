@@ -13,7 +13,7 @@ import com.ricardococati.model.entities.EmpresaAtivo;
 import com.ricardococati.repository.dao.CandlestickDiarioInserirDAO;
 import com.ricardococati.repository.dao.CotacaoInserirDAO;
 import com.ricardococati.repository.dao.EmpresaAtivoBuscarDAO;
-import com.ricardococati.repository.event.PostgresEventListener;
+import com.ricardococati.repository.event.CandlestickEventListener;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.CandlestickConverter;
 import com.ricardococati.service.converter.CotacaoConverter;
@@ -48,7 +48,7 @@ public class BMFCargaCotacaoServiceImplTest {
   @Mock
   private ControlaIdArquivoUtil idArquivoUtil;
   @Mock
-  private PostgresEventListener listener;
+  private CandlestickEventListener listener;
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
