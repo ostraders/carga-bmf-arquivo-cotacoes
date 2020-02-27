@@ -29,7 +29,7 @@ public class CalculaCandlestickSemanalAsyncServiceImpl implements
   }
 
   @Override
-  public void executeByData(LocalDate dtPregrao) throws Exception {
+  public void executeByData(final LocalDate dtPregrao) throws Exception {
     executeAsynchronously(dtPregrao);
   }
 
