@@ -6,14 +6,12 @@ import com.ricardococati.service.CalculaCandlestickSemanalAsyncService;
 import com.ricardococati.service.CalculaCandlestickSemanalByDataService;
 import com.ricardococati.service.CalculaCandlestickSemanalService;
 import java.time.LocalDate;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Data
 @Service
 @RequiredArgsConstructor
 public class CalculaCandlestickSemanalAsyncServiceImpl implements

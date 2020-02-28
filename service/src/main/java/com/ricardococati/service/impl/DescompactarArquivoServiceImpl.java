@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DescompactarArquivoServiceImpl implements DescompactarArquivoService {
 
-  private static final String NOME_ARQUIVO_DEFAULT = "COTAHIST_D";
-
   @Override
   public Boolean descompactaArquivoCotacao(final String nomeArquivo) throws IOException {
     File destDir = new File(

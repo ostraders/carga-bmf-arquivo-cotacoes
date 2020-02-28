@@ -73,12 +73,18 @@
                     <exclude>com.ricardococati.service.converter.*</exclude>
                     <exclude>com.ricardococati.service.scheduler.*</exclude>
                     <exclude>com.ricardococati.service.util.*</exclude>
+                    <exclude>com.ricardococati.service.impl.DescompactarArquivoServiceImpl</exclude>
+                    <exclude>com.ricardococati.service.impl.DownloadArquivoServiceImpl</exclude>
+                    <exclude>com.ricardococati.service.impl.GerenciadorArquivosServiceImpl</exclude>
+                    <exclude>com.ricardococati.service.impl.IntegrationServiceImpl</exclude>
+                    <exclude>com.ricardococati.service.impl.BuildCandlestickSemanalServiceImpl</exclude>
+                    <exclude>com.ricardococati.service.impl.CalculaCandlestickSemanalAsyncServiceImpl</exclude>
                   </excludes>
                   <limits>
                     <limit>
                       <counter>LINE</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.00</minimum>
+                      <minimum>0.90</minimum>
                     </limit>
                   </limits>
                 </rule>

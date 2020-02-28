@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickSemanalService {
 
-  private static final boolean SEMANA_GERADA = false;
   private final CandlestickSemanalInserirDAO inserirSemanalDAO;
   private final CandlestickDiarioBuscarDAO diarioDAO;
   private final CandlestickEventListener listener;

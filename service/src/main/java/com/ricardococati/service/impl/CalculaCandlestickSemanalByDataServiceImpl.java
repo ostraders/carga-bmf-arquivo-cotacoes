@@ -14,19 +14,16 @@ import com.ricardococati.service.util.DateServiceUtils;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Data
 @Service
 @RequiredArgsConstructor
 public class CalculaCandlestickSemanalByDataServiceImpl implements
     CalculaCandlestickSemanalByDataService {
 
-  private static final boolean SEMANA_GERADA = false;
   private final CandlestickSemanalInserirDAO inserirSemanalDAO;
   private final CandlestickDiarioBuscarDAO diarioDAO;
   private final CandlestickEventListener listener;
@@ -34,7 +31,7 @@ public class CalculaCandlestickSemanalByDataServiceImpl implements
   private final BuildCandlestickSemanalService buildSemanal;
 
   @Override
-  public void execute(final LocalDate dataOrigem) {
+  public void execute(final LocalDate dataOrigem) throws Exception {
     try {
       diarioDAO.buscaCodNeg()
           .parallelStream()
@@ -44,10 +41,12 @@ public class CalculaCandlestickSemanalByDataServiceImpl implements
               geraCandleStickSemanal(codneg, dataOrigem);
             } catch (Exception e) {
               log.error("Erro ao tentar gerar candle semanal");
+              throw new RuntimeException("Erro ao tentar gerar candle semanal");
             }
           });
     } catch (Exception e) {
       log.error("Erro ao tentar gerar candle semanal {} {} ", e.getMessage(), e.getCause());
+      throw new Exception("Erro ao tentar gerar candle semanal");
     }
   }
 
