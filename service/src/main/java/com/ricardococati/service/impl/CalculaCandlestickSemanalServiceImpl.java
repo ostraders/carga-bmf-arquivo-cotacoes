@@ -17,13 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Data
 @Service
 @RequiredArgsConstructor
 public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickSemanalService {
@@ -51,6 +49,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
                     e.getMessage(),
                     e.getCause()
                 );
+                throw new RuntimeException("Erro ao calcular Candlestick");
               }
             });
       }
@@ -81,6 +80,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
               inserirSemanalDAO.incluirCandlestickSemanal(candlestickSemanal);
             } catch (Exception ex) {
               log.error("Erro ao tentar gerar candle semanal {} ", ex.getMessage());
+              throw new RuntimeException("Erro ao tentar gerar candle semanal");
             }
             CandlestickSemanalMessage message = candlestickConverter
                 .convertMessageSemanal(candlestickSemanal);
@@ -89,6 +89,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
       log.info("Finalizando Código de negociação: " + codneg);
     } catch (Exception ex) {
       log.error("Erro ao tentar gerar candle semanal {} ", ex.getMessage());
+      throw new Exception("Erro ao tentar gerar candle semanal");
     }
     return codneg;
   }
