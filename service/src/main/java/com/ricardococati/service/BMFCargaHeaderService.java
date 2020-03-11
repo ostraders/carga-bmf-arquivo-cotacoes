@@ -1,6 +1,6 @@
 package com.ricardococati.service;
 
-import com.ricardococati.model.dto.Header;
+import com.ricardococati.model.entities.Header;
 
 public interface BMFCargaHeaderService {
 	

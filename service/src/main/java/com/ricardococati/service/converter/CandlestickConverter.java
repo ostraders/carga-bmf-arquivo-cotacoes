@@ -1,6 +1,6 @@
 package com.ricardococati.service.converter;
 
-import com.ricardococati.model.dto.Cotacao;
+import com.ricardococati.model.entities.Cotacao;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickDiarioMessage;
 import com.ricardococati.model.entities.CandlestickSemanal;

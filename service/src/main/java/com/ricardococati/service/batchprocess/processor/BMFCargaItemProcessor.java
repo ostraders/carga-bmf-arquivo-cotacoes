@@ -1,8 +1,8 @@
 package com.ricardococati.service.batchprocess.processor;
 
-import com.ricardococati.model.dto.BMFCargaDTO;
-import com.ricardococati.model.dto.Cotacao;
-import com.ricardococati.model.dto.Header;
+import com.ricardococati.model.entities.Arquivo;
+import com.ricardococati.model.entities.Cotacao;
+import com.ricardococati.model.entities.Header;
 import com.ricardococati.model.enums.TipoRegistroEnum;
 import com.ricardococati.repository.util.ConverteValorDividindoPorCem;
 import com.ricardococati.repository.util.ConverteStringParaLocalDate;
@@ -15,16 +15,16 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDTO>, Serializable {
+public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, Arquivo>, Serializable {
 
 	private static final long serialVersionUID = 1602197886947938991L;
 
 	@Override
-	public BMFCargaDTO process(FieldSet line) {
+	public Arquivo process(FieldSet line) {
 		String identificacao = line.readString("tipoRegistro");
-		BMFCargaDTO bmfCargaDTO = null;
+		Arquivo arquivo = null;
 		if(identificacao.equals(TipoRegistroEnum.HEADER.getCod())) {
-			bmfCargaDTO = Header
+			arquivo = Header
 					.builder()
 					.tipoRegistro(line.readLong("tipoRegistro"))
 					.nomeDoArquivo(line.readString("nomeDoArquivo"))
@@ -63,10 +63,10 @@ public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, BMFCargaDT
 			cotacao.setPtoexe(ConverteValorDividindoPorCem.divisao(line.readBigDecimal("ptoexe")));
 			cotacao.setCodisi(line.readString("codisi"));
 			cotacao.setDismes(line.readLong("dismes"));
-			bmfCargaDTO = cotacao;
+			arquivo = cotacao;
 		}
 
-		return bmfCargaDTO;
+		return arquivo;
 	}
 
 }

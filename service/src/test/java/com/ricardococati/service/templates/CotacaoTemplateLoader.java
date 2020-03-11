@@ -3,7 +3,7 @@ package com.ricardococati.service.templates;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
-import com.ricardococati.model.dto.Cotacao;
+import com.ricardococati.model.entities.Cotacao;
 import com.ricardococati.service.util.BigDecimalCustomizado;
 import java.time.LocalDate;
 

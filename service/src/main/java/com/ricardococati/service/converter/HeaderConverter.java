@@ -1,6 +1,6 @@
 package com.ricardococati.service.converter;
 
-import com.ricardococati.model.dto.Header;
+import com.ricardococati.model.entities.Header;
 import com.ricardococati.model.dto.HeaderDTO;
 import org.springframework.stereotype.Component;
 

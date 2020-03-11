@@ -1,13 +1,12 @@
 package com.ricardococati.service.impl;
 
-import com.ricardococati.model.dto.Header;
+import com.ricardococati.model.entities.Header;
 import com.ricardococati.model.dto.HeaderDTO;
 import com.ricardococati.repository.dao.HeaderInserirDAO;
 import com.ricardococati.service.BMFCargaHeaderService;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.HeaderConverter;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

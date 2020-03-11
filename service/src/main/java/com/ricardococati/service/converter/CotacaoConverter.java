@@ -1,6 +1,6 @@
 package com.ricardococati.service.converter;
 
-import com.ricardococati.model.dto.Cotacao;
+import com.ricardococati.model.entities.Cotacao;
 import com.ricardococati.model.dto.CotacaoDTO;
 import org.springframework.stereotype.Component;
 

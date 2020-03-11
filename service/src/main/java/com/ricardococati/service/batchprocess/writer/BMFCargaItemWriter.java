@@ -1,8 +1,8 @@
 package com.ricardococati.service.batchprocess.writer;
 
-import com.ricardococati.model.dto.BMFCargaDTO;
-import com.ricardococati.model.dto.Cotacao;
-import com.ricardococati.model.dto.Header;
+import com.ricardococati.model.entities.Arquivo;
+import com.ricardococati.model.entities.Cotacao;
+import com.ricardococati.model.entities.Header;
 import com.ricardococati.service.BMFCargaCotacaoService;
 import com.ricardococati.service.BMFCargaHeaderService;
 import com.ricardococati.service.config.ControleArquivoConfig;
@@ -18,14 +18,14 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @RequiredArgsConstructor
-public class BMFCargaItemWriter implements ItemWriter<BMFCargaDTO> {
+public class BMFCargaItemWriter implements ItemWriter<Arquivo> {
 
   private final BMFCargaCotacaoService cargaCotacaoService;
   private final BMFCargaHeaderService cargaHeaderService;
   private final ControleArquivoConfig arquivoConfig;
 
   @Override
-  public void write(List<? extends BMFCargaDTO> listDTOs) {
+  public void write(List<? extends Arquivo> listDTOs) {
     try {
       listDTOs
           .stream()

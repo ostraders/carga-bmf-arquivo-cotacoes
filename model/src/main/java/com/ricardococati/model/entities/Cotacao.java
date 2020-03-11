@@ -1,4 +1,4 @@
-package com.ricardococati.model.dto;
+package com.ricardococati.model.entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,9 +8,8 @@ import java.time.LocalDate;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Cotacao extends BMFCargaDTO {
+public class Cotacao extends Arquivo {
 
-  private static final long serialVersionUID = 505011356059052924L;
   private String id;
   private Long tipoRegistro;
   private LocalDate dtpreg;

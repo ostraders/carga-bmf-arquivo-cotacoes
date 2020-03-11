@@ -1,4 +1,4 @@
-package com.ricardococati.model.dto;
+package com.ricardococati.model.entities;
 
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +9,8 @@ import java.time.LocalDate;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper=false)
-public class Header extends BMFCargaDTO {
+public class Header extends Arquivo {
 
-	private static final long serialVersionUID = 4338858549320272919L;
 	private String id;
 	private Long tipoRegistro;
 	private String nomeDoArquivo;

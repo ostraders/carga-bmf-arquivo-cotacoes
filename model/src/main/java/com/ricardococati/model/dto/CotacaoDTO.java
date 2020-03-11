@@ -2,6 +2,8 @@ package com.ricardococati.model.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import com.ricardococati.model.entities.Arquivo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CotacaoDTO extends BMFCargaDTO {
+public class CotacaoDTO extends Arquivo {
 
   private Long tipoRegistro;
   private LocalDate dtpreg;

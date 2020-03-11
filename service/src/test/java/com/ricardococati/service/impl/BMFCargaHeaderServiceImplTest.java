@@ -7,7 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.ricardococati.model.dto.Header;
+import com.ricardococati.model.entities.Header;
 import com.ricardococati.repository.dao.HeaderInserirDAO;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.HeaderConverter;

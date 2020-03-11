@@ -1,6 +1,8 @@
 package com.ricardococati.model.dto;
 
 import java.time.LocalDate;
+
+import com.ricardococati.model.entities.Arquivo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HeaderDTO extends BMFCargaDTO {
+public class HeaderDTO extends Arquivo {
 
   private Long tipoRegistro;
   private String nomeDoArquivo;

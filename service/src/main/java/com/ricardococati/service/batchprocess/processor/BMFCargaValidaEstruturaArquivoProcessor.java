@@ -2,7 +2,7 @@ package com.ricardococati.service.batchprocess.processor;
 
 import static java.util.Objects.isNull;
 
-import com.ricardococati.model.dto.BMFCargaDTO;
+import com.ricardococati.model.entities.Arquivo;
 import com.ricardococati.model.enums.TipoRegistroEnum;
 import com.ricardococati.model.enums.TiposCamposEnum;
 import com.ricardococati.service.batchprocess.layouts.CotacoesDosPapeisPorDiaLayoutImpl;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<FieldSet, BMFCargaDTO> {
+public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<FieldSet, Arquivo> {
 
   private HeaderBMFLayoutImpl header = null;
   private CotacoesDosPapeisPorDiaLayoutImpl cotacoes;
@@ -32,7 +32,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
   private final ControleArquivoConfig arquivoConfig;
 
   @Override
-  public BMFCargaDTO process(FieldSet line) throws Exception {
+  public Arquivo process(FieldSet line) throws Exception {
     try {
       BMFUtil bmfUtil = new BMFUtil();
       bmfUtil.setTrackingID(UUID.randomUUID().toString());

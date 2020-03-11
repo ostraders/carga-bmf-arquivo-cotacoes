@@ -1,28 +1,29 @@
 package com.ricardococati.service.impl;
 
-import static java.util.Objects.nonNull;
-
 import com.ricardococati.kafka.topic.TopicEnum;
-import com.ricardococati.model.dto.Cotacao;
 import com.ricardococati.model.dto.CotacaoDTO;
+import com.ricardococati.model.entities.Ativo;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickDiarioMessage;
-import com.ricardococati.model.entities.EmpresaAtivo;
+import com.ricardococati.model.entities.Cotacao;
+import com.ricardococati.repository.dao.AtivoBuscarDAO;
 import com.ricardococati.repository.dao.CandlestickDiarioInserirDAO;
 import com.ricardococati.repository.dao.CotacaoInserirDAO;
-import com.ricardococati.repository.dao.EmpresaAtivoBuscarDAO;
 import com.ricardococati.repository.event.CandlestickEventListener;
 import com.ricardococati.service.BMFCargaCotacaoService;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.CandlestickConverter;
 import com.ricardococati.service.converter.CotacaoConverter;
 import com.ricardococati.service.util.ControlaIdArquivoUtil;
-import java.util.List;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
+
+import static java.util.Objects.nonNull;
 
 @Slf4j
 @Service
@@ -34,7 +35,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
   private final ControleArquivoConfig arquivoConfig;
   private final CandlestickConverter candlestickConverter;
   private final CotacaoInserirDAO cotacaoInserirDAO;
-  private final EmpresaAtivoBuscarDAO empresaAtivoBuscarDAO;
+  private final AtivoBuscarDAO ativoBuscarDAO;
   private final CotacaoConverter convertCot;
   private final ControlaIdArquivoUtil idArquivoUtil;
   private final CandlestickEventListener listener;
@@ -69,7 +70,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
     return buscaAtivos()
         .stream()
         .filter(Objects::nonNull)
-        .map(EmpresaAtivo::getAtivo)
+        .map(Ativo::getAtivo)
         .anyMatch(ativo ->
             nonNull(cotacao.getCodneg())
                 && cotacao.getCodneg().equals(ativo)
@@ -81,8 +82,8 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
   }
 
   @Cacheable
-  private List<EmpresaAtivo> buscaAtivos() throws Exception {
-    return empresaAtivoBuscarDAO.buscaEmpresaAtivo();
+  private List<Ativo> buscaAtivos() throws Exception {
+    return ativoBuscarDAO.buscaAtivo();
   }
 
 }

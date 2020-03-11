@@ -1,6 +1,6 @@
 package com.ricardococati.service;
 
-import com.ricardococati.model.dto.Cotacao;
+import com.ricardococati.model.entities.Cotacao;
 
 public interface BMFCargaCotacaoService {
 	

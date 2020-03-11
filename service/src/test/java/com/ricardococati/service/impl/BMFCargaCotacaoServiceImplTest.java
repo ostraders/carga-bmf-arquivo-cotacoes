@@ -8,11 +8,11 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.model.dto.Cotacao;
-import com.ricardococati.model.entities.EmpresaAtivo;
+import com.ricardococati.model.entities.Ativo;
+import com.ricardococati.model.entities.Cotacao;
 import com.ricardococati.repository.dao.CandlestickDiarioInserirDAO;
 import com.ricardococati.repository.dao.CotacaoInserirDAO;
-import com.ricardococati.repository.dao.EmpresaAtivoBuscarDAO;
+import com.ricardococati.repository.dao.AtivoBuscarDAO;
 import com.ricardococati.repository.event.CandlestickEventListener;
 import com.ricardococati.service.config.ControleArquivoConfig;
 import com.ricardococati.service.converter.CandlestickConverter;
@@ -42,7 +42,7 @@ public class BMFCargaCotacaoServiceImplTest {
   @Mock
   private CotacaoInserirDAO cotacaoInserirDAO;
   @Mock
-  private EmpresaAtivoBuscarDAO empresaAtivoBuscarDAO;
+  private AtivoBuscarDAO ativoBuscarDAO;
   @Mock
   private CotacaoConverter convertCot;
   @Mock
@@ -61,8 +61,8 @@ public class BMFCargaCotacaoServiceImplTest {
   public void insereDados() throws Exception {
     //given
     when(candlestickConverter.convert(any())).thenCallRealMethod();
-    EmpresaAtivo empresaAtivo = getBuildEmpresaAtivo();
-    when(empresaAtivoBuscarDAO.buscaEmpresaAtivo()).thenReturn(Arrays.asList(empresaAtivo));
+    Ativo empresaAtivo = getBuildAtivo();
+    when(ativoBuscarDAO.buscaAtivo()).thenReturn(Arrays.asList(empresaAtivo));
     when(convertCot.convert(any())).thenCallRealMethod();
     when(idArquivoUtil.getIdentificadorArquivo()).thenReturn(1L);
     //when
@@ -75,9 +75,9 @@ public class BMFCargaCotacaoServiceImplTest {
   public void insereDadosFalse() throws Exception {
     //given
     when(candlestickConverter.convert(any())).thenCallRealMethod();
-    EmpresaAtivo empresaAtivo = getBuildEmpresaAtivo();
+    Ativo empresaAtivo = getBuildAtivo();
     empresaAtivo.setAtivo("MGLU");
-    when(empresaAtivoBuscarDAO.buscaEmpresaAtivo()).thenReturn(Arrays.asList(empresaAtivo));
+    when(ativoBuscarDAO.buscaAtivo()).thenReturn(Arrays.asList(empresaAtivo));
     when(convertCot.convert(any())).thenCallRealMethod();
     when(idArquivoUtil.getIdentificadorArquivo()).thenReturn(1L);
     //when
@@ -91,8 +91,8 @@ public class BMFCargaCotacaoServiceImplTest {
     //given
     when(candlestickConverter.convert(any())).thenCallRealMethod();
     when(candlestickDiarioDAO.incluirCandlestickDiario(any())).thenThrow(Exception.class);
-    EmpresaAtivo empresaAtivo = getBuildEmpresaAtivo();
-    when(empresaAtivoBuscarDAO.buscaEmpresaAtivo()).thenReturn(Arrays.asList(empresaAtivo));
+    Ativo empresaAtivo = getBuildAtivo();
+    when(ativoBuscarDAO.buscaAtivo()).thenReturn(Arrays.asList(empresaAtivo));
     when(convertCot.convert(any())).thenCallRealMethod();
     when(idArquivoUtil.getIdentificadorArquivo()).thenReturn(1L);
     this.thrown.expectMessage("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE");
@@ -102,11 +102,11 @@ public class BMFCargaCotacaoServiceImplTest {
     Boolean result = target.insereDados(cotacao);
   }
 
-  private EmpresaAtivo getBuildEmpresaAtivo() {
-    return EmpresaAtivo
+  private Ativo getBuildAtivo() {
+    return Ativo
         .builder()
         .ativo("MGLU3")
-        .idEmpresa(1L)
+        .idAtivo(1L)
         .build();
   }
 

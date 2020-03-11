@@ -1,18 +1,19 @@
 package com.ricardococati.repository.dao.mapper;
 
-import com.ricardococati.model.entities.EmpresaAtivo;
+import com.ricardococati.model.entities.Ativo;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmpresaAtivoMapper {
+public class AtivoMapper {
 
-  public EmpresaAtivo mapper(ResultSet rs) {
+  public Ativo mapper(ResultSet rs) {
     try {
-      return EmpresaAtivo
+      return Ativo
           .builder()
-          .idEmpresa(rs.getLong("id_empresa"))
+          .idAtivo(rs.getLong("id_ativo"))
           .ativo(rs.getString("ativo"))
           .build();
     } catch (SQLException e) {

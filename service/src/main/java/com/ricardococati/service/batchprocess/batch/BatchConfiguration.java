@@ -1,6 +1,6 @@
 package com.ricardococati.service.batchprocess.batch;
 
-import com.ricardococati.model.dto.BMFCargaDTO;
+import com.ricardococati.model.entities.Arquivo;
 import com.ricardococati.model.enums.CaminhoArquivoEnum;
 import com.ricardococati.service.batchprocess.decider.BMFCargaDecider;
 import com.ricardococati.service.batchprocess.processor.BMFCargaItemProcessor;
@@ -76,7 +76,7 @@ public class BatchConfiguration {
   @Bean
   public Step step1_ValidaEstruturaArquivo() throws Exception {
     return stepBuilderFactory.get("step1_ValidaEstruturaArquivo")
-        .<FieldSet, BMFCargaDTO>chunk(50)
+        .<FieldSet, Arquivo>chunk(50)
         .reader(bmfItemReader())
         .faultTolerant()
         .skipPolicy(verificadorArquivoSkipper())
@@ -92,7 +92,7 @@ public class BatchConfiguration {
   @Bean
   public Step step2_LerProcessarEscreverArquivo() throws Exception {
     return stepBuilderFactory.get("step2_LerProcessarEscreverArquivo")
-        .<FieldSet, BMFCargaDTO>chunk(50)
+        .<FieldSet, Arquivo>chunk(50)
         .reader(bmfItemReader())
         .processor(bmfItemProcessor())
         .writer(bmfItemWriter())
