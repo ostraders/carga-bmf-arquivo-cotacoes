@@ -23,7 +23,7 @@ public class HeaderSQLUtil {
     sql.appendSQL("     :tipoRegistro, ");
     sql.appendSQL("     :identificacaoArquivo ");
     sql.appendSQL("   ) ");
-    sql.appendSQL(" on conflict (data_geracao_arquivo, nome_arquivo) do update set ");
+    sql.appendSQL(" on conflict (identificacao_reg) do update set ");
     sql.appendSQL("      codigo_origem = excluded.codigo_origem ");
     sql.appendSQL("     ,nome_arquivo = excluded.nome_arquivo ");
     sql.appendSQL("     ,data_geracao_arquivo = excluded.data_geracao_arquivo ");

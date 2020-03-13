@@ -1,22 +1,16 @@
 package com.ricardococati.repository.dao.impl;
 
-import static br.com.six2six.fixturefactory.Fixture.from;
-import static com.ricardococati.repository.dao.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
-
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import com.ricardococati.model.dto.CotacaoDTO;
+import com.ricardococati.model.dto.HeaderDTO;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.repository.dao.BaseJdbcTest;
-import com.ricardococati.repository.dao.GeraSequenciaDAO;
 import com.ricardococati.repository.dao.mapper.CandlestickDiarioMapper;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioBuscarSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioInserirSQLUtil;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
+import com.ricardococati.repository.dao.sqlutil.CotacaoSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.HeaderSQLUtil;
+import com.ricardococati.repository.dao.utils.InserirDadosPrimariosDiarioUtil;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,6 +21,19 @@ import org.mockito.Mock;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+
+import static br.com.six2six.fixturefactory.Fixture.from;
+import static com.ricardococati.repository.dao.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
+import static com.ricardococati.repository.dao.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_021;
+import static com.ricardococati.repository.dao.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
@@ -40,9 +47,13 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
   @MockBean
   private CandlestickDiarioInserirDAOImpl incluirDAO;
   @Mock
+  private CotacaoSQLUtil cotacaoSQLUtil;
+  @Mock
+  private HeaderSQLUtil headerSQLUtil;
+  @Mock
   private CandlestickDiarioInserirSQLUtil incluirSQLUtil;
   @Mock
-  private GeraSequenciaDAO genericDAO;
+  private GeraSequenciaDAOImpl genericDAO;
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
@@ -54,7 +65,19 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
         sqlUtil,
         mapper
     );
-    incluiCandleAntesDeExecutarTestes();
+    InserirDadosPrimariosDiarioUtil util = new InserirDadosPrimariosDiarioUtil(
+            buildCotacaoDTO(),
+            buildCandlestickDiarioDTO(),
+            buildHeaderDTO(),
+            cotacaoSQLUtil,
+            incluirSQLUtil,
+            headerSQLUtil,
+            genericDAO,
+            getNamedParameterJdbcTemplate()
+    );
+    util.incluiHeaderAntesDeExecutarTestes();
+    util.incluiCotacaoAntesDeExecutarTestes();
+    util.incluiCandleAntesDeExecutarTestes();
   }
 
   @Test
@@ -187,20 +210,16 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
     List<String> result = target.buscaCodNeg();
   }
 
-  private void incluiCandleAntesDeExecutarTestes() throws Exception {
-    incluirDAO = new CandlestickDiarioInserirDAOImpl(
-        getNamedParameterJdbcTemplate(),
-        genericDAO,
-        incluirSQLUtil
-    );
-    when(incluirSQLUtil.getInsert()).thenCallRealMethod();
-    when(incluirSQLUtil.toParameters(any())).thenCallRealMethod();
-    when(genericDAO.getSequence(any())).thenReturn(1);
-    incluirDAO.incluirCandlestickDiario(buildCandlestickDiarioDTO());
-  }
-
   private CandlestickDiario buildCandlestickDiarioDTO() {
     return from(CandlestickDiario.class).gimme(CANDLESTICK_DIARIO_VALID_001);
+  }
+
+  private CotacaoDTO buildCotacaoDTO(){
+    return from(CotacaoDTO.class).gimme(COTACAO_DTO_VALID_021);
+  }
+
+  private HeaderDTO buildHeaderDTO(){
+    return from(HeaderDTO.class).gimme(HEADER_DTO_VALID_001);
   }
 
 }

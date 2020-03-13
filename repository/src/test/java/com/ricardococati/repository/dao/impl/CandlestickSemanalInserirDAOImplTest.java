@@ -1,15 +1,25 @@
 package com.ricardococati.repository.dao.impl;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
+import static com.ricardococati.repository.dao.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
 import static com.ricardococati.repository.dao.templates.CandlestickSemanalTemplateLoader.CANDLESTICK_SEMANAL_VALID_001;
+import static com.ricardococati.repository.dao.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_021;
+import static com.ricardococati.repository.dao.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import com.ricardococati.model.dto.CotacaoDTO;
+import com.ricardococati.model.dto.HeaderDTO;
+import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.CandlestickSemanal;
 import com.ricardococati.repository.dao.BaseJdbcTest;
+import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioInserirSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.CandlestickSemanalInserirSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.CotacaoSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.HeaderSQLUtil;
+import com.ricardococati.repository.dao.utils.InserirDadosPrimariosSemanalUtil;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,13 +39,40 @@ public class CandlestickSemanalInserirDAOImplTest extends BaseJdbcTest {
   private GeraSequenciaDAOImpl genericDAO;
   @Mock
   private CandlestickSemanalInserirSQLUtil sqlUtil;
+  @Mock
+  private CandlestickDiarioInserirSQLUtil incluirDiarioSQLUtil;
+  @Mock
+  private CotacaoSQLUtil cotacaoSQLUtil;
+  @Mock
+  private HeaderSQLUtil headerSQLUtil;
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
   @Before
   public void setUp() throws Exception {
-    FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
-    target = new CandlestickSemanalInserirDAOImpl(getNamedParameterJdbcTemplate(), genericDAO, sqlUtil);
+    FixtureFactoryLoader.loadTemplates(
+            "com.ricardococati.repository.dao.templates"
+    );
+    target = new CandlestickSemanalInserirDAOImpl(
+            getNamedParameterJdbcTemplate(),
+            genericDAO,
+            sqlUtil
+    );
+    InserirDadosPrimariosSemanalUtil util = new InserirDadosPrimariosSemanalUtil(
+            buildCotacaoDTO(),
+            buildCandlestick(),
+            buildCandlestickDiarioDTO(),
+            buildHeaderDTO(),
+            cotacaoSQLUtil,
+            sqlUtil,
+            incluirDiarioSQLUtil,
+            headerSQLUtil,
+            genericDAO,
+            getNamedParameterJdbcTemplate()
+    );
+    util.incluiHeaderAntesDeExecutarTestes();
+    util.incluiCotacaoAntesDeExecutarTestes();
+    util.incluiCandleDiarioAntesDeExecutarTestes();
   }
 
   @Test
@@ -106,6 +143,18 @@ public class CandlestickSemanalInserirDAOImplTest extends BaseJdbcTest {
 
   private CandlestickSemanal buildCandlestick() {
     return from(CandlestickSemanal.class).gimme(CANDLESTICK_SEMANAL_VALID_001);
+  }
+
+  private CandlestickDiario buildCandlestickDiarioDTO() {
+    return from(CandlestickDiario.class).gimme(CANDLESTICK_DIARIO_VALID_001);
+  }
+
+  private CotacaoDTO buildCotacaoDTO(){
+    return from(CotacaoDTO.class).gimme(COTACAO_DTO_VALID_021);
+  }
+
+  private HeaderDTO buildHeaderDTO(){
+    return from(HeaderDTO.class).gimme(HEADER_DTO_VALID_001);
   }
 
 }

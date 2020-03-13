@@ -29,6 +29,7 @@ public class CotacaoDTOTemplateLoader implements TemplateLoader {
   public static final String COTACAO_DTO_VALID_018 = "COTACAO_DTO_VALID_018";
   public static final String COTACAO_DTO_VALID_019 = "COTACAO_DTO_VALID_019";
   public static final String COTACAO_DTO_VALID_020 = "COTACAO_DTO_VALID_020";
+  public static final String COTACAO_DTO_VALID_021 = "COTACAO_DTO_VALID_021";
   private Double precoVar = 10.1;
   private LocalDate dtpreg = LocalDate.of(1978, 2, 16);
 
@@ -233,6 +234,10 @@ public class CotacaoDTOTemplateLoader implements TemplateLoader {
       add("preult", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
       add("preofc", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
       add("preofv", BigDecimalCustomizado.getValueBigDecimalHalfUpArredondado4Casas(precoVar++));
+    }})
+            .addTemplate(COTACAO_DTO_VALID_021).inherits(COTACAO_DTO_VALID_001, new Rule() {{
+      add("dtpreg", dtpreg.plusDays(1));
+      add("identificacaoArquivo", 1L);
     }})
     ;
   }

@@ -1,19 +1,17 @@
 package com.ricardococati.repository.dao.impl;
 
-import static br.com.six2six.fixturefactory.Fixture.from;
-import static com.ricardococati.repository.dao.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
-
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import com.ricardococati.model.dto.CotacaoDTO;
+import com.ricardococati.model.dto.HeaderDTO;
 import com.ricardococati.model.entities.CandlestickDiario;
 import com.ricardococati.model.entities.SplitInplit;
 import com.ricardococati.model.enums.OperacaoSplitInplit;
 import com.ricardococati.repository.dao.BaseJdbcTest;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioAtualizarSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioInserirSQLUtil;
-import java.time.LocalDate;
+import com.ricardococati.repository.dao.sqlutil.CotacaoSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.HeaderSQLUtil;
+import com.ricardococati.repository.dao.utils.InserirDadosPrimariosDiarioUtil;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,6 +22,16 @@ import org.mockito.Mock;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
+
+import static br.com.six2six.fixturefactory.Fixture.from;
+import static com.ricardococati.repository.dao.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
+import static com.ricardococati.repository.dao.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_021;
+import static com.ricardococati.repository.dao.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+
 @RunWith(SpringRunner.class)
 public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
 
@@ -32,7 +40,11 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
   @Mock
   private CandlestickDiarioAtualizarSQLUtil sqlUtil;
   @Mock
+  private CotacaoSQLUtil cotacaoSQLUtil;
+  @Mock
   private CandlestickDiarioInserirSQLUtil incluirSQLUtil;
+  @Mock
+  private HeaderSQLUtil headerSQLUtil;
   @Mock
   private GeraSequenciaDAOImpl genericDAO;
   @Rule
@@ -42,16 +54,19 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
   public void setUp() throws Exception {
     FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
     target = new CandlestickDiarioAtualizarDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
-    incluiCandleAntesDeExecutarTestes();
-  }
-
-  private void incluiCandleAntesDeExecutarTestes() throws Exception {
-    CandlestickDiarioInserirDAOImpl incluirDAO = new CandlestickDiarioInserirDAOImpl(
-        getNamedParameterJdbcTemplate(), genericDAO, incluirSQLUtil);
-    when(incluirSQLUtil.getInsert()).thenCallRealMethod();
-    when(incluirSQLUtil.toParameters(any())).thenCallRealMethod();
-    when(genericDAO.getSequence(any())).thenReturn(1);
-    incluirDAO.incluirCandlestickDiario(buildCandlestickDiarioDTO());
+    InserirDadosPrimariosDiarioUtil util = new InserirDadosPrimariosDiarioUtil(
+            buildCotacaoDTO(),
+            buildCandlestickDiarioDTO(),
+            buildHeaderDTO(),
+            cotacaoSQLUtil,
+            incluirSQLUtil,
+            headerSQLUtil,
+            genericDAO,
+            getNamedParameterJdbcTemplate()
+    );
+    util.incluiHeaderAntesDeExecutarTestes();
+    util.incluiCotacaoAntesDeExecutarTestes();
+    util.incluiCandleAntesDeExecutarTestes();
   }
 
   @Test
@@ -168,6 +183,14 @@ public class CandlestickDiarioAtualizarDAOImplTest extends BaseJdbcTest {
 
   private CandlestickDiario buildCandlestickDiarioDTO() {
     return from(CandlestickDiario.class).gimme(CANDLESTICK_DIARIO_VALID_001);
+  }
+
+  private CotacaoDTO buildCotacaoDTO(){
+    return from(CotacaoDTO.class).gimme(COTACAO_DTO_VALID_021);
+  }
+
+  private HeaderDTO buildHeaderDTO(){
+    return from(HeaderDTO.class).gimme(HEADER_DTO_VALID_001);
   }
 
 }

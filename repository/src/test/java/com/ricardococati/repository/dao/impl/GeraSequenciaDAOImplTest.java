@@ -64,7 +64,7 @@ public class GeraSequenciaDAOImplTest extends BaseJdbcTest {
     //when
     Number retorno = target.getSequence(sequence);
     //then
-    Assertions.assertThat(retorno).isNotNull().isEqualTo(1L);
+    Assertions.assertThat(retorno).isNotNull().isEqualTo(12L);
   }
 
   @Test
@@ -74,7 +74,17 @@ public class GeraSequenciaDAOImplTest extends BaseJdbcTest {
     //when
     Number retorno = target.getSequence(sequence);
     //then
-    Assertions.assertThat(retorno).isNotNull().isEqualTo(1L);
+    Assertions.assertThat(retorno).isNotNull().isEqualTo(272L);
+  }
+
+  @Test
+  public void getSequenceAtivo() {
+    //given
+    String sequence = "ATIVO_SEQ";
+    //when
+    Number retorno = target.getSequence(sequence);
+    //then
+    Assertions.assertThat(retorno).isNotNull().isEqualTo(344L);
   }
 
   @Test

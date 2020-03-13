@@ -2,14 +2,19 @@ package com.ricardococati.repository.dao.impl;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
 import static com.ricardococati.repository.dao.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_001;
+import static com.ricardococati.repository.dao.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.ricardococati.model.dto.CotacaoDTO;
+import com.ricardococati.model.dto.HeaderDTO;
 import com.ricardococati.repository.dao.BaseJdbcTest;
 import com.ricardococati.repository.dao.sqlutil.CotacaoSQLUtil;
+import com.ricardococati.repository.dao.sqlutil.HeaderSQLUtil;
+import com.ricardococati.repository.dao.utils.InserirDadosPrimariosCotacaoUtil;
+import com.ricardococati.repository.dao.utils.InserirDadosPrimariosSemanalUtil;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,13 +32,24 @@ public class CotacaoInserirDAOImplTest extends BaseJdbcTest {
   private CotacaoInserirDAOImpl target;
   @Mock
   private CotacaoSQLUtil sqlUtil;
+  @Mock
+  private HeaderSQLUtil headerSQLUtil;
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
   @Before
   public void setUp() throws Exception {
     FixtureFactoryLoader.loadTemplates("com.ricardococati.repository.dao.templates");
-    target = new CotacaoInserirDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
+    target = new CotacaoInserirDAOImpl(
+            getNamedParameterJdbcTemplate(),
+            sqlUtil
+    );
+    InserirDadosPrimariosCotacaoUtil util = new InserirDadosPrimariosCotacaoUtil(
+            buildHeader(),
+            headerSQLUtil,
+            getNamedParameterJdbcTemplate()
+    );
+    util.incluiHeaderAntesDeExecutarTestes();
   }
 
   @Test
@@ -116,6 +132,10 @@ public class CotacaoInserirDAOImplTest extends BaseJdbcTest {
 
   private CotacaoDTO buildCotacaoDTO(){
     return from(CotacaoDTO.class).gimme(COTACAO_DTO_VALID_001);
+  }
+
+  private HeaderDTO buildHeader(){
+    return from(HeaderDTO.class).gimme(HEADER_DTO_VALID_001);
   }
 
 }
