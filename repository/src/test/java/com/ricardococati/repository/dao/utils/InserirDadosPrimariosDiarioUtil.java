@@ -10,40 +10,23 @@ import com.ricardococati.repository.dao.impl.HeaderInserirDAOImpl;
 import com.ricardococati.repository.dao.sqlutil.CandlestickDiarioInserirSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.CotacaoSQLUtil;
 import com.ricardococati.repository.dao.sqlutil.HeaderSQLUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
+@RequiredArgsConstructor
 public class InserirDadosPrimariosDiarioUtil {
 
-    private CotacaoDTO cotacaoDTO;
-    private CotacaoSQLUtil cotacaoSQLUtil;
-    private HeaderDTO headerDTO;
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private CandlestickDiario candlestickDiarioDTO;
-    private CandlestickDiarioInserirSQLUtil candlestickSQLUtil;
-    private GeraSequenciaDAOImpl genericDAO;
-    private HeaderSQLUtil headerSQLUtil;
-
-    public InserirDadosPrimariosDiarioUtil(
-            final CotacaoDTO cotacaoDTO,
-            final CandlestickDiario candlestickDiario,
-            final HeaderDTO headerDTO,
-            final CotacaoSQLUtil cotacaoSQLUtil,
-            final CandlestickDiarioInserirSQLUtil candlestickSQLUtil,
-            final HeaderSQLUtil headerSQLUtil,
-            final GeraSequenciaDAOImpl genericDAO,
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.cotacaoDTO = cotacaoDTO;
-        this.candlestickDiarioDTO = candlestickDiario;
-        this.headerDTO = headerDTO;
-        this.cotacaoSQLUtil = cotacaoSQLUtil;
-        this.candlestickSQLUtil = candlestickSQLUtil;
-        this.headerSQLUtil = headerSQLUtil;
-        this.genericDAO = genericDAO;
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
+    private final CotacaoDTO cotacaoDTO;
+    private final CotacaoSQLUtil cotacaoSQLUtil;
+    private final HeaderDTO headerDTO;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final CandlestickDiario candlestickDiarioDTO;
+    private final CandlestickDiarioInserirSQLUtil candlestickSQLUtil;
+    private final GeraSequenciaDAOImpl genericDAO;
+    private final HeaderSQLUtil headerSQLUtil;
 
     public void incluiHeaderAntesDeExecutarTestes() throws Exception {
         HeaderInserirDAOImpl incluirDAO = new HeaderInserirDAOImpl(

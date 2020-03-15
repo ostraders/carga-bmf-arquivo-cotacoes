@@ -53,13 +53,13 @@ public class CandlestickDiarioInserirDAOImplTest extends BaseJdbcTest {
     );
     InserirDadosPrimariosDiarioUtil util = new InserirDadosPrimariosDiarioUtil(
             buildCotacaoDTO(),
-            buildCandlestickDiarioDTO(),
-            buildHeaderDTO(),
             cotacaoSQLUtil,
+            buildHeaderDTO(),
+            getNamedParameterJdbcTemplate(),
+            buildCandlestickDiarioDTO(),
             sqlUtil,
-            headerSQLUtil,
             genericDAO,
-            getNamedParameterJdbcTemplate()
+            headerSQLUtil
     );
     util.incluiHeaderAntesDeExecutarTestes();
     util.incluiCotacaoAntesDeExecutarTestes();

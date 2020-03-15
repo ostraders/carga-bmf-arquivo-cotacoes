@@ -46,8 +46,8 @@ public class CotacaoInserirDAOImplTest extends BaseJdbcTest {
     );
     InserirDadosPrimariosCotacaoUtil util = new InserirDadosPrimariosCotacaoUtil(
             buildHeader(),
-            headerSQLUtil,
-            getNamedParameterJdbcTemplate()
+            getNamedParameterJdbcTemplate(),
+            headerSQLUtil
     );
     util.incluiHeaderAntesDeExecutarTestes();
   }
