@@ -11,9 +11,9 @@ management:
 # Spring properties
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-34-200-72-77.compute-1.amazonaws.com:5432/d66tth4v85pn22
-    username: qzohotthgcajgz
-    password: d3ef63c60888c114551ba3126c81c3a80e9d5811083ccd3f0a1d77e775bc34bd
+    url: jdbc:postgresql://localhost:5432/dbbmf
+    username: dbbmf
+    password: dbbmf
     driver-class-name: org.postgresql.Driver
   profiles:
     active: local
