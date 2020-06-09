@@ -1,5 +1,6 @@
 kafka:
   image: spotify/kafka
+  container_name: kafka
   ports:
     - "2181:2181"
     - "9092:9092"
@@ -19,6 +20,7 @@ kafka:
 
 pg-dbbmf:
   image: postgres:10.6-alpine
+  container_name: pg-dbbmf
   environment:
     POSTGRES_DB: dbbmf
     POSTGRES_USER: dbbmf
@@ -30,6 +32,7 @@ pg-dbbmf:
 
 pg-calcula-dbbmf:
   image: postgres:10.6-alpine
+  container_name: pg-calcula-dbbmf
   environment:
     POSTGRES_DB: calcula_bmf
     POSTGRES_USER: dbbmf

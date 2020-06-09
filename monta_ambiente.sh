@@ -121,13 +121,17 @@ else
 fi
 
 echo "PARANDO TODAS MAQUINAS DOCKER"
-docker stop $(docker ps -aq)
+docker stop kafka
+docker stop pg-dbbmf
+docker stop pg-calcula-dbbmf
 
 echo "AGUARDA 2 SEGUNDOS"
 sleep 2
 
 echo "REMOVENDO TODAS MAQUINAS DOCKER"
-docker rm -f $(docker ps -aq)
+docker rm -f kafka
+docker rm -f pg-dbbmf
+docker rm -f pg-calcula-dbbmf
 
 echo "AGUARDA 2 SEGUNDOS"
 sleep 2
@@ -139,12 +143,12 @@ echo "AGUARDA 5 SEGUNDOS"
 sleep 5
 
 echo "CRIANDO TÓPICOS NO KAFKA DIARIO"
-docker exec carga-bmf-arquivo-cotacoes_kafka_1 /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-diario
+docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-diario
 
 echo "AGUARDA 5 SEGUNDOS"
 sleep 5
 
 echo "CRIANDO TÓPICOS NO KAFKA SEMANAL"
-docker exec carga-bmf-arquivo-cotacoes_kafka_1 /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-semanal
+docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-semanal
 
 exit 1
