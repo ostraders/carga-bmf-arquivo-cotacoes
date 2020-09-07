@@ -11,7 +11,7 @@ management:
 # Spring properties
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-54-216-202-161.eu-west-1.compute.amazonaws.com:5432/d52u8qvab4ni45
+    url: jdbc:postgresql://ec2-54-216-202-161.eu-west-1.compute.amazonaws.com:5432/d52u8qvab4ni45?sslmode=require
     username: wqwghyxtdeegis
     password: 68a3e440c1cb94d63b77d8b76f71ede5c70e93dbeb1351e7bbb2b6ed420395c6
     driver-class-name: org.postgresql.Driver
