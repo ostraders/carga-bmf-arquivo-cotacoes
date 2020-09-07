@@ -11,7 +11,7 @@ management:
 # Spring properties
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/dbbmf
+    url: jdbc:postgresql://172.17.0.1:5432/dbbmf
     username: dbbmf
     password: dbbmf
     driver-class-name: org.postgresql.Driver
@@ -30,3 +30,6 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: false
+  kafka:
+    properties.max.request.size: 15728640
+    bootstrap-servers: localhost:9092

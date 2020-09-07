@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pv-claim
+  labels:
+    app: mongodb
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+     
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rsvp-db
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        appdb: rsvpdb
+    spec:
+      containers:
+      - name: rsvpd-db
+        image: mongo:3.3
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name : mongodb-persistent-storage
+          mountPath : /data/db
+      volumes:
+      - name: mongodb-persistent-storage
+        persistentVolumeClaim:
+          claimName: mongodb-pv-claim

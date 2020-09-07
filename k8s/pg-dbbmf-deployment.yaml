@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pg-dbbmf
+  name: pg-dbbmf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: pg-dbbmf
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: pg-dbbmf
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: dbbmf
+        - name: POSTGRES_PASSWORD
+          value: dbbmf
+        - name: POSTGRES_USER
+          value: dbbmf
+        image: postgres:10.6-alpine
+        imagePullPolicy: ""
+        name: pg-dbbmf
+        ports:
+        - containerPort: 5432
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: pg-dbbmf-claim0
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: pg-dbbmf-claim0
+        persistentVolumeClaim:
+          claimName: pg-dbbmf-claim0
+status: {}

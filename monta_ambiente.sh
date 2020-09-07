@@ -119,6 +119,15 @@ else
 	echo "ALTERANDO O DONO DA PASTA CRIADA" + " $dirZIP " + " $USER "
 	sudo chown -c -R $USER "$dirZIP"
 fi
+#
+#echo "CRIANDO AS PASTAS COMPARTILHADAS(VOLUMES)"
+#docker run -dit -P --name rccargadirDataBmfCarga -v "$dirDataBmfCarga":/"$dirDataBmfCarga" ricardococati/carga
+#docker run -dit -P --name rccargadirEntrada -v "$dirEntrada":/"$dirEntrada" ricardococati/carga
+#docker run -dit -P --name rccargadirErro -v "$dirErro":/"$dirErro" ricardococati/carga
+#docker run -dit -P --name rccargadirExecucao -v "$dirExecucao":/"$dirExecucao" ricardococati/carga
+#docker run -dit -P --name rccargadirSucesso -v "$dirSucesso":/"$dirSucesso" ricardococati/carga
+#docker run -dit -P --name rccargadirSQL -v "$dirSQL":/"$dirSQL" ricardococati/carga
+#docker run -dit -P --name rccargadirZIP -v "$dirZIP":/"$dirZIP" ricardococati/carga
 
 echo "PARANDO TODAS MAQUINAS DOCKER"
 docker stop kafka
@@ -143,12 +152,12 @@ echo "AGUARDA 5 SEGUNDOS"
 sleep 5
 
 echo "CRIANDO TÓPICOS NO KAFKA DIARIO"
-docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-diario
+docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic candlestick-diario
 
 echo "AGUARDA 5 SEGUNDOS"
 sleep 5
 
 echo "CRIANDO TÓPICOS NO KAFKA SEMANAL"
-docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-semanal
+docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic candlestick-semanal
 
 exit 1

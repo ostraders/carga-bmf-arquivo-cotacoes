@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: kafka
+  name: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: kafka
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: kafka
+    spec:
+      containers:
+      - env:
+        - name: ADVERTISED_HOST
+          value: localhost
+        - name: ADVERTISED_PORT
+          value: "9092"
+        - name: CONSUMER_THREADS
+          value: "1"
+        - name: GROUP_ID
+          value: bmf
+        - name: KAFKA_CONSUMER_MAX_REQUEST_SIZE
+          value: "15728640"
+        - name: KAFKA_PRODUCER_MAX_REQUEST_SIZE
+          value: "15728640"
+        - name: KAFKA_SERVER_MAX_REQUEST_SIZE
+          value: "15728640"
+        - name: NUM_PARTITIONS
+          value: "100"
+        - name: TOPICS
+          value: candlestick-diario, candlestick-semanal
+        - name: ZK_CONNECT
+          value: kafka7zookeeper:2181/root/path
+        image: spotify/kafka
+        imagePullPolicy: ""
+        name: kafka
+        ports:
+        - containerPort: 2181
+        - containerPort: 9092
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: kafka-claim0
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: kafka-claim0
+        persistentVolumeClaim:
+          claimName: kafka-claim0
+status: {}
