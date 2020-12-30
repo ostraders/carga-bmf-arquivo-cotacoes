@@ -1,7 +1,7 @@
 package com.ricardococati.carga.usecases;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
-import static com.ricardococati.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_001;
+import static com.ricardococati.templates.CotacaoTemplateLoader.COTACAO_VALID_001;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
@@ -112,7 +112,7 @@ public class BMFCargaCotacaoServiceImplTest {
   }
 
   private Cotacao buildCotacao(){
-    return from(Cotacao.class).gimme(COTACAO_DTO_VALID_001);
+    return from(Cotacao.class).gimme(COTACAO_VALID_001);
   }
 
 }

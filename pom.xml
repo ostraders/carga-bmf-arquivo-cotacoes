@@ -190,12 +190,26 @@
                     <exclude>com.ricardococati.carga.Application</exclude>
                     <exclude>com.ricardococati.carga.config.*</exclude>
                     <exclude>com.ricardococati.carga.adapters.controller.converter.*</exclude>
+                    <exclude>com.ricardococati.carga.usecases.batchprocess.*</exclude>
+                    <exclude>com.ricardococati.carga.config.*</exclude>
+                    <exclude>com.ricardococati.carga.entities.*</exclude>
+                    <exclude>com.ricardococati.carga.utils.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.mapper.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.scheduler.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.message.*</exclude>
+                    <exclude>com.ricardococati.carga.usecases.impl.DescompactarArquivoServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.impl.DownloadArquivoServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.impl.GerenciadorArquivosServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.impl.IntegrationServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.impl.BuildCandlestickSemanalServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.impl.CalculaCandlestickSemanalAsyncServiceImpl</exclude>
                   </excludes>
                   <limits>
                     <limit>
                       <counter>LINE</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.95</minimum>
+                      <minimum>0.90</minimum>
                     </limit>
                   </limits>
                 </rule>
