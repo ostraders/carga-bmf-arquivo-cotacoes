@@ -1,0 +1,35 @@
+server:
+  port: 8666
+
+#Swagger
+swagger:
+  enabled: true
+
+management:
+  context-path: /
+
+# Spring properties
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dbbmf
+    username: dbbmf
+    password: dbbmf
+    driver-class-name: org.postgresql.Driver
+  profiles:
+    active: local
+  application:
+    name: carga-bmf-arquivo-cotacoes
+  flyway:
+    url: ${spring.datasource.url}
+    enabled: true
+    checkLocation: false
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    baseline-on-migrate: true
+    validate-on-migrate: false
+    schemas: 'public'
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+url.arquivo.cotacoes: http://bvmf.bmfbovespa.com.br/InstDados/SerHist/COTAHIST_D*.ZIP
