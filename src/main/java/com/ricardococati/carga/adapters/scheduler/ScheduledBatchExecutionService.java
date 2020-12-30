@@ -2,9 +2,9 @@ package com.ricardococati.carga.adapters.scheduler;
 
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA;
 
-import com.ricardococati.carga.usecases.CalculaCandlestickSemanalService;
-import com.ricardococati.carga.usecases.IntegrationService;
-import com.ricardococati.carga.utils.geral.ControlaIdArquivoUtil;
+import com.ricardococati.carga.usecases.candlestick.CalculaCandlestickSemanalService;
+import com.ricardococati.carga.usecases.integracao.IntegrationService;
+import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;

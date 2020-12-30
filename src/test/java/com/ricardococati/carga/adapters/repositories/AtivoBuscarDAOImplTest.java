@@ -5,11 +5,11 @@ import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-import com.ricardococati.carga.adapters.repositories.impl.AtivoBuscarDAOImpl;
+import com.ricardococati.carga.adapters.repositories.ativo.impl.AtivoBuscarDAOImpl;
 import com.ricardococati.carga.config.BaseJdbcTest;
-import com.ricardococati.carga.adapters.repositories.mapper.AtivoMapper;
-import com.ricardococati.carga.adapters.repositories.sqlutil.AtivoSQLUtil;
-import com.ricardococati.carga.entities.domains.Ativo;
+import com.ricardococati.carga.adapters.repositories.ativo.mapper.AtivoMapper;
+import com.ricardococati.carga.adapters.repositories.ativo.sqlutil.AtivoSQLUtil;
+import com.ricardococati.carga.entities.domains.ativo.Ativo;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;

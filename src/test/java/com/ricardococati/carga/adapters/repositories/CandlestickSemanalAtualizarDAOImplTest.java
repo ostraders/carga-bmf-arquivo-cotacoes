@@ -1,29 +1,29 @@
 package com.ricardococati.carga.adapters.repositories;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
-import static com.ricardococati.templates.CandlestickSemanalTemplateLoader.CANDLESTICK_SEMANAL_VALID_001;
-import static com.ricardococati.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_021;
-import static com.ricardococati.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
+import static com.ricardococati.carga.templates.CandlestickSemanalTemplateLoader.CANDLESTICK_SEMANAL_VALID_001;
+import static com.ricardococati.carga.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_021;
+import static com.ricardococati.carga.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.carga.adapters.repositories.impl.CandlestickSemanalAtualizarDAOImpl;
-import com.ricardococati.carga.adapters.repositories.impl.GeraSequenciaDAOImpl;
+import com.ricardococati.carga.adapters.repositories.candlestick.impl.CandlestickSemanalAtualizarDAOImpl;
+import com.ricardococati.carga.adapters.repositories.gerasequencia.impl.GeraSequenciaDAOImpl;
 import com.ricardococati.carga.config.BaseJdbcTest;
-import com.ricardococati.carga.adapters.repositories.sqlutil.CandlestickDiarioInserirSQLUtil;
-import com.ricardococati.carga.adapters.repositories.sqlutil.CandlestickSemanalAtualizarSQLUtil;
-import com.ricardococati.carga.adapters.repositories.sqlutil.CandlestickSemanalInserirSQLUtil;
-import com.ricardococati.carga.adapters.repositories.sqlutil.CotacaoSQLUtil;
-import com.ricardococati.carga.adapters.repositories.sqlutil.HeaderSQLUtil;
-import com.ricardococati.util.InserirDadosPrimariosSemanalUtil;
-import com.ricardococati.carga.entities.domains.CandlestickDiario;
-import com.ricardococati.carga.entities.domains.CandlestickSemanal;
-import com.ricardococati.carga.entities.domains.SplitInplit;
-import com.ricardococati.carga.entities.dto.CotacaoDTO;
-import com.ricardococati.carga.entities.dto.HeaderDTO;
+import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.CandlestickDiarioInserirSQLUtil;
+import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.CandlestickSemanalAtualizarSQLUtil;
+import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.CandlestickSemanalInserirSQLUtil;
+import com.ricardococati.carga.adapters.repositories.cotacao.sqlutil.CotacaoSQLUtil;
+import com.ricardococati.carga.adapters.repositories.header.sqlutil.HeaderSQLUtil;
+import com.ricardococati.carga.util.InserirDadosPrimariosSemanalUtil;
+import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
+import com.ricardococati.carga.entities.domains.candlestick.CandlestickSemanal;
+import com.ricardococati.carga.entities.domains.splitinplit.SplitInplit;
+import com.ricardococati.carga.entities.domains.cotacao.dto.CotacaoDTO;
+import com.ricardococati.carga.entities.domains.header.dto.HeaderDTO;
 import com.ricardococati.carga.entities.enums.OperacaoSplitInplit;
 import java.time.LocalDate;
 import org.junit.Before;
@@ -58,7 +58,7 @@ public class CandlestickSemanalAtualizarDAOImplTest extends BaseJdbcTest {
 
   @Before
   public void setUp() throws Exception {
-    FixtureFactoryLoader.loadTemplates("com.ricardococati.templates");
+    FixtureFactoryLoader.loadTemplates("com.ricardococati.carga.templates");
     target = new CandlestickSemanalAtualizarDAOImpl(
             getNamedParameterJdbcTemplate(),
             sqlUtil

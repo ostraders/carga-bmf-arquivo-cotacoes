@@ -2,9 +2,9 @@ package com.ricardococati.carga.usecases.batchprocess.processor;
 
 import static java.util.Objects.isNull;
 
-import com.ricardococati.carga.utils.geral.ConverteStringParaLocalDate;
+import com.ricardococati.carga.utils.ConverteStringParaLocalDate;
 import com.ricardococati.carga.config.ControleArquivoConfig;
-import com.ricardococati.carga.entities.domains.Arquivo;
+import com.ricardococati.carga.entities.domains.arquivo.Arquivo;
 import com.ricardococati.carga.entities.enums.TipoRegistroEnum;
 import com.ricardococati.carga.entities.enums.TiposCamposEnum;
 import com.ricardococati.carga.usecases.batchprocess.layouts.CotacoesDosPapeisPorDiaLayoutImpl;

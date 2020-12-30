@@ -1,10 +1,10 @@
 package com.ricardococati.carga.usecases.batchprocess.processor;
 
-import com.ricardococati.carga.utils.geral.ConverteStringParaLocalDate;
-import com.ricardococati.carga.utils.geral.ConverteValorDividindoPorCem;
-import com.ricardococati.carga.entities.domains.Arquivo;
-import com.ricardococati.carga.entities.domains.Cotacao;
-import com.ricardococati.carga.entities.domains.Header;
+import com.ricardococati.carga.utils.ConverteStringParaLocalDate;
+import com.ricardococati.carga.utils.ConverteValorDividindoPorCem;
+import com.ricardococati.carga.entities.domains.arquivo.Arquivo;
+import com.ricardococati.carga.entities.domains.cotacao.Cotacao;
+import com.ricardococati.carga.entities.domains.header.Header;
 import com.ricardococati.carga.entities.enums.TipoRegistroEnum;
 import java.io.Serializable;
 import java.util.UUID;

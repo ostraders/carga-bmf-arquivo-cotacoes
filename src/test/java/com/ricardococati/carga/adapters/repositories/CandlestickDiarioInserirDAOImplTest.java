@@ -1,24 +1,24 @@
 package com.ricardococati.carga.adapters.repositories;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
-import static com.ricardococati.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_021;
-import static com.ricardococati.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
+import static com.ricardococati.carga.templates.CotacaoDTOTemplateLoader.COTACAO_DTO_VALID_021;
+import static com.ricardococati.carga.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.carga.adapters.repositories.impl.CandlestickDiarioInserirDAOImpl;
-import com.ricardococati.carga.adapters.repositories.impl.GeraSequenciaDAOImpl;
+import com.ricardococati.carga.adapters.repositories.candlestick.impl.CandlestickDiarioInserirDAOImpl;
+import com.ricardococati.carga.adapters.repositories.gerasequencia.impl.GeraSequenciaDAOImpl;
 import com.ricardococati.carga.config.BaseJdbcTest;
-import com.ricardococati.carga.adapters.repositories.sqlutil.CandlestickDiarioInserirSQLUtil;
-import com.ricardococati.carga.adapters.repositories.sqlutil.CotacaoSQLUtil;
-import com.ricardococati.carga.adapters.repositories.sqlutil.HeaderSQLUtil;
-import com.ricardococati.util.InserirDadosPrimariosDiarioUtil;
-import com.ricardococati.carga.entities.domains.CandlestickDiario;
-import com.ricardococati.carga.entities.dto.CotacaoDTO;
-import com.ricardococati.carga.entities.dto.HeaderDTO;
+import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.CandlestickDiarioInserirSQLUtil;
+import com.ricardococati.carga.adapters.repositories.cotacao.sqlutil.CotacaoSQLUtil;
+import com.ricardococati.carga.adapters.repositories.header.sqlutil.HeaderSQLUtil;
+import com.ricardococati.carga.util.InserirDadosPrimariosDiarioUtil;
+import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
+import com.ricardococati.carga.entities.domains.cotacao.dto.CotacaoDTO;
+import com.ricardococati.carga.entities.domains.header.dto.HeaderDTO;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class CandlestickDiarioInserirDAOImplTest extends BaseJdbcTest {
 
   @Before
   public void setUp() throws Exception {
-    FixtureFactoryLoader.loadTemplates("com.ricardococati.templates");
+    FixtureFactoryLoader.loadTemplates("com.ricardococati.carga.templates");
     target = new CandlestickDiarioInserirDAOImpl(
             getNamedParameterJdbcTemplate(),
             genericDAO,

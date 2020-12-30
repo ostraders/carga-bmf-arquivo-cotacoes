@@ -7,11 +7,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.ricardococati.carga.adapters.repositories.CandlestickDiarioAtualizarDAO;
-import com.ricardococati.carga.adapters.repositories.CandlestickSemanalAtualizarDAO;
-import com.ricardococati.carga.entities.domains.SplitInplit;
+import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioAtualizarDAO;
+import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickSemanalAtualizarDAO;
+import com.ricardococati.carga.entities.domains.splitinplit.SplitInplit;
 import com.ricardococati.carga.entities.enums.OperacaoSplitInplit;
-import com.ricardococati.carga.usecases.impl.AtualizarCandlesticksServiceImpl;
+import com.ricardococati.carga.usecases.candlestick.impl.AtualizarCandlesticksServiceImpl;
 import java.time.LocalDate;
 import org.junit.Rule;
 import org.junit.Test;

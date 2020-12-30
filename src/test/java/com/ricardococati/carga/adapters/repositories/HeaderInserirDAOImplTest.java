@@ -1,16 +1,16 @@
 package com.ricardococati.carga.adapters.repositories;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
-import static com.ricardococati.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
+import static com.ricardococati.carga.templates.HeaderDTOTemplateLoader.HEADER_DTO_VALID_001;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.carga.adapters.repositories.impl.HeaderInserirDAOImpl;
+import com.ricardococati.carga.adapters.repositories.header.impl.HeaderInserirDAOImpl;
 import com.ricardococati.carga.config.BaseJdbcTest;
-import com.ricardococati.carga.adapters.repositories.sqlutil.HeaderSQLUtil;
-import com.ricardococati.carga.entities.dto.HeaderDTO;
+import com.ricardococati.carga.adapters.repositories.header.sqlutil.HeaderSQLUtil;
+import com.ricardococati.carga.entities.domains.header.dto.HeaderDTO;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class HeaderInserirDAOImplTest extends BaseJdbcTest {
 
   @Before
   public void setUp() throws Exception {
-    FixtureFactoryLoader.loadTemplates("com.ricardococati.templates");
+    FixtureFactoryLoader.loadTemplates("com.ricardococati.carga.templates");
     target = new HeaderInserirDAOImpl(getNamedParameterJdbcTemplate(), sqlUtil);
   }
 

@@ -1,17 +1,17 @@
 package com.ricardococati.carga.usecases;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_002;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_003;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_004;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_005;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_006;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_007;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_008;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_009;
-import static com.ricardococati.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_010;
-import static com.ricardococati.templates.CandlestickSemanalTemplateLoader.CANDLESTICK_SEMANAL_VALID_001;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_001;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_002;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_003;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_004;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_005;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_006;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_007;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_008;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_009;
+import static com.ricardococati.carga.templates.CandlestickDiarioTemplateLoader.CANDLESTICK_DIARIO_VALID_010;
+import static com.ricardococati.carga.templates.CandlestickSemanalTemplateLoader.CANDLESTICK_SEMANAL_VALID_001;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -19,12 +19,13 @@ import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.ricardococati.carga.adapters.message.event.CandlestickEventListener;
-import com.ricardococati.carga.adapters.repositories.CandlestickDiarioBuscarDAO;
-import com.ricardococati.carga.adapters.repositories.CandlestickSemanalInserirDAO;
-import com.ricardococati.carga.entities.domains.CandlestickDiario;
-import com.ricardococati.carga.entities.domains.CandlestickSemanal;
-import com.ricardococati.carga.usecases.impl.CalculaCandlestickSemanalByDataServiceImpl;
-import com.ricardococati.carga.utils.converter.CandlestickConverter;
+import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioBuscarDAO;
+import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickSemanalInserirDAO;
+import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
+import com.ricardococati.carga.entities.domains.candlestick.CandlestickSemanal;
+import com.ricardococati.carga.usecases.candlestick.BuildCandlestickSemanalService;
+import com.ricardococati.carga.usecases.candlestick.impl.CalculaCandlestickSemanalByDataServiceImpl;
+import com.ricardococati.carga.usecases.cotacao.converter.CandlestickConverter;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +58,7 @@ public class CalculaCandlestickSemanalByDataServiceImplTest {
 
   @Before
   public void setUp() throws Exception {
-    FixtureFactoryLoader.loadTemplates("com.ricardococati.templates");
+    FixtureFactoryLoader.loadTemplates("com.ricardococati.carga.templates");
   }
 
   @Test

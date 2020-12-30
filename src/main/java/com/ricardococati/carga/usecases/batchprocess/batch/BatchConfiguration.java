@@ -5,7 +5,7 @@ import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_SUCESSO;
 
 import com.ricardococati.carga.config.ControleArquivoConfig;
-import com.ricardococati.carga.entities.domains.Arquivo;
+import com.ricardococati.carga.entities.domains.arquivo.Arquivo;
 import com.ricardococati.carga.usecases.batchprocess.decider.BMFCargaDecider;
 import com.ricardococati.carga.usecases.batchprocess.processor.BMFCargaItemProcessor;
 import com.ricardococati.carga.usecases.batchprocess.processor.BMFCargaValidaEstruturaArquivoProcessor;

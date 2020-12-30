@@ -1,8 +1,8 @@
 package com.ricardococati.carga.usecases.batchprocess.tasklet;
 
 import com.ricardococati.carga.entities.enums.CaminhoArquivoEnum;
-import com.ricardococati.carga.usecases.GerenciadorArquivosService;
-import com.ricardococati.carga.usecases.impl.GerenciadorArquivosServiceImpl;
+import com.ricardococati.carga.usecases.arquivo.GerenciadorArquivosService;
+import com.ricardococati.carga.usecases.arquivo.impl.GerenciadorArquivosServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.batch.core.StepContribution;

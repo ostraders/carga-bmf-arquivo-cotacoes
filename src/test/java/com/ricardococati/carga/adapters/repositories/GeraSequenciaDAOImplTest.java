@@ -1,6 +1,6 @@
 package com.ricardococati.carga.adapters.repositories;
 
-import com.ricardococati.carga.adapters.repositories.impl.GeraSequenciaDAOImpl;
+import com.ricardococati.carga.adapters.repositories.gerasequencia.impl.GeraSequenciaDAOImpl;
 import com.ricardococati.carga.config.BaseJdbcTest;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

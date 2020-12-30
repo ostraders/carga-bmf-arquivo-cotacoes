@@ -189,21 +189,29 @@
                   <excludes>
                     <exclude>com.ricardococati.carga.Application</exclude>
                     <exclude>com.ricardococati.carga.config.*</exclude>
-                    <exclude>com.ricardococati.carga.adapters.controller.converter.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.controllers.splitinplit.converter.*</exclude>
+                    <exclude>com.ricardococati.carga.usecases.cotacao.converter.*</exclude>
+                    <exclude>com.ricardococati.carga.usecases.header.converter.*</exclude>
                     <exclude>com.ricardococati.carga.usecases.batchprocess.*</exclude>
                     <exclude>com.ricardococati.carga.config.*</exclude>
                     <exclude>com.ricardococati.carga.entities.*</exclude>
                     <exclude>com.ricardococati.carga.utils.*</exclude>
-                    <exclude>com.ricardococati.carga.adapters.repositories.sqlutil.*</exclude>
-                    <exclude>com.ricardococati.carga.adapters.repositories.mapper.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.ativo.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.calendario.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.cotacao.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.gerasequencia.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.header.sqlutil.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.ativo.mapper.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.candlestick.mapper.*</exclude>
                     <exclude>com.ricardococati.carga.adapters.scheduler.*</exclude>
                     <exclude>com.ricardococati.carga.adapters.message.*</exclude>
-                    <exclude>com.ricardococati.carga.usecases.impl.DescompactarArquivoServiceImpl</exclude>
-                    <exclude>com.ricardococati.carga.usecases.impl.DownloadArquivoServiceImpl</exclude>
-                    <exclude>com.ricardococati.carga.usecases.impl.GerenciadorArquivosServiceImpl</exclude>
-                    <exclude>com.ricardococati.carga.usecases.impl.IntegrationServiceImpl</exclude>
-                    <exclude>com.ricardococati.carga.usecases.impl.BuildCandlestickSemanalServiceImpl</exclude>
-                    <exclude>com.ricardococati.carga.usecases.impl.CalculaCandlestickSemanalAsyncServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.arquivo.impl.DescompactarArquivoServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.arquivo.impl.DownloadArquivoServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.arquivo.impl.GerenciadorArquivosServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.integracao.impl.IntegrationServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.candlestick.impl.BuildCandlestickSemanalServiceImpl</exclude>
+                    <exclude>com.ricardococati.carga.usecases.candlestick.impl.CalculaCandlestickSemanalAsyncServiceImpl</exclude>
                   </excludes>
                   <limits>
                     <limit>

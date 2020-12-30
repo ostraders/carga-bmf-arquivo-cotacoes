@@ -1,11 +1,11 @@
 package com.ricardococati.carga.usecases.batchprocess.writer;
 
 import com.ricardococati.carga.config.ControleArquivoConfig;
-import com.ricardococati.carga.entities.domains.Arquivo;
-import com.ricardococati.carga.entities.domains.Cotacao;
-import com.ricardococati.carga.entities.domains.Header;
-import com.ricardococati.carga.usecases.BMFCargaCotacaoService;
-import com.ricardococati.carga.usecases.BMFCargaHeaderService;
+import com.ricardococati.carga.entities.domains.arquivo.Arquivo;
+import com.ricardococati.carga.entities.domains.cotacao.Cotacao;
+import com.ricardococati.carga.entities.domains.header.Header;
+import com.ricardococati.carga.usecases.cotacao.BMFCargaCotacaoService;
+import com.ricardococati.carga.usecases.header.BMFCargaHeaderService;
 import java.util.List;
 import java.util.Objects;
 import lombok.Data;

@@ -1,6 +1,8 @@
 package com.ricardococati.carga.usecases;
 
-import com.ricardococati.carga.usecases.impl.CalculaCandlestickSemanalAsyncServiceImpl;
+import com.ricardococati.carga.usecases.candlestick.CalculaCandlestickSemanalByDataService;
+import com.ricardococati.carga.usecases.candlestick.CalculaCandlestickSemanalService;
+import com.ricardococati.carga.usecases.candlestick.impl.CalculaCandlestickSemanalAsyncServiceImpl;
 import java.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-import com.ricardococati.carga.adapters.repositories.impl.CalendarioFeriadoDAOImpl;
+import com.ricardococati.carga.adapters.repositories.calendario.impl.CalendarioFeriadoDAOImpl;
 import com.ricardococati.carga.config.BaseJdbcTest;
-import com.ricardococati.carga.adapters.repositories.sqlutil.CalendarioFeriadoSQLUtil;
+import com.ricardococati.carga.adapters.repositories.calendario.sqlutil.CalendarioFeriadoSQLUtil;
 import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Rule;

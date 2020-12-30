@@ -4,9 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-import com.ricardococati.carga.adapters.repositories.CalendarioFeriadoDAO;
+import com.ricardococati.carga.adapters.repositories.calendario.CalendarioFeriadoDAO;
 import com.ricardococati.carga.entities.response.BaixarArquivo;
-import com.ricardococati.carga.usecases.impl.BaixarArquivoServiceImpl;
+import com.ricardococati.carga.usecases.arquivo.DescompactarArquivoService;
+import com.ricardococati.carga.usecases.arquivo.DownloadArquivoService;
+import com.ricardococati.carga.usecases.arquivo.impl.BaixarArquivoServiceImpl;
 import java.time.LocalDate;
 import org.junit.Rule;
 import org.junit.Test;

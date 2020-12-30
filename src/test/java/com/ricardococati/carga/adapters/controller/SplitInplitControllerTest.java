@@ -5,9 +5,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ricardococati.carga.adapters.controllers.SplitInplitController;
-import com.ricardococati.carga.usecases.AtualizarCandlesticksService;
-import com.ricardococati.carga.utils.converter.SplitInplitConverter;
+import com.ricardococati.carga.adapters.controllers.splitinplit.SplitInplitController;
+import com.ricardococati.carga.usecases.candlestick.AtualizarCandlesticksService;
+import com.ricardococati.carga.adapters.controllers.splitinplit.converter.SplitInplitConverter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

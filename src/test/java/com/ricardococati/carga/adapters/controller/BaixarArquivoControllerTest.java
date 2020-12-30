@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ricardococati.carga.adapters.controllers.BaixarArquivoController;
+import com.ricardococati.carga.adapters.controllers.arquivo.BaixarArquivoController;
 import com.ricardococati.carga.entities.response.BaixarArquivo;
-import com.ricardococati.carga.usecases.BaixarArquivoService;
+import com.ricardococati.carga.usecases.arquivo.BaixarArquivoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
