@@ -25,7 +25,8 @@ spring:
     checkLocation: false
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
-    baseline-on-migrate: false
+    baseline-on-migrate: true
+    validate-on-migrate: false
     schemas: 'public'
   jackson:
     serialization:

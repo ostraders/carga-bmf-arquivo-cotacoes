@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class FlywayConfigurationCarga extends FlywayAutoConfiguration {
+public class FlywayConfiguration extends FlywayAutoConfiguration {
 
   private final DataSource dataSource;
 

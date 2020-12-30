@@ -1,4 +1,0 @@
-# Spring properties
-spring:
-  application:
-    name: carga-bmf-arquivo-cotacoes

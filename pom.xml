@@ -6,11 +6,12 @@
 
   <groupId>com.ricardococati</groupId>
   <artifactId>carga-bmf-arquivo-cotacoes</artifactId>
-  <packaging>pom</packaging>
   <version>2.0.0-SNAPSHOT</version>
+  <name>carga-bmf-arquivo-cotacoes</name>
+  <description>Projeto de carga dos arquivos de cotações da BMF</description>
 
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>11</java.version>
     <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
     <lombok.version>1.18.16</lombok.version>
     <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
@@ -22,6 +23,7 @@
     <spring.profiles.active>develop</spring.profiles.active>
     <docker.image.prefix>springboot</docker.image.prefix>
     <flyway-core.version>3.2</flyway-core.version>
+    <commons-dbcp.version>1.4</commons-dbcp.version>
     <springfox-swagger2.version>2.6.1</springfox-swagger2.version>
     <fixture-factory.version>3.1.0</fixture-factory.version>
     <jacoco-plugin.version>0.8.5</jacoco-plugin.version>
@@ -100,6 +102,11 @@
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
       <version>${flyway-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>${commons-dbcp.version}</version>
     </dependency>
     <dependency>
       <groupId>br.com.six2six</groupId>
