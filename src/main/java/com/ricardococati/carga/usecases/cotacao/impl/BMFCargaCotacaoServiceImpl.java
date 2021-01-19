@@ -1,6 +1,8 @@
 package com.ricardococati.carga.usecases.cotacao.impl;
 
-import com.ricardococati.carga.adapters.message.event.CandlestickEventListener;
+import static java.util.Objects.nonNull;
+
+import com.ricardococati.carga.adapters.message.action.CandlestickActionListener;
 import com.ricardococati.carga.adapters.message.topic.TopicosDiarioSemanal;
 import com.ricardococati.carga.adapters.repositories.ativo.AtivoBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioInserirDAO;
@@ -15,15 +17,12 @@ import com.ricardococati.carga.usecases.cotacao.BMFCargaCotacaoService;
 import com.ricardococati.carga.usecases.cotacao.converter.CandlestickConverter;
 import com.ricardococati.carga.usecases.cotacao.converter.CotacaoConverter;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
+import java.util.List;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Objects;
-
-import static java.util.Objects.nonNull;
 
 @Slf4j
 @Service
@@ -38,7 +37,7 @@ public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
   private final AtivoBuscarDAO ativoBuscarDAO;
   private final CotacaoConverter convertCot;
   private final ControlaIdArquivoUtil idArquivoUtil;
-  private final CandlestickEventListener listener;
+  private final CandlestickActionListener listener;
 
   @Override
   public Boolean insereDados(final Cotacao cotacao) throws Exception {

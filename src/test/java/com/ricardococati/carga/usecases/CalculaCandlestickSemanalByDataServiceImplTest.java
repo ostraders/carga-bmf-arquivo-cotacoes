@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.carga.adapters.message.event.CandlestickEventListener;
+import com.ricardococati.carga.adapters.message.action.CandlestickActionListener;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickSemanalInserirDAO;
 import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
@@ -48,7 +48,7 @@ public class CalculaCandlestickSemanalByDataServiceImplTest {
   @Mock
   private CandlestickDiarioBuscarDAO diarioDAO;
   @Mock
-  private CandlestickEventListener listener;
+  private CandlestickActionListener listener;
   @Mock
   private CandlestickConverter candlestickConverter;
   @Mock

@@ -8,7 +8,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.carga.adapters.message.event.CandlestickEventListener;
+import com.ricardococati.carga.adapters.message.action.impl.CandlestickActionListenerImpl;
 import com.ricardococati.carga.adapters.repositories.ativo.AtivoBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioInserirDAO;
 import com.ricardococati.carga.adapters.repositories.cotacao.CotacaoInserirDAO;
@@ -49,7 +49,7 @@ public class BMFCargaCotacaoServiceImplTest {
   @Mock
   private ControlaIdArquivoUtil idArquivoUtil;
   @Mock
-  private CandlestickEventListener listener;
+  private CandlestickActionListenerImpl listener;
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 

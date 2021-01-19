@@ -142,13 +142,25 @@ docker-compose up -d
 echo "AGUARDA 5 SEGUNDOS"
 sleep 5
 
-echo "CRIANDO TÓPICOS NO KAFKA DIARIO"
+echo "CRIANDO TÓPICOS NO KAFKA - CANDLESTICK-DIARIO"
 docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-diario
 
 echo "AGUARDA 5 SEGUNDOS"
 sleep 5
 
-echo "CRIANDO TÓPICOS NO KAFKA SEMANAL"
+echo "CRIANDO TÓPICOS NO KAFKA - CANDLESTICK-SEMANAL"
 docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic candlestick-semanal
+
+echo "AGUARDA 5 SEGUNDOS"
+sleep 5
+
+echo "CRIANDO TÓPICOS NO KAFKA - RECOMENDACAO-DIARIA"
+docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic recomendacao-diaria
+
+echo "AGUARDA 5 SEGUNDOS"
+sleep 5
+
+echo "CRIANDO TÓPICOS NO KAFKA - RECOMENDACAO-SEMANAL"
+docker exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic recomendacao-semanal
 
 exit 1

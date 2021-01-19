@@ -1,21 +1,23 @@
-package com.ricardococati.carga.adapters.message.event;
+package com.ricardococati.carga.adapters.message.action.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ricardococati.carga.adapters.message.action.CandlestickActionListener;
 import com.ricardococati.carga.adapters.message.sender.KafkaSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 @Slf4j
-public class CandlestickEventListener {
+public class CandlestickActionListenerImpl implements CandlestickActionListener {
 
   private final KafkaSender kafkaSender;
 
   private final ObjectMapper om;
 
+  @Override
   public void onAfterSave(final Object event, String topicName) {
       final String payload = serialize(event);
       kafkaSender.send(payload, topicName);

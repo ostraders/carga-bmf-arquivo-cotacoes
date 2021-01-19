@@ -2,7 +2,7 @@ package com.ricardococati.carga.usecases.candlestick.impl;
 
 import static java.util.Objects.nonNull;
 
-import com.ricardococati.carga.adapters.message.event.CandlestickEventListener;
+import com.ricardococati.carga.adapters.message.action.CandlestickActionListener;
 import com.ricardococati.carga.adapters.message.topic.TopicosDiarioSemanal;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickSemanalInserirDAO;
@@ -28,7 +28,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
 
   private final CandlestickSemanalInserirDAO inserirSemanalDAO;
   private final CandlestickDiarioBuscarDAO diarioDAO;
-  private final CandlestickEventListener listener;
+  private final CandlestickActionListener listener;
   private final CandlestickConverter candlestickConverter;
   private final BuildCandlestickSemanalService buildSemanal;
 
