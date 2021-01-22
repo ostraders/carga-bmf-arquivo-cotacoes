@@ -1,18 +1,17 @@
-package com.ricardococati.carga.usecases.batchprocess.batch;
+package com.ricardococati.carga.config;
 
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_ERRO;
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_EXECUCAO;
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_SUCESSO;
 
-import com.ricardococati.carga.config.ControleArquivoConfig;
 import com.ricardococati.carga.entities.domains.arquivo.Arquivo;
-import com.ricardococati.carga.usecases.batchprocess.decider.BMFCargaDecider;
-import com.ricardococati.carga.usecases.batchprocess.processor.BMFCargaItemProcessor;
-import com.ricardococati.carga.usecases.batchprocess.processor.BMFCargaValidaEstruturaArquivoProcessor;
-import com.ricardococati.carga.usecases.batchprocess.read.BMFCargaItemReader;
+import com.ricardococati.carga.usecases.batchprocess.decider.CargaDecider;
+import com.ricardococati.carga.usecases.batchprocess.processor.CargaItemProcessor;
+import com.ricardococati.carga.usecases.batchprocess.processor.CargaValidaEstruturaArquivoProcessor;
+import com.ricardococati.carga.usecases.batchprocess.read.CargaItemReader;
 import com.ricardococati.carga.usecases.batchprocess.tasklet.MoveArquivosTasklet;
 import com.ricardococati.carga.usecases.batchprocess.validator.VerificadorArquivoSkipper;
-import com.ricardococati.carga.usecases.batchprocess.writer.BMFCargaItemWriter;
+import com.ricardococati.carga.usecases.batchprocess.writer.CargaItemWriter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -36,14 +35,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableBatchProcessing
 @RequiredArgsConstructor
-public class BatchConfiguration {
+public class BatchConfig {
 
   private final JobBuilderFactory jobBuilderFactory;
   private final StepBuilderFactory stepBuilderFactory;
   private final ControleArquivoConfig arquivoConfig;
-  private final BMFCargaItemWriter itemWriter;
-  private final BMFCargaItemReader itemReader;
-  private final BMFCargaItemProcessor itemProcessor;
+  private final CargaItemWriter itemWriter;
+  private final CargaItemReader itemReader;
+  private final CargaItemProcessor itemProcessor;
 
   @Bean
   public Job jobExecutionBatch(
@@ -51,7 +50,7 @@ public class BatchConfiguration {
       @Qualifier("step2_LerProcessarEscreverArquivo") Step step2_LerProcessarEscreverArquivo,
       @Qualifier("step3_MoverArquivoParaSucesso") Step step3_MoverArquivoParaSucesso,
       @Qualifier("step4_MoverArquivoParaErro") Step step4_MoverArquivoParaErro,
-      BMFCargaDecider bmfCargaDecider) throws Exception {
+      CargaDecider cargaDecider) throws Exception {
     log.info("Executando jobExecutionBatch [SPRING BATCH]");
 
     FlowBuilder<Flow> flowBuilder = new FlowBuilder<Flow>("flowJobExecutionBatch");
@@ -61,11 +60,11 @@ public class BatchConfiguration {
         .on(FlowExecutionStatus.FAILED.getName())
         .to(step4_MoverArquivoParaErro)
         .from(step1_ValidaEstruturaArquivo)
-        .next(bmfCargaDecider)
+        .next(cargaDecider)
         .on(FlowExecutionStatus.COMPLETED.getName())
         .to(step2_LerProcessarEscreverArquivo)
         .next(step3_MoverArquivoParaSucesso)
-        .from(bmfCargaDecider)
+        .from(cargaDecider)
         .on(FlowExecutionStatus.FAILED.getName())
         .to(step4_MoverArquivoParaErro).build();
 
@@ -88,8 +87,8 @@ public class BatchConfiguration {
   }
 
   @Bean
-  public BMFCargaValidaEstruturaArquivoProcessor processorValidaEstruturaArquivo() {
-    return new BMFCargaValidaEstruturaArquivoProcessor(arquivoConfig);
+  public CargaValidaEstruturaArquivoProcessor processorValidaEstruturaArquivo() {
+    return new CargaValidaEstruturaArquivoProcessor(arquivoConfig);
   }
 
   @Bean
@@ -109,7 +108,7 @@ public class BatchConfiguration {
   }
 
   @Bean
-  public BMFCargaItemProcessor bmfItemProcessor() {
+  public CargaItemProcessor bmfItemProcessor() {
     return itemProcessor;
   }
 
@@ -137,7 +136,7 @@ public class BatchConfiguration {
   }
 
   @Bean
-  public BMFCargaItemWriter bmfItemWriter() {
+  public CargaItemWriter bmfItemWriter() {
     return itemWriter;
   }
 

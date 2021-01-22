@@ -1,9 +1,9 @@
-package com.ricardococati.carga.adapters.message.action.impl;
+package com.ricardococati.carga.adapters.messages.action.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ricardococati.carga.adapters.message.action.CandlestickActionListener;
-import com.ricardococati.carga.adapters.message.sender.KafkaSender;
+import com.ricardococati.carga.adapters.messages.action.CandlestickActionListener;
+import com.ricardococati.carga.adapters.messages.sender.KafkaSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

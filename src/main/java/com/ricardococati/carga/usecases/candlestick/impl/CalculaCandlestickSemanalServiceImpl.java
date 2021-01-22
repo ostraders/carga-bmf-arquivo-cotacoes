@@ -2,8 +2,8 @@ package com.ricardococati.carga.usecases.candlestick.impl;
 
 import static java.util.Objects.nonNull;
 
-import com.ricardococati.carga.adapters.message.action.CandlestickActionListener;
-import com.ricardococati.carga.adapters.message.topic.TopicosDiarioSemanal;
+import com.ricardococati.carga.adapters.messages.action.CandlestickActionListener;
+import com.ricardococati.carga.adapters.messages.topic.TopicosDiarioSemanal;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickSemanalInserirDAO;
 import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;

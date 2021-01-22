@@ -4,7 +4,7 @@ import com.ricardococati.carga.adapters.repositories.header.HeaderInserirDAO;
 import com.ricardococati.carga.config.ControleArquivoConfig;
 import com.ricardococati.carga.entities.domains.header.Header;
 import com.ricardococati.carga.entities.domains.header.dto.HeaderDTO;
-import com.ricardococati.carga.usecases.header.BMFCargaHeaderService;
+import com.ricardococati.carga.usecases.header.CargaHeaderService;
 import com.ricardococati.carga.usecases.header.converter.HeaderConverter;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class BMFCargaHeaderServiceImpl implements BMFCargaHeaderService {
+public class CargaHeaderServiceImpl implements CargaHeaderService {
 
   private final ControleArquivoConfig arquivoConfig;
   private final HeaderInserirDAO headerInserirDAO;

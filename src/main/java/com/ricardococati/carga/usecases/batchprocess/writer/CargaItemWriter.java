@@ -4,8 +4,8 @@ import com.ricardococati.carga.config.ControleArquivoConfig;
 import com.ricardococati.carga.entities.domains.arquivo.Arquivo;
 import com.ricardococati.carga.entities.domains.cotacao.Cotacao;
 import com.ricardococati.carga.entities.domains.header.Header;
-import com.ricardococati.carga.usecases.cotacao.BMFCargaCotacaoService;
-import com.ricardococati.carga.usecases.header.BMFCargaHeaderService;
+import com.ricardococati.carga.usecases.cotacao.CargaCotacaoService;
+import com.ricardococati.carga.usecases.header.CargaHeaderService;
 import java.util.List;
 import java.util.Objects;
 import lombok.Data;
@@ -18,10 +18,10 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @RequiredArgsConstructor
-public class BMFCargaItemWriter implements ItemWriter<Arquivo> {
+public class CargaItemWriter implements ItemWriter<Arquivo> {
 
-  private final BMFCargaCotacaoService cargaCotacaoService;
-  private final BMFCargaHeaderService cargaHeaderService;
+  private final CargaCotacaoService cargaCotacaoService;
+  private final CargaHeaderService cargaHeaderService;
   private final ControleArquivoConfig arquivoConfig;
 
   @Override

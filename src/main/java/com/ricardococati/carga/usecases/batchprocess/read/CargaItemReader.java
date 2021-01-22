@@ -2,9 +2,9 @@ package com.ricardococati.carga.usecases.batchprocess.read;
 
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_PROCESSO;
 
-import com.ricardococati.carga.usecases.batchprocess.layouts.CotacoesDosPapeisPorDiaLayoutImpl;
-import com.ricardococati.carga.usecases.batchprocess.layouts.HeaderBMFLayoutImpl;
-import com.ricardococati.carga.usecases.batchprocess.layouts.TraillerBMFLayoutImpl;
+import com.ricardococati.carga.usecases.batchprocess.layouts.CotacaoLayoutImpl;
+import com.ricardococati.carga.usecases.batchprocess.layouts.HeaderLayoutImpl;
+import com.ricardococati.carga.usecases.batchprocess.layouts.TraillerLayoutImpl;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<FieldSet>>, ItemStream {
+public class CargaItemReader implements ItemReader<MultiResourceItemReader<FieldSet>>, ItemStream {
 
 	private final static String HEADER = "00*";
 	private final static String COTACAO = "01*";
@@ -80,13 +80,13 @@ public class BMFCargaItemReader implements ItemReader<MultiResourceItemReader<Fi
 	private Map<String, LineTokenizer> setTokenizers() {
 		final Map<String, LineTokenizer> tokenizers = new HashMap<>();
 
-		HeaderBMFLayoutImpl headerLayout = new HeaderBMFLayoutImpl();
+		HeaderLayoutImpl headerLayout = new HeaderLayoutImpl();
 		tokenizers.put(HEADER, headerLayout.configurarParser());
 
-		CotacoesDosPapeisPorDiaLayoutImpl cotacao = new CotacoesDosPapeisPorDiaLayoutImpl();
+		CotacaoLayoutImpl cotacao = new CotacaoLayoutImpl();
 		tokenizers.put(COTACAO, cotacao.configurarParser());
 
-		TraillerBMFLayoutImpl trailerLayout = new TraillerBMFLayoutImpl();
+		TraillerLayoutImpl trailerLayout = new TraillerLayoutImpl();
 		tokenizers.put(TRAILER, trailerLayout.configurarParser());
 
 		return tokenizers;

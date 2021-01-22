@@ -7,9 +7,9 @@ import com.ricardococati.carga.config.ControleArquivoConfig;
 import com.ricardococati.carga.entities.domains.arquivo.Arquivo;
 import com.ricardococati.carga.entities.enums.TipoRegistroEnum;
 import com.ricardococati.carga.entities.enums.TiposCamposEnum;
-import com.ricardococati.carga.usecases.batchprocess.layouts.CotacoesDosPapeisPorDiaLayoutImpl;
-import com.ricardococati.carga.usecases.batchprocess.layouts.HeaderBMFLayoutImpl;
-import com.ricardococati.carga.usecases.batchprocess.layouts.TraillerBMFLayoutImpl;
+import com.ricardococati.carga.usecases.batchprocess.layouts.CotacaoLayoutImpl;
+import com.ricardococati.carga.usecases.batchprocess.layouts.HeaderLayoutImpl;
+import com.ricardococati.carga.usecases.batchprocess.layouts.TraillerLayoutImpl;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -23,22 +23,22 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<FieldSet, Arquivo> {
+public class CargaValidaEstruturaArquivoProcessor implements ItemProcessor<FieldSet, Arquivo> {
 
-  private HeaderBMFLayoutImpl header = null;
-  private CotacoesDosPapeisPorDiaLayoutImpl cotacoes;
-  private TraillerBMFLayoutImpl trailler;
+  private HeaderLayoutImpl header = null;
+  private CotacaoLayoutImpl cotacoes;
+  private TraillerLayoutImpl trailler;
 
   private final ControleArquivoConfig arquivoConfig;
 
   @Override
   public Arquivo process(FieldSet line) throws Exception {
     try {
-      BMFUtil bmfUtil = new BMFUtil();
-      bmfUtil.setTrackingID(UUID.randomUUID().toString());
-      bmfUtil.setLine(line);
-      bmfUtil.setTipoRegistro(line.readRawString("tipoRegistro"));
-      validarArquivo(bmfUtil);
+      ValidaUtil validaUtil = new ValidaUtil();
+      validaUtil.setTrackingID(UUID.randomUUID().toString());
+      validaUtil.setLine(line);
+      validaUtil.setTipoRegistro(line.readRawString("tipoRegistro"));
+      validarArquivo(validaUtil);
     } catch (Exception ex) {
       arquivoConfig.setArquivoValido(false);
       String mensagemErro = "OCORREU UM ERRO NA VALIDACAO DO ARQUIVO -  ControleProcessamentoErro - process";
@@ -47,10 +47,10 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
     return null;
   }
 
-  private void validarArquivo(BMFUtil bmfUtil) throws Exception {
+  private void validarArquivo(ValidaUtil validaUtil) throws Exception {
     try {
-      String[] lineNameField = bmfUtil.getLine().getNames();
-      String[] lineValueField = bmfUtil.getLine().getValues();
+      String[] lineNameField = validaUtil.getLine().getNames();
+      String[] lineValueField = validaUtil.getLine().getValues();
 
       String nameField = "";
       String valueField = "";
@@ -58,7 +58,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
       for (int i = 0; i < lineValueField.length; i++) {
         nameField = lineNameField[i];
         valueField = lineValueField[i];
-        validarTipagemDosCampos(nameField, valueField, bmfUtil);
+        validarTipagemDosCampos(nameField, valueField, validaUtil);
       }
     } catch (Exception e) {
       log.error("Erro na execução do método validarArquivo: " + e.getMessage());
@@ -66,21 +66,21 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
     }
   }
 
-  private void validarTipagemDosCampos(String nomeCampo, String valorCampo, BMFUtil bmfUtil)
+  private void validarTipagemDosCampos(String nomeCampo, String valorCampo, ValidaUtil validaUtil)
       throws Exception {
-    header = new HeaderBMFLayoutImpl();
-    cotacoes = new CotacoesDosPapeisPorDiaLayoutImpl();
-    trailler = new TraillerBMFLayoutImpl();
+    header = new HeaderLayoutImpl();
+    cotacoes = new CotacaoLayoutImpl();
+    trailler = new TraillerLayoutImpl();
 
     try {
 
       TiposCamposEnum tipoCampo = null;
 
-      if (bmfUtil.getTipoRegistro().equals(TipoRegistroEnum.HEADER.getCod())) {
+      if (validaUtil.getTipoRegistro().equals(TipoRegistroEnum.HEADER.getCod())) {
         tipoCampo = header.getTipos().get(nomeCampo);
-      } else if (TipoRegistroEnum.DETALHE.getCod().equals(bmfUtil.getTipoRegistro())) {
+      } else if (TipoRegistroEnum.DETALHE.getCod().equals(validaUtil.getTipoRegistro())) {
         tipoCampo = cotacoes.getTipos().get(nomeCampo);
-      } else if (bmfUtil.getTipoRegistro().equals(TipoRegistroEnum.TRAILER.getCod())) {
+      } else if (validaUtil.getTipoRegistro().equals(TipoRegistroEnum.TRAILER.getCod())) {
         tipoCampo = trailler.getTipos().get(nomeCampo);
       }
 
@@ -97,7 +97,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
       String mensagemErro =
-          "Ocorreu um erro ao validar o " + "LAYOUT " + bmfUtil.getTipoRegistro() + " Campo "
+          "Ocorreu um erro ao validar o " + "LAYOUT " + validaUtil.getTipoRegistro() + " Campo "
               + nomeCampo + " Numerico : ";
       log.info(mensagemErro + e.toString());
     }
@@ -105,7 +105,7 @@ public class BMFCargaValidaEstruturaArquivoProcessor implements ItemProcessor<Fi
   }
 
   @Data
-  private class BMFUtil {
+  private class ValidaUtil {
 
     private String tipoRegistro;
     private String segmento;

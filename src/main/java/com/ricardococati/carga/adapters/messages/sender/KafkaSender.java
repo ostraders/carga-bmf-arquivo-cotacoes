@@ -1,4 +1,4 @@
-package com.ricardococati.carga.adapters.message.sender;
+package com.ricardococati.carga.adapters.messages.sender;
 
 public interface KafkaSender {
 

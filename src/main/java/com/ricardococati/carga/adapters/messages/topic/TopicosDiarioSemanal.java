@@ -1,4 +1,4 @@
-package com.ricardococati.carga.adapters.message.topic;
+package com.ricardococati.carga.adapters.messages.topic;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

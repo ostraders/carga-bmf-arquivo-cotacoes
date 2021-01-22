@@ -8,14 +8,14 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.ricardococati.carga.adapters.message.action.impl.CandlestickActionListenerImpl;
+import com.ricardococati.carga.adapters.messages.action.impl.CandlestickActionListenerImpl;
 import com.ricardococati.carga.adapters.repositories.ativo.AtivoBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioInserirDAO;
 import com.ricardococati.carga.adapters.repositories.cotacao.CotacaoInserirDAO;
 import com.ricardococati.carga.config.ControleArquivoConfig;
 import com.ricardococati.carga.entities.domains.ativo.Ativo;
 import com.ricardococati.carga.entities.domains.cotacao.Cotacao;
-import com.ricardococati.carga.usecases.cotacao.impl.BMFCargaCotacaoServiceImpl;
+import com.ricardococati.carga.usecases.cotacao.impl.CargaCotacaoServiceImpl;
 import com.ricardococati.carga.usecases.cotacao.converter.CandlestickConverter;
 import com.ricardococati.carga.usecases.cotacao.converter.CotacaoConverter;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
@@ -30,10 +30,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BMFCargaCotacaoServiceImplTest {
+public class CargaCotacaoServiceImplTest {
 
   @InjectMocks
-  private BMFCargaCotacaoServiceImpl target;
+  private CargaCotacaoServiceImpl target;
   @Mock
   private CandlestickDiarioInserirDAO candlestickDiarioDAO;
   @Mock

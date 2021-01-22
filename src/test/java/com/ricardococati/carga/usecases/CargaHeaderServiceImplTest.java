@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import com.ricardococati.carga.adapters.repositories.header.HeaderInserirDAO;
 import com.ricardococati.carga.config.ControleArquivoConfig;
 import com.ricardococati.carga.entities.domains.header.Header;
-import com.ricardococati.carga.usecases.header.impl.BMFCargaHeaderServiceImpl;
+import com.ricardococati.carga.usecases.header.impl.CargaHeaderServiceImpl;
 import com.ricardococati.carga.usecases.header.converter.HeaderConverter;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
 import java.time.LocalDate;
@@ -23,10 +23,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BMFCargaHeaderServiceImplTest {
+public class CargaHeaderServiceImplTest {
 
   @InjectMocks
-  private BMFCargaHeaderServiceImpl target;
+  private CargaHeaderServiceImpl target;
   @Mock
   private ControleArquivoConfig arquivoConfig;
   @Mock

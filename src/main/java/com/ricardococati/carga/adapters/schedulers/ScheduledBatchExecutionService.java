@@ -1,9 +1,9 @@
-package com.ricardococati.carga.adapters.scheduler;
+package com.ricardococati.carga.adapters.schedulers;
 
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA;
 
 import com.ricardococati.carga.usecases.candlestick.CalculaCandlestickSemanalService;
-import com.ricardococati.carga.usecases.integracao.IntegrationService;
+import com.ricardococati.carga.usecases.integracao.IntegracaoService;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ScheduledBatchExecutionService {
 
-  private final IntegrationService service;
+  private final IntegracaoService service;
   private final CalculaCandlestickSemanalService candlestickSemanalService;
   private final ControlaIdArquivoUtil idArquivoUtil;
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");

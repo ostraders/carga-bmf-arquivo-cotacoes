@@ -1,6 +1,6 @@
 package com.ricardococati.carga.usecases.integracao;
 
-public interface IntegrationService {
+public interface IntegracaoService {
 
 	void execute() throws Exception;
 

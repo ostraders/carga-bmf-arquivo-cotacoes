@@ -5,9 +5,9 @@ import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_SUCESSO;
 
 import com.ricardococati.carga.adapters.repositories.gerasequencia.GeraSequenciaDAO;
-import com.ricardococati.carga.usecases.cotacao.BMFCargaCotacaoService;
+import com.ricardococati.carga.usecases.cotacao.CargaCotacaoService;
 import com.ricardococati.carga.usecases.arquivo.GerenciadorArquivosService;
-import com.ricardococati.carga.usecases.integracao.IntegrationService;
+import com.ricardococati.carga.usecases.integracao.IntegracaoService;
 import java.io.File;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Data
 @Service
 @RequiredArgsConstructor
-public class IntegrationServiceImpl implements IntegrationService {
+public class IntegracaoServiceImpl implements IntegracaoService {
 
   @Qualifier("jobExecutionBatch")
   private final Job jobExecutionBatch;
@@ -33,7 +33,7 @@ public class IntegrationServiceImpl implements IntegrationService {
 
   private JobExecution execution;
 
-  private final BMFCargaCotacaoService cargaService;
+  private final CargaCotacaoService cargaService;
 
   private final GerenciadorArquivosService gerenciadorArquivos;
 

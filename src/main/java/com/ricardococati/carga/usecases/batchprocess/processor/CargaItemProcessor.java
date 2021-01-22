@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class BMFCargaItemProcessor implements ItemProcessor<FieldSet, Arquivo>, Serializable {
+public class CargaItemProcessor implements ItemProcessor<FieldSet, Arquivo>, Serializable {
 
 	private static final long serialVersionUID = 1602197886947938991L;
 

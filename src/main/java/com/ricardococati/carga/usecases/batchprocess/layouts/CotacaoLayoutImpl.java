@@ -9,7 +9,7 @@ import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.batch.item.file.transform.Range;
 
 @Data
-public class CotacoesDosPapeisPorDiaLayoutImpl implements LayoutArquivo {
+public class CotacaoLayoutImpl implements LayoutArquivo {
 
   private static final long serialVersionUID = -1550389035997848703L;
 
@@ -71,7 +71,7 @@ public class CotacoesDosPapeisPorDiaLayoutImpl implements LayoutArquivo {
   private static final Range RANGE_CODISI = new Range(231, 242);
   private static final Range RANGE_DISMES = new Range(243, 245);
 
-  public CotacoesDosPapeisPorDiaLayoutImpl() {
+  public CotacaoLayoutImpl() {
     super();
     this.campos = new String[]{TIPREG,
         DTPREG,

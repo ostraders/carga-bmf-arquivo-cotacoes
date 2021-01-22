@@ -1,11 +1,10 @@
-package com.ricardococati.carga.adapters.message.sender.impl;
+package com.ricardococati.carga.adapters.messages.sender.impl;
 
-import com.ricardococati.carga.adapters.message.sender.KafkaSender;
+import com.ricardococati.carga.adapters.messages.sender.KafkaSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 @RequiredArgsConstructor

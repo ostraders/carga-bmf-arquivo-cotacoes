@@ -1,4 +1,4 @@
-package com.ricardococati.carga.adapters.message.action;
+package com.ricardococati.carga.adapters.messages.action;
 
 public interface CandlestickActionListener {
 

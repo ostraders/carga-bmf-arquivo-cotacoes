@@ -2,8 +2,8 @@ package com.ricardococati.carga.usecases.cotacao.impl;
 
 import static java.util.Objects.nonNull;
 
-import com.ricardococati.carga.adapters.message.action.CandlestickActionListener;
-import com.ricardococati.carga.adapters.message.topic.TopicosDiarioSemanal;
+import com.ricardococati.carga.adapters.messages.action.CandlestickActionListener;
+import com.ricardococati.carga.adapters.messages.topic.TopicosDiarioSemanal;
 import com.ricardococati.carga.adapters.repositories.ativo.AtivoBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioInserirDAO;
 import com.ricardococati.carga.adapters.repositories.cotacao.CotacaoInserirDAO;
@@ -13,7 +13,7 @@ import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
 import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiarioMessage;
 import com.ricardococati.carga.entities.domains.cotacao.Cotacao;
 import com.ricardococati.carga.entities.domains.cotacao.dto.CotacaoDTO;
-import com.ricardococati.carga.usecases.cotacao.BMFCargaCotacaoService;
+import com.ricardococati.carga.usecases.cotacao.CargaCotacaoService;
 import com.ricardococati.carga.usecases.cotacao.converter.CandlestickConverter;
 import com.ricardococati.carga.usecases.cotacao.converter.CotacaoConverter;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class BMFCargaCotacaoServiceImpl implements BMFCargaCotacaoService {
+public class CargaCotacaoServiceImpl implements CargaCotacaoService {
 
   private static final String LOTE_PADRAO = "02";
   private final CandlestickDiarioInserirDAO candlestickDiarioDAO;
