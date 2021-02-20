@@ -18,7 +18,7 @@ import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.Candles
 import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.CandlestickSemanalInserirSQLUtil;
 import com.ricardococati.carga.adapters.repositories.cotacao.sqlutil.CotacaoSQLUtil;
 import com.ricardococati.carga.adapters.repositories.header.sqlutil.HeaderSQLUtil;
-import com.ricardococati.carga.util.InserirDadosPrimariosSemanalUtil;
+import com.ricardococati.carga.utils.InserirDadosPrimariosSemanalUtil;
 import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
 import com.ricardococati.carga.entities.domains.candlestick.CandlestickSemanal;
 import com.ricardococati.carga.entities.domains.splitinplit.SplitInplit;

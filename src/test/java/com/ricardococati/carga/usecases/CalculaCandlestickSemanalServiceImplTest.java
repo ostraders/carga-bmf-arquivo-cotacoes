@@ -65,14 +65,13 @@ public class CalculaCandlestickSemanalServiceImplTest {
   public void execute() throws Exception {
     //given
     when(diarioDAO.buscaCodNeg()).thenReturn(Arrays.asList("MGLU3"));
-    when(diarioDAO.buscaCandleDiarioPorCodNegSemanaGerada(any()))
-        .thenReturn(buildListCandleDiario());
+    when(diarioDAO.buscaCandleDiarioPorCodNeg(any())).thenReturn(buildListCandleDiario());
     when(buildSemanal.build(any())).thenReturn(buildCandlestickSemanal());
     when(candlestickConverter.convertMessage(any())).thenCallRealMethod();
     //when
-    Boolean result = target.execute();
-    //then
-    assertTrue(result);
+    List<CandlestickSemanal> resultList = target.execute();
+    // then
+    assertTrue(!resultList.isEmpty());
     verify(this.diarioDAO, times(1)).buscaCodNeg();
   }
 
@@ -81,9 +80,9 @@ public class CalculaCandlestickSemanalServiceImplTest {
     //given
     when(diarioDAO.buscaCodNeg()).thenReturn(null);
     //when
-    Boolean result = target.execute();
+    List<CandlestickSemanal> resultList = target.execute();
     //then
-    assertTrue(result);
+    assertTrue(resultList.isEmpty());
     verify(this.diarioDAO, times(1)).buscaCodNeg();
   }
 
@@ -101,7 +100,7 @@ public class CalculaCandlestickSemanalServiceImplTest {
   public void executeBuscaCandleDiarioPorCodNegSemanaGeradaError() throws Exception {
     //given
     when(diarioDAO.buscaCodNeg()).thenReturn(Arrays.asList("MGLU3"));
-    when(diarioDAO.buscaCandleDiarioPorCodNegSemanaGerada(any()))
+    when(diarioDAO.buscaCandleDiarioPorCodNeg(any()))
         .thenReturn(buildListCandleDiario());
     when(buildSemanal.build(any())).thenThrow(RuntimeException.class);
     this.thrown.expect(Exception.class);
@@ -114,7 +113,7 @@ public class CalculaCandlestickSemanalServiceImplTest {
   public void executeBuildSemanalError() throws Exception {
     //given
     when(diarioDAO.buscaCodNeg()).thenReturn(Arrays.asList("MGLU3"));
-    when(diarioDAO.buscaCandleDiarioPorCodNegSemanaGerada(any()))
+    when(diarioDAO.buscaCandleDiarioPorCodNeg(any()))
         .thenThrow(RuntimeException.class);
     this.thrown.expect(Exception.class);
     this.thrown.expectMessage("Erro ao calcular Candlestick");
@@ -126,7 +125,7 @@ public class CalculaCandlestickSemanalServiceImplTest {
   public void executeIncluirCandlestickSemanalError() throws Exception {
     //given
     when(diarioDAO.buscaCodNeg()).thenReturn(Arrays.asList("MGLU3"));
-    when(diarioDAO.buscaCandleDiarioPorCodNegSemanaGerada(any()))
+    when(diarioDAO.buscaCandleDiarioPorCodNeg(any()))
         .thenReturn(buildListCandleDiario());
     when(buildSemanal.build(any())).thenReturn(buildCandlestickSemanal());
     when(inserirSemanalDAO.incluirCandlestickSemanal(any()))

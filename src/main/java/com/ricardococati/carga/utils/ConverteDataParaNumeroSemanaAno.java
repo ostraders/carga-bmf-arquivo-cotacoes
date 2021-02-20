@@ -14,7 +14,6 @@ public class ConverteDataParaNumeroSemanaAno {
   public static Integer converte(final LocalDate data) {
     SimpleDateFormat formatDataContinua = new SimpleDateFormat("yyyy-MM-dd");
     Calendar calendar = Calendar.getInstance();
-    calendar.setMinimalDaysInFirstWeek(7);
     try {
       Date dateObj = formatDataContinua.parse(data.toString());
       calendar.setTime(dateObj);

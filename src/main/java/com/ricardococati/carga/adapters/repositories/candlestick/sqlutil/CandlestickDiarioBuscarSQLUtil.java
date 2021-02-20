@@ -23,7 +23,7 @@ public class CandlestickDiarioBuscarSQLUtil {
         .addValue("codneg", codneg);
   }
 
-  public String getSelectByCodNegESemana() {
+  public String getSelectByCodNeg() {
     SQLAppender sql = new SQLAppender(100);
     sql.appendSQL(" select ");
     sql.appendSQL("		id_candle_diario, ");
