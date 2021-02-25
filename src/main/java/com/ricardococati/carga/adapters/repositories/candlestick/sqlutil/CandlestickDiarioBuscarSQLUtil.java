@@ -34,6 +34,7 @@ public class CandlestickDiarioBuscarSQLUtil {
     sql.appendSQL("		premin, ");
     sql.appendSQL("		preult, ");
     sql.appendSQL("		semana, ");
+    sql.appendSQL("		id_semana, ");
     sql.appendSQL("		semana_gerada, ");
     sql.appendSQL("		voltot ");
     sql.appendSQL(" from candlestick_diario ");
@@ -52,6 +53,7 @@ public class CandlestickDiarioBuscarSQLUtil {
     sql.appendSQL("		premin, ");
     sql.appendSQL("		preult, ");
     sql.appendSQL("		semana, ");
+    sql.appendSQL("		id_semana, ");
     sql.appendSQL("		semana_gerada, ");
     sql.appendSQL("		voltot ");
     sql.appendSQL(" from candlestick_diario ");

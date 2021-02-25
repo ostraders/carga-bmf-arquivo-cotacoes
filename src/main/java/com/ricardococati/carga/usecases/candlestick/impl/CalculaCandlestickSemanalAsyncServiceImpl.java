@@ -23,7 +23,15 @@ public class CalculaCandlestickSemanalAsyncServiceImpl implements
 
   @Override
   public void execute() throws Exception {
-    executeAsynchronously(null);
+    taskExecutor.execute(() -> {
+      log.info("Inicia task calculaSemanal");
+      try {
+        semanalService.execute();
+      } catch (Exception e) {
+        log.error("Erro ao executar thread: {}", e.getMessage());
+      }
+      log.info("Termina task calculaSemanal");
+    });
   }
 
   @Override
@@ -32,19 +40,7 @@ public class CalculaCandlestickSemanalAsyncServiceImpl implements
   }
 
   public void executeAsynchronously(final LocalDate dtPregao) {
-    taskExecutor.execute(() -> {
-      log.info("Inicia task calculaSemanal");
-      try {
-        if(nonNull(dtPregao)) {
-          semanalServiceByData.execute(dtPregao);
-        } else{
-          semanalService.execute();
-        }
-      } catch (Exception e) {
-        log.error("Erro ao executar thread: {}", e.getMessage());
-      }
-      log.info("Termina task calculaSemanal");
-    });
+    //TODO
   }
 
 }

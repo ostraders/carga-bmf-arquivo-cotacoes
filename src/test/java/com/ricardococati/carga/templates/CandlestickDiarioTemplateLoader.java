@@ -47,6 +47,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.1));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(100000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_002)
@@ -60,6 +61,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.1));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(100000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_003)
@@ -73,6 +75,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.2));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(200000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_004)
@@ -86,6 +89,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.3));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(300000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_005)
@@ -99,6 +103,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.4));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(400000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_006)
@@ -112,6 +117,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.5));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(500000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_007)
@@ -125,6 +131,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.6));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(600000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_008)
@@ -138,6 +145,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.7));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(700000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_009)
@@ -151,6 +159,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.8));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(800000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_010)
@@ -164,6 +173,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.9));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(900000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_011)
@@ -177,6 +187,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.2));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(200000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_012)
@@ -190,6 +201,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.3));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(300000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_013)
@@ -203,6 +215,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.4));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(400000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_014)
@@ -216,6 +229,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.5));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(500000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_015)
@@ -229,6 +243,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.6));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(600000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_016)
@@ -242,6 +257,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.7));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(700000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_017)
@@ -255,6 +271,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.8));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(800000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_018)
@@ -268,6 +285,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.9));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(900000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_019)
@@ -281,6 +299,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.2));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(200000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
         .addTemplate(CANDLESTICK_DIARIO_VALID_020)
@@ -294,6 +313,7 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.3));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(400000.0));
           add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
         }})
     ;

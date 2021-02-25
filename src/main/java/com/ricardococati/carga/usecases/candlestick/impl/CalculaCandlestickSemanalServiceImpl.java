@@ -98,16 +98,14 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
   private Map<String, List<CandlestickDiario>> getCandlestickListToMapStringList(
       final List<CandlestickDiario> dtoList
   ) {
-    Map<String, List<CandlestickDiario>> mapCandlestick =
-        generateMapListNull(dtoList);
+    Map<String, List<CandlestickDiario>> mapCandlestick = generateMapListNull(dtoList);
     mapCandlestick
         .entrySet()
         .forEach(entry -> {
           List<CandlestickDiario> candlestickList = new ArrayList<>();
           dtoList
               .stream()
-              .filter(dto -> entry.getKey()
-                  .equals(dto.getIdSemanaAno() + "#" + dto.getDtpreg().getYear()))
+              .filter(dto -> entry.getKey().equals(dto.getIdSemana()))
               .forEach(dto -> {
                 candlestickList.add(dto);
                 mapCandlestick.replace(entry.getKey(), candlestickList);
@@ -120,8 +118,7 @@ public class CalculaCandlestickSemanalServiceImpl implements CalculaCandlestickS
       List<CandlestickDiario> listcandlestickDiarios) {
     Map<String, List<CandlestickDiario>> mapCandlestick = new HashMap<>();
     for (CandlestickDiario dto : listcandlestickDiarios) {
-      final String strKey = dto.getIdSemanaAno() + "#" + dto.getDtpreg().getYear();
-      mapCandlestick.put(strKey, null);
+      mapCandlestick.put(dto.getIdSemana(), null);
     }
     return mapCandlestick;
   }
