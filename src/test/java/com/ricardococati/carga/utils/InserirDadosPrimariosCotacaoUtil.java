@@ -1,4 +1,4 @@
-package com.ricardococati.carga.util;
+package com.ricardococati.carga.utils;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;

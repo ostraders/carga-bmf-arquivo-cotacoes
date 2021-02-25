@@ -19,6 +19,7 @@ public class CandlestickDiarioInserirSQLUtil {
     sql.appendSQL("		premin, ");
     sql.appendSQL("		preult, ");
     sql.appendSQL("		semana, ");
+    sql.appendSQL("		id_semana, ");
     sql.appendSQL("		semana_gerada, ");
     sql.appendSQL("		voltot) ");
     sql.appendSQL("	values( ");
@@ -30,6 +31,7 @@ public class CandlestickDiarioInserirSQLUtil {
     sql.appendSQL("		:premin, ");
     sql.appendSQL("		:preult, ");
     sql.appendSQL("		:semana, ");
+    sql.appendSQL("		:idSemana, ");
     sql.appendSQL("		:semanaGerada, ");
     sql.appendSQL("		:voltot ");
     sql.appendSQL("   ) ");
@@ -41,6 +43,8 @@ public class CandlestickDiarioInserirSQLUtil {
     sql.appendSQL("		premin = excluded.premin, ");
     sql.appendSQL("		preult = excluded.preult, ");
     sql.appendSQL("		semana = excluded.semana, ");
+    sql.appendSQL("		id_semana = excluded.id_semana, ");
+    sql.appendSQL("		semana_gerada = excluded.semana_gerada, ");
     sql.appendSQL("		voltot = excluded.voltot ");
     return sql.getAppendSQLSemQuebra().toString();
   }
@@ -55,6 +59,7 @@ public class CandlestickDiarioInserirSQLUtil {
         .addValue("premin", candlestickDiarioDTO.getPremin())
         .addValue("preult", candlestickDiarioDTO.getPreult())
         .addValue("semana", candlestickDiarioDTO.getIdSemanaAno())
+        .addValue("idSemana", candlestickDiarioDTO.getIdSemana())
         .addValue("semanaGerada", candlestickDiarioDTO.getSemanaGerada())
         .addValue("voltot", candlestickDiarioDTO.getVoltot());
   }

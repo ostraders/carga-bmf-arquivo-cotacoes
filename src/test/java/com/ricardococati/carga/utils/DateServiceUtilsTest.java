@@ -1,4 +1,4 @@
-package com.ricardococati.carga.util;
+package com.ricardococati.carga.utils;
 
 import static com.ricardococati.carga.utils.DateServiceUtils.hojeEh;
 import static com.ricardococati.carga.utils.DateServiceUtils.obterPrimeiroDiaUtilDaSemana;

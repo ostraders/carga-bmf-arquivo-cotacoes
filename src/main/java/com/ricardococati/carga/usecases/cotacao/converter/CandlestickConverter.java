@@ -26,6 +26,7 @@ public class CandlestickConverter {
           .premax(cotacao.getPremax())
           .voltot(cotacao.getVoltot())
           .idSemanaAno(ConverteDataParaNumeroSemanaAno.converte(cotacao.getDtpreg()))
+          .idSemana(ConverteDataParaNumeroSemanaAno.geraDataInicialEFinalDaSemana(cotacao.getDtpreg()))
           .semanaGerada(false)
           .build();
     }
@@ -51,6 +52,7 @@ public class CandlestickConverter {
         .premax(diarioDTO.getPremax())
         .voltot(diarioDTO.getVoltot())
         .semana(ConverteDataParaNumeroSemanaAno.converte(diarioDTO.getDtpreg()))
+        .idSemana(ConverteDataParaNumeroSemanaAno.geraDataInicialEFinalDaSemana(diarioDTO.getDtpreg()))
         .semanaGerada(false)
         .build();
   }

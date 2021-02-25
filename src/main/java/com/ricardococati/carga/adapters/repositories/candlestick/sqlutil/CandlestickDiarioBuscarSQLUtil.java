@@ -23,7 +23,7 @@ public class CandlestickDiarioBuscarSQLUtil {
         .addValue("codneg", codneg);
   }
 
-  public String getSelectByCodNegESemana() {
+  public String getSelectByCodNeg() {
     SQLAppender sql = new SQLAppender(100);
     sql.appendSQL(" select ");
     sql.appendSQL("		id_candle_diario, ");
@@ -34,6 +34,7 @@ public class CandlestickDiarioBuscarSQLUtil {
     sql.appendSQL("		premin, ");
     sql.appendSQL("		preult, ");
     sql.appendSQL("		semana, ");
+    sql.appendSQL("		id_semana, ");
     sql.appendSQL("		semana_gerada, ");
     sql.appendSQL("		voltot ");
     sql.appendSQL(" from candlestick_diario ");
@@ -52,6 +53,7 @@ public class CandlestickDiarioBuscarSQLUtil {
     sql.appendSQL("		premin, ");
     sql.appendSQL("		preult, ");
     sql.appendSQL("		semana, ");
+    sql.appendSQL("		id_semana, ");
     sql.appendSQL("		semana_gerada, ");
     sql.appendSQL("		voltot ");
     sql.appendSQL(" from candlestick_diario ");

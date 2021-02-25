@@ -42,7 +42,7 @@ public class CandlestickDiarioBuscarDAOImpl implements CandlestickDiarioBuscarDA
   }
 
   @Override
-  public List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(
+  public List<CandlestickDiario> buscaCandleDiarioPorCodNeg(
       final String codneg
   ) throws Exception {
     if (isNull(codneg)) {
@@ -51,7 +51,7 @@ public class CandlestickDiarioBuscarDAOImpl implements CandlestickDiarioBuscarDA
     }
     try {
       return template.query(
-          sqlUtil.getSelectByCodNegESemana(),
+          sqlUtil.getSelectByCodNeg(),
           sqlUtil.toParametersSelectByCodNeg(codneg),
           (rs, rowNum) -> mapper.mapper(rs)
       );

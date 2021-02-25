@@ -23,6 +23,7 @@ public class CandlestickDiario {
   private BigDecimal preult;
   private BigDecimal voltot;
   private Integer idSemanaAno;
+  private String idSemana;
   private Boolean semanaGerada;
 
 }

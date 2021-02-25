@@ -19,7 +19,7 @@ import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.Candles
 import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.CandlestickDiarioInserirSQLUtil;
 import com.ricardococati.carga.adapters.repositories.cotacao.sqlutil.CotacaoSQLUtil;
 import com.ricardococati.carga.adapters.repositories.header.sqlutil.HeaderSQLUtil;
-import com.ricardococati.carga.util.InserirDadosPrimariosDiarioUtil;
+import com.ricardococati.carga.utils.InserirDadosPrimariosDiarioUtil;
 import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
 import com.ricardococati.carga.entities.domains.cotacao.dto.CotacaoDTO;
 import com.ricardococati.carga.entities.domains.header.dto.HeaderDTO;
@@ -149,12 +149,12 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
   @Test
   public void buscaCandleDiarioPorCodNegSemanaGerada() throws Exception {
     //given
-    when(sqlUtil.getSelectByCodNegESemana()).thenCallRealMethod();
+    when(sqlUtil.getSelectByCodNeg()).thenCallRealMethod();
     when(sqlUtil.toParametersSelectByCodNeg(any())).thenCallRealMethod();
     when(mapper.mapper(any())).thenCallRealMethod();
     //when
     List<CandlestickDiario> result =
-        target.buscaCandleDiarioPorCodNegSemanaGerada("MGLU3");
+        target.buscaCandleDiarioPorCodNeg("MGLU3");
     //then
     assertTrue(!result.isEmpty());
     assertThat(result).isNotNull().size().isEqualTo(1);
@@ -165,27 +165,27 @@ public class CandlestickDiarioBuscarDAOImplTest extends BaseJdbcTest {
   @Test
   public void buscaCandleDiarioPorCodNegSemanaGeradaDtpregNull() throws Exception {
     //given
-    when(sqlUtil.getSelectByCodNegESemana()).thenCallRealMethod();
+    when(sqlUtil.getSelectByCodNeg()).thenCallRealMethod();
     when(sqlUtil.toParametersSelectByCodNeg(any())).thenCallRealMethod();
     when(mapper.mapper(any())).thenCallRealMethod();
     this.thrown.expectMessage("Violação de chave na inserção de CANDLESTICK_DIARIO");
     this.thrown.expect(DataIntegrityViolationException.class);
     //when
     List<CandlestickDiario> result =
-        target.buscaCandleDiarioPorCodNegSemanaGerada(null);
+        target.buscaCandleDiarioPorCodNeg(null);
   }
 
   @Test
   public void buscaCandleDiarioPorCodNegSemanaGeradaError() throws Exception {
     //given
-    when(sqlUtil.getSelectByCodNegESemana()).thenReturn(",");
+    when(sqlUtil.getSelectByCodNeg()).thenReturn(",");
     when(sqlUtil.toParametersSelectByCodNeg(any())).thenCallRealMethod();
     when(mapper.mapper(any())).thenCallRealMethod();
     this.thrown.expectMessage("Erro na execução do método CANDLESTICK_DIARIO");
     this.thrown.expect(Exception.class);
     //when
     List<CandlestickDiario> result =
-        target.buscaCandleDiarioPorCodNegSemanaGerada("MGLU3");
+        target.buscaCandleDiarioPorCodNeg("MGLU3");
   }
 
   @Test

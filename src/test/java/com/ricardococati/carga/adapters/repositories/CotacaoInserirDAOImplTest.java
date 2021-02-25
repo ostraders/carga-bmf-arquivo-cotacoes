@@ -12,7 +12,7 @@ import com.ricardococati.carga.adapters.repositories.cotacao.impl.CotacaoInserir
 import com.ricardococati.carga.config.BaseJdbcTest;
 import com.ricardococati.carga.adapters.repositories.cotacao.sqlutil.CotacaoSQLUtil;
 import com.ricardococati.carga.adapters.repositories.header.sqlutil.HeaderSQLUtil;
-import com.ricardococati.carga.util.InserirDadosPrimariosCotacaoUtil;
+import com.ricardococati.carga.utils.InserirDadosPrimariosCotacaoUtil;
 import com.ricardococati.carga.entities.domains.cotacao.dto.CotacaoDTO;
 import com.ricardococati.carga.entities.domains.header.dto.HeaderDTO;
 import org.junit.Before;

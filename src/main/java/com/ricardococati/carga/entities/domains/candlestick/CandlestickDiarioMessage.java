@@ -17,6 +17,7 @@ public class CandlestickDiarioMessage {
   private BigDecimal preult;
   private BigDecimal voltot;
   private Integer semana;
+  private String idSemana;
   private Boolean semanaGerada;
 
 }

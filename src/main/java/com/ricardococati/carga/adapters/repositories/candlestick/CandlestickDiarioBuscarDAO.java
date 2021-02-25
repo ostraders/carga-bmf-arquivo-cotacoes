@@ -8,7 +8,7 @@ public interface CandlestickDiarioBuscarDAO {
 
   List<String> buscaCodNeg() throws Exception;
 
-  List<CandlestickDiario> buscaCandleDiarioPorCodNegSemanaGerada(String codneg) throws Exception;
+  List<CandlestickDiario> buscaCandleDiarioPorCodNeg(String codneg) throws Exception;
 
   List<CandlestickDiario> buscarCandleDiarioPorPrimeiroDiaSemanaCodneg(
       LocalDate primeiroDiaUtilSemanaCorrente,
