@@ -7,6 +7,7 @@ import com.ricardococati.carga.entities.domains.candlestick.CandlestickSemanal;
 import com.ricardococati.carga.usecases.candlestick.BuildCandlestickSemanalService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import lombok.Data;
@@ -18,8 +19,7 @@ import org.springframework.stereotype.Service;
 @Data
 @Service
 @RequiredArgsConstructor
-public class BuildCandlestickSemanalServiceImpl implements
-    BuildCandlestickSemanalService {
+public class BuildCandlestickSemanalServiceImpl implements BuildCandlestickSemanalService {
 
   @Override
   public CandlestickSemanal build(
@@ -84,6 +84,14 @@ public class BuildCandlestickSemanalServiceImpl implements
       candlestickSemanal.setPremin(candlestickDiario.getPremin());
     }
     return candlestickSemanal.getPremin();
+  }
+
+  private BigDecimal calculaPremin(final List<CandlestickDiario> semanalList){
+    return semanalList
+        .stream()
+        .map(CandlestickDiario::getPremin)
+        .min(Comparator.naturalOrder())
+        .orElse(BigDecimal.ZERO);
   }
 
   private BigDecimal calculaPreult(CandlestickSemanal candlestickSemanal,

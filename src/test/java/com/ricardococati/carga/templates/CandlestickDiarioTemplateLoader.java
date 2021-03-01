@@ -30,6 +30,8 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
   public static final String CANDLESTICK_DIARIO_VALID_018 = "CANDLESTICK_DIARIO_VALID_018";
   public static final String CANDLESTICK_DIARIO_VALID_019 = "CANDLESTICK_DIARIO_VALID_019";
   public static final String CANDLESTICK_DIARIO_VALID_020 = "CANDLESTICK_DIARIO_VALID_020";
+  public static final String CANDLESTICK_DIARIO_VALID_021 = "CANDLESTICK_DIARIO_VALID_021";
+  public static final String CANDLESTICK_DIARIO_INVALID = "CANDLESTICK_DIARIO_VALID_022";
   private LocalDate dtpreg = LocalDate.of(1978, 2, 16);
   private int value = 1;
   private int count = 1;
@@ -126,8 +128,8 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("dtpreg", dtpreg.plusDays(count++));
           add("codneg", "MGLU3");
           add("preabe", getValueBigDecimalHalfUpArredondado4Casas(9.1));
-          add("premax", getValueBigDecimalHalfUpArredondado4Casas(18.1));
-          add("premin", getValueBigDecimalHalfUpArredondado4Casas(7.0));
+          add("premax", getValueBigDecimalHalfUpArredondado4Casas(92.1));
+          add("premin", getValueBigDecimalHalfUpArredondado4Casas(1.1));
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.6));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(600000.0));
           add("idSemanaAno", value++);
@@ -312,6 +314,32 @@ public class CandlestickDiarioTemplateLoader implements TemplateLoader {
           add("premin", getValueBigDecimalHalfUpArredondado4Casas(7.0));
           add("preult", getValueBigDecimalHalfUpArredondado4Casas(11.3));
           add("voltot", getValueBigDecimalHalfUpArredondado4Casas(400000.0));
+          add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
+          add("semanaGerada", Boolean.TRUE);
+        }})
+        .addTemplate(CANDLESTICK_DIARIO_VALID_021, new Rule() {{
+          add("idCandleDiario", random(Long.class, range(1L, 200L)));
+          add("dtpreg", LocalDate.of(2021, 2, 16));
+          add("codneg", "MGLU3");
+          add("preabe", getValueBigDecimalHalfUpArredondado4Casas(0.9));
+          add("premax", getValueBigDecimalHalfUpArredondado4Casas(122.0));
+          add("premin", getValueBigDecimalHalfUpArredondado4Casas(0.9));
+          add("preult", getValueBigDecimalHalfUpArredondado4Casas(199.3));
+          add("voltot", getValueBigDecimalHalfUpArredondado4Casas(100000.0));
+          add("idSemanaAno", value++);
+          add("idSemana", "2021-02-15#2021-02-19");
+          add("semanaGerada", Boolean.TRUE);
+        }})
+        .addTemplate(CANDLESTICK_DIARIO_INVALID, new Rule() {{
+          add("idCandleDiario", random(Long.class, range(1L, 200L)));
+          add("dtpreg", LocalDate.of(2021, 2, 16));
+          add("codneg", "MGLU3");
+          add("preabe", null);
+          add("premax", null);
+          add("premin", null);
+          add("preult", null);
+          add("voltot", null);
           add("idSemanaAno", value++);
           add("idSemana", "2021-02-15#2021-02-19");
           add("semanaGerada", Boolean.TRUE);
