@@ -20,6 +20,7 @@ import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
 import com.ricardococati.carga.entities.domains.candlestick.CandlestickSemanal;
 import com.ricardococati.carga.usecases.candlestick.impl.BuildCandlestickSemanalServiceImpl;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +47,9 @@ public class BuildCandlestickSemanalServiceImplTest {
     assertThat(result.getPremax()).isNotNull().isEqualTo(new BigDecimal("92.1000"));
     assertThat(result.getPreabe()).isNotNull().isEqualTo(new BigDecimal("9.1000"));
     assertThat(result.getPreult()).isNotNull().isEqualTo(new BigDecimal("11.9000"));
+    assertThat(result.getVoltot()).isNotNull().isEqualTo(new BigDecimal("4600000.0000"));
+    assertThat(result.getDtpregini()).isNotNull().isEqualTo(LocalDate.of(1978,02,17));
+    assertThat(result.getDtpregfim()).isNotNull().isEqualTo(LocalDate.of(1978,02,26));
   }
 
   @Test
@@ -57,6 +61,9 @@ public class BuildCandlestickSemanalServiceImplTest {
     assertThat(result.getPremax()).isNotNull().isEqualTo(new BigDecimal("122.0000"));
     assertThat(result.getPreabe()).isNotNull().isEqualTo(new BigDecimal("9.1000"));
     assertThat(result.getPreult()).isNotNull().isEqualTo(new BigDecimal("199.3000"));
+    assertThat(result.getVoltot()).isNotNull().isEqualTo(new BigDecimal("4700000.0000"));
+    assertThat(result.getDtpregini()).isNotNull().isEqualTo(LocalDate.of(1978,02,17));
+    assertThat(result.getDtpregfim()).isNotNull().isEqualTo(LocalDate.of(2021,02,16));
   }
 
   @Test
@@ -69,6 +76,9 @@ public class BuildCandlestickSemanalServiceImplTest {
     assertThat(result.getPremax()).isNotNull().isEqualTo(new BigDecimal("122.0000"));
     assertThat(result.getPreabe()).isNotNull().isEqualTo(new BigDecimal("9.1000"));
     assertThat(result.getPreult()).isNotNull().isEqualTo(new BigDecimal("199.3000"));
+    assertThat(result.getVoltot()).isNotNull().isEqualTo(new BigDecimal("4700000.0000"));
+    assertThat(result.getDtpregini()).isNotNull().isEqualTo(LocalDate.of(1978,02,17));
+    assertThat(result.getDtpregfim()).isNotNull().isEqualTo(LocalDate.of(2021,02,16));
   }
 
   private List<CandlestickDiario> buildListCandleDiario() {
