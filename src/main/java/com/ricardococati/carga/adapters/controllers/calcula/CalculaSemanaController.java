@@ -45,23 +45,4 @@ public class CalculaSemanaController {
     return ResponseEntity.noContent().build();
   }
 
-  @ApiOperation(value = "Efetua todos os cálculos(Semanais) por data")
-  @ApiResponses(
-      value = {
-          @ApiResponse(code = 204, message = "NO_CONTENT"),
-          @ApiResponse(code = 400, message = "Bad Request"),
-          @ApiResponse(code = 500, message = "Internal Server Error")
-      }
-  )
-  @ResponseStatus(NO_CONTENT)
-  @GetMapping("/by-data")
-  public ResponseEntity<?> calcularByData(
-      @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dtPregrao
-  ) throws Exception {
-    log.info("Executando calculo semana ");
-    service.executeByData(dtPregrao);
-    log.info("Inciada a thread para calculo da semana ");
-    return ResponseEntity.noContent().build();
-  }
-
 }

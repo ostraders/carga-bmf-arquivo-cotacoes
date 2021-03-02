@@ -12,18 +12,25 @@ import org.springframework.stereotype.Component;
 public class VerificadorArquivoSkipper implements SkipPolicy, Serializable {
 
 	private static final long serialVersionUID = 587789236177587832L;
-	
+	private static final String MENSAGEM_LINHA = "LINHA - ";
+	private static final String MENSAGEM_ERRO = "Ocorreu um erro no metodo VerificadorArquivoSkipper.shouldSkip ";
+	private static final String MENSAGEM_INFO = "ARQUIVO INVALIDO - shouldSkip ";
+
 	@Override
     public boolean shouldSkip(Throwable exception, int skipCount) throws SkipLimitExceededException {
-		try {
-			String msg = "ARQUIVO INVALIDO - shouldSkip ";
-			if(exception.getClass().equals(FlatFileParseException.class)) {
-				FlatFileParseException flatFileParseException = (FlatFileParseException) exception;
-				log.info(msg + flatFileParseException.getMessage().toString() + "LINHA - " + String.valueOf(flatFileParseException.getLineNumber()));
+			try {
+				if(exception.getClass().equals(FlatFileParseException.class)) {
+					FlatFileParseException flatFileParseException = (FlatFileParseException) exception;
+					log.info(
+							MENSAGEM_INFO +
+							flatFileParseException.getMessage() +
+							MENSAGEM_LINHA +
+							flatFileParseException.getLineNumber()
+					);
+				}
+			} catch (Exception e) {
+				log.error(MENSAGEM_ERRO + e.getMessage());
 			}
-		} catch (Exception e) {
-			log.error("Ocorreu um erro no metodo VerificadorArquivoSkipper.shouldSkip " + e.getMessage());
-		}
-        return false;
+			return false;
     }
 }

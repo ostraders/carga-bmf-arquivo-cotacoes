@@ -210,7 +210,6 @@
                     <exclude>com.ricardococati.carga.usecases.arquivo.impl.DownloadArquivoServiceImpl</exclude>
                     <exclude>com.ricardococati.carga.usecases.arquivo.impl.GerenciadorArquivosServiceImpl</exclude>
                     <exclude>com.ricardococati.carga.usecases.integracao.impl.IntegracaoServiceImpl</exclude>
-                    <exclude>com.ricardococati.carga.usecases.candlestick.impl.BuildCandlestickSemanalServiceImpl</exclude>
                     <exclude>com.ricardococati.carga.usecases.candlestick.impl.CalculaCandlestickSemanalAsyncServiceImpl</exclude>
                   </excludes>
                   <limits>

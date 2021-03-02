@@ -2,7 +2,6 @@ package com.ricardococati.carga.adapters.schedulers;
 
 import static com.ricardococati.carga.entities.enums.CaminhoArquivoEnum.CAMINHO_ARQUIVO_ENTRADA;
 
-import com.ricardococati.carga.usecases.candlestick.CalculaCandlestickSemanalService;
 import com.ricardococati.carga.usecases.integracao.IntegracaoService;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
 import java.io.File;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 public class ScheduledBatchExecutionService {
 
   private final IntegracaoService service;
-  private final CalculaCandlestickSemanalService candlestickSemanalService;
   private final ControlaIdArquivoUtil idArquivoUtil;
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
@@ -29,8 +27,6 @@ public class ScheduledBatchExecutionService {
     try {
       if (existemArquivosNoDiretorio()) {
         executaGeracaoCandleDiario();
-      } else {
-        executaGeracaoCandleSemanal();
       }
     } catch (Exception e) {
       log.error(" Causa: " + e.getCause() + " Mensagem de Erro: " + e.getMessage());
@@ -55,11 +51,6 @@ public class ScheduledBatchExecutionService {
 
   private Long getIdArquivo() throws Exception {
     return service.getIdArquivoSequence("ARQUIVO_SEQ");
-  }
-
-  private void executaGeracaoCandleSemanal() throws Exception {
-    log.info("Inicia cálculo semanal");
-    //candlestickSemanalService.execute();
   }
 
 }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CargaItemWriter implements ItemWriter<Arquivo> {
 
+  private static final String MENSAGEM_ERRO = "OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}";
   private final CargaCotacaoService cargaCotacaoService;
   private final CargaHeaderService cargaHeaderService;
   private final ControleArquivoConfig arquivoConfig;
@@ -39,8 +40,7 @@ public class CargaItemWriter implements ItemWriter<Arquivo> {
           });
     } catch (Exception e) {
       arquivoConfig.setArquivoValido(false);
-      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
-					+ e.getMessage());
+      log.error(MENSAGEM_ERRO, e.getMessage());
     }
   }
 
@@ -49,8 +49,7 @@ public class CargaItemWriter implements ItemWriter<Arquivo> {
     try {
       cargaCotacaoService.insereDados(cotacao);
     } catch (Exception e) {
-      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
-          + e.getMessage());
+      log.error(MENSAGEM_ERRO, e.getMessage());
     }
   }
 
@@ -58,8 +57,7 @@ public class CargaItemWriter implements ItemWriter<Arquivo> {
     try {
       cargaHeaderService.insereDados(bmfCargaDTO);
     } catch (Exception e) {
-      log.error("OCORREU UM ERRO NA ESCRITA DOS DADOS NA BASE - write - Erro: {}"
-          + e.getMessage());
+      log.error(MENSAGEM_ERRO, e.getMessage());
     }
   }
 

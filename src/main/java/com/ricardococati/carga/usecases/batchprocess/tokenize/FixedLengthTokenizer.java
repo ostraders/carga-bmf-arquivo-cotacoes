@@ -1,5 +1,7 @@
 package com.ricardococati.carga.usecases.batchprocess.tokenize;
 
+import static java.util.Objects.isNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,29 +23,28 @@ public class FixedLengthTokenizer extends AbstractLineTokenizer implements Seria
   }
 
   private void calculateMaxRange(Range[] ranges) {
-    if (ranges == null || ranges.length == 0) {
+    if (isNull(ranges) || ranges.length == 0) {
       maxRange = 0;
       return;
     }
-
     open = false;
     maxRange = ranges[0].getMin();
 
-    for (int i = 0; i < ranges.length; i++) {
+    for (Range range : ranges) {
       int upperBound;
-      if (ranges[i].hasMaxValue()) {
-        upperBound = ranges[i].getMax();
+      if (range.hasMaxValue()) {
+        upperBound = range.getMax();
       } else {
-        upperBound = ranges[i].getMin();
+        upperBound = range.getMin();
         if (upperBound > maxRange) {
           open = true;
         }
       }
-
       if (upperBound > maxRange) {
         maxRange = upperBound;
       }
     }
+
   }
 
   @Override
@@ -55,11 +56,9 @@ public class FixedLengthTokenizer extends AbstractLineTokenizer implements Seria
 
     lineLength = linhaTratada.length();
 
-    for (int i = 0; i < ranges.length; i++) {
-
-      int startPos = ranges[i].getMin() - 1;
-      int endPos = ranges[i].getMax();
-
+    for (Range range : ranges) {
+      int startPos = range.getMin() - 1;
+      int endPos = range.getMax();
       if (lineLength >= endPos) {
         token = linhaTratada.substring(startPos, endPos);
       } else if (lineLength >= startPos) {
@@ -67,10 +66,8 @@ public class FixedLengthTokenizer extends AbstractLineTokenizer implements Seria
       } else {
         token = "";
       }
-
       tokens.add(token);
     }
-
     return tokens;
   }
 
@@ -79,4 +76,3 @@ public class FixedLengthTokenizer extends AbstractLineTokenizer implements Seria
   }
 
 }
-

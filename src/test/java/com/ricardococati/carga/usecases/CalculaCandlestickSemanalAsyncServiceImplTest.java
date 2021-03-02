@@ -1,9 +1,7 @@
 package com.ricardococati.carga.usecases;
 
-import com.ricardococati.carga.usecases.candlestick.CalculaCandlestickSemanalByDataService;
 import com.ricardococati.carga.usecases.candlestick.CalculaCandlestickSemanalService;
 import com.ricardococati.carga.usecases.candlestick.impl.CalculaCandlestickSemanalAsyncServiceImpl;
-import java.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,8 +17,6 @@ public class CalculaCandlestickSemanalAsyncServiceImplTest {
   @Mock
   private CalculaCandlestickSemanalService semanalService;
   @Mock
-  private CalculaCandlestickSemanalByDataService semanalServiceByData;
-  @Mock
   private TaskExecutor taskExecutor;
 
   @Test
@@ -28,8 +24,4 @@ public class CalculaCandlestickSemanalAsyncServiceImplTest {
     target.execute();
   }
 
-  @Test
-  public void executeByData() throws Exception {
-    target.executeByData(LocalDate.now());
-  }
 }

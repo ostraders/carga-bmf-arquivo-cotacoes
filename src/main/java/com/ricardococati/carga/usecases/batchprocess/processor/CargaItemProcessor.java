@@ -20,7 +20,7 @@ public class CargaItemProcessor implements ItemProcessor<FieldSet, Arquivo>, Ser
 	private static final long serialVersionUID = 1602197886947938991L;
 
 	@Override
-	public Arquivo process(FieldSet line) {
+	public Arquivo process(final FieldSet line) {
 		String identificacao = line.readString("tipoRegistro");
 		Arquivo arquivo = null;
 		if(identificacao.equals(TipoRegistroEnum.HEADER.getCod())) {
