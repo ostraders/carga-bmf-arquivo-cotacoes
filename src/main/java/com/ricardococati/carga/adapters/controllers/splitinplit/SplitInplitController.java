@@ -33,9 +33,10 @@ public class SplitInplitController {
   @ApiOperation(
       value = "Split | Inplit na acao por: "
           + "codigo de negocio(String), "
-          + "data do pregão(DD/MM/YYYY), "
+          + "data do pregão(DD-MM-YYYY), "
           + "quantidade de divisões e(Integer) "
-          + "operação(SPLIT ou INPLIT)")
+          + "operação(SPLIT ou INPLIT)"
+  )
   @ApiResponses(
       value = {
           @ApiResponse(code = 200, message = "Split OK"),

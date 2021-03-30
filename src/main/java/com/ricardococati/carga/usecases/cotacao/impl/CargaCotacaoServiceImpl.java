@@ -44,12 +44,12 @@ public class CargaCotacaoServiceImpl implements CargaCotacaoService {
     Boolean retorno = Boolean.FALSE;
     try {
       CotacaoDTO cotacaoDTO = convertCot.convert(cotacao);
-      if (isLotePadrao(cotacaoDTO) && isAtivoValido(cotacaoDTO)) {
+      if (isLotePadrao(cotacaoDTO)) {
         cotacaoDTO.setIdentificacaoArquivo(idArquivoUtil.getIdentificadorArquivo());
         cotacaoInserirDAO.incluirCotacao(cotacaoDTO);
         log.info("Incluido cotacao: {}", cotacao);
         CandlestickDiario candlestickDiarioDTO = candlestickConverter.convert(cotacao);
-        if (nonNull(candlestickDiarioDTO)) {
+        if (nonNull(candlestickDiarioDTO) && isAtivoValido(cotacaoDTO)) {
           candlestickDiarioDAO.incluirCandlestickDiario(candlestickDiarioDTO);
           CandlestickDiarioMessage message = candlestickConverter
               .convertMessage(candlestickDiarioDTO);
