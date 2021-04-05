@@ -34,8 +34,8 @@ public class EmpresaController {
   @PostMapping
   public ResponseEntity<?> criaEmpresas(
       @RequestBody final EmpresaRequest empresaRequest
-  ) throws Exception {
-    log.info("Excutando criação de empresas!");
+  ) {
+    log.info("Executando criação de empresas!");
     inserir.salvar(empresaRequest.getEmpresas());
     log.info("Criação executada com sucesso!");
     return ResponseEntity.noContent().build();
