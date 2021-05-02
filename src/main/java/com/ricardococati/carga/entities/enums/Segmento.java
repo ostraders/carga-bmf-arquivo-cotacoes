@@ -14,7 +14,7 @@ public enum Segmento {
   ARTEFATOS_COBRE(6,  "Artefatos de Cobre"),
   PETROQUOMICOS(7,  "Petroquímicos"),
   FERTILIZANTES_DEFENSIVOS(8,  "Fertilizantes e Defensivos"),
-  QUOMICOS_DIVERSOS(9,  "Químicos Diversos"),
+  QUIMICOS_DIVERSOS(9,  "Químicos Diversos"),
   MADEIRA(10, "Madeira"),
   PAPEL_CELULOSE(11, "Papel e Celulose"),
   EMBALAGENS(12, "Embalagens"),

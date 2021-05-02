@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface InserirEmpresa {
 
-  void salvar(final List<EmpresaDTO> empresaList);
+  void salvar(final List<EmpresaDTO> empresaList) throws Exception;
 
 }
