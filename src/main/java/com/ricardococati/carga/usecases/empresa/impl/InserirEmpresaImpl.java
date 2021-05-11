@@ -1,6 +1,8 @@
 package com.ricardococati.carga.usecases.empresa.impl;
 
+import com.ricardococati.carga.adapters.repositories.ativo.AtivoBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.empresa.EmpresaInserirDAO;
+import com.ricardococati.carga.entities.domains.ativo.Ativo;
 import com.ricardococati.carga.entities.domains.empresa.EmpresaDTO;
 import com.ricardococati.carga.usecases.empresa.InserirEmpresa;
 import java.util.List;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class InserirEmpresaImpl implements InserirEmpresa {
 
   private final EmpresaInserirDAO empresaInserirDAO;
+  private final AtivoBuscarDAO ativoBuscarDAO;
 
   @Override
   public void salvar(final List<EmpresaDTO> empresaList) throws Exception {
@@ -28,9 +31,13 @@ public class InserirEmpresaImpl implements InserirEmpresa {
   }
 
   @SneakyThrows
-  private void insertEmpresa(EmpresaDTO empresaDTO) {
+  private void insertEmpresa(final EmpresaDTO empresaDTO) {
     try {
-      empresaInserirDAO.incluirEmpresa(empresaDTO);
+      List<Ativo> ativoList = ativoBuscarDAO.buscaAtivo(empresaDTO.getAtivo());
+      if(ativoList.isEmpty()){
+        log.info("COD_NEG não encontrado na base de ativos!");
+      }
+      empresaInserirDAO.incluirEmpresa(null);
     } catch (Exception e) {
       log.error("Erro ao inserir empresa: ", e.getMessage());
       throw new Exception("Erro ao inserir empresa: " + e.getMessage());

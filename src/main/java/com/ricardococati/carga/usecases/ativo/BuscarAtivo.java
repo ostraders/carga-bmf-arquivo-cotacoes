@@ -1,11 +1,9 @@
-package com.ricardococati.carga.adapters.repositories.ativo;
+package com.ricardococati.carga.usecases.ativo;
 
 import com.ricardococati.carga.entities.domains.ativo.Ativo;
 import java.util.List;
 
-public interface AtivoBuscarDAO {
-
-  List<Ativo> buscaAtivo() throws Exception;
+public interface BuscarAtivo {
 
   List<Ativo> buscaAtivo(final String ativo) throws Exception;
 
