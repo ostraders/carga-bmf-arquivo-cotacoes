@@ -4,9 +4,11 @@ import com.ricardococati.carga.entities.domains.ativo.Ativo;
 import com.ricardococati.carga.entities.enums.Segmento;
 import com.ricardococati.carga.entities.enums.Setor;
 import com.ricardococati.carga.entities.enums.SubSetor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Empresa {
 
   private Long idEmpresa;
@@ -14,6 +16,5 @@ public class Empresa {
   private Setor setor;
   private SubSetor subSetor;
   private Segmento segmento;
-  private Ativo ativo;
 
 }

@@ -30,7 +30,10 @@ public class EmpresaAtivoInsereImpl implements EmpresaAtivoInsere {
       throw new DataIntegrityViolationException("Violação de chave na inserção de EMPRESA_ATIVO");
     }
     try {
-      retorno = template.update(sqlUtil.getInsert(), sqlUtil.toParameters(empresaAtivo));
+      retorno = template.update(
+          sqlUtil.getInsert(),
+          sqlUtil.toParameters(empresaAtivo)
+      );
     } catch (Exception ex) {
       log.error("Erro na execução do método EMPRESA_ATIVO: " + ex.getMessage());
       throw ex;

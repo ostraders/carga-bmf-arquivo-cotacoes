@@ -25,14 +25,14 @@ public class AtivoSQLUtil {
     sql.appendSQL(" 	ativo ");
     sql.appendSQL(" from  ");
     sql.appendSQL(" 	ativo ");
-    sql.appendSQL("	where ativo LIKE '%:ativo%' ");
+    sql.appendSQL("	where ativo LIKE :ativo ");
     sql.appendSQL(" order by ativo asc ");
     return sql.getAppendSQLSemQuebra().toString();
   }
 
   public MapSqlParameterSource toParametersSelectByAtivo(final String ativo) {
     return new MapSqlParameterSource()
-        .addValue("ativo", ativo);
+        .addValue("ativo", "%" + ativo.toUpperCase().trim() + "%");
   }
 
 }

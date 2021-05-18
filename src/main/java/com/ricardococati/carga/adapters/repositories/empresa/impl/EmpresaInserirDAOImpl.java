@@ -20,7 +20,7 @@ public class EmpresaInserirDAOImpl implements EmpresaInserirDAO {
   private final GeraSequenciaDAO genericDAO;
 
   @Override
-  public Boolean incluirEmpresa(final Empresa empresa) throws Exception {
+  public Boolean incluirEmpresa(final Empresa empresa) throws RuntimeException {
     return null;
   }
 
