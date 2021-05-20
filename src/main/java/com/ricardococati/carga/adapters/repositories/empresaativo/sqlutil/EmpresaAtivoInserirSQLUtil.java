@@ -15,11 +15,8 @@ public class EmpresaAtivoInserirSQLUtil {
     sql.appendSQL("		id_ativo) ");
     sql.appendSQL("	values( ");
     sql.appendSQL("		:idEmpresa, ");
-    sql.appendSQL("		:idAtivo ");
-    sql.appendSQL("   ) ");
-    sql.appendSQL(" on conflict (id_empresa, id_ativo) do update set ");
-    sql.appendSQL("		id_empresa = excluded.id_empresa, ");
-    sql.appendSQL("		id_ativo = excluded.id_ativo ");
+    sql.appendSQL("		:idAtivo) ");
+    sql.appendSQL(" on conflict do nothing ");
     return sql.getAppendSQLSemQuebra().toString();
   }
 

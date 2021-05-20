@@ -1,5 +1,6 @@
 package com.ricardococati.carga.entities.enums;
 
+import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -22,5 +23,15 @@ public enum Setor {
   private Integer idSetor;
   @Getter
   private String descricaoSetor;
+
+  public static Setor findValueById(final Integer idSetor) throws RuntimeException {
+    return Arrays
+        .stream(Setor.values())
+        .filter(v -> v.getIdSetor().equals(idSetor))
+        .findFirst()
+        .orElseThrow(() ->
+            new RuntimeException(String.format("Id do Setor Desconhecido: '%s'", idSetor))
+        );
+  }
 
 }

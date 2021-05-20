@@ -1,5 +1,6 @@
 package com.ricardococati.carga.entities.enums;
 
+import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -95,5 +96,15 @@ public enum Segmento {
   private Integer idSegmento;
   @Getter
   private String descricaoSegmento;
+
+  public static Segmento findValueById(final Integer idSegmento) throws RuntimeException {
+    return Arrays
+        .stream(Segmento.values())
+        .filter(v -> v.getIdSegmento().equals(idSegmento))
+        .findFirst()
+        .orElseThrow(() ->
+          new RuntimeException(String.format("Id do Segmento Desconhecido: '%s'", idSegmento))
+        );
+  }
 
 }
