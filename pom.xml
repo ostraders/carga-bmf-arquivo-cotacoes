@@ -113,6 +113,11 @@
       <artifactId>fixture-factory</artifactId>
       <version>${fixture-factory.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-commons</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
   </dependencies>
 
   <build>

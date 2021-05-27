@@ -58,13 +58,18 @@ public enum SubSetor {
   private String descricaoSubSetor;
 
   public static SubSetor findValueById(final Integer idSubSetor) throws RuntimeException {
-    return Arrays
-        .stream(SubSetor.values())
-        .filter(v -> v.getIdSubSetor().equals(idSubSetor))
-        .findFirst()
-        .orElseThrow(() ->
-            new RuntimeException(String.format("Id do SubSetor Desconhecido: '%s'", idSubSetor))
-        );
+    SubSetor subSetor = null;
+    if (idSubSetor != 0) {
+      subSetor =
+          Arrays.stream(SubSetor.values())
+              .filter(v -> v.getIdSubSetor().equals(idSubSetor))
+              .findFirst()
+              .orElseThrow(
+                  () ->
+                      new RuntimeException(
+                          String.format("Id do SubSetor Desconhecido: '%s'", idSubSetor)));
+    }
+    return subSetor;
   }
 
 }

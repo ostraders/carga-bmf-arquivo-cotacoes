@@ -1,16 +1,12 @@
 package com.ricardococati.carga.adapters.repositories.empresa.impl;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
-import com.ricardococati.carga.adapters.repositories.candlestick.CandlestickDiarioBuscarDAO;
-import com.ricardococati.carga.adapters.repositories.candlestick.mapper.CandlestickDiarioMapper;
-import com.ricardococati.carga.adapters.repositories.candlestick.sqlutil.CandlestickDiarioBuscarSQLUtil;
 import com.ricardococati.carga.adapters.repositories.empresa.EmpresaBuscarDAO;
 import com.ricardococati.carga.adapters.repositories.empresa.mapper.EmpresaMapper;
 import com.ricardococati.carga.adapters.repositories.empresa.sqlutil.EmpresaBuscarSQLUtil;
-import com.ricardococati.carga.entities.domains.candlestick.CandlestickDiario;
 import com.ricardococati.carga.entities.domains.empresa.Empresa;
-import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +41,54 @@ public class EmpresaBuscarDAOImpl implements EmpresaBuscarDAO {
     } catch (Exception ex) {
       log.error("Erro na execução do método BUSCAR EMPRESA: {} ", ex.getMessage());
       throw new RuntimeException("Erro na execução do método BUSCAR EMPRESA");
+    }
+  }
+
+  @Override
+  public List<Empresa> buscaEmpresasPorNome(final String nomeEmpresa, final Integer limit, final Long offset) throws Exception {
+    Boolean whereNomeEmpresa = Boolean.FALSE;
+    if (nonNull(nomeEmpresa)) {
+      whereNomeEmpresa = Boolean.TRUE;
+    }
+    try {
+      return template.query(
+          sqlUtil.getSelectOnly(whereNomeEmpresa),
+          sqlUtil.toParametersOnly(nomeEmpresa, limit, offset),
+          (rs, rowNum) -> mapper.mapper(rs)
+      );
+    } catch (Exception ex) {
+      log.error("Erro na execução do método BUSCAR EMPRESA: {} ", ex.getMessage());
+      throw new RuntimeException("Erro na execução do método BUSCAR EMPRESA");
+    }
+  }
+
+  @Override
+  public Long quantidadeEmpresa() {
+    Long result = 0L;
+    try {
+      result = template.queryForObject(
+          sqlUtil.getSelectCount(),
+          new MapSqlParameterSource(),
+          Long.class
+      );
+    } catch (Exception ex) {
+      log.error("Erro na execução do método QUANTIDADE_EMPRESA: {} ", ex.getMessage());
+      new RuntimeException(ex);
+    }
+    return result;
+  }
+
+  @Override
+  public List<Empresa> buscaEmpresasPorNome(int pageSize, long offset) {
+    try {
+      return template.query(
+          sqlUtil.getSelectAll(),
+          sqlUtil.toParametersAll(pageSize, offset),
+          (rs, rowNum) -> mapper.mapper(rs)
+      );
+    } catch (Exception ex) {
+      log.error("Erro na execução do método BUSCAR EMPRESA: {} ", ex.getMessage());
+      throw new RuntimeException("Erro na execução do método BUSCAR EMPRESA", ex);
     }
   }
 

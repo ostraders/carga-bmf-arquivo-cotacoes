@@ -25,13 +25,18 @@ public enum Setor {
   private String descricaoSetor;
 
   public static Setor findValueById(final Integer idSetor) throws RuntimeException {
-    return Arrays
-        .stream(Setor.values())
-        .filter(v -> v.getIdSetor().equals(idSetor))
-        .findFirst()
-        .orElseThrow(() ->
-            new RuntimeException(String.format("Id do Setor Desconhecido: '%s'", idSetor))
-        );
+    Setor setor = null;
+    if (idSetor != 0) {
+      setor =
+          Arrays.stream(Setor.values())
+              .filter(v -> v.getIdSetor().equals(idSetor))
+              .findFirst()
+              .orElseThrow(
+                  () ->
+                      new RuntimeException(
+                          String.format("Id do Setor Desconhecido: '%s'", idSetor)));
+    }
+    return setor;
   }
 
 }
