@@ -1,7 +1,6 @@
 package com.ricardococati.carga.adapters.repositories.empresa;
 
 import com.ricardococati.carga.entities.domains.empresa.Empresa;
-import java.util.Arrays;
 import java.util.List;
 
 public interface EmpresaBuscarDAO {

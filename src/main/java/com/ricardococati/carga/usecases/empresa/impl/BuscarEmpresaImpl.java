@@ -23,20 +23,27 @@ public class BuscarEmpresaImpl implements BuscarEmpresa {
   private final EmpresaBuscarDAO empresaBuscarDAO;
 
   @Override
-  public CustomPageImpl<EmpresaResponse> buscarPorNomeEmpresa(final String nomeEmpresa, final Pageable pageable) throws Exception {
+  public CustomPageImpl<EmpresaResponse> buscarPorNomeEmpresa(
+      final String nomeEmpresa,
+      final Pageable pageable) throws Exception {
     final List<EmpresaResponse> responseList = new ArrayList<>();
     if (nonNull(nomeEmpresa)) {
       responseList.addAll(getEmpresaResponseListByNomeEmpresa(nomeEmpresa, pageable));
-    } else{
-      responseList.addAll(getEmpresaResponseList(pageable));
+      return new CustomPageImpl<>(
+          responseList,
+          pageable,
+          quantidadeEmpresas());
     }
+    responseList.addAll(getEmpresaResponseList(pageable));
     return new CustomPageImpl<>(
         responseList,
         pageable,
         quantidadeEmpresas());
   }
 
-  private List<EmpresaResponse> getEmpresaResponseListByNomeEmpresa(String nomeEmpresa, Pageable pageable) throws Exception {
+  private List<EmpresaResponse> getEmpresaResponseListByNomeEmpresa(
+      final String nomeEmpresa,
+      final Pageable pageable) throws Exception {
     return empresaBuscarDAO
         .buscaEmpresasPorNome(nomeEmpresa, pageable.getPageSize(), (long) pageable.getOffset())
         .stream()
@@ -47,7 +54,7 @@ public class BuscarEmpresaImpl implements BuscarEmpresa {
 
   private List<EmpresaResponse> getEmpresaResponseList(final Pageable pageable) throws Exception {
     return empresaBuscarDAO
-        .buscaEmpresasPorNome(pageable.getPageSize(), (long) pageable.getOffset())
+        .buscaEmpresasPorNome(pageable.getPageSize(), pageable.getOffset())
         .stream()
         .filter(Objects::nonNull)
         .map(this::convertEmpresaToResponse)

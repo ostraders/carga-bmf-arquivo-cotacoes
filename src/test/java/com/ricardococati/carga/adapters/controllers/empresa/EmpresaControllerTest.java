@@ -8,17 +8,21 @@ import static com.ricardococati.carga.templates.EmpresaDTOTemplateLoader.EMPRESA
 import static com.ricardococati.carga.templates.EmpresaDTOTemplateLoader.EMPRESA_DTO_VALID_005;
 import static com.ricardococati.carga.templates.EmpresaDTOTemplateLoader.EMPRESA_DTO_VALID_006;
 import static com.ricardococati.carga.templates.EmpresaDTOTemplateLoader.EMPRESA_DTO_VALID_007;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ricardococati.carga.config.CustomPageImpl;
 import com.ricardococati.carga.entities.domains.empresa.EmpresaDTO;
 import com.ricardococati.carga.entities.domains.empresa.EmpresaRequest;
 import com.ricardococati.carga.usecases.empresa.BuscarEmpresa;
 import com.ricardococati.carga.usecases.empresa.InserirEmpresa;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +54,7 @@ public class EmpresaControllerTest {
   public void setUp(){
     FixtureFactoryLoader.loadTemplates("com.ricardococati.carga.templates");
     this.objectMapper = new ObjectMapper();
+    initMocks(this);
   }
 
   @Test
@@ -69,7 +74,24 @@ public class EmpresaControllerTest {
   }
 
   @Test
-  public void testBuscarEmpresas() {
+  public void testBuscarEmpresas() throws Exception {
+    //given
+    int page = 1;
+    int size = 3;
+    when(buscarEmpresa.buscarPorNomeEmpresa(anyString(), anyObject())).thenReturn(new CustomPageImpl<>());
+    String nomeEmpresa = "MAGAZINE LUIZA";
+    //when
+    final ResultActions result = this.mockMvc
+        .perform(
+            get(String.format("/api/v1/empresa"))
+                .param("nomeEmpresa", nomeEmpresa)
+                .param("page", String.valueOf(page))
+                .param("size", String.valueOf(size))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+    //then
+    result
+        .andExpect(status().isOk());
   }
 
   private EmpresaRequest getEmpresaRequest(){

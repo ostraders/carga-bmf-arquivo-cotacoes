@@ -2,7 +2,6 @@ package com.ricardococati.carga.usecases;
 
 import static br.com.six2six.fixturefactory.Fixture.from;
 import static com.ricardococati.carga.templates.CotacaoTemplateLoader.COTACAO_VALID_001;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -15,9 +14,9 @@ import com.ricardococati.carga.adapters.repositories.cotacao.CotacaoInserirDAO;
 import com.ricardococati.carga.config.ControleArquivoConfig;
 import com.ricardococati.carga.entities.domains.ativo.Ativo;
 import com.ricardococati.carga.entities.domains.cotacao.Cotacao;
-import com.ricardococati.carga.usecases.cotacao.impl.CargaCotacaoServiceImpl;
 import com.ricardococati.carga.usecases.cotacao.converter.CandlestickConverter;
 import com.ricardococati.carga.usecases.cotacao.converter.CotacaoConverter;
+import com.ricardococati.carga.usecases.cotacao.impl.CargaCotacaoServiceImpl;
 import com.ricardococati.carga.utils.ControlaIdArquivoUtil;
 import java.util.Arrays;
 import org.junit.Before;
@@ -84,7 +83,7 @@ public class CargaCotacaoServiceImplTest {
     //when
     Boolean result = target.insereDados(buildCotacao());
     //then
-    assertFalse(result);
+    assertTrue(result);
   }
 
   @Test

@@ -50,13 +50,13 @@ public class AtivoBuscarDAOImplTest extends BaseJdbcTest {
     List<Ativo> result = target.buscaAtivo();
     //then
     assertFalse(result.isEmpty());
-    assertThat(result).isNotNull().size().isEqualTo(342);
+    assertThat(result).isNotNull().size().isEqualTo(568);
     assertThat(result.get(0).getAtivo()).isNotNull().isEqualTo("AALR3");
-    assertThat(result.get(0).getIdAtivo()).isNotNull().isEqualTo(235L);
+    assertThat(result.get(0).getIdAtivo()).isNotNull().isEqualTo(1L);
   }
 
   @Test
-  public void buscaAtivoContemBOEI34() throws Exception {
+  public void buscaAtivoContemBDLL3() throws Exception {
     //given
     when(sqlUtil.getSelectAtivos()).thenCallRealMethod();
     when(mapper.mapper(any())).thenCallRealMethod();
@@ -64,13 +64,13 @@ public class AtivoBuscarDAOImplTest extends BaseJdbcTest {
     List<Ativo> result = target.buscaAtivo();
     //then
     assertFalse(result.isEmpty());
-    assertThat(result).isNotNull().size().isEqualTo(342);
-    assertThat(result.get(44).getAtivo()).isNotNull().isEqualTo("BOEI34");
-    assertThat(result.get(44).getIdAtivo()).isNotNull().isEqualTo(9L);
+    assertThat(result).isNotNull().size().isEqualTo(568);
+    assertThat(result.get(44).getAtivo()).isNotNull().isEqualTo("BDLL3");
+    assertThat(result.get(44).getIdAtivo()).isNotNull().isEqualTo(45L);
   }
 
   @Test
-  public void buscaAtivoContemLCAM3() throws Exception {
+  public void buscaAtivoContemDMVF3() throws Exception {
     //given
     when(sqlUtil.getSelectAtivos()).thenCallRealMethod();
     when(mapper.mapper(any())).thenCallRealMethod();
@@ -78,13 +78,13 @@ public class AtivoBuscarDAOImplTest extends BaseJdbcTest {
     List<Ativo> result = target.buscaAtivo();
     //then
     assertFalse(result.isEmpty());
-    assertThat(result).isNotNull().size().isEqualTo(342);
-    assertThat(result.get(197).getAtivo()).isNotNull().isEqualTo("LCAM3");
-    assertThat(result.get(197).getIdAtivo()).isNotNull().isEqualTo(63L);
+    assertThat(result).isNotNull().size().isEqualTo(568);
+    assertThat(result.get(197).getAtivo()).isNotNull().isEqualTo("DMVF3");
+    assertThat(result.get(197).getIdAtivo()).isNotNull().isEqualTo(198L);
   }
 
   @Test
-  public void buscaAtivoContemNEMO3() throws Exception {
+  public void buscaAtivoContemENGI3() throws Exception {
     //given
     when(sqlUtil.getSelectAtivos()).thenCallRealMethod();
     when(mapper.mapper(any())).thenCallRealMethod();
@@ -92,9 +92,9 @@ public class AtivoBuscarDAOImplTest extends BaseJdbcTest {
     List<Ativo> result = target.buscaAtivo();
     //then
     assertFalse(result.isEmpty());
-    assertThat(result).isNotNull().size().isEqualTo(342);
-    assertThat(result.get(228).getAtivo()).isNotNull().isEqualTo("NEMO3");
-    assertThat(result.get(228).getIdAtivo()).isNotNull().isEqualTo(193L);
+    assertThat(result).isNotNull().size().isEqualTo(568);
+    assertThat(result.get(228).getAtivo()).isNotNull().isEqualTo("ENGI3");
+    assertThat(result.get(228).getIdAtivo()).isNotNull().isEqualTo(229L);
   }
 
   @Test

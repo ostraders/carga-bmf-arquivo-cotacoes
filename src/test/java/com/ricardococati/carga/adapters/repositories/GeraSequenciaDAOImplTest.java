@@ -75,7 +75,7 @@ public class GeraSequenciaDAOImplTest extends BaseJdbcTest {
     //when
     Number retorno = target.getSequence(sequence);
     //then
-    Assertions.assertThat(retorno).isNotNull().isEqualTo(272L);
+    Assertions.assertThat(retorno).isNotNull().isEqualTo(443L);
   }
 
   @Test

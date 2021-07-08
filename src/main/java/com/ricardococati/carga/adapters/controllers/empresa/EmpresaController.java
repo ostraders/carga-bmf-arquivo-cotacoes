@@ -1,5 +1,6 @@
 package com.ricardococati.carga.adapters.controllers.empresa;
 
+import com.ricardococati.carga.config.CustomPageImpl;
 import com.ricardococati.carga.entities.domains.empresa.EmpresaRequest;
 import com.ricardococati.carga.entities.domains.empresa.EmpresaResponse;
 import com.ricardococati.carga.usecases.empresa.BuscarEmpresa;
@@ -55,7 +56,10 @@ public class EmpresaController {
       @RequestParam final int page,
       @RequestParam final int size) throws Exception {
     log.info("Excutando busca de empresas ");
-    return buscarEmpresa.buscarPorNomeEmpresa(nomeEmpresa, new PageRequest(page, size));
+    final PageRequest pageable = new PageRequest(page, size);
+    final CustomPageImpl<EmpresaResponse> empresaResponses =
+        buscarEmpresa.buscarPorNomeEmpresa(nomeEmpresa, pageable);
+    return empresaResponses;
   }
 
 }

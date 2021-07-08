@@ -211,6 +211,11 @@
                     <exclude>com.ricardococati.carga.adapters.repositories.candlestick.mapper.*</exclude>
                     <exclude>com.ricardococati.carga.adapters.schedulers.*</exclude>
                     <exclude>com.ricardococati.carga.adapters.messages.*</exclude>
+                    <exclude>com.ricardococati.carga.usecases.ativo.*</exclude>
+                    <exclude>com.ricardococati.carga.usecases.empresa.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.ativo.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.empresa.*</exclude>
+                    <exclude>com.ricardococati.carga.adapters.repositories.empresaativo.*</exclude>
                     <exclude>com.ricardococati.carga.usecases.arquivo.impl.DescompactarArquivoServiceImpl</exclude>
                     <exclude>com.ricardococati.carga.usecases.arquivo.impl.DownloadArquivoServiceImpl</exclude>
                     <exclude>com.ricardococati.carga.usecases.arquivo.impl.GerenciadorArquivosServiceImpl</exclude>
